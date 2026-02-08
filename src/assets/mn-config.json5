@@ -1,0 +1,14 @@
+{
+  "defaults": {
+
+    "mn-input-field": {
+      "placeholder": "Default placeholder from mn-config",
+      "label": "Generic Input",
+      "ariaLabel": "Global accessible label"
+    }
+  },
+  "overrides": {
+    "root": {
+    }
+  }
+}
