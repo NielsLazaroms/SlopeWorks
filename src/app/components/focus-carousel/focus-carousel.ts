@@ -8,6 +8,14 @@ import { Options } from '@splidejs/splide';
   imports: [NgxSplideModule],
   standalone: true,
   templateUrl: './focus-carousel.html',
+  styles: [`
+    :host {
+      display: block;
+      width: 100%;
+      max-width: 80vw;
+      overflow: hidden;
+    }
+  `]
 })
 export class FocusCarousel {
   images: ImageProps[] = [];
@@ -20,9 +28,10 @@ export class FocusCarousel {
     focus: 'center',
     updateOnMove: true,
     cloneStatus: false,
-    fixedWidth: 300,
+    autoWidth: false,
+    gap: '1rem',
     perPage: 5,
-    breakpoints: {
+        breakpoints: {
       1024: { perPage: 5 },
       768: { perPage: 3 },
       480: { perPage: 1 },
