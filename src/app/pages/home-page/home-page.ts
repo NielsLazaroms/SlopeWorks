@@ -23,9 +23,9 @@ export class HomePage {
     },
     button: {
       color: 'primary',
-      size: 'sm',
+      size: 'md',
       variant: 'fill',
-      borderRadius: 'three_xl',
+      borderRadius: 'xl',
     } as MnButtonTypes,
   } as const;
 
