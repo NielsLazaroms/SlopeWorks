@@ -12,3 +12,19 @@
   --color-brand-800: #8F6600;
   --color-brand-900: #5F4300;
 }
+
+.splide__track {
+  height: 400px;
+}
+
+.splide__slide .slide-inner {
+  border-radius: 16px;
+  height: 100%;
+  overflow: hidden;
+  transform: scale(0.8);
+  transition: transform 0.2s ease-in-out;
+}
+
+.splide__slide.is-active .slide-inner {
+  transform: scale(1);
+}

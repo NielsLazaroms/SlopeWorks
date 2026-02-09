@@ -1,0 +1,11 @@
+  <div class="relative w-4/5 overflow-hidden">
+    <splide [options]="options">
+      @for (image of images; track image.id) {
+        <splide-slide>
+          <div class="slide-inner">
+            <img class="size-full object-cover" [src]="image.src" [alt]="image.alt" />
+          </div>
+        </splide-slide>
+      }
+    </splide>
+  </div>
