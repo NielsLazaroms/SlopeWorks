@@ -3,10 +3,10 @@
   class="relative h-[55vh] w-full bg-cover bg-center bg-no-repeat"
   [ngStyle]="{ 'background-image': 'url(' + data.backgroundImage.url + ')' }"
 >
-  <div class="absolute inset-0 bg-black/30 z-2"></div>
+  <div class="absolute inset-0 bg-black/50 z-2"></div>
 
-  <div class="relative z-10  p-6">
-    <h1 class="text-brand-500">Title</h1>
+  <div class="relative z-10 mx-48  p-6">
+    <app-section-title class="w-[2vw]" [data]="data.title"></app-section-title>
     <div>{{ data.description }}</div>
     <button mnButton [data]="data.button">Learn more</button>
   </div>

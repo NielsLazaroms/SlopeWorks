@@ -3,13 +3,15 @@ import {ParallaxComponent, ParallaxComponentData} from '../../components/paralla
 import {FocusCarousel} from '../../components/focus-carousel/focus-carousel';
 import {FocusCarouselTypes} from '../../components/focus-carousel/focus-carouselTypes';
 import {MnButtonTypes} from 'mn-angular-lib';
+import {SectionTitleTypes} from '../../components/section-title/section-titleTypes';
 
 @Component({
   selector: 'app-home-page',
   standalone: true,
   imports: [
     ParallaxComponent,
-    FocusCarousel
+    FocusCarousel,
+
   ],
   templateUrl: './home-page.html',
 })
@@ -27,6 +29,16 @@ export class HomePage {
       variant: 'fill',
       borderRadius: 'xl',
     } as MnButtonTypes,
+    title: {
+      text: 'Corporate ski retreats, elevated',
+      size: 'md',
+      shadow: true,
+      showUnderLine: false,
+      textPosition: 'left',
+      textColor: 'light',
+      fontWeight: 'semibold',
+      textStroke: 'sm',
+    } as SectionTitleTypes,
   } as const;
 
   carouselData:FocusCarouselTypes  = {
@@ -49,5 +61,6 @@ export class HomePage {
     ],
     showArrows: true,
   };
+
 
 }
