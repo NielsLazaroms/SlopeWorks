@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {ParallaxComponent, ParallaxComponentData} from '../../components/parallax-component/parallax-component';
 import {FocusCarousel} from '../../components/focus-carousel/focus-carousel';
 import {FocusCarouselTypes} from '../../components/focus-carousel/focus-carouselTypes';
+import {MnButtonTypes} from 'mn-angular-lib';
 
 @Component({
   selector: 'app-home-page',
@@ -25,7 +26,7 @@ export class HomePage {
       size: 'sm',
       variant: 'fill',
       borderRadius: 'three_xl',
-    },
+    } as MnButtonTypes,
   } as const;
 
   carouselData:FocusCarouselTypes  = {
