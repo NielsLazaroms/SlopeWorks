@@ -81,12 +81,11 @@
           "#section-title-getInTouch" : {
             "title": "Get in touch"
           },
-          "#section-title-form": {
-            title: "Send a message"
-          },
+
           "app-contact-section": {
             "informationDescription": "Nulla tincidunt nisl sit amet mi varius, in dictum massa hendrerit. Mauris et quam interdum diam finibus gravida sit amet in quam.",
             "formDescription": "Nulla tincidunt nisl sit amet mi varius, in dictum massa hendrerit. Mauris et quam interdum diam finibus gravida sit amet in quam.",
+            "formButtonText": "Contact us"
           },
           "#location-item": {
             "title": "Location",
@@ -101,6 +100,10 @@
             "description": "Nusadadlla tincidunt nisl sit amet mi varius, in dictum massa hendrerit."
           },
           "form": {
+            "#section-title-form": {
+              title: "Send a message"
+            },
+
             "#mn-input-name": {
               "placeholder": "Name placeholder",
               "label": "Name label",
@@ -117,6 +120,29 @@
               "ariaLabel": "Description accessible label"
             }
           }
+        }
+      },
+      "navbar": {
+        "app-navbar": {
+          "logoSrc": "logo_slopeworks.svg",
+          "logoAlt": "SlopeWorks",
+          "navItems": [
+            { "label": "About", "sectionId": "about-section" },
+            { "label": "Packages", "sectionId": "packages-section" },
+            { "label": "Pictures", "sectionId": "pictures-section" }
+          ],
+          "contactItem": { "label": "Contact", "sectionId": "contact-section" }
+        }
+      },
+      "footer": {
+        "app-footer": {
+          "logoSrc": "logo_slopeworks.svg",
+          "logoAlt": "SlopeWorks",
+          "copyrightText": "Skiwie - All rights reserved",
+          "links": [
+            { "label": "Linkedin", "href": "https://www.linkedin.com/in/niels-lazaroms-608664242/" },
+            { "label": "Facebook", "href": "https://github.com/NielsLazaroms" }
+          ]
         }
       }
     }

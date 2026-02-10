@@ -8,7 +8,7 @@
   class="w-2/5 md:w-1/5 px-10   cursor-pointer"
   (click)="scrollToSection('top-section')"
 >
-  <img src="logo_slopeworks.svg" alt="SlopeWorks" class="w-full max-h-32 ">
+  <img [src]="componentConfig.logoSrc" [alt]="componentConfig.logoAlt" class="w-full max-h-32 ">
 </div>
 
 <ul
@@ -20,31 +20,31 @@
       'gap-7.5!','p-5!','border-0!','bg-white/90!'
     ] : []"
 >
-  <app-nav-list-item label="About" (itemClick)="scrollToSection('about-section')"></app-nav-list-item>
-  <app-nav-list-item label="Packages" (itemClick)="scrollToSection('packages-section')"></app-nav-list-item>
-  <app-nav-list-item label="Pictures" (itemClick)="scrollToSection('pictures-section')"></app-nav-list-item>
+  @for (item of componentConfig.navItems; track item.sectionId) {
+    <app-nav-list-item [label]="item.label" (itemClick)="scrollToSection(item.sectionId)"></app-nav-list-item>
+  }
 
-  @if (menuOpen) {
+  @if (menuOpen && componentConfig.contactItem) {
     <li
       class="absolute bottom-10 text-lg text-black cursor-pointer
                transition-colors duration-300 hover:text-brand-500"
-      (click)="scrollToSection('contact-section')"
+      (click)="scrollToSection(componentConfig.contactItem.sectionId)"
     >
-      Contact
+      {{componentConfig.contactItem.label}}
     </li>
   }
 </ul>
 
-@if (!menuOpen) {
+@if (!menuOpen && componentConfig.contactItem) {
   <div
     class="hidden md:block w-1/5 text-lg text-center relative text-black cursor-pointer
              transition-colors duration-300 hover:text-brand-500
              after:content-[''] after:absolute after:left-0 after:-bottom-[26.5px]
              after:w-full after:h-0.75 after:bg-linear-to-r
              after:from-brand-500 after:to-brand-500 after:rounded-sm"
-    (click)="scrollToSection('contact-section')"
+    (click)="scrollToSection(componentConfig.contactItem.sectionId)"
   >
-    Contact
+    {{componentConfig.contactItem.label}}
   </div>
 }
 

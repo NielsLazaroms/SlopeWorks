@@ -1,5 +1,5 @@
 <section class="flex w-full justify-between gap-16 md:gap-8 items-start flex-col md:flex-row" >
-  <div class=" flex flex-col gap-8 justify-center items-center sm:items-start">
+  <div class=" flex flex-col w-[50%] gap-8 justify-center items-center sm:items-start">
     <app-section-title  mn-instance="section-title-getInTouch" [data]="getInTouchTitle"></app-section-title>
     <p class="text-center sm:text-left">{{componentConfig.informationDescription}}</p>
     <div class="flex flex-col gap-6">
@@ -26,7 +26,7 @@
     </div>
 
   </div>
-  <form [formGroup]="form" class="flex flex-col items-center sm:items-start gap-8" mn-section="form">
+  <form [formGroup]="form" class="flex flex-col items-center w-[50%] sm:items-start gap-8" mn-section="form">
     <app-section-title mn-instance="section-title-form" [data]="contactTitle"></app-section-title>
     <p class="text-center sm:text-left">{{componentConfig.formDescription}}</p>
     <mn-lib-input-field class="block w-full"
@@ -41,6 +41,6 @@
                     formControlName="description"
                     [props]="descriptionProps"
     ></mn-lib-input-field>
-    <button class="w-fit" mnButton [data]="formButton">Contact us</button>
+    <button class="w-fit" mnButton [data]="formButton">{{componentConfig.formButtonText}}</button>
   </form>
 </section>

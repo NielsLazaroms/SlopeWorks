@@ -8,6 +8,7 @@ import {SectionTitleTypes} from '../../../../components/section-title/section-ti
 export interface ContactSectionConfig {
   informationDescription?: string;
   formDescription?: string;
+  formButtonText?: string;
 }
 
 export const APP_CONTACT_SECTION_COMPONENT_CONFIG = new InjectionToken<ContactSectionConfig>('APP_CONTACT_SECTION_CONFIG');
