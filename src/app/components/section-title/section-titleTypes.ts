@@ -1,7 +1,6 @@
 import {SectionTitleVariants} from './section-titleVariants';
 
 export interface SectionTitleTypes {
-  text: string;
   size: SectionTitleVariants['size'];
   shadow: SectionTitleVariants['shadow'];
   showUnderLine: SectionTitleVariants['showUnderLine'];

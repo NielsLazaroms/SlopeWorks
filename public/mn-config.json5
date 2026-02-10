@@ -1,0 +1,66 @@
+{
+  "defaults": {
+    "mn-input-field": {
+      "placeholder": "Default placeholder from mn-config",
+      "label": "Generic Input",
+      "ariaLabel": "Global accessible label"
+    },
+    "app-parallax-component": {
+      "backgroundImageUrl": "https://4kwallpapers.com/images/walls/thumbs_3t/1025.jpg",
+      "description": "Description placeholder",
+      "buttonText": "Learn More"
+    },
+    "app-section-title": {
+      "title": "Title Placeholder"
+    },
+    "app-about-section": {
+      "description": "About Us Description",
+      "aboutUsButtonText": "Learn More"
+    },
+    "mn-dual-horizontal-image": {
+      images: [
+        { id: '1', url: 'https://www.wildkogel-arena.at/site/assets/files/17949/wildkogelarena_2024-7237.1920x0-sp.jpg', alt: 'Image 1' },
+        { id: '2', url: 'https://6hsport15.wordpress.com/wp-content/uploads/2016/01/skic3abn.jpg?w=617&h=411', alt: 'Image 2' }
+      ]
+    }
+  },
+  "overrides": {
+    "root": {
+      "home": {
+        "top-section": {
+          "#section-title-parallax": {
+            "title": "Corporate ski retreats, elevated"
+          }
+        },
+        "about-section": {
+          "#section-title-about": {
+            "title": "About Section Title"
+          },
+          "app-about-section": {
+            "description": "About Us Description Overridden",
+            "aboutUsButtonText": "Learn More Overridden"
+          }
+        },
+        "contact-section": {
+          "form": {
+            "#mn-input-name": {
+              "placeholder": "Name placeholder",
+              "label": "Name label",
+              "ariaLabel": "Name accessible label"
+            },
+            "#mn-input-subject": {
+              "placeholder": "Subject placeholder",
+              "label": "Subject label",
+              "ariaLabel": "Subject accessible label"
+            },
+            "#mn-input-description": {
+              "placeholder": "Description placeholder",
+              "label": "Description label",
+              "ariaLabel": "Description accessible label"
+            }
+          }
+        }
+      }
+    }
+  }
+}

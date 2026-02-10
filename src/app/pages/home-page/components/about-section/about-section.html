@@ -1,11 +1,11 @@
-<section class="flex w-full h-full lg:h-[400px] overflow-hidden  justify-between items-center lg:items-start flex-col lg:flex-row gap-16">
+<section mn-section="about-section" class="flex w-full h-full lg:h-100 overflow-hidden justify-between items-center lg:items-start flex-col lg:flex-row gap-16">
   <div class="w-full lg:w-[50%] h-full flex items-center lg:items-start flex-col gap-y-8">
-    <app-section-title [data]="aboutUsTitle"></app-section-title>
-    <p class="text-center lg:text-left">Nulla tincidunt nisl sit amet mi varius, in dictum massa hendrerit. Mauris et quam interdum diam finibus gravida sit amet in quam.</p>
-    <button class="w-fit" mnButton [data]="aboutUsButton">Contact us</button>
+    <app-section-title mn-instance="section-title-about" [data]="aboutUsTitle"></app-section-title>
+    <p class="text-center lg:text-left">{{componentConfig.description}}</p>
+    <button class="w-fit" mnButton [data]="aboutUsButton">{{componentConfig.aboutUsButtonText}}</button>
   </div>
-  <div class="w-full lg:w-[50%] h-[500px] lg:h-[400px]">
+  <div class="w-full lg:w-[50%] h-125 lg:h-100">
 
-  <lib-mn-dual-horizontal-image class="h-full" [images]="aboutUsImages"></lib-mn-dual-horizontal-image>
+  <mn-lib-dual-horizontal-image class="h-full"></mn-lib-dual-horizontal-image>
   </div>
 </section>

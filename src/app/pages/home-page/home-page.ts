@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {MnButtonTypes} from 'mn-angular-lib';
+import {MnButtonTypes, MnSectionDirective} from 'mn-angular-lib';
 import {SectionTitleTypes} from '../../components/section-title/section-titleTypes';
 import {AboutSectionComponent} from './components/about-section/about-section';
 import {PackagesSectionComponent} from './components/packages-section/packages-section';
@@ -20,17 +20,12 @@ import {ParallaxComponent, ParallaxComponentData} from '../../components/paralla
     ContactSectionComponent,
     FooterComponent,
     NavbarComponent,
+    MnSectionDirective,
   ],
   templateUrl: './home-page.html',
 })
 export class HomePage {
   parallaxData: ParallaxComponentData = {
-    description: 'Parallax  description description description description description description description description description description description description',
-    backgroundImage: {
-      url: 'https://4kwallpapers.com/images/walls/thumbs_3t/1025.jpg',
-      alt: 'Parallax image',
-      id: 1
-    },
     button: {
       color: 'primary',
       size: 'md',
@@ -39,7 +34,6 @@ export class HomePage {
       fullWidth: false,
     } as MnButtonTypes,
     title: {
-      text: 'Corporate ski retreats, elevated',
       size: 'md',
       shadow: true,
       showUnderLine: false,

@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {MnButton, MnButtonTypes, MnInputField, MnInputProps} from 'mn-angular-lib';
+import {MnButton, MnButtonTypes, MnInputField, MnInputProps, MnSectionDirective} from 'mn-angular-lib';
 import {SectionTitle} from '../../../../components/section-title/section-title';
 import {ReactiveFormsModule, FormGroup, FormControl, Validators} from '@angular/forms';
 import {InfoItem} from '../../../../components/info-item/info-item';
@@ -14,6 +14,7 @@ import {SectionTitleTypes} from '../../../../components/section-title/section-ti
     ReactiveFormsModule,
     InfoItem,
     MnButton,
+    MnSectionDirective,
   ],
   templateUrl: './contact-section.html',
 })

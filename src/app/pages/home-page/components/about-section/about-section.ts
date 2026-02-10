@@ -1,12 +1,22 @@
-import {Component} from '@angular/core';
+import {Component, inject, InjectionToken} from '@angular/core';
 import {
   MnButton,
   MnButtonTypes,
   MnDualHorizontalImage,
-  MnDualHorizontalImageTypes,
+  MnDualHorizontalImageTypes, MnInstanceDirective, MnSectionDirective, provideMnComponentConfig,
 } from 'mn-angular-lib';
 import {SectionTitleTypes} from '../../../../components/section-title/section-titleTypes';
 import {SectionTitle} from '../../../../components/section-title/section-title';
+import {APP_PARALLAX_COMPONENT_CONFIG, ParallaxComponentConfig} from '../../../../components/parallax-component';
+
+export interface AboutSectionConfig {
+  description?: string;
+  aboutUsButtonText?: string;
+}
+
+export const APP_ABOUT_SECTION_COMPONENT_CONFIG = new InjectionToken<AboutSectionConfig>('APP_ABOUT_SECTION_CONFIG');
+
+
 
 @Component({
   selector: 'app-about-section',
@@ -15,12 +25,19 @@ import {SectionTitle} from '../../../../components/section-title/section-title';
     SectionTitle,
     MnDualHorizontalImage,
     MnButton,
+    MnInstanceDirective,
+    MnSectionDirective,
+  ],
+  providers: [
+    provideMnComponentConfig<ParallaxComponentConfig>(APP_ABOUT_SECTION_COMPONENT_CONFIG, 'app-about-section'),
   ],
   templateUrl: './about-section.html',
 })
 export class AboutSectionComponent {
+
+  protected readonly componentConfig = inject(APP_ABOUT_SECTION_COMPONENT_CONFIG);
+
   aboutUsTitle = {
-    text: 'About us',
     size: 'md',
     shadow: false,
     showUnderLine: true,
@@ -38,9 +55,4 @@ export class AboutSectionComponent {
     borderRadius: 'xl',
     fullWidth: false,
   } as MnButtonTypes;
-
-  aboutUsImages: MnDualHorizontalImageTypes[] = [
-    { id: '1', url: 'https://www.wildkogel-arena.at/site/assets/files/17949/wildkogelarena_2024-7237.1920x0-sp.jpg', alt: 'Image 1' },
-    { id: '2', url: 'https://6hsport15.wordpress.com/wp-content/uploads/2016/01/skic3abn.jpg?w=617&h=411', alt: 'Image 2' },
-  ];
 }

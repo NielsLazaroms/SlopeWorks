@@ -10,7 +10,5 @@ export interface imageType {
 
 export interface ParallaxComponentData {
   title: SectionTitleTypes;
-  description: string;
-  backgroundImage: imageType;
   button: MnButtonTypes
 }
