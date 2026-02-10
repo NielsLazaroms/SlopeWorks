@@ -1,5 +1,5 @@
 <section class="flex flex-col gap-y-8 w-full justify-center items-center">
-  <app-section-title [data]="carouselTitle" />
-  <p class="w-[50%] text-center">Nulla tincidunt nisl sit amet mi varius, in dictum massa hendrerit. Mauris et quam interdum diam finibus gravida sit amet in quam.</p>
-  <app-focus-carousel [data]="carouselData"></app-focus-carousel>
+  <app-section-title mn-instance="section-title-pictures" [data]="carouselTitle" />
+  <p class="w-[50%] text-center">{{componentConfig.description}}</p>
+  <app-focus-carousel></app-focus-carousel>
 </section>

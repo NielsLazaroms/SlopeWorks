@@ -17,11 +17,8 @@
       "description": "About Us Description",
       "aboutUsButtonText": "Learn More"
     },
-    "mn-dual-horizontal-image": {
-      images: [
-        { id: '1', url: 'https://www.wildkogel-arena.at/site/assets/files/17949/wildkogelarena_2024-7237.1920x0-sp.jpg', alt: 'Image 1' },
-        { id: '2', url: 'https://6hsport15.wordpress.com/wp-content/uploads/2016/01/skic3abn.jpg?w=617&h=411', alt: 'Image 2' }
-      ]
+    "app-pictures-section" : {
+      "description" : 'Test'
     }
   },
   "overrides": {
@@ -30,18 +27,79 @@
         "top-section": {
           "#section-title-parallax": {
             "title": "Corporate ski retreats, elevated"
+          },
+          "app-parallax-component": {
+            "backgroundImageUrl": "https://4kwallpapers.com/images/walls/thumbs_3t/1025.jpg",
+            "description": "Transform your next company trip with experly organized retreats design to inspire, connect and energize your team",
+            "buttonText": "Learn More "
           }
         },
         "about-section": {
           "#section-title-about": {
-            "title": "About Section Title"
+            "title": "About us"
           },
           "app-about-section": {
-            "description": "About Us Description Overridden",
-            "aboutUsButtonText": "Learn More Overridden"
+            "description": "Nulla tincidunt nisl sit amet mi varius, in dictum massa hendrerit. Mauris et quam interdum diam finibus gravida sit amet in quam. Duis ut dui augue. Duis fringilla semper massa, eu vulputate sem. Nullam eu ex tempor, accumsan lectus ut, consequat mi. Integer ",
+            "aboutUsButtonText": "Contact us"
+          },
+          "mn-dual-horizontal-image": {
+            images: [
+              { id: '1', url: 'https://www.wildkogel-arena.at/site/assets/files/17949/wildkogelarena_2024-7237.1920x0-sp.jpg', alt: 'Image 1' },
+              { id: '2', url: 'https://6hsport15.wordpress.com/wp-content/uploads/2016/01/skic3abn.jpg?w=617&h=411', alt: 'Image 2' }
+            ]
+          }
+        },
+//        PACKAGE SECTION
+        "pictures-section": {
+          "#section-title-pictures": {
+            "title": "Our pictures"
+          },
+          "app-pictures-section": {
+            "description": "Nulla tincidunt nisl sit amet mi varius, in dictum massa hendrerit. Mauris et quam interdum diam finibus gravida sit amet in quam.",
+          },
+          "app-focus-carousel": {
+            images: [
+              {
+                id: 1,
+                src: 'https://images.photowall.com/products/47782/extreme-skiing.jpg?h=699&q=85',
+                alt: 'Image 1',
+              },
+              {
+                id: 2,
+                src: 'https://hotel-kaya.com/assets/uploads/2022/06/regles-ski-alpin.jpg',
+                alt: 'Image 2',
+              },
+              {
+                id: 3,
+                src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Ski_Famille_-_Family_Ski_Holidays.jpg/500px-Ski_Famille_-_Family_Ski_Holidays.jpg',
+                alt: 'Image 3',
+              },
+            ]
           }
         },
         "contact-section": {
+          "#section-title-getInTouch" : {
+            "title": "Get in touch"
+          },
+          "#section-title-form": {
+            title: "Send a message"
+          },
+          "app-contact-section": {
+            "informationDescription": "Nulla tincidunt nisl sit amet mi varius, in dictum massa hendrerit. Mauris et quam interdum diam finibus gravida sit amet in quam.",
+            "formDescription": "Nulla tincidunt nisl sit amet mi varius, in dictum massa hendrerit. Mauris et quam interdum diam finibus gravida sit amet in quam.",
+          },
+          "#location-item": {
+            "title": "Location",
+            "description": "Nulla tincidunt nisl sit amet mi varius, in dictum massa hendrerit."
+          },
+          "#email-item": {
+            "title": "Email us",
+            "description": "Nulla tincidunt nisl sit amet mi varius, in dictum massa hendrerit."
+          },
+          "#call-item": {
+            "title": "Call us",
+            "description": "Nusadadlla tincidunt nisl sit amet mi varius, in dictum massa hendrerit."
+          },
           "form": {
             "#mn-input-name": {
               "placeholder": "Name placeholder",

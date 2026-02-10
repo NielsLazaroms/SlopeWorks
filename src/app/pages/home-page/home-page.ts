@@ -18,8 +18,6 @@ import {ParallaxComponent, ParallaxComponentData} from '../../components/paralla
     PackagesSectionComponent,
     PicturesSectionComponent,
     ContactSectionComponent,
-    FooterComponent,
-    NavbarComponent,
     MnSectionDirective,
   ],
   templateUrl: './home-page.html',

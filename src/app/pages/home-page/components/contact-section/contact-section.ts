@@ -1,9 +1,16 @@
-import {Component} from '@angular/core';
-import {MnButton, MnButtonTypes, MnInputField, MnInputProps, MnSectionDirective} from 'mn-angular-lib';
+import {Component, inject, InjectionToken} from '@angular/core';
+import {MnButton, MnButtonTypes, MnInputField, MnInputProps, MnInstanceDirective, MnSectionDirective, provideMnComponentConfig} from 'mn-angular-lib';
 import {SectionTitle} from '../../../../components/section-title/section-title';
 import {ReactiveFormsModule, FormGroup, FormControl, Validators} from '@angular/forms';
 import {InfoItem} from '../../../../components/info-item/info-item';
 import {SectionTitleTypes} from '../../../../components/section-title/section-titleTypes';
+
+export interface ContactSectionConfig {
+  informationDescription?: string;
+  formDescription?: string;
+}
+
+export const APP_CONTACT_SECTION_COMPONENT_CONFIG = new InjectionToken<ContactSectionConfig>('APP_CONTACT_SECTION_CONFIG');
 
 @Component({
   selector: 'app-contact-section',
@@ -14,11 +21,17 @@ import {SectionTitleTypes} from '../../../../components/section-title/section-ti
     ReactiveFormsModule,
     InfoItem,
     MnButton,
+    MnInstanceDirective,
     MnSectionDirective,
+  ],
+  providers: [
+    provideMnComponentConfig<ContactSectionConfig>(APP_CONTACT_SECTION_COMPONENT_CONFIG, 'app-contact-section'),
   ],
   templateUrl: './contact-section.html',
 })
 export class ContactSectionComponent {
+
+  protected readonly componentConfig = inject(APP_CONTACT_SECTION_COMPONENT_CONFIG);
   form = new FormGroup({
     name: new FormControl('', { validators: [Validators.required] }),
     subject: new FormControl('', { validators: [Validators.required] }),

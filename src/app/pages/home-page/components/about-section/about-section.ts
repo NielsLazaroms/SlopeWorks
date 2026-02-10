@@ -26,10 +26,9 @@ export const APP_ABOUT_SECTION_COMPONENT_CONFIG = new InjectionToken<AboutSectio
     MnDualHorizontalImage,
     MnButton,
     MnInstanceDirective,
-    MnSectionDirective,
   ],
   providers: [
-    provideMnComponentConfig<ParallaxComponentConfig>(APP_ABOUT_SECTION_COMPONENT_CONFIG, 'app-about-section'),
+    provideMnComponentConfig<AboutSectionConfig>(APP_ABOUT_SECTION_COMPONENT_CONFIG, 'app-about-section'),
   ],
   templateUrl: './about-section.html',
 })

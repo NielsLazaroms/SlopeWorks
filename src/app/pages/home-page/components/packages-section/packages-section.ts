@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {
   MnImageType,
   MnInformationCard,
-  MnInformationCardData,
+  MnInformationCardData, MnInstanceDirective, MnSectionDirective,
 } from 'mn-angular-lib';
 import {SectionTitleTypes} from '../../../../components/section-title/section-titleTypes';
 import {SectionTitle} from '../../../../components/section-title/section-title';
@@ -10,12 +10,14 @@ import {SectionTitle} from '../../../../components/section-title/section-title';
 type OneImageExtra = { kind: 'one-image'; image: MnImageType };
 type OneImageCard = MnInformationCardData<OneImageExtra>;
 
+
 @Component({
   selector: 'app-packages-section',
   standalone: true,
   imports: [
     SectionTitle,
     MnInformationCard,
+    MnInstanceDirective,
   ],
   templateUrl: './packages-section.html',
 })
