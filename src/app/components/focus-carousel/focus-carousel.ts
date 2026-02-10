@@ -32,7 +32,7 @@ export class FocusCarousel {
     gap: '1rem',
     perPage: 5,
         breakpoints: {
-      1024: { perPage: 5 },
+      1024: { perPage: 3 },
       768: { perPage: 3 },
       480: { perPage: 1 },
     },

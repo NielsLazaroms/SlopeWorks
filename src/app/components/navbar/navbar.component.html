@@ -5,14 +5,14 @@
 >
 
 <div
-  class="w-1/5 px-10   cursor-pointer"
+  class="w-2/5 md:w-1/5 px-10   cursor-pointer"
   (click)="scrollToSection('top-section')"
 >
-  <img src="logo_slopeworks.svg" alt="SlopeWorks" class="h-24">
+  <img src="logo_slopeworks.svg" alt="SlopeWorks" class="w-full max-h-32 ">
 </div>
 
 <ul
-  class="relative w-3/5 hidden md:flex justify-center gap-10 py-7
+  class="relative w-3/5 hidden md:flex justify-center gap-10 py-7 h-20
            border-l border-r border-gray-500 transition-transform duration-300"
   [ngClass]="menuOpen ? [
       'flex!','fixed!','inset-0!','w-full!','h-screen!',
@@ -39,7 +39,7 @@
   <div
     class="hidden md:block w-1/5 text-lg text-center relative text-black cursor-pointer
              transition-colors duration-300 hover:text-brand-500
-             after:content-[''] after:absolute after:left-0 after:-bottom-7
+             after:content-[''] after:absolute after:left-0 after:-bottom-[26.5px]
              after:w-full after:h-0.75 after:bg-linear-to-r
              after:from-brand-500 after:to-brand-500 after:rounded-sm"
     (click)="scrollToSection('contact-section')"

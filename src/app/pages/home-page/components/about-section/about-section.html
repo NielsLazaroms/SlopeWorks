@@ -1,8 +1,11 @@
-<section class="flex w-full justify-center items-center lg:items-start flex-col lg:flex-row gap-16">
-  <div class="w-full lg:w-[50%] flex items-center lg:items-start flex-col gap-y-8">
+<section class="flex w-full h-full lg:h-[400px] overflow-hidden  justify-between items-center lg:items-start flex-col lg:flex-row gap-16">
+  <div class="w-full lg:w-[50%] h-full flex items-center lg:items-start flex-col gap-y-8">
     <app-section-title [data]="aboutUsTitle"></app-section-title>
     <p class="text-center lg:text-left">Nulla tincidunt nisl sit amet mi varius, in dictum massa hendrerit. Mauris et quam interdum diam finibus gravida sit amet in quam.</p>
     <button class="w-fit" mnButton [data]="aboutUsButton">Contact us</button>
   </div>
-  <lib-mn-dual-horizontal-image class="w-full lg:w-[50%]" [images]="aboutUsImages"></lib-mn-dual-horizontal-image>
+  <div class="w-full lg:w-[50%] h-[500px] lg:h-[400px]">
+
+  <lib-mn-dual-horizontal-image class="h-full" [images]="aboutUsImages"></lib-mn-dual-horizontal-image>
+  </div>
 </section>

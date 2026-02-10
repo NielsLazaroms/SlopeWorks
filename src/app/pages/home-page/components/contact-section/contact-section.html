@@ -1,14 +1,14 @@
-<section class="flex w-full justify-between gap-8 items-start flex-row">
-  <div class=" flex flex-col gap-8 justify-center items-start">
+<section class="flex w-full justify-between gap-16 md:gap-8 items-start flex-col">
+  <div class=" flex flex-col gap-8 justify-center items-center sm:items-start">
     <app-section-title [data]="getInTouchTitle"></app-section-title>
-    <p>Nulla tincidunt nisl sit amet mi varius, in dictum massa hendrerit. Mauris et quam interdum diam finibus gravida sit amet in quam.</p>
-    <div class="flex flex-col gap-6">
+    <p class="text-center sm:text-left">Nulla tincidunt nisl sit amet mi varius, in dictum massa hendrerit. Mauris et quam interdum diam finibus gravida sit amet in quam.</p>
+    <div class="flex flex-col  gap-6">
       <app-info-item
         title="Location"
         description="Nulla tincidunt nisl sit amet mi varius, in dictum massa hendrerit."
         bgColor="bg-purple-500"
       >
-        📍
+        <img src="location.svg" alt="location icon" />
       </app-info-item>
 
       <app-info-item
@@ -16,7 +16,7 @@
         description="Nulla tincidunt nisl sit amet mi varius, in dictum massa hendrerit."
         bgColor="bg-blue-500"
       >
-        ✉️
+      <img src="email.svg" alt="email icon" />
       </app-info-item>
 
       <app-info-item
@@ -24,23 +24,23 @@
         description="Nulla tincidunt nisl sit amet mi varius, in dictum massa hendrerit."
         bgColor="bg-red-500"
       >
-        📞
+      <img src="phone.svg" alt="phone icon" />
       </app-info-item>
     </div>
 
   </div>
-  <form [formGroup]="form" class="flex flex-col gap-8" mn-section="root">
+  <form [formGroup]="form" class="flex flex-col items-center sm:items-start gap-8" mn-section="root">
     <app-section-title [data]="contactTitle"></app-section-title>
-    <p>Nulla tincidunt nisl sit amet mi varius, in dictum massa hendrerit. Mauris et quam interdum diam finibus gravida sit amet in quam.</p>
-    <mn-input-field class="block"
+    <p class="text-center sm:text-left">Nulla tincidunt nisl sit amet mi varius, in dictum massa hendrerit. Mauris et quam interdum diam finibus gravida sit amet in quam.</p>
+    <mn-input-field class="block w-full"
                     formControlName="name"
                     [props]="nameProps"
     ></mn-input-field>
-    <mn-input-field class="block"
+    <mn-input-field class="block w-full"
                     formControlName="subject"
                     [props]="subjectProps"
     ></mn-input-field>
-    <mn-input-field class="block"
+    <mn-input-field class="block w-full"
                     formControlName="description"
                     [props]="descriptionProps"
     ></mn-input-field>

@@ -38,6 +38,7 @@ export class PackagesSectionComponent {
       id: 1,
       description: 'This is card 1.',
       bottomBorder: true,
+      borderRadius:'md',
       shadow: true,
       kind: 'one-image',
       image: {
@@ -53,6 +54,7 @@ export class PackagesSectionComponent {
       description: 'This is card 2.',
       kind: 'one-image',
       bottomBorder: true,
+      borderRadius:'md',
       shadow: true,
       image: {
         id: 2,
@@ -66,6 +68,7 @@ export class PackagesSectionComponent {
       description: 'This is card 3.',
       kind: 'one-image',
       bottomBorder: true,
+      borderRadius:'md',
       shadow: true,
       image: {
         id: 3,

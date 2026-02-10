@@ -1,15 +1,15 @@
 <!--Container-->
 <section
-  class="relative lg:h-[55vh]  w-full py-16  bg-cover bg-center bg-no-repeat"
+  class="relative lg:h-[55vh] w-full py-16 bg-cover bg-center bg-no-repeat"
   [ngStyle]="{ 'background-image': 'url(' + data.backgroundImage.url + ')' }"
 >
   <div class="absolute inset-0 bg-black/50 z-2"></div>
 
-  <div class="relative z-10 mx-8 lg:mx-48  flex flex-col gap-y-8  p-6">
+  <div class="relative z-10 px-8  xl:px-80  flex flex-col gap-y-8 py-6">
     <div class="w-full lg:w-[40%]">
     <app-section-title  [data]="data.title"></app-section-title>
     </div>
-    <p class="text-white lg:max-w-[50%]">{{ data.description }}</p>
+    <p class="text-white lg:max-w-[80%]">{{ data.description }}</p>
     <button class="w-fit" mnButton [data]="data.button">Learn more</button>
   </div>
 </section>
