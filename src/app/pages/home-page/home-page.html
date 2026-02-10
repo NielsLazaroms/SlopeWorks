@@ -2,5 +2,26 @@
 <app-parallax-component [data]="parallaxData"></app-parallax-component>
 
 <div class=" flex flex-col w-full items-center ">
-  <app-focus-carousel [data]="carouselData"></app-focus-carousel>
+  <section class="flex flex-col gap-y-8 w-full justify-center items-center">
+    <app-section-title [data]="packagesTitle"></app-section-title>
+    <p class="w-[50%] text-center">Nulla tincidunt nisl sit amet mi varius, in dictum massa hendrerit. Mauris et quam interdum diam finibus gravida sit amet in quam.</p>
+    <div class="flex flex-row gap-8">
+      @for (card of cards; track card.id) {
+        <lib-mn-information-card [data]="card" class="size-48 bg-white">
+          <div header>
+            <img class="size-20" [src]="card.image.url" [alt]="card.image.alt" />
+          </div>
+          <p>{{ card.title }}</p>
+          <div footer>
+            <button>{{ card.description }}</button>
+          </div>
+        </lib-mn-information-card>
+      }
+    </div>
+  </section>
+  <section class="flex flex-col gap-y-8 w-full justify-center items-center">
+    <app-section-title [data]="carouselTitle" />
+    <p class="w-[50%] text-center">Nulla tincidunt nisl sit amet mi varius, in dictum massa hendrerit. Mauris et quam interdum diam finibus gravida sit amet in quam.</p>
+    <app-focus-carousel [data]="carouselData"></app-focus-carousel>
+  </section>
 </div>
