@@ -1,4 +1,4 @@
-<section class="flex w-full justify-between gap-16 md:gap-8 items-start flex-col">
+<section class="flex w-full justify-between gap-16 md:gap-8 items-start flex-col md:flex-row">
   <div class=" flex flex-col gap-8 justify-center items-center sm:items-start">
     <app-section-title [data]="getInTouchTitle"></app-section-title>
     <p class="text-center sm:text-left">Nulla tincidunt nisl sit amet mi varius, in dictum massa hendrerit. Mauris et quam interdum diam finibus gravida sit amet in quam.</p>
@@ -44,5 +44,7 @@
                     formControlName="description"
                     [props]="descriptionProps"
     ></mn-input-field>
+    <button class="w-fit" mnButton [data]="formButton">Contact us</button>
+
   </form>
 </section>

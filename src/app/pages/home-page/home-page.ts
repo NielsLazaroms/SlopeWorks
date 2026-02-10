@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {ParallaxComponent, ParallaxComponentData} from '../../components/parallax-component/parallax-component';
 import {MnButtonTypes} from 'mn-angular-lib';
 import {SectionTitleTypes} from '../../components/section-title/section-titleTypes';
 import {AboutSectionComponent} from './components/about-section/about-section';
@@ -8,6 +7,7 @@ import {PicturesSectionComponent} from './components/pictures-section/pictures-s
 import {ContactSectionComponent} from './components/contact-section/contact-section';
 import {FooterComponent} from '../../components/footer/footer';
 import {NavbarComponent} from '../../components/navbar/navbar.component';
+import {ParallaxComponent, ParallaxComponentData} from '../../components/parallax-component';
 
 @Component({
   selector: 'app-home-page',

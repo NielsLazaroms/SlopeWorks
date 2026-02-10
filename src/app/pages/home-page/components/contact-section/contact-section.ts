@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {MnInputField, MnInputProps} from 'mn-angular-lib';
+import {MnButton, MnButtonTypes, MnInputField, MnInputProps} from 'mn-angular-lib';
 import {SectionTitle} from '../../../../components/section-title/section-title';
 import {ReactiveFormsModule, FormGroup, FormControl, Validators} from '@angular/forms';
 import {InfoItem} from '../../../../components/info-item/info-item';
@@ -13,6 +13,7 @@ import {SectionTitleTypes} from '../../../../components/section-title/section-ti
     MnInputField,
     ReactiveFormsModule,
     InfoItem,
+    MnButton,
   ],
   templateUrl: './contact-section.html',
 })
@@ -59,4 +60,12 @@ export class ContactSectionComponent {
     fontWeight: 'semibold',
     textStroke: 'sm',
   } as SectionTitleTypes;
+
+  formButton = {
+    color: 'primary',
+    size: 'md',
+    variant: 'fill',
+    borderRadius: 'xl',
+    fullWidth: false,
+  } as MnButtonTypes;
 }

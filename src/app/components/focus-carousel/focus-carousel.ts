@@ -34,7 +34,7 @@ export class FocusCarousel {
         breakpoints: {
       1024: { perPage: 3 },
       768: { perPage: 3 },
-      480: { perPage: 1 },
+      600: { perPage: 1 },
     },
   };
 
