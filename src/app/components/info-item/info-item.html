@@ -1,0 +1,22 @@
+<div class="flex items-start gap-4">
+  <!-- Icon -->
+  <div
+    class="flex items-center justify-center w-12 h-12 rounded-full shrink-0"
+    [ngClass]="bgColor"
+  >
+    <span class="">
+      <ng-content></ng-content>
+    </span>
+  </div>
+
+  <!-- Text -->
+  <div>
+    <h3 class="font-bold text-black mb-1">
+      {{ title }}
+    </h3>
+    <p class="text-gray-600 text-sm leading-relaxed">
+      {{ description }}
+    </p>
+  </div>
+
+</div>

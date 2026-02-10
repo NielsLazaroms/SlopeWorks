@@ -2,6 +2,8 @@ import {Component} from '@angular/core';
 import {MnInputField, MnInputProps} from 'mn-angular-lib';
 import {SectionTitle} from '../../../../components/section-title/section-title';
 import {ReactiveFormsModule, FormGroup, FormControl, Validators} from '@angular/forms';
+import {InfoItem} from '../../../../components/info-item/info-item';
+import {SectionTitleTypes} from '../../../../components/section-title/section-titleTypes';
 
 @Component({
   selector: 'app-contact-section',
@@ -10,6 +12,7 @@ import {ReactiveFormsModule, FormGroup, FormControl, Validators} from '@angular/
     SectionTitle,
     MnInputField,
     ReactiveFormsModule,
+    InfoItem,
   ],
   templateUrl: './contact-section.html',
 })
@@ -34,4 +37,26 @@ export class ContactSectionComponent {
     id: 'description',
     type: 'text',
   } satisfies MnInputProps;
+
+  getInTouchTitle = {
+    text: 'Get in touch',
+    size: 'md',
+    shadow: false,
+    showUnderLine: false,
+    textPosition: 'left',
+    textColor: 'dark',
+    fontWeight: 'semibold',
+    textStroke: 'sm',
+  } as SectionTitleTypes;
+
+  contactTitle = {
+    text: 'Send a message',
+    size: 'md',
+    shadow: false,
+    showUnderLine: false,
+    textPosition: 'left',
+    textColor: 'dark',
+    fontWeight: 'semibold',
+    textStroke: 'sm',
+  } as SectionTitleTypes;
 }
