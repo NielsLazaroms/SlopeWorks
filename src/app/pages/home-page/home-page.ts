@@ -1,24 +1,25 @@
 import {Component} from '@angular/core';
 import {ParallaxComponent, ParallaxComponentData} from '../../components/parallax-component/parallax-component';
-import {FocusCarousel} from '../../components/focus-carousel/focus-carousel';
-import {FocusCarouselTypes} from '../../components/focus-carousel/focus-carouselTypes';
-import {MnButtonTypes, MnImageType, MnInformationCard, MnInformationCardData} from 'mn-angular-lib';
+import {MnButtonTypes} from 'mn-angular-lib';
 import {SectionTitleTypes} from '../../components/section-title/section-titleTypes';
-import {SectionTitle} from '../../components/section-title/section-title';
-
-type OneImageExtra = { kind: 'one-image'; image: MnImageType };
-type OneImageCard = MnInformationCardData<OneImageExtra>;
-
+import {AboutSectionComponent} from './components/about-section/about-section';
+import {PackagesSectionComponent} from './components/packages-section/packages-section';
+import {PicturesSectionComponent} from './components/pictures-section/pictures-section';
+import {ContactSectionComponent} from './components/contact-section/contact-section';
+import {FooterComponent} from '../../components/footer/footer';
+import {NavbarComponent} from '../../components/navbar/navbar.component';
 
 @Component({
   selector: 'app-home-page',
   standalone: true,
   imports: [
     ParallaxComponent,
-    FocusCarousel,
-    SectionTitle,
-    MnInformationCard,
-
+    AboutSectionComponent,
+    PackagesSectionComponent,
+    PicturesSectionComponent,
+    ContactSectionComponent,
+    FooterComponent,
+    NavbarComponent,
   ],
   templateUrl: './home-page.html',
 })
@@ -48,92 +49,4 @@ export class HomePage {
       textStroke: 'sm',
     } as SectionTitleTypes,
   } as const;
-
-  carouselData:FocusCarouselTypes  = {
-    images: [
-      {
-        id: 1,
-        src: 'https://images.photowall.com/products/47782/extreme-skiing.jpg?h=699&q=85',
-        alt: 'Image 1',
-      },
-      {
-        id: 2,
-        src: 'https://hotel-kaya.com/assets/uploads/2022/06/regles-ski-alpin.jpg',
-        alt: 'Image 2',
-      },
-      {
-        id: 3,
-        src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Ski_Famille_-_Family_Ski_Holidays.jpg/500px-Ski_Famille_-_Family_Ski_Holidays.jpg',
-        alt: 'Image 3',
-      },
-    ],
-    showArrows: true,
-  };
-
-  carouselTitle = {
-    text: 'Our pictures',
-    size: 'md',
-    shadow: false,
-    showUnderLine: true,
-    underlineColor: 'primary',
-    textPosition: 'left',
-    textColor: 'dark',
-    fontWeight: 'semibold',
-    textStroke: 'sm',
-  } as SectionTitleTypes;
-
-  packagesTitle = {
-    text: 'Our packages',
-    size: 'md',
-    shadow: false,
-    showUnderLine: true,
-    underlineColor: 'primary',
-    textPosition: 'left',
-    textColor: 'dark',
-    fontWeight: 'semibold',
-    textStroke: 'sm',
-  } as SectionTitleTypes;
-
-  cards: MnInformationCardData<OneImageCard>[] = [
-    {
-      title: 'Card 1',
-      id: 1,
-      description: 'This is card 1.',
-      bottomBorder: true,
-      shadow: true,
-      kind: 'one-image',
-      image: {
-        id: 1,
-        url: 'https://logo-icons.com/cdn/shop/files/2081-logo-1713630973.369.svg?v=1713641356',
-        alt: 'test-image',
-      },
-      textPosition: 'center',
-    },
-    {
-      id: 2,
-      title: 'Card 2',
-      description: 'This is card 2.',
-      kind: 'one-image',
-      bottomBorder: true,
-      shadow: true,
-      image: {
-        id: 2,
-        url: 'https://logo-icons.com/cdn/shop/files/2081-logo-1713630973.369.svg?v=1713641356',
-        alt: 'test-image',
-      },
-    },
-    {
-      id: 3,
-      title: 'Card 2',
-      description: 'This is card 3.',
-      kind: 'one-image',
-      bottomBorder: true,
-      shadow: true,
-      image: {
-        id: 3,
-        url: 'https://logo-icons.com/cdn/shop/files/2081-logo-1713630973.369.svg?v=1713641356',
-        alt: 'test-image',
-      },
-    }
-  ];
 }

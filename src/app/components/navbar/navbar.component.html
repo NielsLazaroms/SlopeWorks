@@ -1,0 +1,73 @@
+<nav
+  class="navbar fixed z-100 flex items-center justify-between w-full h-20
+         border-b border-gray-500 bg-white/80 transition-colors duration-300"
+  [ngClass]="menuOpen ? 'max-md:bg-white/90' : ''"
+>
+
+<div
+  class="w-1/5 px-10   cursor-pointer"
+  (click)="scrollToSection('top-section')"
+>
+  <img src="logo_slopeworks.svg" alt="SlopeWorks" class="h-24">
+</div>
+
+<ul
+  class="relative w-3/5 hidden md:flex justify-center gap-10 py-7
+           border-l border-r border-gray-500 transition-transform duration-300"
+  [ngClass]="menuOpen ? [
+      'flex!','fixed!','inset-0!','w-full!','h-screen!',
+      'flex-col!','items-center!','justify-center!',
+      'gap-7.5!','p-5!','border-0!','bg-white/90!'
+    ] : []"
+>
+  <app-nav-list-item label="About" (itemClick)="scrollToSection('about-section')"></app-nav-list-item>
+  <app-nav-list-item label="Packages" (itemClick)="scrollToSection('packages-section')"></app-nav-list-item>
+  <app-nav-list-item label="Pictures" (itemClick)="scrollToSection('pictures-section')"></app-nav-list-item>
+
+  @if (menuOpen) {
+    <li
+      class="absolute bottom-10 text-lg text-black cursor-pointer
+               transition-colors duration-300 hover:text-brand-500"
+      (click)="scrollToSection('contact-section')"
+    >
+      Contact
+    </li>
+  }
+</ul>
+
+@if (!menuOpen) {
+  <div
+    class="hidden md:block w-1/5 text-lg text-center relative text-black cursor-pointer
+             transition-colors duration-300 hover:text-brand-500
+             after:content-[''] after:absolute after:left-0 after:-bottom-7
+             after:w-full after:h-0.75 after:bg-linear-to-r
+             after:from-brand-500 after:to-brand-500 after:rounded-sm"
+    (click)="scrollToSection('contact-section')"
+  >
+    Contact
+  </div>
+}
+
+<button
+  type="button"
+  class="flex md:hidden flex-col w-10 h-10 items-center justify-center gap-1.25 mr-4"
+  (click)="toggleMenu()"
+  aria-label="Toggle menu"
+  [attr.aria-expanded]="menuOpen"
+>
+  <span
+    class="block w-7.5 h-1 bg-black rounded-sm transition-all duration-300"
+    [ngClass]="menuOpen ? 'translate-y-2.25 rotate-45' : ''"
+  ></span>
+
+  <span
+    class="block w-7.5 h-1 bg-black rounded-sm transition-all duration-300"
+    [ngClass]="menuOpen ? 'opacity-0' : ''"
+  ></span>
+  <span
+    class="block w-7.5 h-1 bg-black rounded-sm transition-all duration-300"
+    [ngClass]="menuOpen ? '-translate-y-2.25 -rotate-45' : ''"
+  ></span>
+
+</button>
+</nav>

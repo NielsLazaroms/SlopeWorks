@@ -1,0 +1,19 @@
+<section class="flex flex-row">
+  <div></div>
+  <form [formGroup]="form" mn-section="root">
+    <app-section-title></app-section-title>
+    <p>Nulla tincidunt nisl sit amet mi varius, in dictum massa hendrerit. Mauris et quam interdum diam finibus gravida sit amet in quam.</p>
+    <mn-input-field class="block"
+                    formControlName="name"
+                    [props]="nameProps"
+    ></mn-input-field>
+    <mn-input-field class="block"
+                    formControlName="subject"
+                    [props]="subjectProps"
+    ></mn-input-field>
+    <mn-input-field class="block"
+                    formControlName="description"
+                    [props]="descriptionProps"
+    ></mn-input-field>
+  </form>
+</section>
