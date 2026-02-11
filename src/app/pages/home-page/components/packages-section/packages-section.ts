@@ -1,14 +1,12 @@
-import {Component} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {
-  MnImageType,
   MnInformationCard,
-  MnInformationCardData, MnInstanceDirective, MnSectionDirective,
+  MnInstanceDirective,
 } from 'mn-angular-lib';
 import {SectionTitleTypes} from '../../../../components/section-title/section-titleTypes';
 import {SectionTitle} from '../../../../components/section-title/section-title';
-
-type OneImageExtra = { kind: 'one-image'; image: MnImageType };
-type OneImageCard = MnInformationCardData<OneImageExtra>;
+import {provideMnComponentConfig} from 'mn-angular-lib';
+import {APP_PACKAGES_SECTION_CONFIG, PackagesSectionConfig} from './packages-sectionTypes';
 
 
 @Component({
@@ -20,10 +18,15 @@ type OneImageCard = MnInformationCardData<OneImageExtra>;
     MnInstanceDirective,
   ],
   templateUrl: './packages-section.html',
+  providers: [
+    provideMnComponentConfig<PackagesSectionConfig>(APP_PACKAGES_SECTION_CONFIG, 'app-packages-section'),
+  ],
 })
 export class PackagesSectionComponent {
+  protected readonly componentConfig = inject(APP_PACKAGES_SECTION_CONFIG);
+
   packagesTitle = {
-    text: 'Our packages',
+    text: this.componentConfig.packagesTitleText ?? 'Our packages',
     size: 'md',
     shadow: false,
     showUnderLine: true,
@@ -33,50 +36,4 @@ export class PackagesSectionComponent {
     fontWeight: 'semibold',
     textStroke: 'sm',
   } as SectionTitleTypes;
-
-  cards: MnInformationCardData<OneImageCard>[] = [
-    {
-      title: 'Card 1',
-      id: 1,
-      description: 'This is card 1.',
-      bottomBorder: true,
-      borderRadius:'md',
-      shadow: true,
-      kind: 'one-image',
-      image: {
-        id: 1,
-        url: 'https://logo-icons.com/cdn/shop/files/2081-logo-1713630973.369.svg?v=1713641356',
-        alt: 'test-image',
-      },
-      textPosition: 'center',
-    },
-    {
-      id: 2,
-      title: 'Card 2',
-      description: 'This is card 2.',
-      kind: 'one-image',
-      bottomBorder: true,
-      borderRadius:'md',
-      shadow: true,
-      image: {
-        id: 2,
-        url: 'https://logo-icons.com/cdn/shop/files/2081-logo-1713630973.369.svg?v=1713641356',
-        alt: 'test-image',
-      },
-    },
-    {
-      id: 3,
-      title: 'Card 2',
-      description: 'This is card 3.',
-      kind: 'one-image',
-      bottomBorder: true,
-      borderRadius:'md',
-      shadow: true,
-      image: {
-        id: 3,
-        url: 'https://logo-icons.com/cdn/shop/files/2081-logo-1713630973.369.svg?v=1713641356',
-        alt: 'test-image',
-      },
-    }
-  ];
 }

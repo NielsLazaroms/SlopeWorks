@@ -2,8 +2,8 @@
   <app-section-title mn-instance="section-title-packages" [data]="packagesTitle"></app-section-title>
   <p class="w-[50%] text-center">Nulla tincidunt nisl sit amet mi varius, in dictum massa hendrerit. Mauris et quam interdum diam finibus gravida sit amet in quam.</p>
   <div class="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-8">
-    @for (card of cards; track card.id) {
-      <mn-lib-information-card [data]="card" class="size-64 bg-stone-100">
+    @for (card of componentConfig.cards; track card.id) {
+      <mn-lib-information-card [data]="$any(card)" class="size-64 bg-stone-100">
         <div header>
           <img class="size-20" [src]="card.image.url" [alt]="card.image.alt" />
         </div>

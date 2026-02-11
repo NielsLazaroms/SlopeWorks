@@ -17,8 +17,57 @@
       "description": "About Us Description",
       "aboutUsButtonText": "Learn More"
     },
-    "app-pictures-section" : {
-      "description" : 'Test'
+    "app-pictures-section": {
+      "description": 'Test'
+    },
+    "app-packages-section": {
+      "packagesTitleText": "Our packages",
+//      DO NOT EDIT THE STYLING INSIDE CARDS
+      "cards": [
+        {
+          "title": "Card 1",
+          "id": 1,
+          "description": "This is card 1.",
+          "bottomBorder": true,
+          "borderRadius": "md",
+          "shadow": true,
+          "kind": "one-image",
+          "image": {
+            "id": 1,
+            "url": "https://logo-icons.com/cdn/shop/files/2081-logo-1713630973.369.svg?v=1713641356",
+            "alt": "test-image"
+          },
+          "textPosition": "center"
+        },
+        {
+          "id": 2,
+          "title": "Card 2",
+          "description": "This is card 2.",
+          "kind": "one-image",
+          "bottomBorder": true,
+          "borderRadius": "md",
+          "shadow": true,
+          "image": {
+            "id": 2,
+            "url": "https://logo-icons.com/cdn/shop/files/2081-logo-1713630973.369.svg?v=1713641356",
+            "alt": "test-image"
+          }
+        },
+        {
+          "id": 3,
+          "title": "Card 3",
+          "description": "This is card 3.",
+          "kind": "one-image",
+          "bottomBorder": true,
+          "borderRadius": "md",
+          "shadow": true,
+          "image": {
+            "id": 3,
+            "url": "https://logo-icons.com/cdn/shop/files/2081-logo-1713630973.369.svg?v=1713641356",
+            "alt": "test-image"
+          }
+        }
+      ]
     }
   },
   "overrides": {
@@ -44,12 +93,19 @@
           },
           "mn-dual-horizontal-image": {
             images: [
-              { id: '1', url: 'https://www.wildkogel-arena.at/site/assets/files/17949/wildkogelarena_2024-7237.1920x0-sp.jpg', alt: 'Image 1' },
-              { id: '2', url: 'https://6hsport15.wordpress.com/wp-content/uploads/2016/01/skic3abn.jpg?w=617&h=411', alt: 'Image 2' }
+              {
+                id: '1',
+                url: 'https://www.wildkogel-arena.at/site/assets/files/17949/wildkogelarena_2024-7237.1920x0-sp.jpg',
+                alt: 'Image 1'
+              },
+              {
+                id: '2',
+                url: 'https://6hsport15.wordpress.com/wp-content/uploads/2016/01/skic3abn.jpg?w=617&h=411',
+                alt: 'Image 2'
+              }
             ]
           }
         },
-//        PACKAGE SECTION
         "pictures-section": {
           "#section-title-pictures": {
             "title": "Our pictures"
@@ -77,11 +133,50 @@
             ]
           }
         },
+        "packages-section": {
+          "#section-title-packages": {
+            "title": "Our packages"
+          },
+          "app-packages-section": {
+            "packagesTitleText": "Our packages",
+            "cards": [
+              {
+                "id": 1,
+                "title": "Card 1",
+                "description": "This is card 1.",
+                "image": {
+                  "id": 1,
+                  "url": "https://logo-icons.com/cdn/shop/files/2081-logo-1713630973.369.svg?v=1713641356",
+                  "alt": "test-image"
+                }
+              },
+              {
+                "id": 2,
+                "title": "Card 2",
+                "description": "This is card 2.",
+                "image": {
+                  "id": 2,
+                  "url": "https://logo-icons.com/cdn/shop/files/2081-logo-1713630973.369.svg?v=1713641356",
+                  "alt": "test-image"
+                }
+              },
+              {
+                "id": 3,
+                "title": "Card 3a",
+                "description": "This is card 3.",
+                "image": {
+                  "id": 3,
+                  "url": "https://logo-icons.com/cdn/shop/files/2081-logo-1713630973.369.svg?v=1713641356",
+                  "alt": "test-image"
+                }
+              }
+            ]
+          }
+        },
         "contact-section": {
-          "#section-title-getInTouch" : {
+          "#section-title-getInTouch": {
             "title": "Get in touch"
           },
-
           "app-contact-section": {
             "informationDescription": "Nulla tincidunt nisl sit amet mi varius, in dictum massa hendrerit. Mauris et quam interdum diam finibus gravida sit amet in quam.",
             "formDescription": "Nulla tincidunt nisl sit amet mi varius, in dictum massa hendrerit. Mauris et quam interdum diam finibus gravida sit amet in quam.",
@@ -103,7 +198,6 @@
             "#section-title-form": {
               title: "Send a message"
             },
-
             "#mn-input-name": {
               "placeholder": "Name placeholder",
               "label": "Name label",
@@ -127,11 +221,23 @@
           "logoSrc": "logo_slopeworks.svg",
           "logoAlt": "SlopeWorks",
           "navItems": [
-            { "label": "About", "sectionId": "about-section" },
-            { "label": "Packages", "sectionId": "packages-section" },
-            { "label": "Pictures", "sectionId": "pictures-section" }
+            {
+              "label": "About",
+              "sectionId": "about-section"
+            },
+            {
+              "label": "Packages",
+              "sectionId": "packages-section"
+            },
+            {
+              "label": "Pictures",
+              "sectionId": "pictures-section"
+            }
           ],
-          "contactItem": { "label": "Contact", "sectionId": "contact-section" }
+          "contactItem": {
+            "label": "Contact",
+            "sectionId": "contact-section"
+          }
         }
       },
       "footer": {
@@ -140,8 +246,14 @@
           "logoAlt": "SlopeWorks",
           "copyrightText": "Skiwie - All rights reserved",
           "links": [
-            { "label": "Linkedin", "href": "https://www.linkedin.com/in/niels-lazaroms-608664242/" },
-            { "label": "Facebook", "href": "https://github.com/NielsLazaroms" }
+            {
+              "label": "Linkedin",
+              "href": "https://www.linkedin.com/in/niels-lazaroms-608664242/"
+            },
+            {
+              "label": "Facebook",
+              "href": "https://github.com/NielsLazaroms"
+            }
           ]
         }
       }
