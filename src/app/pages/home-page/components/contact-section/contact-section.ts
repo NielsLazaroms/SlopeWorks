@@ -1,5 +1,8 @@
 import {Component, inject, InjectionToken} from '@angular/core';
-import {MnButton, MnButtonTypes, MnInputField, MnInputProps, MnInstanceDirective, MnSectionDirective, provideMnComponentConfig} from 'mn-angular-lib';
+import {
+  MnButton, MnButtonTypes, MnInputField, MnInputProps, MnInstanceDirective, MnSectionDirective,
+  MnTextarea, MnTextareaProps, provideMnComponentConfig
+} from 'mn-angular-lib';
 import {SectionTitle} from '../../../../components/section-title/section-title';
 import {ReactiveFormsModule, FormGroup, FormControl, Validators} from '@angular/forms';
 import {InfoItem} from '../../../../components/info-item/info-item';
@@ -24,6 +27,7 @@ export const APP_CONTACT_SECTION_COMPONENT_CONFIG = new InjectionToken<ContactSe
     MnButton,
     MnInstanceDirective,
     MnSectionDirective,
+    MnTextarea,
   ],
   providers: [
     provideMnComponentConfig<ContactSectionConfig>(APP_CONTACT_SECTION_COMPONENT_CONFIG, 'app-contact-section'),
@@ -51,8 +55,9 @@ export class ContactSectionComponent {
 
   descriptionProps = {
     id: 'description',
-    type: 'text',
-  } satisfies MnInputProps;
+    resize: 'none',
+    rows: 5
+  } satisfies MnTextareaProps;
 
   getInTouchTitle = {
     text: 'Get in touch',

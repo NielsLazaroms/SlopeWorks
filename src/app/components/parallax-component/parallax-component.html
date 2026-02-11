@@ -1,16 +1,34 @@
-<!--Container-->
-<section
-  class="relative lg:h-[55vh] flex flex-col justify-center w-full py-16 bg-cover bg-center bg-no-repeat"
-  [ngStyle]="{ 'background-image': 'url(' + componentConfig.backgroundImageUrl + ')' }"
->
-  <div class="absolute inset-0 bg-black/50 z-2"></div>
+<section class="relative w-full overflow-hidden lg:h-[55vh] py-16">
+  <!-- Background image -->
+  @if (componentConfig.backgroundImageUrl) {
+    <img
+    [ngSrc]="componentConfig.backgroundImageUrl"
+    fill
+    priority
+    class="object-cover"
+    [alt]=componentConfig.backgroundImageAlt
+  />
+  }
+  <!-- Overlay -->
+  <div class="absolute inset-0 bg-black/50"></div>
 
-  <div class="relative z-10 px-8 md:px-48  flex flex-col gap-y-8 py-6">
+  <!-- Content wrapper keeps centering -->
+  <div class="relative z-10 h-full flex flex-col justify-center p-8 md:px-48 gap-y-8">
     <div class="w-full lg:w-[40%]">
-    <app-section-title mn-instance="section-title-parallax" [data]="data.title"></app-section-title>
+      <app-section-title
+        mn-instance="section-title-parallax"
+        [data]="data.title">
+      </app-section-title>
     </div>
+
     <p class="text-white lg:max-w-[80%]">{{ componentConfig.description }}</p>
-    <button class="w-fit" mnButton [data]="data.button">{{componentConfig.buttonText}}</button>
+
+    <button
+      (click)="scrollToPackages()"
+      class="w-fit font-bold"
+      mnButton
+      [data]="data.button">
+      {{ componentConfig.buttonText }}
+    </button>
   </div>
 </section>
-

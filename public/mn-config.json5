@@ -114,7 +114,7 @@
               "label": "Subject label",
               "ariaLabel": "Subject accessible label"
             },
-            "#mn-input-description": {
+            "#mn-textarea-description": {
               "placeholder": "Description placeholder",
               "label": "Description label",
               "ariaLabel": "Description accessible label"

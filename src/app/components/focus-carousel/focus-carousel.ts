@@ -29,26 +29,21 @@ export class FocusCarousel {
     return this.componentConfig.images ?? [];
   }
 
-  get showArrows(): boolean {
-    return this.componentConfig.showArrows ?? true;
-  }
-
-  get options(): Options {
-    return {
-      type: 'loop',
-      arrows: this.showArrows,
-      pagination: true,
-      focus: 'center',
-      updateOnMove: true,
-      cloneStatus: false,
-      autoWidth: false,
-      gap: '1rem',
-      perPage: 5,
-      breakpoints: {
-        1024: {perPage: 3},
-        768: {perPage: 3},
-        600: {perPage: 1},
-      },
-    };
-  }
+  readonly options: Options = {
+    type: 'loop',
+    arrows: true,
+    pagination: true,
+    focus: 'center',
+    updateOnMove: true,
+    cloneStatus: false,
+    autoWidth: false,
+    gap: '1rem',
+    perPage: 5,
+    breakpoints: {
+      1400: { perPage: 3 },
+      1024: { perPage: 3 },
+      768: { perPage: 3 },
+      600: { perPage: 1 },
+    },
+  };
 }
