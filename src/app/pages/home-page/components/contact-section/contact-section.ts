@@ -1,10 +1,17 @@
 import {Component, inject, InjectionToken} from '@angular/core';
 import {
-  MnButton, MnButtonTypes, MnInputField, MnInputProps, MnInstanceDirective, MnSectionDirective,
-  MnTextarea, MnTextareaProps, provideMnComponentConfig
+  MnButton,
+  MnButtonTypes,
+  MnInputField,
+  MnInputProps,
+  MnInstanceDirective,
+  MnSectionDirective,
+  MnTextarea,
+  MnTextareaProps,
+  provideMnComponentConfig
 } from 'mn-angular-lib';
 import {SectionTitle} from '../../../../components/section-title/section-title';
-import {ReactiveFormsModule, FormGroup, FormControl, Validators} from '@angular/forms';
+import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {InfoItem} from '../../../../components/info-item/info-item';
 import {SectionTitleTypes} from '../../../../components/section-title/section-titleTypes';
 
@@ -12,6 +19,9 @@ export interface ContactSectionConfig {
   informationDescription?: string;
   formDescription?: string;
   formButtonText?: string;
+  emailSalutation?: string;
+  emailClosing?: string;
+  contactEmail?: string;
 }
 
 export const APP_CONTACT_SECTION_COMPONENT_CONFIG = new InjectionToken<ContactSectionConfig>('APP_CONTACT_SECTION_CONFIG');
@@ -88,4 +98,36 @@ export class ContactSectionComponent {
     borderRadius: 'xl',
     fullWidth: false,
   } as MnButtonTypes;
+
+  get formButtonData(): MnButtonTypes {
+    return {
+      ...this.formButton,
+      disabled: this.form.invalid
+    };
+  }
+
+  sendEmail() {
+    if (this.form.invalid) {
+      return;
+    }
+
+    const name = this.form.get('name')?.value ?? '';
+    const subject = this.form.get('subject')?.value ?? '';
+    const description = this.form.get('description')?.value ?? '';
+
+    const salutation = this.componentConfig?.emailSalutation ?? 'Beste Meneer';
+    const closing = this.componentConfig?.emailClosing ?? 'Met vriendelijke groet';
+    const contactEmail = this.componentConfig?.contactEmail ?? 'info@Slopeworks.nl';
+
+    const body =
+      `${salutation},
+
+${description}
+
+${closing},
+${name}`;
+
+    window.location.href = `mailto:${contactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  }
+
 }

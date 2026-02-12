@@ -8,6 +8,6 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
-    ...provideMnConfig('mn-config.json5'),
+    ...provideMnConfig('mn-config.json5', false),
   ]
 };

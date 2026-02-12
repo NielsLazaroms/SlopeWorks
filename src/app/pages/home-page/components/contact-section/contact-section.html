@@ -7,21 +7,21 @@
         mn-instance="location-item"
         bgColor="bg-purple-500"
       >
-        <img src="location.svg" alt="location icon" />
+        <img src="/location.svg" alt="location icon" />
       </app-info-item>
 
       <app-info-item
         mn-instance="email-item"
         bgColor="bg-blue-500"
       >
-      <img src="email.svg" alt="email icon" />
+      <img src="/email.svg" alt="email icon" />
       </app-info-item>
 
       <app-info-item
         mn-instance="call-item"
         bgColor="bg-red-500"
       >
-      <img src="phone.svg" alt="phone icon" />
+      <img src="/phone.svg" alt="phone icon" />
       </app-info-item>
     </div>
 
@@ -39,11 +39,9 @@
                     [props]="subjectProps"
     ></mn-lib-input-field>
     <mn-lib-textarea class="block w-full"    formControlName="description"
-                        [props]="descriptionProps"></mn-lib-textarea>
-<!--    <mn-lib-input-field class="block w-full"-->
-<!--                    formControlName="description"-->
-<!--                    [props]="descriptionProps"-->
-<!--    ></mn-lib-input-field>-->
-    <button class="w-fit font-bold" mnButton [data]="formButton">{{componentConfig.formButtonText}}</button>
+                        [props]="descriptionProps">
+    </mn-lib-textarea>
+
+    <button type="button" class="w-fit font-bold" mnButton [data]="formButtonData" (click)="sendEmail()">{{componentConfig.formButtonText}}</button>
   </form>
 </section>

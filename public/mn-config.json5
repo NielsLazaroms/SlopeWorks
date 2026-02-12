@@ -1,3 +1,19 @@
+/**
+ * This file is used to configure the application's content and behavior.
+ * It uses the JSON5 format, which allows for comments, trailing commas, and more.
+ *
+ * How it works:
+ * - "defaults": Contains the default configuration for various components. These values
+ *   are used if no specific override is provided.
+ * - "overrides": Contains specific configuration overrides organized by route and section.
+ *   - "root": The base level for overrides.
+ *   - "home", "navbar", "footer": Specific areas of the application where defaults can be overridden.
+ *
+ * How to edit:
+ * - You can change text, image URLs, and other properties within the JSON objects.
+ * - Use double or single quotes for keys and string values.
+ * - Ensure the JSON structure remains valid (matched braces and brackets).
+ */
 {
   "defaults": {
     "mn-input-field": {
@@ -180,7 +196,10 @@
           "app-contact-section": {
             "informationDescription": "Nulla tincidunt nisl sit amet mi varius, in dictum massa hendrerit. Mauris et quam interdum diam finibus gravida sit amet in quam.",
             "formDescription": "Nulla tincidunt nisl sit amet mi varius, in dictum massa hendrerit. Mauris et quam interdum diam finibus gravida sit amet in quam.",
-            "formButtonText": "Contact us"
+            "formButtonText": "Contact us",
+            "emailSalutation": "Beste meneer",
+            "emailClosing": "Met vriendelijke groet",
+            "contactEmail": "info@slopeworks.nl"
           },
           "#location-item": {
             "title": "Location",
