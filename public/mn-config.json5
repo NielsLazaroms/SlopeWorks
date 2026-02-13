@@ -38,7 +38,7 @@
     },
     "app-packages-section": {
       "packagesTitleText": "Our packages",
-//      DO NOT EDIT THE STYLING INSIDE CARDS
+      //      DO NOT EDIT THE STYLING INSIDE CARDS
       "cards": [
         {
           "title": "Card 1",
@@ -95,7 +95,7 @@
           },
           "app-parallax-component": {
             "backgroundImageUrl": "https://4kwallpapers.com/images/walls/thumbs_3t/1025.jpg",
-            "description": "Transform your next company trip with experly organized retreats design to inspire, connect and energize your team",
+            "description": "Transform your next company trip with expertly organized retreats design to inspire, connect and energize your team",
             "buttonText": "Learn More "
           }
         },
@@ -104,7 +104,7 @@
             "title": "About us"
           },
           "app-about-section": {
-            "description": "Nulla tincidunt nisl sit amet mi varius, in dictum massa hendrerit. Mauris et quam interdum diam finibus gravida sit amet in quam. Duis ut dui augue. Duis fringilla semper massa, eu vulputate sem. Nullam eu ex tempor, accumsan lectus ut, consequat mi. Integer ",
+            "description": "SlopeWorks creates premium corporate ski experiences designed to bring teams closer together on and off the mountain. We believe the best business conversations don’t happen in boardrooms, but on chairlifts, over long alpine lunches, and during shared moments of challenge and adventure. A ski trip isn’t just a getaway; it’s a powerful tool for connection, performance and culture. From carefully selected resorts to seamless logistics, we design fully curated winter experiences tailored to ambitious companies. Whether it’s a strategy retreat, incentive trip or team celebration, we combine comfort, energy and precision to deliver unforgettable alpine escapes. Professional. Energetic. Effortlessly organised. SlopeWorks turns business trips into peak experiences.",
             "aboutUsButtonText": "Contact us"
           },
           "mn-dual-horizontal-image": {
@@ -127,7 +127,7 @@
             "title": "Our pictures"
           },
           "app-pictures-section": {
-            "description": "Nulla tincidunt nisl sit amet mi varius, in dictum massa hendrerit. Mauris et quam interdum diam finibus gravida sit amet in quam.",
+            "description": "A glimpse into the energy, connection and alpine moments that define a SlopeWorks retreat. Every image captures the balance between performance, adventure and unforgettable shared experiences.",
           },
           "app-focus-carousel": {
             images: [
@@ -158,8 +158,8 @@
             "cards": [
               {
                 "id": 1,
-                "title": "Card 1",
-                "description": "This is card 1.",
+                "title": "Essential Retreats",
+                "description": "A focused corporate ski experience built around connection, clarity and momentum. Carefully selected resorts, smooth logistics and comfortable accommodation combined with the right balance of strategy sessions and time on the slopes. A powerful retreat that delivers real impact for your team.",
                 "image": {
                   "id": 1,
                   "url": "https://logo-icons.com/cdn/shop/files/2081-logo-1713630973.369.svg?v=1713641356",
@@ -168,8 +168,8 @@
               },
               {
                 "id": 2,
-                "title": "Card 2",
-                "description": "This is card 2.",
+                "title": "Premium Retreats",
+                "description": "An elevated alpine experience for ambitious teams who value comfort and refinement. Upgraded accommodation, curated dining, private transfers and thoughtfully designed team moments. Strategy, adventure and hospitality come together in one seamless experience.",
                 "image": {
                   "id": 2,
                   "url": "https://logo-icons.com/cdn/shop/files/2081-logo-1713630973.369.svg?v=1713641356",
@@ -178,8 +178,8 @@
               },
               {
                 "id": 3,
-                "title": "Card 3a",
-                "description": "This is card 3.",
+                "title": "Luxury Retreats",
+                "description": "Our most exclusive ski experience. Five star stays, premium ski service, VIP transfers and fully bespoke programming tailored to your leadership goals. Designed for organisations that expect exceptional quality, flawless execution and an unforgettable alpine setting.",
                 "image": {
                   "id": 3,
                   "url": "https://logo-icons.com/cdn/shop/files/2081-logo-1713630973.369.svg?v=1713641356",
@@ -194,8 +194,8 @@
             "title": "Get in touch"
           },
           "app-contact-section": {
-            "informationDescription": "Nulla tincidunt nisl sit amet mi varius, in dictum massa hendrerit. Mauris et quam interdum diam finibus gravida sit amet in quam.",
-            "formDescription": "Nulla tincidunt nisl sit amet mi varius, in dictum massa hendrerit. Mauris et quam interdum diam finibus gravida sit amet in quam.",
+            "informationDescription": "Ready to explore what your team could achieve in the mountains? Let’s start designing an alpine experience tailored to your goals.",
+            "formDescription": "Tell us about your team, ambitions and preferred dates. We will get back to you quickly to shape the perfect retreat together.",
             "formButtonText": "Contact us",
             "emailSalutation": "Beste meneer",
             "emailClosing": "Met vriendelijke groet",
@@ -203,15 +203,15 @@
           },
           "#location-item": {
             "title": "Location",
-            "description": "Nulla tincidunt nisl sit amet mi varius, in dictum massa hendrerit."
+            "description": "Operating across Europe based in the Netherlands & Belgium"
           },
           "#email-item": {
             "title": "Email us",
-            "description": "Nulla tincidunt nisl sit amet mi varius, in dictum massa hendrerit."
+            "description": "E-mail us at info@slopeworks.nl to share your ideas and start shaping your alpine retreat"
           },
           "#call-item": {
             "title": "Call us",
-            "description": "Nusadadlla tincidunt nisl sit amet mi varius, in dictum massa hendrerit."
+            "description": "Call us directly to discuss your retreat plans and next steps. +31 06 309 41 253"
           },
           "form": {
             "#section-title-form": {
