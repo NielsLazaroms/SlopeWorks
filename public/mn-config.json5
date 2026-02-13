@@ -155,6 +155,7 @@
           },
           "app-packages-section": {
             "packagesTitleText": "Our packages",
+            "packagesDescription"  : 'Description',
             "cards": [
               {
                 "id": 1,

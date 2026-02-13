@@ -6,6 +6,7 @@ export type OneImageCard = MnInformationCardData<OneImageExtra>;
 
 export interface PackagesSectionConfig {
   packagesTitleText?: string;
+  packagesDescription?: string;
   cards?: OneImageCard[];
 }
 

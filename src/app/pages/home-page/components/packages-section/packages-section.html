@@ -1,6 +1,6 @@
 <section class="flex flex-col gap-y-8 w-full justify-center items-center">
   <app-section-title mn-instance="section-title-packages" [data]="packagesTitle"></app-section-title>
-  <p class="w-[50%] text-center">Nulla tincidunt nisl sit amet mi varius, in dictum massa hendrerit. Mauris et quam interdum diam finibus gravida sit amet in quam.</p>
+  <p class="w-[50%] text-center">{{componentConfig.packagesDescription}}</p>
   <div class="flex flex-col sm:flex-row flex-wrap items-stretch justify-center gap-8">
     @for (card of componentConfig.cards; track card.id) {
       <mn-lib-information-card [data]="$any(card)" class="w-64 bg-stone-100  flex flex-col">
