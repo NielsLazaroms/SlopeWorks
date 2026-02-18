@@ -51,7 +51,7 @@
           "image": {
             "id": 1,
             "url": "https://logo-icons.com/cdn/shop/files/2081-logo-1713630973.369.svg?v=1713641356",
-            "alt": "test-image"
+            "alt": "Icon representing the Essential Retreat package"
           },
           "textPosition": "center"
         },
@@ -66,7 +66,7 @@
           "image": {
             "id": 2,
             "url": "https://logo-icons.com/cdn/shop/files/2081-logo-1713630973.369.svg?v=1713641356",
-            "alt": "test-image"
+            "alt": "Icon representing the Premium Retreat package"
           }
         },
         {
@@ -80,7 +80,7 @@
           "image": {
             "id": 3,
             "url": "https://logo-icons.com/cdn/shop/files/2081-logo-1713630973.369.svg?v=1713641356",
-            "alt": "test-image"
+            "alt": "Icon representing the Luxury Retreat package"
           }
         }
       ]
@@ -111,13 +111,13 @@
             images: [
               {
                 id: '1',
-                url: 'https://www.wildkogel-arena.at/site/assets/files/17949/wildkogelarena_2024-7237.1920x0-sp.jpg',
-                alt: 'Image 1'
+                url: '/images/about_us_1.jpg',
+                alt: 'Team members during a SlopeWorks corporate ski retreat'
               },
               {
                 id: '2',
-                url: 'https://6hsport15.wordpress.com/wp-content/uploads/2016/01/skic3abn.jpg?w=617&h=411',
-                alt: 'Image 2'
+                url: '/images/about_us_2.jpg',
+                alt: 'Scenic view of the snowy mountains from an alpine resort'
               }
             ]
           }
@@ -133,19 +133,55 @@
             images: [
               {
                 id: 1,
-                src: 'https://images.photowall.com/products/47782/extreme-skiing.jpg?h=699&q=85',
-                alt: 'Image 1',
+                src: '/images/carousel_1.jpg',
+                alt: 'Corporate team skiing together on a sunny slope',
               },
               {
                 id: 2,
-                src: 'https://hotel-kaya.com/assets/uploads/2022/06/regles-ski-alpin.jpg',
-                alt: 'Image 2',
+                src: '/images/carousel_2.jpg',
+                alt: 'Mountain landscape at sunset during a winter retreat',
               },
               {
                 id: 3,
-                src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Ski_Famille_-_Family_Ski_Holidays.jpg/500px-Ski_Famille_-_Family_Ski_Holidays.jpg',
-                alt: 'Image 3',
+                src: '/images/carousel_4.jpg',
+                alt: 'Strategy session in a cozy mountain lodge',
               },
+              {
+                id: 4,
+                src: '/images/carousel_5.jpg',
+                alt: 'Participants enjoying a shared meal at an alpine restaurant',
+              },
+              {
+                id: 5,
+                src: '/images/carousel_6.jpg',
+                alt: 'Close-up of high-quality ski equipment on snow',
+              },
+              {
+                id: 6,
+                src: '/images/carousel_7.jpeg',
+                alt: 'Breathtaking panoramic view of the Alps from a summit',
+              },
+              {
+                id: 7,
+                src: '/images/carousel_8.jpg',
+                alt: 'Team building activity in the snow during a retreat',
+              },
+              {
+                id: 8,
+                src: '/images/carousel_9.jpg',
+                alt: 'Exterior view of a luxury ski chalet at night',
+              },
+              {
+                id: 9,
+                src: '/images/carousel_10.jpg',
+                alt: 'Smiling group photo of retreat participants in ski gear',
+              },
+
+              {
+                id: 10,
+                src: '/images/carousel_12.jpg',
+                alt: 'Peaceful winter forest trail with fresh snow',
+              }
             ]
           }
         },
@@ -164,7 +200,7 @@
                 "image": {
                   "id": 1,
                   "url": "https://logo-icons.com/cdn/shop/files/2081-logo-1713630973.369.svg?v=1713641356",
-                  "alt": "test-image"
+                  "alt": "Icon representing the Essential Retreat package"
                 }
               },
               {
@@ -174,7 +210,7 @@
                 "image": {
                   "id": 2,
                   "url": "https://logo-icons.com/cdn/shop/files/2081-logo-1713630973.369.svg?v=1713641356",
-                  "alt": "test-image"
+                  "alt": "Icon representing the Premium Retreat package"
                 }
               },
               {
@@ -184,7 +220,7 @@
                 "image": {
                   "id": 3,
                   "url": "https://logo-icons.com/cdn/shop/files/2081-logo-1713630973.369.svg?v=1713641356",
-                  "alt": "test-image"
+                  "alt": "Icon representing the Luxury Retreat package"
                 }
               }
             ]
