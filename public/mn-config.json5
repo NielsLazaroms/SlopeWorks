@@ -116,7 +116,7 @@
               },
               {
                 id: '2',
-                url: '/images/about_us_2.jpg',
+                url: '/images/about_us_3.jpg',
                 alt: 'Scenic view of the snowy mountains from an alpine resort'
               }
             ]
@@ -243,8 +243,8 @@
             "informationDescription": "Ready to explore what your team could achieve in the mountains? Let’s start designing an alpine experience tailored to your goals.",
             "formDescription": "Tell us about your team, ambitions and preferred dates. We will get back to you quickly to shape the perfect retreat together.",
             "formButtonText": "Contact us",
-            "emailSalutation": "Beste meneer",
-            "emailClosing": "Met vriendelijke groet",
+            "emailSalutation": "Dear Bas and Carmen,",
+            "emailClosing": "See you on the Slopes,",
             "contactEmail": "info@slopeworks.nl"
           },
           "#location-item": {
@@ -309,15 +309,15 @@
         "app-footer": {
           "logoSrc": "logo_slopeworks.svg",
           "logoAlt": "SlopeWorks",
-          "copyrightText": "Skiwie - All rights reserved",
+          "copyrightText": "SlopeWorks - All rights reserved",
           "links": [
             {
               "label": "Linkedin",
-              "href": "https://www.linkedin.com/in/niels-lazaroms-608664242/"
+              "href": "https://www.linkedin.com/company/slopeworks/"
             },
             {
-              "label": "Facebook",
-              "href": "https://github.com/NielsLazaroms"
+              "label": "Instagram",
+              "href": "https://www.instagram.com/slopeworks_ski/"
             }
           ]
         }

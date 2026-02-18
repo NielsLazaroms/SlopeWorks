@@ -2,7 +2,7 @@
   <div class="w-full lg:w-[50%] h-full flex items-center lg:items-start flex-col gap-y-8">
     <app-section-title mn-instance="section-title-about" [data]="aboutUsTitle"></app-section-title>
     <p class="text-center lg:text-left">{{componentConfig.description}}</p>
-    <button class="w-fit font-bold" mnButton [data]="aboutUsButton">{{componentConfig.aboutUsButtonText}}</button>
+    <button class="w-fit font-bold" mnButton [data]="aboutUsButton" (click)="scrollToContact()">{{componentConfig.aboutUsButtonText}}</button>
   </div>
   <div class="w-full lg:w-[50%] ">
 

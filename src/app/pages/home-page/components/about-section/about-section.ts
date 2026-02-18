@@ -3,11 +3,10 @@ import {
   MnButton,
   MnButtonTypes,
   MnDualHorizontalImage,
-  MnDualHorizontalImageTypes, MnInstanceDirective, MnSectionDirective, provideMnComponentConfig,
+  MnInstanceDirective, provideMnComponentConfig,
 } from 'mn-angular-lib';
 import {SectionTitleTypes} from '../../../../components/section-title/section-titleTypes';
 import {SectionTitle} from '../../../../components/section-title/section-title';
-import {APP_PARALLAX_COMPONENT_CONFIG, ParallaxComponentConfig} from '../../../../components/parallax-component';
 
 export interface AboutSectionConfig {
   description?: string;
@@ -54,4 +53,11 @@ export class AboutSectionComponent {
     borderRadius: 'xl',
     fullWidth: false,
   } as MnButtonTypes;
+
+  scrollToContact() {
+    const contactSection = document.getElementById('contact-section');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
 }
