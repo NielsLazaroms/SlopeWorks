@@ -202,7 +202,7 @@
                 "shadow": true,
                 "image": {
                   "id": 1,
-                  "url": "https://media.canva.com/v2/image-resize/format:PNG/height:389/quality:100/uri:ifs%3A%2F%2FM%2Fcf8c23d4-f44f-480b-aff2-d46034c3d1bf/watermark:F/width:800?csig=AAAAAAAAAAAAAAAAAAAAAIgKNabcnwCSRDRQ9-DKMVRnONvPkt5cpoWADpbbOVqz&exp=1771440492&osig=AAAAAAAAAAAAAAAAAAAAAAzD16I1C4_HKup8o_X2Q-LOv6QWDRGGjZwrV3eg-Yhy&signer=media-rpc&x-canva-quality=screen",
+                  "url": "/images/essential_retreats.png",
                   "alt": "Icon representing the Essential Retreat package"
                 }
               },
@@ -215,7 +215,7 @@
                 "shadow": true,
                 "image": {
                   "id": 2,
-                  "url": "https://media.canva.com/v2/image-resize/format:PNG/height:533/quality:100/uri:ifs%3A%2F%2FM%2Fc5ab23b3-b611-4972-839e-32aaa3f1678b/watermark:F/width:800?csig=AAAAAAAAAAAAAAAAAAAAALOlPn48C0taqSIiDYSpVZfW0m_xOipMjirRAU1PejyR&exp=1771439986&osig=AAAAAAAAAAAAAAAAAAAAAN7DLgCg371lYJnecG9V_8LINemHTMD9E1vQ63-9-jGg&signer=media-rpc&x-canva-quality=screen",
+                  "url": "/images/premium_retreats.png",
                   "alt": "Icon representing the Premium Retreat package"
                 }
               },
@@ -228,7 +228,7 @@
                 "shadow": true,
                 "image": {
                   "id": 3,
-                  "url": "https://media.canva.com/v2/image-resize/format:PNG/height:533/quality:100/uri:ifs%3A%2F%2FM%2Fe1198abc-1494-4f33-8001-690150acdd7b/watermark:F/width:800?csig=AAAAAAAAAAAAAAAAAAAAAAVho12gO4sTXDkZgrPdY88iT7kiRFE1rkmRW1l8lkuX&exp=1771439327&osig=AAAAAAAAAAAAAAAAAAAAAKDmZZgE73l8i1W0Ml1AYWt_UGAr189iMnE9VYlNIoS2&signer=media-rpc&x-canva-quality=screen",
+                  "url": "/images/luxury_retreats.png",
                   "alt": "Icon representing the Luxury Retreat package"
                 }
               }

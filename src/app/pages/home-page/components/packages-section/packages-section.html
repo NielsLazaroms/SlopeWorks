@@ -5,9 +5,9 @@
     @for (card of componentConfig.cards; track card.id) {
       <mn-lib-information-card [data]="$any(card)" class="w-80 bg-stone-200 rounded-md  flex flex-col">
       <div header>
-          <img class="w-20 h-16" [src]="card.image.url" [alt]="card.image.alt" />
+          <img class="w-28 h-20" [src]="card.image.url" [alt]="card.image.alt" />
         </div>
-        <p>{{ card.title }}</p>
+        <p class="font-bold text-lg ">{{ card.title }}</p>
         <div footer>
           <button>{{ card.description }}</button>
         </div>
