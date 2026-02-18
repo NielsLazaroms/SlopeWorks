@@ -111,12 +111,12 @@
             images: [
               {
                 id: '1',
-                url: '/images/about_us_1.jpg',
+                url: '/images/about_us_1.webp',
                 alt: 'Team members during a SlopeWorks corporate ski retreat'
               },
               {
                 id: '2',
-                url: '/images/about_us_3.jpg',
+                url: '/images/about_us_2.webp',
                 alt: 'Scenic view of the snowy mountains from an alpine resort'
               }
             ]
@@ -133,53 +133,53 @@
             images: [
               {
                 id: 1,
-                src: '/images/carousel_1.jpg',
+                src: '/images/carousel_1.webp',
                 alt: 'Corporate team skiing together on a sunny slope',
               },
               {
                 id: 2,
-                src: '/images/carousel_2.jpg',
+                src: '/images/carousel_2.webp',
                 alt: 'Mountain landscape at sunset during a winter retreat',
               },
               {
                 id: 3,
-                src: '/images/carousel_4.jpg',
+                src: '/images/carousel_4.webp',
                 alt: 'Strategy session in a cozy mountain lodge',
               },
               {
                 id: 4,
-                src: '/images/carousel_5.jpg',
+                src: '/images/carousel_5.webp',
                 alt: 'Participants enjoying a shared meal at an alpine restaurant',
               },
               {
                 id: 5,
-                src: '/images/carousel_6.jpg',
+                src: '/images/carousel_6.webp',
                 alt: 'Close-up of high-quality ski equipment on snow',
               },
               {
                 id: 6,
-                src: '/images/carousel_7.jpeg',
+                src: '/images/carousel_7.webp',
                 alt: 'Breathtaking panoramic view of the Alps from a summit',
               },
               {
                 id: 7,
-                src: '/images/carousel_8.jpg',
+                src: '/images/carousel_8.webp',
                 alt: 'Team building activity in the snow during a retreat',
               },
               {
                 id: 8,
-                src: '/images/carousel_9.jpg',
+                src: '/images/carousel_9.webp',
                 alt: 'Exterior view of a luxury ski chalet at night',
               },
               {
                 id: 9,
-                src: '/images/carousel_10.jpg',
+                src: '/images/carousel_10.webp',
                 alt: 'Smiling group photo of retreat participants in ski gear',
               },
 
               {
                 id: 10,
-                src: '/images/carousel_12.jpg',
+                src: '/images/carousel_12.webp',
                 alt: 'Peaceful winter forest trail with fresh snow',
               }
             ]
@@ -202,7 +202,7 @@
                 "shadow": true,
                 "image": {
                   "id": 1,
-                  "url": "/images/essential_retreats.png",
+                  "url": "/images/essential_retreats.webp",
                   "alt": "Icon representing the Essential Retreat package"
                 }
               },
@@ -215,7 +215,7 @@
                 "shadow": true,
                 "image": {
                   "id": 2,
-                  "url": "/images/premium_retreats.png",
+                  "url": "/images/premium_retreats.webp",
                   "alt": "Icon representing the Premium Retreat package"
                 }
               },
@@ -228,7 +228,7 @@
                 "shadow": true,
                 "image": {
                   "id": 3,
-                  "url": "/images/luxury_retreats.png",
+                  "url": "/images/luxury_retreats.webp",
                   "alt": "Icon representing the Luxury Retreat package"
                 }
               }
