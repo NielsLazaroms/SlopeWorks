@@ -1,4 +1,8 @@
 import {Component, inject, InjectionToken} from '@angular/core';
+import gsap from 'gsap';
+import {ScrollToPlugin} from 'gsap/ScrollToPlugin';
+
+gsap.registerPlugin(ScrollToPlugin);
 import {
   MnButton,
   MnButtonTypes,
@@ -57,7 +61,7 @@ export class AboutSectionComponent {
   scrollToContact() {
     const contactSection = document.getElementById('contact-section');
     if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
+      gsap.to(window, { duration: 1, scrollTo: { y: contactSection, offsetY: 80 }, ease: 'power2.inOut' });
     }
   }
 }
