@@ -111,13 +111,13 @@
             images: [
               {
                 id: '1',
-                url: '/images/about_us_1.webp',
-                alt: 'Team members during a SlopeWorks corporate ski retreat'
+                url: '/images/about_us_2.webp',
+                alt: 'Scenic view of the snowy mountains from an alpine resort'
               },
               {
                 id: '2',
-                url: '/images/about_us_2.webp',
-                alt: 'Scenic view of the snowy mountains from an alpine resort'
+                url: '/images/about_us_1.webp',
+                alt: 'Team members during a SlopeWorks corporate ski retreat',
               }
             ]
           }
