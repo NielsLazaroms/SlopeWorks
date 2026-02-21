@@ -1,11 +1,11 @@
-<section class="relative w-full overflow-hidden lg:h-[55vh] py-16">
+<section class="relative w-full overflow-hidden lg:min-h-[55vh] py-16">
   <!-- Background image -->
   @if (componentConfig.backgroundImageUrl) {
     <img
     [ngSrc]="componentConfig.backgroundImageUrl"
     fill
     priority
-    class="object-cover"
+    class="object-cover w-full"
     [alt]=componentConfig.backgroundImageAlt
   />
   }
@@ -13,7 +13,7 @@
   <div class="absolute inset-0 bg-black/50"></div>
 
   <!-- Content wrapper keeps centering -->
-  <div class="relative z-10 h-full flex flex-col justify-center p-8 md:px-48 gap-y-8">
+  <div class="relative z-10 min-h-[inherit] flex flex-col justify-center p-8 md:px-48 gap-y-8">
     <div class="w-full lg:w-[40%]">
       <app-section-title
         mn-instance="section-title-parallax"

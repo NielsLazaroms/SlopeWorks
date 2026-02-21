@@ -1,4 +1,8 @@
 import {Component, HostListener, inject, InjectionToken} from '@angular/core';
+import gsap from 'gsap';
+import {ScrollToPlugin} from 'gsap/ScrollToPlugin';
+
+gsap.registerPlugin(ScrollToPlugin);
 import {NgClass} from '@angular/common';
 import {NavListItemComponent} from './nav-list-item/nav-list-item.component';
 import {provideMnComponentConfig} from 'mn-angular-lib';
@@ -49,7 +53,7 @@ export class NavbarComponent {
   scrollToSection(sectionId: string) {
     const section = document.getElementById(sectionId);
     if (section) {
-      section.scrollIntoView({behavior: 'smooth', block: 'start'});
+      gsap.to(window, { duration: 1, scrollTo: { y: section, offsetY: 80 }, ease: 'power2.inOut' });
       this.closeMenu();
     }
   }
