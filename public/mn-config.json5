@@ -104,7 +104,7 @@
             "title": "About us"
           },
           "app-about-section": {
-            "description": "SlopeWorks creates premium corporate ski experiences designed to bring teams closer together on and off the mountain. We believe the best business conversations don’t happen in boardrooms, but on chairlifts, over long alpine lunches, and during shared moments of challenge and adventure. A ski trip isn’t just a getaway; it’s a powerful tool for connection, performance and culture. From carefully selected resorts to seamless logistics, we design fully curated winter experiences tailored to ambitious companies. Whether it’s a strategy retreat, incentive trip or team celebration, we combine comfort, energy and precision to deliver unforgettable alpine escapes. Professional. Energetic. Effortlessly organised. SlopeWorks turns business trips into peak experiences.",
+            "description": "SlopeWorks started with us. Two skiers who realised that the best business conversations never happened behind a desk, but on a chairlift, on a mountain peak, or over a long alpine lunch after fresh tracks.\n\nWe’ve experienced ourselves how powerful the mountains can be for connection, clarity and team energy. Away from the office, people open up. Hierarchies fade. Ideas flow.\n\nThat’s why we created SlopeWorks.\nTo design premium corporate ski retreats that feel effortless, energising and genuinely meaningful.\n\nBuilt by skiers. Designed for ambitious teams.",
             "aboutUsButtonText": "Contact us"
           },
           "mn-dual-horizontal-image": {
@@ -138,7 +138,7 @@
               },
               {
                 id: 2,
-                src: '/images/carousel_2.webp',
+                src: '/images/carousel_8.webp',
                 alt: 'Mountain landscape at sunset during a winter retreat',
               },
               {
@@ -157,26 +157,10 @@
                 alt: 'Close-up of high-quality ski equipment on snow',
               },
               {
-                id: 6,
-                src: '/images/carousel_7.webp',
-                alt: 'Breathtaking panoramic view of the Alps from a summit',
-              },
-              {
                 id: 7,
-                src: '/images/carousel_8.webp',
+                src: '/images/carousel_2.webp',
                 alt: 'Team building activity in the snow during a retreat',
               },
-              {
-                id: 8,
-                src: '/images/carousel_9.webp',
-                alt: 'Exterior view of a luxury ski chalet at night',
-              },
-              {
-                id: 9,
-                src: '/images/carousel_10.webp',
-                alt: 'Smiling group photo of retreat participants in ski gear',
-              },
-
               {
                 id: 10,
                 src: '/images/carousel_12.webp',
