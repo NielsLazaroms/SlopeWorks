@@ -1,8 +1,12 @@
 import {Component, inject, InjectionToken, Input} from '@angular/core';
+import gsap from 'gsap';
+import {ScrollToPlugin} from 'gsap/ScrollToPlugin';
+
+gsap.registerPlugin(ScrollToPlugin);
 import {MnButton, MnInstanceDirective, provideMnComponentConfig} from 'mn-angular-lib';
-import {NgOptimizedImage, NgStyle} from '@angular/common';
+import {NgOptimizedImage} from '@angular/common';
 import {SectionTitle} from '../section-title/section-title';
-import {imageType, ParallaxComponentData} from './parallax-componentTypes';
+import {ParallaxComponentData} from './parallax-componentTypes';
 
 
 export interface ParallaxComponentConfig {
@@ -37,7 +41,7 @@ export class ParallaxComponent {
   scrollToPackages() {
     const element = document.getElementById('packages-section');
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      gsap.to(window, { duration: 1, scrollTo: { y: element, offsetY: 80 }, ease: 'power2.inOut' });
     }
   }
 }
