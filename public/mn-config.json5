@@ -95,7 +95,7 @@
           },
           "app-parallax-component": {
             "backgroundImageUrl": "/images/hero_image.webp",
-            "description": "Transform your next company trip with expertly organized retreats design to inspire, connect and energize your team",
+            "description": "Transform your next company trip with expertly organized retreats designed to inspire, connect and energize your team.",
             "buttonText": "Learn More "
           }
         },
@@ -127,7 +127,7 @@
             "title": "Our pictures"
           },
           "app-pictures-section": {
-            "description": "A glimpse into the energy, connection and alpine moments that define a SlopeWorks retreat. Every image captures the balance between performance, adventure and unforgettable shared experiences.",
+            "description": "A look at what a SlopeWorks retreat actually feels like.\nTime on the mountain. Evenings together. The moments in between.\n",
           },
           "app-focus-carousel": {
             images: [
@@ -180,7 +180,7 @@
               {
                 "id": 1,
                 "title": "Essential Retreats",
-                "description": "A focused corporate ski experience built around connection, clarity and momentum. Carefully selected resorts, smooth logistics and comfortable accommodation combined with the right balance of strategy sessions and time on the slopes. A powerful retreat that delivers real impact for your team.",
+                "description": "A well-organised ski experience for teams who want quality without unnecessary extras.\n\nWe select a resort that fits your group.\nWe arrange accommodation in a good, comfortable hotel or chalet.\nTransfers, ski passes, rentals and reservations are handled in advance so the trip runs smoothly from the moment you arrive.\n\nThe focus is simple: time on the mountain, relaxed dinners, and genuine moments together outside the office.\n\nNo overcomplication.\nJust a solid, well-executed ski retreat that does exactly what it should.\n",
                 "bottomBorder": true,
                 "borderRadius": "md",
                 "shadow": true,
@@ -193,7 +193,7 @@
               {
                 "id": 2,
                 "title": "Premium Retreats",
-                "description": "An elevated alpine experience for ambitious teams who value comfort and refinement. Upgraded accommodation, curated dining, private transfers and thoughtfully designed team moments. Strategy, adventure and hospitality come together in one seamless experience.",
+                "description": "For teams who want more comfort, more refinement and more attention to detail.\n\nWe work with elevated alpine hotels and boutique properties that offer atmosphere and service. Private transfers, curated restaurants and upgraded experiences are seamlessly integrated into the programme.\n\nEverything feels more considered.\nMore comfortable.\nMore tailored to your preferences.\n\nThis is where the trip becomes more than well-organised; it becomes memorable.\n",
                 "bottomBorder": true,
                 "borderRadius": "md",
                 "shadow": true,
@@ -206,7 +206,7 @@
               {
                 "id": 3,
                 "title": "Luxury Retreats",
-                "description": "Our most exclusive ski experience. Five star stays, premium ski service, VIP transfers and fully bespoke programming tailored to your leadership goals. Designed for organisations that expect exceptional quality, flawless execution and an unforgettable alpine setting.",
+                "description": "Our highest level of alpine experience.\n\nWe collaborate with exceptional mountain properties known for discretion, service and character. From VIP transfers and private ski guides to exclusive dining and fully tailored planning, every element is elevated.\n\nThe programme is built around your expectations. Nothing is standard. Everything is considered.\n\nFor organisations and founders who expect excellence, privacy and flawless execution.\n",
                 "bottomBorder": true,
                 "borderRadius": "md",
                 "shadow": true,
