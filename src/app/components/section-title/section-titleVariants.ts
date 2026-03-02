@@ -16,7 +16,7 @@ export const sectionTitleVariants = tv({
       bold: 'font-bold',
     },
     shadow: {
-      true: 'text-shadow-xs md:text-shadow-md lg:text-shadow-lg'
+      true: 'text-shadow-none md:text-shadow-lg'
     },
     showUnderLine: {
       true: 'underline underline-offset-12'
