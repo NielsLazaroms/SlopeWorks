@@ -15,6 +15,11 @@
  * - Ensure the JSON structure remains valid (matched braces and brackets).
  */
 {
+  language: {
+    urlPattern: "assets/i18n/{locale}.json",
+    defaultLocale: "en",
+    preload: ["en", "nl"]
+  },
   "defaults": {
     "mn-input-field": {
       "placeholder": "Enter text here...",
@@ -91,129 +96,129 @@
       "home": {
         "top-section": {
           "#section-title-parallax": {
-            "title": "Corporate ski retreats, elevated"
+            "title": { $translate: "home.hero.title" }
           },
           "app-parallax-component": {
             "backgroundImageUrl": "/images/hero_image.webp",
-            "description": "Transform your next company trip with expertly organized retreats designed to inspire, connect and energize your team.",
-            "buttonText": "Learn More "
+            "description": { $translate: "home.hero.description" },
+            "buttonText": { $translate: "home.hero.button" }
           }
         },
         "about-section": {
           "#section-title-about": {
-            "title": "About us"
+            "title": { $translate: "home.about.title" }
           },
           "app-about-section": {
-            "description": "SlopeWorks started with us. Two skiers who realised that the best business conversations never happened behind a desk, but on a chairlift, on a mountain peak, or over a long alpine lunch after fresh tracks.\n\nWe’ve experienced ourselves how powerful the mountains can be for connection, clarity and team energy. Away from the office, people open up. Hierarchies fade. Ideas flow.\n\nThat’s why we created SlopeWorks.\nTo design premium corporate ski retreats that feel effortless, energising and genuinely meaningful.\n\nBuilt by skiers. Designed for ambitious teams.",
-            "aboutUsButtonText": "Contact us"
+            "description": { $translate: "home.about.description" },
+            "aboutUsButtonText": { $translate: "home.about.button" }
           },
           "mn-dual-horizontal-image": {
             images: [
               {
                 id: '1',
                 url: '/images/about_us_2.webp',
-                alt: 'Scenic view of the snowy mountains from an alpine resort'
+                alt: { $translate: "home.about.image1.alt" }
               },
               {
                 id: '2',
                 url: '/images/about_us_1.webp',
-                alt: 'Team members during a SlopeWorks corporate ski retreat',
+                alt: { $translate: "home.about.image2.alt" },
               }
             ]
           }
         },
         "pictures-section": {
           "#section-title-pictures": {
-            "title": "Our pictures"
+            "title": { $translate: "home.pictures.title" }
           },
           "app-pictures-section": {
-            "description": "A look at what a SlopeWorks retreat actually feels like.\nTime on the mountain. Evenings together. The moments in between.\n",
+            "description": { $translate: "home.pictures.description" },
           },
           "app-focus-carousel": {
             images: [
               {
                 id: 1,
                 src: '/images/carousel_1.webp',
-                alt: 'Corporate team skiing together on a sunny slope',
+                alt: { $translate: "home.pictures.carousel.1.alt" },
               },
               {
                 id: 2,
                 src: '/images/carousel_8.webp',
-                alt: 'Mountain landscape at sunset during a winter retreat',
+                alt: { $translate: "home.pictures.carousel.2.alt" },
               },
               {
                 id: 3,
                 src: '/images/carousel_4.webp',
-                alt: 'Strategy session in a cozy mountain lodge',
+                alt: { $translate: "home.pictures.carousel.3.alt" },
               },
               {
                 id: 4,
                 src: '/images/carousel_5.webp',
-                alt: 'Participants enjoying a shared meal at an alpine restaurant',
+                alt: { $translate: "home.pictures.carousel.4.alt" },
               },
               {
                 id: 5,
                 src: '/images/carousel_6.webp',
-                alt: 'Close-up of high-quality ski equipment on snow',
+                alt: { $translate: "home.pictures.carousel.5.alt" },
               },
               {
                 id: 7,
                 src: '/images/carousel_2.webp',
-                alt: 'Team building activity in the snow during a retreat',
+                alt: { $translate: "home.pictures.carousel.6.alt" },
               },
               {
                 id: 10,
                 src: '/images/carousel_12.webp',
-                alt: 'Peaceful winter forest trail with fresh snow',
+                alt: { $translate: "home.pictures.carousel.7.alt" },
               }
             ]
           }
         },
         "packages-section": {
           "#section-title-packages": {
-            "title": "Our packages"
+            "title": { $translate: "home.packages.title" }
           },
           "app-packages-section": {
-            "packagesTitleText": "Our packages",
-            "packagesDescription"  : 'Three distinct alpine retreat concepts, each crafted to match your team’s objectives, budget and desired level of exclusivity.',
+            "packagesTitleText": { $translate: "home.packages.title" },
+            "packagesDescription": { $translate: "home.packages.description" },
             "cards": [
               {
                 "id": 1,
-                "title": "Essential Retreats",
-                "description": "A well-organised ski experience for teams who want quality without unnecessary extras.\n\nWe select a resort that fits your group.\nWe arrange accommodation in a good, comfortable hotel or chalet.\nTransfers, ski passes, rentals and reservations are handled in advance so the trip runs smoothly from the moment you arrive.\n\nThe focus is simple: time on the mountain, relaxed dinners, and genuine moments together outside the office.\n\nNo overcomplication.\nJust a solid, well-executed ski retreat that does exactly what it should.\n",
+                "title": { $translate: "home.packages.essential.title" },
+                "description": { $translate: "home.packages.essential.description" },
                 "bottomBorder": true,
                 "borderRadius": "md",
                 "shadow": true,
                 "image": {
                   "id": 1,
                   "url": "/images/essential_retreats.webp",
-                  "alt": "Icon representing the Essential Retreat package"
+                  "alt": { $translate: "home.packages.essential.image.alt" }
                 }
               },
               {
                 "id": 2,
-                "title": "Premium Retreats",
-                "description": "For teams who want more comfort, more refinement and more attention to detail.\n\nWe work with elevated alpine hotels and boutique properties that offer atmosphere and service. Private transfers, curated restaurants and upgraded experiences are seamlessly integrated into the programme.\n\nEverything feels more considered.\nMore comfortable.\nMore tailored to your preferences.\n\nThis is where the trip becomes more than well-organised; it becomes memorable.\n",
+                "title": { $translate: "home.packages.premium.title" },
+                "description": { $translate: "home.packages.premium.description" },
                 "bottomBorder": true,
                 "borderRadius": "md",
                 "shadow": true,
                 "image": {
                   "id": 2,
                   "url": "/images/premium_retreats.webp",
-                  "alt": "Icon representing the Premium Retreat package"
+                  "alt": { $translate: "home.packages.premium.image.alt" }
                 }
               },
               {
                 "id": 3,
-                "title": "Luxury Retreats",
-                "description": "Our highest level of alpine experience.\n\nWe collaborate with exceptional mountain properties known for discretion, service and character. From VIP transfers and private ski guides to exclusive dining and fully tailored planning, every element is elevated.\n\nThe programme is built around your expectations. Nothing is standard. Everything is considered.\n\nFor organisations and founders who expect excellence, privacy and flawless execution.\n",
+                "title": { $translate: "home.packages.luxury.title" },
+                "description": { $translate: "home.packages.luxury.description" },
                 "bottomBorder": true,
                 "borderRadius": "md",
                 "shadow": true,
                 "image": {
                   "id": 3,
                   "url": "/images/luxury_retreats.webp",
-                  "alt": "Icon representing the Luxury Retreat package"
+                  "alt": { $translate: "home.packages.luxury.image.alt" }
                 }
               }
             ]
@@ -221,46 +226,46 @@
         },
         "contact-section": {
           "#section-title-getInTouch": {
-            "title": "Get in touch"
+            "title": { $translate: "home.contact.title" }
           },
           "app-contact-section": {
-            "informationDescription": "Ready to explore what your team could achieve in the mountains? Let’s start designing an alpine experience tailored to your goals.",
-            "formDescription": "Tell us about your team, ambitions and preferred dates. We will get back to you quickly to shape the perfect retreat together.",
-            "formButtonText": "Contact us",
-            "emailSalutation": "Dear Bas and Carmen,",
-            "emailClosing": "See you on the Slopes,",
+            "informationDescription": { $translate: "home.contact.informationDescription" },
+            "formDescription": { $translate: "home.contact.formDescription" },
+            "formButtonText": { $translate: "home.contact.formButton" },
+            "emailSalutation": { $translate: "home.contact.emailSalutation" },
+            "emailClosing": { $translate: "home.contact.emailClosing" },
             "contactEmail": "info@slopeworks.nl"
           },
           "#location-item": {
-            "title": "Location",
-            "description": "Operating across Europe based in the Netherlands & Belgium"
+            "title": { $translate: "home.contact.location.title" },
+            "description": { $translate: "home.contact.location.description" }
           },
           "#email-item": {
-            "title": "Email us",
-            "description": "E-mail us at info@slopeworks.nl to share your ideas and start shaping your alpine retreat"
+            "title": { $translate: "home.contact.email.title" },
+            "description": { $translate: "home.contact.email.description" }
           },
           "#call-item": {
-            "title": "Call us",
-            "description": "Call us directly to discuss your retreat plans and next steps. +31 6 309 41 253"
+            "title": { $translate: "home.contact.call.title" },
+            "description": { $translate: "home.contact.call.description" }
           },
           "form": {
             "#section-title-form": {
-              title: "Send a message"
+              title: { $translate: "home.contact.form.title" }
             },
             "#mn-input-name": {
-              "placeholder": "Oliver Slopes",
-              "label": "Name",
-              "ariaLabel": "Name accessible label"
+              "placeholder": { $translate: "home.contact.form.name.placeholder" },
+              "label": { $translate: "home.contact.form.name.label" },
+              "ariaLabel": { $translate: "home.contact.form.name.ariaLabel" }
             },
             "#mn-input-subject": {
-              "placeholder": "Corporate ski retreat for 20 people, February 2027",
-              "label": "Subject",
-              "ariaLabel": "Subject accessible label"
+              "placeholder": { $translate: "home.contact.form.subject.placeholder" },
+              "label": { $translate: "home.contact.form.subject.label" },
+              "ariaLabel": { $translate: "home.contact.form.subject.ariaLabel" }
             },
             "#mn-textarea-description": {
-              "placeholder": "Tell us about your team size, preferred dates, location ideas and budget range. What would make this retreat a success for you?",
-              "label": "Description",
-              "ariaLabel": "Description accessible label"
+              "placeholder": { $translate: "home.contact.form.description.placeholder" },
+              "label": { $translate: "home.contact.form.description.label" },
+              "ariaLabel": { $translate: "home.contact.form.description.ariaLabel" }
             }
           }
         }
@@ -271,20 +276,20 @@
           "logoAlt": "SlopeWorks",
           "navItems": [
             {
-              "label": "About",
+              "label": { $translate: "navbar.about" },
               "sectionId": "about-section"
             },
             {
-              "label": "Packages",
+              "label": { $translate: "navbar.packages" },
               "sectionId": "packages-section"
             },
             {
-              "label": "Pictures",
+              "label": { $translate: "navbar.pictures" },
               "sectionId": "pictures-section"
             }
           ],
           "contactItem": {
-            "label": "Contact",
+            "label": { $translate: "navbar.contact" },
             "sectionId": "contact-section"
           }
         }
@@ -293,7 +298,7 @@
         "app-footer": {
           "logoSrc": "logo_slopeworks.svg",
           "logoAlt": "SlopeWorks",
-          "copyrightText": "SlopeWorks - All rights reserved",
+          "copyrightText": { $translate: "footer.copyright" },
           "links": [
             {
               "label": "Linkedin",

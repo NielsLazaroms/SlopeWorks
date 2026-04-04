@@ -1,9 +1,9 @@
-import {Component, AfterViewInit, OnDestroy} from '@angular/core';
+import {Component, AfterViewInit, OnDestroy, inject} from '@angular/core';
 import gsap from 'gsap';
 import {ScrollTrigger} from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
-import {MnButtonTypes, MnSectionDirective} from 'mn-angular-lib';
+import {MnButtonTypes, MnLanguageService, MnSectionDirective, MnTranslatePipe} from 'mn-angular-lib';
 import {SectionTitleTypes} from '../../components/section-title/section-titleTypes';
 import {AboutSectionComponent} from './components/about-section/about-section';
 import {PackagesSectionComponent} from './components/packages-section/packages-section';
@@ -21,10 +21,22 @@ import {ParallaxComponent, ParallaxComponentData} from '../../components/paralla
     PicturesSectionComponent,
     ContactSectionComponent,
     MnSectionDirective,
+    MnTranslatePipe,
   ],
   templateUrl: './home-page.html',
 })
 export class HomePage implements AfterViewInit, OnDestroy {
+  private readonly lang = inject(MnLanguageService);
+
+  get currentLocale(): string {
+    return this.lang.locale;
+  }
+
+  async toggleLocale() {
+    const next = this.lang.locale === 'en' ? 'nl' : 'en';
+    await this.lang.setLocale(next);
+  }
+
   parallaxData: ParallaxComponentData = {
     button: {
       color: 'primary',
