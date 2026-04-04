@@ -21,7 +21,6 @@ import {ParallaxComponent, ParallaxComponentData} from '../../components/paralla
     PicturesSectionComponent,
     ContactSectionComponent,
     MnSectionDirective,
-    MnTranslatePipe,
   ],
   templateUrl: './home-page.html',
 })
