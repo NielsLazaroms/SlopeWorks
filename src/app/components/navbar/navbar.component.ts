@@ -5,7 +5,7 @@ import {ScrollToPlugin} from 'gsap/ScrollToPlugin';
 gsap.registerPlugin(ScrollToPlugin);
 import {NgClass} from '@angular/common';
 import {NavListItemComponent} from './nav-list-item/nav-list-item.component';
-import {provideMnComponentConfig} from 'mn-angular-lib';
+import {MnLanguageService, provideMnComponentConfig} from 'mn-angular-lib';
 
 export interface NavbarNavItem {
   label: string;
@@ -32,7 +32,16 @@ export const APP_NAVBAR_CONFIG = new InjectionToken<NavbarConfig>('APP_NAVBAR_CO
 })
 export class NavbarComponent {
   protected readonly componentConfig = inject(APP_NAVBAR_CONFIG);
+  private readonly lang = inject(MnLanguageService);
   menuOpen = false;
+
+  get currentLocale(): string {
+    return this.lang.locale;
+  }
+
+  async setLocale(locale: 'en' | 'nl') {
+    await this.lang.setLocale(locale);
+  }
 
   toggleMenu() {
     this.menuOpen = !this.menuOpen;

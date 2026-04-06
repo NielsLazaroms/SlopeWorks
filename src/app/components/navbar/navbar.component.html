@@ -33,6 +33,12 @@
       {{componentConfig.contactItem.label}}
     </li>
   }
+
+  <div class="flex gap-2 text-md uppercase md:absolute md:right-10 md:top-1/2 md:-translate-y-1/2" [class.absolute]="menuOpen" [class.bottom-20]="menuOpen">
+    <button (click)="setLocale('nl')" [class.text-brand-500]="currentLocale === 'nl'" [class.font-bold]="currentLocale === 'nl'" class="cursor-pointer duration-300 hover:text-brand-500">NL</button>
+    <span class="text-gray-400">/</span>
+    <button (click)="setLocale('en')" [class.text-brand-500]="currentLocale === 'en'" [class.font-bold]="currentLocale === 'en'" class="cursor-pointer duration-300 hover:text-brand-500">EN</button>
+  </div>
 </ul>
 
 @if (!menuOpen && componentConfig.contactItem) {
