@@ -30,6 +30,32 @@
         email: { $translate: "validation.email" }
       }
     },
+    "mn-textarea": {
+      placeholder: "Default textarea placeholder",
+      label: "Generic Textarea",
+      errorMessages: {
+        required: { $translate: "validation.required" },
+        minlength: { $translate: "validation.minlength" },
+        maxlength: { $translate: "validation.maxlength" }
+      }
+    },
+    "mn-checkbox": {
+      errorMessages: {
+        required: { $translate: "validation.required" }
+      }
+    },
+    "mn-datetime": {
+      errorMessages: {
+        required: { $translate: "validation.required" },
+        mnMin: { $translate: "validation.mnMin" },
+        mnMax: { $translate: "validation.mnMax" }
+      }
+    },
+    "mn-multi-select": {
+      errorMessages: {
+        required: { $translate: "validation.multiselect.required" }
+      }
+    },
     "app-parallax-component": {
       "backgroundImageUrl": "https://4kwallpapers.com/images/walls/thumbs_3t/1025.jpg",
       "description": "Description placeholder",
