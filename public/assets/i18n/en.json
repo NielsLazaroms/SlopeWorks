@@ -62,6 +62,6 @@
   "navbar.contact": "Contact",
   "footer.copyright": "SlopeWorks - All rights reserved",
 
-  "validation.required": "This field is required.",
+  "validation.required": "This field is required",
   "validation.email": "Please enter a valid email address"
 }
