@@ -18,7 +18,11 @@
   language: {
     urlPattern: "assets/i18n/{locale}.json",
     defaultLocale: "en",
-    preload: ["en", "nl"]
+    preload: ["en", "nl"],
+    domainLocaleMap: {
+      "slopeworks.nl": "nl",
+      "slopeworks.eu": "en",
+    }
   },
   "defaults": {
     "mn-input-field": {
