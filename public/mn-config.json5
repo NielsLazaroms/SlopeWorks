@@ -22,6 +22,7 @@
     domainLocaleMap: {
       "slopeworks.nl": "nl",
       "slopeworks.eu": "en",
+      "slopeworks.be": "en",
     }
   },
   "defaults": {
