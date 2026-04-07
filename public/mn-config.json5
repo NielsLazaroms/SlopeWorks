@@ -21,8 +21,8 @@
     preload: ["en", "nl"],
     domainLocaleMap: {
       "slopeworks.nl": "nl",
+      "slopeworks.be": "nl",
       "slopeworks.eu": "en",
-      "slopeworks.be": "en",
     }
   },
   "defaults": {
