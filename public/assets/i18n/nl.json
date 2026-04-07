@@ -60,5 +60,8 @@
   "navbar.packages": "Concepten",
   "navbar.pictures": "Sfeerimpressie",
   "navbar.contact": "Contact",
-  "footer.copyright": "SlopeWorks - Alle rechten voorbehouden"
+  "footer.copyright": "SlopeWorks - Alle rechten voorbehouden",
+
+  "validation.required": "Dit veld is verplicht",
+  "validation.email": "Voer een geldig e-mailadres in"
 }

@@ -24,7 +24,11 @@
     "mn-input-field": {
       "placeholder": "Enter text here...",
       "label": "Input field",
-      "ariaLabel": "Global accessible label"
+      "ariaLabel": "Global accessible label",
+      errorMessages: {
+        required: { $translate: "validation.required" },
+        email: { $translate: "validation.email" }
+      }
     },
     "app-parallax-component": {
       "backgroundImageUrl": "https://4kwallpapers.com/images/walls/thumbs_3t/1025.jpg",

@@ -60,5 +60,8 @@
   "navbar.packages": "Packages",
   "navbar.pictures": "Pictures",
   "navbar.contact": "Contact",
-  "footer.copyright": "SlopeWorks - All rights reserved"
+  "footer.copyright": "SlopeWorks - All rights reserved",
+
+  "validation.required": "This field is required.",
+  "validation.email": "Please enter a valid email address"
 }
