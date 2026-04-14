@@ -34,6 +34,7 @@ export class HomePage implements AfterViewInit, OnDestroy {
       fullWidth: false,
     } as MnButtonTypes,
     title: {
+      headingLevel: 'h1',
       size: 'md',
       shadow: true,
       showUnderLine: false,
