@@ -1,3 +1,25 @@
-<h1 [ngClass]="classes">
-  {{ componentConfig.title }}
-</h1>
+@if (data.headingLevel === 'h1') {
+  <h1 [ngClass]="classes">
+    {{ componentConfig.title }}
+  </h1>
+} @else if (data.headingLevel === 'h3') {
+  <h3 [ngClass]="classes">
+    {{ componentConfig.title }}
+  </h3>
+} @else if (data.headingLevel === 'h4') {
+  <h4 [ngClass]="classes">
+    {{ componentConfig.title }}
+  </h4>
+} @else if (data.headingLevel === 'h5') {
+  <h5 [ngClass]="classes">
+    {{ componentConfig.title }}
+  </h5>
+} @else if (data.headingLevel === 'h6') {
+  <h6 [ngClass]="classes">
+    {{ componentConfig.title }}
+  </h6>
+} @else {
+  <h2 [ngClass]="classes">
+    {{ componentConfig.title }}
+  </h2>
+}
