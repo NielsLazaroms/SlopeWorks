@@ -15,6 +15,10 @@
  * - Ensure the JSON structure remains valid (matched braces and brackets).
  */
 {
+  settings: {
+    name: "SlopeWorks",
+    version: "1.0.0",
+  },
   language: {
     urlPattern: "assets/i18n/{locale}.json",
     defaultLocale: "en",
