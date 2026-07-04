@@ -1,0 +1,93 @@
+<app-page-hero
+  imageUrl="/images/hero_image.webp"
+  [eyebrow]="'comparison.eyebrow' | mnTranslate"
+  [title]="'comparison.title' | mnTranslate"
+  [subtitle]="'comparison.subtitle' | mnTranslate"
+></app-page-hero>
+
+<!-- Signature: the honest triptych. Each provider owns its real strength -->
+<section appReveal class="max-w-7xl mx-auto px-6 lg:px-16 pt-16 lg:pt-24 pb-16 lg:pb-20">
+  <div class="max-w-3xl mb-10 lg:mb-12">
+    <p class="font-display font-bold text-sm tracking-[0.1em] uppercase text-dark-yellow mb-4">{{ 'comparison.profiles.label' | mnTranslate }}</p>
+    <h2 class="font-display font-extrabold text-2xl md:text-[2rem] tracking-tight">{{ 'comparison.profiles.title' | mnTranslate }}</h2>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    @for (p of providers; track p.nameKey) {
+      <div
+        class="flex flex-col rounded-xl border p-7 lg:p-8"
+        [ngClass]="p.highlight ? 'border-brand-500 bg-[#FFFCF2] shadow-[0_10px_30px_rgba(255,187,0,0.12)]' : 'border-[#E8E8F0] bg-paper-card'"
+      >
+        <!-- Identity -->
+        <h3 class="font-display font-bold text-xl mb-2" [ngClass]="p.highlight ? 'text-dark-yellow' : 'text-ink'">{{ p.nameKey | mnTranslate }}</h3>
+        <p class="text-[14.5px] leading-relaxed text-text-grey">{{ p.typeKey | mnTranslate }}</p>
+
+        <!-- What they are genuinely best at -->
+        <div class="mt-6 pt-6 border-t border-[#EAEAF0]">
+          <p class="flex items-center gap-2 font-display font-bold text-[11px] tracking-[0.1em] uppercase text-dark-yellow mb-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-brand-500"></span>{{ 'comparison.card.bestAt' | mnTranslate }}
+          </p>
+          <p class="text-[15px] leading-snug font-medium text-ink">{{ p.bestAtKey | mnTranslate }}</p>
+        </div>
+
+        <!-- Who it fits -->
+        <div class="mt-6 pt-6 border-t border-[#EAEAF0]">
+          <p class="font-display font-bold text-sm text-ink mb-1.5">{{ p.chooseTitleKey | mnTranslate }}</p>
+          <p class="text-[14px] leading-relaxed text-text-grey">{{ p.chooseBodyKey | mnTranslate }}</p>
+        </div>
+      </div>
+    }
+  </div>
+</section>
+
+<!-- Three decisive questions: the concrete process criteria, answered three ways -->
+<section appReveal class="bg-paper-card border-y border-[#ECECF3]">
+  <div class="max-w-7xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
+  <div class="max-w-3xl mb-8 lg:mb-10">
+    <p class="font-display font-bold text-sm tracking-[0.1em] uppercase text-dark-yellow mb-4">{{ 'comparison.three.label' | mnTranslate }}</p>
+    <h2 class="font-display font-extrabold text-2xl md:text-[2rem] tracking-tight">{{ 'comparison.three.title' | mnTranslate }}</h2>
+  </div>
+
+  <div class="space-y-10 lg:space-y-12">
+    @for (q of questions; track q.labelKey) {
+      <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,15rem)_minmax(0,1fr)] gap-4 lg:gap-12">
+        <!-- Axis + question: names the decision this question actually probes -->
+        <div class="lg:pt-1">
+          <p class="flex items-center gap-2 font-display font-bold text-[11px] tracking-[0.16em] uppercase text-dark-yellow mb-2.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-brand-500"></span>{{ q.axisKey | mnTranslate }}
+          </p>
+          <h3 class="font-display font-bold text-lg lg:text-xl leading-snug tracking-tight text-ink">{{ q.labelKey | mnTranslate }}</h3>
+        </div>
+
+        <!-- The three answers as an attributed ledger; SlopeWorks marked as 'us', not as winner -->
+        <div class="rounded-xl border border-[#E8E8F0] overflow-hidden divide-y divide-[#E8E8F0]">
+          @for (a of q.answers; track a.labelKey) {
+            <div
+              class="grid grid-cols-1 sm:grid-cols-[8.5rem_minmax(0,1fr)] gap-1 sm:gap-6 px-5 py-4"
+              [ngClass]="a.highlight ? 'bg-[#FFFCF2] border-l-[3px] border-brand-500' : 'border-l-[3px] border-transparent'"
+            >
+              <span
+                class="font-display text-[11px] tracking-[0.08em] uppercase self-baseline"
+                [ngClass]="a.highlight ? 'font-bold text-dark-yellow' : 'text-text-grey'"
+              >{{ a.labelKey | mnTranslate }}</span>
+              <span
+                class="text-[14.5px] leading-relaxed"
+                [ngClass]="a.highlight ? 'font-medium text-ink' : 'text-[#333]'"
+              >{{ a.answerKey | mnTranslate }}</span>
+            </div>
+          }
+        </div>
+      </div>
+    }
+  </div>
+
+    <p class="text-sm italic text-text-grey leading-relaxed max-w-2xl mt-12">{{ 'comparison.note' | mnTranslate }}</p>
+  </div>
+</section>
+
+<app-page-cta
+  appReveal
+  titleKey="comparison.cta.title"
+  subKey="comparison.cta.sub"
+  buttonKey="comparison.cta.button"
+></app-page-cta>

@@ -1,13 +1,29 @@
 <div mn-section="home">
-  <div mn-section="top-section" id="top-section" >
-    <app-parallax-component [data]="parallaxData"></app-parallax-component>
+  <div id="top-section"><app-home-hero></app-home-hero></div>
+  <div appReveal mn-section="why-section" id="why-section" class="scroll-mt-20"><app-why-section></app-why-section></div>
+  <div appReveal mn-section="proof-section" id="proof-section"><app-proof-section></app-proof-section></div>
+  <div appReveal mn-section="destinations-section" id="destinations-section" class="scroll-mt-20"><app-destinations-section></app-destinations-section></div>
+
+  <!-- Orient: route out to the reference pages now that the site is multi-page -->
+  <section appReveal id="orient-section" class="max-w-7xl mx-auto px-6 lg:px-16 py-12 lg:py-16">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="flex flex-col rounded-lg border border-[#E8E8F0] bg-paper-card p-8">
+        <div class="w-9 h-1 bg-brand-500 rounded-full mb-5"></div>
+        <h3 class="font-display font-bold text-xl mb-2">{{ 'home.orient.faq.title' | mnTranslate }}</h3>
+        <p class="text-[14.5px] leading-relaxed text-text-grey mb-4">{{ 'home.orient.faq.body' | mnTranslate }}</p>
+        <a mnButton [data]="orientData" routerLink="/faq" class="font-display font-bold text-dark-yellow! self-start -ml-4 mt-auto">{{ 'home.orient.faq.link' | mnTranslate }} →</a>
+      </div>
+      <div class="flex flex-col rounded-lg border border-[#E8E8F0] bg-paper-card p-8">
+        <div class="w-9 h-1 bg-brand-500 rounded-full mb-5"></div>
+        <h3 class="font-display font-bold text-xl mb-2">{{ 'home.orient.vs.title' | mnTranslate }}</h3>
+        <p class="text-[14.5px] leading-relaxed text-text-grey mb-4">{{ 'home.orient.vs.body' | mnTranslate }}</p>
+        <a mnButton [data]="orientData" routerLink="/vergelijken" class="font-display font-bold text-dark-yellow! self-start -ml-4 mt-auto">{{ 'home.orient.vs.link' | mnTranslate }} →</a>
+      </div>
+    </div>
+  </section>
+
+  <div appReveal id="gallery-section"><app-gallery-section></app-gallery-section></div>
+  <div appReveal id="cta-section">
+    <app-page-cta titleKey="home.cta.title" subKey="home.cta.sub" buttonKey="home.cta.button"></app-page-cta>
   </div>
-
-
-<div class="flex flex-col w-full gap-y-16 mt-16 px-8 xl:px-48   items-center ">
-  <div mn-section="about-section" id="about-section" class="scroll-mt-20 w-full"><app-about-section></app-about-section></div>
-  <div mn-section="packages-section" id="packages-section" class="scroll-mt-20 w-full"><app-packages-section></app-packages-section></div>
-  <div mn-section="pictures-section" id="pictures-section" class="scroll-mt-20 w-full"><app-pictures-section></app-pictures-section></div>
-  <div mn-section="contact-section" id="contact-section" class="scroll-mt-20 w-full"><app-contact-section></app-contact-section></div>
-</div>
 </div>

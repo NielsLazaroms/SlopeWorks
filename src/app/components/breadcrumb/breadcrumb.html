@@ -1,0 +1,16 @@
+<nav aria-label="Breadcrumb" class="font-display text-[13px] tracking-wide">
+  <ol class="flex flex-wrap items-center gap-2">
+    @for (crumb of items; track crumb.label; let last = $last) {
+      <li class="flex items-center gap-2">
+        @if (crumb.route && !last) {
+          <a [routerLink]="crumb.route" class="text-white/60 transition-colors duration-200 hover:text-brand-400">{{ crumb.label }}</a>
+        } @else {
+          <span class="text-brand-400" aria-current="page">{{ crumb.label }}</span>
+        }
+        @if (!last) {
+          <span class="text-white/25" aria-hidden="true">/</span>
+        }
+      </li>
+    }
+  </ol>
+</nav>

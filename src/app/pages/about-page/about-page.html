@@ -1,0 +1,84 @@
+<app-page-hero
+  imageUrl="/images/hero_image.webp"
+  [eyebrow]="'about.eyebrow' | mnTranslate"
+  [title]="'about.title' | mnTranslate"
+  [subtitle]="'about.subtitle' | mnTranslate"
+></app-page-hero>
+
+<!-- Story: a short headline (site pattern), then the story beside a single photo -->
+<section appReveal class="max-w-7xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
+  <p class="font-display font-bold text-sm tracking-[0.14em] uppercase text-dark-yellow mb-4">{{ 'about.story.label' | mnTranslate }}</p>
+  <h2 class="font-display font-extrabold text-3xl md:text-4xl tracking-tight leading-[1.12] max-w-2xl mb-10 lg:mb-12">{{ 'about.story.title' | mnTranslate }}</h2>
+
+  <div class="grid grid-cols-1 lg:grid-cols-[1fr_0.85fr] gap-12 lg:gap-16 items-start">
+    <div class="max-w-xl">
+      <p class="text-[17px] leading-relaxed text-text-grey mb-5">{{ 'about.story.p1' | mnTranslate }}</p>
+      <p class="text-[17px] leading-relaxed text-text-grey mb-5">{{ 'about.story.p2' | mnTranslate }}</p>
+      <p class="text-[17px] leading-relaxed text-text-grey">{{ 'about.story.p3' | mnTranslate }}</p>
+    </div>
+    <div class="relative">
+      <img src="/images/about_us_1.webp" alt="" aria-hidden="true"
+           class="w-full aspect-[4/3] lg:aspect-[5/4] object-cover rounded-xl" />
+      <!-- Brand field-note tag anchoring the photo to a real place -->
+      <span class="absolute left-4 bottom-4 flex items-center gap-2 rounded-full bg-ink/85 backdrop-blur px-3.5 py-1.5">
+        <span class="w-1.5 h-1.5 rounded-full bg-brand-500"></span>
+        <span class="font-display font-semibold text-[11px] tracking-[0.1em] uppercase text-white">Bas &amp; Carmen</span>
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- The people (dark band): a full-width spread, not a card grid in an empty void -->
+<section appReveal class="bg-ink px-6 lg:px-16 py-16 lg:py-24">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[minmax(0,440px)_1fr] gap-10 lg:gap-16 items-center">
+    <!-- The two of them, on the mountain they scout -->
+    <div class="order-2 lg:order-1">
+      <img src="/images/about_us_2.webp" [alt]="'about.founders.label' | mnTranslate"
+           class="w-full aspect-[4/5] object-cover rounded-xl" />
+    </div>
+
+    <div class="order-1 lg:order-2">
+      <p class="font-display font-bold text-sm tracking-[0.14em] uppercase text-brand-400 mb-5">
+        {{ 'about.founders.label' | mnTranslate }}
+      </p>
+      <h2 class="font-display font-extrabold text-3xl md:text-4xl tracking-tight leading-[1.12] text-white max-w-xl">
+        {{ 'about.founders.title' | mnTranslate }}
+      </h2>
+
+      <ul class="mt-9 border-t border-white/12">
+        @for (person of founders; track person.nameKey) {
+          <li class="flex items-start gap-4 py-5 border-b border-white/12">
+            <span class="mt-1 w-1 h-9 shrink-0 rounded-full bg-brand-500" aria-hidden="true"></span>
+            <div>
+              <h3 class="font-display font-bold text-lg text-white">{{ person.nameKey | mnTranslate }}</h3>
+              <p class="text-sm text-white/55 mt-1">{{ person.roleKey | mnTranslate }}</p>
+            </div>
+          </li>
+        }
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- What stays true: three constants, hairline-divided rather than boxed -->
+<section appReveal class="max-w-7xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
+  <p class="font-display font-bold text-sm tracking-[0.14em] uppercase text-dark-yellow mb-4">{{ 'about.values.label' | mnTranslate }}</p>
+  <h2 class="font-display font-extrabold text-3xl md:text-4xl tracking-tight leading-[1.12] max-w-2xl mb-12">{{ 'about.values.title' | mnTranslate }}</h2>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 border-t border-[#E8E8F0] divide-y md:divide-y-0 md:divide-x divide-[#E8E8F0]">
+    @for (value of values; track value.titleKey) {
+      <div class="py-8 md:px-8 first:md:pl-0 last:md:pr-0">
+        <div class="w-9 h-1 bg-brand-500 rounded-full mb-5"></div>
+        <h3 class="font-display font-bold text-lg mb-2 text-ink">{{ value.titleKey | mnTranslate }}</h3>
+        <p class="text-[14.5px] leading-relaxed text-text-grey">{{ value.bodyKey | mnTranslate }}</p>
+      </div>
+    }
+  </div>
+</section>
+
+<app-page-cta
+  appReveal
+  titleKey="about.cta.title"
+  subKey="about.cta.sub"
+  buttonKey="about.cta.button"
+></app-page-cta>

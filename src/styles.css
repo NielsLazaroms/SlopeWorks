@@ -12,20 +12,84 @@
   --color-brand-700: #BF8A00;
   --color-brand-800: #8F6600;
   --color-brand-900: #5F4300;
+
+  /* mn-angular-lib styles its components with `primary-*` tokens (defaulting to
+     purple). Alias them to the brand palette so library components render on-brand. */
+  --color-primary: var(--color-brand-500);
+  --color-primary-50:  var(--color-brand-50);
+  --color-primary-100: var(--color-brand-100);
+  --color-primary-200: var(--color-brand-200);
+  --color-primary-300: var(--color-brand-300);
+  --color-primary-400: var(--color-brand-400);
+  --color-primary-500: var(--color-brand-500);
+  --color-primary-600: var(--color-brand-600);
+  --color-primary-700: var(--color-brand-700);
+  --color-primary-800: var(--color-brand-800);
+  --color-primary-900: var(--color-brand-900);
+
+  /* mn-angular-lib's `fill` badge/button variants pair each color with a
+     `*-content` (foreground) token and use `base-*` for neutral surfaces.
+     Define the few this project relies on so those variants render on-brand
+     without DaisyUI: dark text on the yellow fill, and an ink/white neutral. */
+  --color-primary-content: var(--color-ink);
+  --color-base-content: var(--color-ink);
+  --color-base-100: var(--color-paper-card);
+
+  /* Editorial palette from the SlopeWorks mockup: dark "ink" surfaces, light
+     "paper" surfaces, muted grey body text, and a deep yellow for on-light accents. */
+  --color-ink: #0B0C0E;
+  --color-ink-soft: #15171A;
+  --color-ink-raised: #1c1e22;
+  --color-paper: #F9F9FF;
+  --color-paper-card: #FFFFFF;
+  --color-text-grey: #5A5D63;
+  --color-dark-yellow: #7B5800;
+
+  /* Montserrat for display/headings, Inter for body copy. Overriding --font-sans
+     makes Inter the default document font; use `font-display` for headings. */
+  --font-sans: 'Inter', sans-serif;
+  --font-display: 'Montserrat', sans-serif;
 }
 
-.splide__track {
-  height: 400px;
+@layer base {
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+  }
 }
 
-.splide__slide .slide-inner {
-  border-radius: 16px;
-  height: 100%;
-  overflow: hidden;
-  transform: scale(0.8);
-  transition: transform 0.2s ease-in-out;
+/* ===== HOME GALLERY — scroll-snap film strip =====
+   Images keep their native aspect ratio at a uniform height (no cropping) and
+   snap to centre as you scroll. Hide the scrollbar; the arrows drive it. */
+.sw-strip {
+  scrollbar-width: none;
+  scroll-padding-inline: 1.5rem;
+}
+.sw-strip::-webkit-scrollbar {
+  display: none;
+}
+@media (min-width: 1024px) {
+  .sw-strip {
+    scroll-padding-inline: 4rem;
+  }
 }
 
-.splide__slide.is-active .slide-inner {
-  transform: scale(1);
+/* "In short" statement beneath the hero: figures wrapped in <b> are tinted with
+   the on-light brand yellow so they stay scannable within the sentence. */
+.stat-line b {
+  color: var(--color-dark-yellow);
+  font-weight: 800;
+}
+
+/* Honour the OS "reduce motion" preference: strip transitions, animations and
+   smooth scrolling site-wide for visitors who ask for a calmer experience. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

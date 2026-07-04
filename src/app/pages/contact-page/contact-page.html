@@ -1,0 +1,12 @@
+<app-page-hero
+  imageUrl="/images/hero_image.webp"
+  [eyebrow]="'contact.eyebrow' | mnTranslate"
+  [title]="'contact.title' | mnTranslate"
+  [subtitle]="'contact.subtitle' | mnTranslate"
+></app-page-hero>
+
+<div mn-section="contact">
+  <div appReveal mn-section="contact-section" class="max-w-7xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
+    <app-contact-section></app-contact-section>
+  </div>
+</div>

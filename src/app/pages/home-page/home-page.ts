@@ -1,72 +1,51 @@
-import {Component, AfterViewInit, OnDestroy} from '@angular/core';
-import gsap from 'gsap';
-import {ScrollTrigger} from 'gsap/ScrollTrigger';
+import {Component} from '@angular/core';
+import {RouterLink} from '@angular/router';
+import {MnButton, MnButtonTypes, MnSectionDirective, MnTranslatePipe} from 'mn-angular-lib';
+import {HomeHeroComponent} from './components/home-hero/home-hero';
+import {WhySectionComponent} from './components/why-section/why-section';
+import {ProofSectionComponent} from './components/proof-section/proof-section';
+import {DestinationsSectionComponent} from './components/destinations-section/destinations-section';
+import {GallerySectionComponent} from './components/gallery-section/gallery-section';
+import {PageCtaComponent} from '../../components/page-cta/page-cta';
+import {RevealDirective} from '../../components/reveal/reveal';
 
-gsap.registerPlugin(ScrollTrigger);
-import {MnButtonTypes, MnSectionDirective} from 'mn-angular-lib';
-import {SectionTitleTypes} from '../../components/section-title/section-titleTypes';
-import {AboutSectionComponent} from './components/about-section/about-section';
-import {PackagesSectionComponent} from './components/packages-section/packages-section';
-import {PicturesSectionComponent} from './components/pictures-section/pictures-section';
-import {ContactSectionComponent} from './components/contact-section/contact-section';
-import {ParallaxComponent, ParallaxComponentData} from '../../components/parallax-component';
-
+/**
+ * The SlopeWorks home page.
+ *
+ * Now that the site is multi-page, home is a landing hub: a photographic hero
+ * with the brand thesis, the differentiator narrative ("why", proof), a preview
+ * of destinations, a pair of cards routing out to the FAQ and comparison pages, a
+ * photo gallery, and a closing CTA to the contact page. Each band reveals on
+ * scroll via the shared {@link RevealDirective}.
+ */
 @Component({
   selector: 'app-home-page',
   standalone: true,
   imports: [
-    ParallaxComponent,
-    AboutSectionComponent,
-    PackagesSectionComponent,
-    PicturesSectionComponent,
-    ContactSectionComponent,
+    RouterLink,
+    MnButton,
+    MnTranslatePipe,
+    HomeHeroComponent,
+    WhySectionComponent,
+    ProofSectionComponent,
+    DestinationsSectionComponent,
+    GallerySectionComponent,
+    PageCtaComponent,
     MnSectionDirective,
+    RevealDirective,
   ],
   templateUrl: './home-page.html',
 })
-export class HomePage implements AfterViewInit, OnDestroy {
-  parallaxData: ParallaxComponentData = {
-    button: {
-      color: 'primary',
-      size: 'md',
-      variant: 'fill',
-      borderRadius: 'xl',
-      fullWidth: false,
-    } as MnButtonTypes,
-    title: {
-      headingLevel: 'h1',
-      size: 'md',
-      shadow: true,
-      showUnderLine: false,
-      textPosition: 'left',
-      textColor: 'light',
-      fontWeight: 'semibold',
-      textStroke: 'sm',
-    } as SectionTitleTypes,
-  } as const;
-
-  ngAfterViewInit() {
-    const sections = ['about-section', 'packages-section', 'pictures-section', 'contact-section'];
-
-    sections.forEach((id) => {
-      const element = document.getElementById(id);
-      if (element) {
-        gsap.from(element, {
-          scrollTrigger: {
-            trigger: element,
-            start: 'top 85%',
-            toggleActions: 'play none none none',
-          },
-          y: 60,
-          opacity: 0,
-          duration: 0.8,
-          ease: 'power2.out',
-        });
-      }
-    });
-  }
-
-  ngOnDestroy() {
-    ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-  }
+export class HomePage {
+  /**
+   * MnLib styling for the "orient" card text buttons. Overridden to `dark-yellow`
+   * in the template so they stay legible on the light cards.
+   */
+  protected readonly orientData: Partial<MnButtonTypes> = {
+    color: 'primary',
+    size: 'md',
+    variant: 'text',
+    borderRadius: 'sm',
+    hover: true,
+  };
 }

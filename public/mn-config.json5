@@ -64,205 +64,116 @@
       errorMessages: {
         required: { $translate: "validation.multiselect.required" }
       }
-    },
-    "app-parallax-component": {
-      "backgroundImageUrl": "https://4kwallpapers.com/images/walls/thumbs_3t/1025.jpg",
-      "description": "Description placeholder",
-      "buttonText": "Learn More"
-    },
-    "app-section-title": {
-      "title": "Title Placeholder"
-    },
-    "app-about-section": {
-      "description": "About Us Description",
-      "aboutUsButtonText": "Learn More"
-    },
-    "app-pictures-section": {
-      "description": 'Test'
-    },
-    "app-packages-section": {
-      "packagesTitleText": "Our packages",
-      //      DO NOT EDIT THE STYLING INSIDE CARDS
-      "cards": [
-        {
-          "title": "Card 1",
-          "id": 1,
-          "description": "This is card 1.",
-          "bottomBorder": true,
-          "borderRadius": "md",
-          "shadow": true,
-          "kind": "one-image",
-          "image": {
-            "id": 1,
-            "url": "https://logo-icons.com/cdn/shop/files/2081-logo-1713630973.369.svg?v=1713641356",
-            "alt": "Icon representing the Essential Retreat package"
-          },
-          "textPosition": "center"
-        },
-        {
-          "id": 2,
-          "title": "Card 2",
-          "description": "This is card 2.",
-          "kind": "one-image",
-          "bottomBorder": true,
-          "borderRadius": "md",
-          "shadow": true,
-          "image": {
-            "id": 2,
-            "url": "https://logo-icons.com/cdn/shop/files/2081-logo-1713630973.369.svg?v=1713641356",
-            "alt": "Icon representing the Premium Retreat package"
-          }
-        },
-        {
-          "id": 3,
-          "title": "Card 3",
-          "description": "This is card 3.",
-          "kind": "one-image",
-          "bottomBorder": true,
-          "borderRadius": "md",
-          "shadow": true,
-          "image": {
-            "id": 3,
-            "url": "https://logo-icons.com/cdn/shop/files/2081-logo-1713630973.369.svg?v=1713641356",
-            "alt": "Icon representing the Luxury Retreat package"
-          }
-        }
-      ]
     }
   },
   "overrides": {
     "root": {
       "home": {
-        "top-section": {
-          "#section-title-parallax": {
-            "title": { $translate: "home.hero.title" }
-          },
-          "app-parallax-component": {
-            "backgroundImageUrl": "/images/hero_image.webp",
-            "description": { $translate: "home.hero.description" },
-            "buttonText": { $translate: "home.hero.button" }
+        "why-section": {
+          "app-why-section": {
+            "label": { $translate: "home.why.label" },
+            "title": { $translate: "home.why.title" },
+            "intro": { $translate: "home.why.intro" },
+            "introSecondary": { $translate: "home.why.introSecondary" },
+            "them": {
+              "head": { $translate: "home.why.them.head" },
+              "items": [
+                { $translate: "home.why.them.item1" },
+                { $translate: "home.why.them.item2" },
+                { $translate: "home.why.them.item3" },
+                { $translate: "home.why.them.item4" }
+              ]
+            },
+            "us": {
+              "head": { $translate: "home.why.us.head" },
+              "items": [
+                { $translate: "home.why.us.item1" },
+                { $translate: "home.why.us.item2" },
+                { $translate: "home.why.us.item3" },
+                { $translate: "home.why.us.item4" }
+              ]
+            }
           }
         },
-        "about-section": {
-          "#section-title-about": {
-            "title": { $translate: "home.about.title" }
-          },
-          "app-about-section": {
-            "description": { $translate: "home.about.description" },
-            "aboutUsButtonText": { $translate: "home.about.button" }
-          },
-          "mn-dual-horizontal-image": {
-            images: [
-              {
-                id: '1',
-                url: '/images/about_us_2.webp',
-                alt: { $translate: "home.about.image1.alt" }
-              },
-              {
-                id: '2',
-                url: '/images/about_us_1.webp',
-                alt: { $translate: "home.about.image2.alt" },
-              }
-            ]
-          }
-        },
-        "pictures-section": {
-          "#section-title-pictures": {
-            "title": { $translate: "home.pictures.title" }
-          },
-          "app-pictures-section": {
-            "description": { $translate: "home.pictures.description" },
-          },
-          "app-focus-carousel": {
-            images: [
-              {
-                id: 1,
-                src: '/images/carousel_1.webp',
-                alt: { $translate: "home.pictures.carousel.1.alt" },
-              },
-              {
-                id: 2,
-                src: '/images/carousel_8.webp',
-                alt: { $translate: "home.pictures.carousel.2.alt" },
-              },
-              {
-                id: 3,
-                src: '/images/carousel_4.webp',
-                alt: { $translate: "home.pictures.carousel.3.alt" },
-              },
-              {
-                id: 4,
-                src: '/images/carousel_5.webp',
-                alt: { $translate: "home.pictures.carousel.4.alt" },
-              },
-              {
-                id: 5,
-                src: '/images/carousel_6.webp',
-                alt: { $translate: "home.pictures.carousel.5.alt" },
-              },
-              {
-                id: 7,
-                src: '/images/carousel_2.webp',
-                alt: { $translate: "home.pictures.carousel.6.alt" },
-              },
-              {
-                id: 10,
-                src: '/images/carousel_12.webp',
-                alt: { $translate: "home.pictures.carousel.7.alt" },
-              }
-            ]
-          }
-        },
-        "packages-section": {
-          "#section-title-packages": {
-            "title": { $translate: "home.packages.title" }
-          },
-          "app-packages-section": {
-            "packagesTitleText": { $translate: "home.packages.title" },
-            "packagesDescription": { $translate: "home.packages.description" },
+        "proof-section": {
+          "app-proof-section": {
+            "label": { $translate: "home.proof.label" },
+            "title": { $translate: "home.proof.title" },
             "cards": [
               {
-                "id": 1,
-                "title": { $translate: "home.packages.essential.title" },
-                "description": { $translate: "home.packages.essential.description" },
-                "bottomBorder": true,
-                "borderRadius": "md",
-                "shadow": true,
-                "image": {
-                  "id": 1,
-                  "url": "/images/essential_retreats.webp",
-                  "alt": { $translate: "home.packages.essential.image.alt" }
-                }
+                "tag": { $translate: "home.proof.card1.tag" },
+                "title": { $translate: "home.proof.card1.title" },
+                "body": { $translate: "home.proof.card1.body" },
+                "stamp": { $translate: "home.proof.stamp" },
+                "imageUrl": "/images/carousel_4.webp",
+                "imageAlt": { $translate: "home.proof.card1.title" }
               },
               {
-                "id": 2,
-                "title": { $translate: "home.packages.premium.title" },
-                "description": { $translate: "home.packages.premium.description" },
-                "bottomBorder": true,
-                "borderRadius": "md",
-                "shadow": true,
-                "image": {
-                  "id": 2,
-                  "url": "/images/premium_retreats.webp",
-                  "alt": { $translate: "home.packages.premium.image.alt" }
-                }
+                "tag": { $translate: "home.proof.card2.tag" },
+                "title": { $translate: "home.proof.card2.title" },
+                "body": { $translate: "home.proof.card2.body" },
+                "stamp": { $translate: "home.proof.stamp" },
+                "imageUrl": "/images/carousel_6.webp",
+                "imageAlt": { $translate: "home.proof.card2.title" }
               },
               {
-                "id": 3,
-                "title": { $translate: "home.packages.luxury.title" },
-                "description": { $translate: "home.packages.luxury.description" },
-                "bottomBorder": true,
-                "borderRadius": "md",
-                "shadow": true,
-                "image": {
-                  "id": 3,
-                  "url": "/images/luxury_retreats.webp",
-                  "alt": { $translate: "home.packages.luxury.image.alt" }
-                }
+                "tag": { $translate: "home.proof.card3.tag" },
+                "title": { $translate: "home.proof.card3.title" },
+                "body": { $translate: "home.proof.card3.body" },
+                "stamp": { $translate: "home.proof.stamp" },
+                "imageUrl": "/images/carousel_2.webp",
+                "imageAlt": { $translate: "home.proof.card3.title" }
               }
             ]
           }
         },
+        "destinations-section": {
+          "app-destinations-section": {
+            "label": { $translate: "home.destinations.label" },
+            "title": { $translate: "home.destinations.title" },
+            "seeAllText": { $translate: "home.destinations.seeAll" },
+            "seeAllRoute": "/bestemmingen",
+            "cards": [
+              {
+                "country": { $translate: "home.destinations.card1.country" },
+                "name": "Sölden",
+                "tagline": { $translate: "home.destinations.card1.tagline" },
+                "linkText": { $translate: "home.destinations.card1.link" },
+                "imageUrl": "/images/carousel_1.webp",
+                "imageAlt": { $translate: "home.destinations.card1.tagline" },
+                "route": "/bestemmingen/solden"
+              },
+              {
+                "country": { $translate: "home.destinations.card2.country" },
+                "name": "Mayrhofen",
+                "tagline": { $translate: "home.destinations.card2.tagline" },
+                "linkText": { $translate: "home.destinations.card2.link" },
+                "imageUrl": "/images/carousel_8.webp",
+                "imageAlt": { $translate: "home.destinations.card2.tagline" },
+                "route": "/bestemmingen"
+              },
+              {
+                "country": { $translate: "home.destinations.card3.country" },
+                "name": "Gstaad",
+                "tagline": { $translate: "home.destinations.card3.tagline" },
+                "linkText": { $translate: "home.destinations.card3.link" },
+                "imageUrl": "/images/carousel_5.webp",
+                "imageAlt": { $translate: "home.destinations.card3.tagline" },
+                "route": "/bestemmingen"
+              }
+            ]
+          }
+        },
+        "cta-strip-section": {
+          "app-cta-strip-section": {
+            "title": { $translate: "home.cta.title" },
+            "sub": { $translate: "home.cta.sub" },
+            "buttonText": { $translate: "home.cta.button" },
+            "buttonRoute": "/contact"
+          }
+        }
+      },
+      "contact": {
         "contact-section": {
           "#section-title-getInTouch": {
             "title": { $translate: "home.contact.title" }
@@ -291,19 +202,25 @@
             "#section-title-form": {
               title: { $translate: "home.contact.form.title" }
             },
+            // Visible field labels are rendered by the contact section's own
+            // template (reactive editorial labels), so no `label` is configured
+            // here. mn-input-field overwrites its config `placeholder` with
+            // `props`, so the name/subject placeholders are supplied from the
+            // component instead (see `nameProps`/`subjectProps`); the textarea
+            // guards that override and keeps its config placeholder below. Each
+            // field keeps its accessible label here for screen readers.
             "#mn-input-name": {
-              "placeholder": { $translate: "home.contact.form.name.placeholder" },
-              "label": { $translate: "home.contact.form.name.label" },
               "ariaLabel": { $translate: "home.contact.form.name.ariaLabel" }
             },
             "#mn-input-subject": {
-              "placeholder": { $translate: "home.contact.form.subject.placeholder" },
-              "label": { $translate: "home.contact.form.subject.label" },
               "ariaLabel": { $translate: "home.contact.form.subject.ariaLabel" }
             },
             "#mn-textarea-description": {
               "placeholder": { $translate: "home.contact.form.description.placeholder" },
-              "label": { $translate: "home.contact.form.description.label" },
+              // Empty string suppresses the library's own label (the global
+              // `mn-textarea` default is "Generic Textarea"); the visible label
+              // is rendered by this section's template instead.
+              "label": "",
               "ariaLabel": { $translate: "home.contact.form.description.ariaLabel" }
             }
           }
@@ -315,21 +232,29 @@
           "logoAlt": "SlopeWorks",
           "navItems": [
             {
+              "label": { $translate: "navbar.home" },
+              "route": "/"
+            },
+            {
+              "label": { $translate: "navbar.destinations" },
+              "route": "/bestemmingen"
+            },
+            {
               "label": { $translate: "navbar.about" },
-              "sectionId": "about-section"
+              "route": "/over-ons"
             },
             {
-              "label": { $translate: "navbar.packages" },
-              "sectionId": "packages-section"
+              "label": { $translate: "navbar.faq" },
+              "route": "/faq"
             },
             {
-              "label": { $translate: "navbar.pictures" },
-              "sectionId": "pictures-section"
+              "label": { $translate: "navbar.comparison" },
+              "route": "/vergelijken"
             }
           ],
           "contactItem": {
             "label": { $translate: "navbar.contact" },
-            "sectionId": "contact-section"
+            "route": "/contact"
           }
         }
       },

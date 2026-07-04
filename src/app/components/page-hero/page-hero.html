@@ -1,0 +1,29 @@
+<header class="relative overflow-hidden bg-ink">
+  <!-- Scouting photograph -->
+  <img [src]="imageUrl" alt="" aria-hidden="true"
+       class="absolute inset-0 w-full h-full object-cover" />
+  <!-- Gradient: readable at the base, image breathing at the top -->
+  <div class="absolute inset-0 bg-[linear-gradient(165deg,rgba(11,12,14,0.55)_0%,rgba(11,12,14,0.72)_45%,rgba(11,12,14,0.94)_100%)]"></div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-16 pt-28 lg:pt-36 pb-16 lg:pb-20">
+    @if (crumbs.length) {
+      <div class="mb-8 lg:mb-10">
+        <app-breadcrumb [items]="crumbs"></app-breadcrumb>
+      </div>
+    }
+
+    @if (eyebrow) {
+      <p class="flex items-center gap-2.5 font-display font-bold text-[13px] tracking-[0.12em] uppercase text-brand-400 mb-5">
+        <span class="w-1.5 h-1.5 rounded-full bg-brand-400"></span>{{ eyebrow }}
+      </p>
+    }
+
+    <h1 class="font-display font-extrabold text-4xl md:text-5xl lg:text-[3.25rem] leading-[1.08] tracking-tight text-white max-w-3xl">
+      {{ title }}
+    </h1>
+
+    @if (subtitle) {
+      <p class="mt-6 text-lg text-white/65 max-w-xl leading-relaxed">{{ subtitle }}</p>
+    }
+  </div>
+</header>

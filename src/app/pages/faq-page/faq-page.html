@@ -1,0 +1,121 @@
+<app-page-hero
+  imageUrl="/images/hero_image.webp"
+  [eyebrow]="'faq.eyebrow' | mnTranslate"
+  [title]="'faq.title' | mnTranslate"
+  [subtitle]="'faq.subtitle' | mnTranslate"
+></app-page-hero>
+
+<section class="bg-paper">
+  <!-- Mobile category chips: horizontal jump-nav where the sticky rail is hidden -->
+  <div class="lg:hidden sticky top-20 z-20 bg-paper/95 backdrop-blur border-b border-[#E8E8F0]">
+    <div class="flex gap-2 overflow-x-auto px-6 py-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      @for (group of groups; track group.id) {
+        <button
+          type="button"
+          (click)="scrollToGroup(group.id)"
+          class="shrink-0 whitespace-nowrap rounded-full border px-3.5 py-1.5 font-display font-semibold text-[12.5px] transition-colors duration-200"
+          [class]="activeGroup() === group.id
+            ? 'bg-ink text-white border-ink'
+            : 'bg-white text-text-grey border-[#E4E4EE]'"
+        >{{ group.titleKey | mnTranslate }}</button>
+      }
+    </div>
+  </div>
+
+  <div class="max-w-6xl mx-auto px-6 lg:px-16 py-16 lg:py-24 grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-10 lg:gap-16">
+    <!-- Living index: tracks the reader's position with a growing yellow tick -->
+    <nav aria-label="FAQ categories" class="hidden lg:block self-start sticky top-28">
+      <p class="font-display font-bold text-[11px] tracking-[0.16em] uppercase text-text-grey mb-5">
+        {{ 'faq.indexLabel' | mnTranslate }}
+      </p>
+      <ul>
+        @for (group of groups; track group.id) {
+          <li>
+            <button
+              type="button"
+              (click)="scrollToGroup(group.id)"
+              [attr.aria-current]="activeGroup() === group.id ? 'true' : null"
+              class="group/idx flex items-center gap-3 w-full text-left py-2 cursor-pointer"
+            >
+              <span
+                class="block h-px shrink-0 transition-all duration-300 ease-out"
+                [class]="activeGroup() === group.id
+                  ? 'w-8 bg-brand-500'
+                  : 'w-4 bg-[#D6D6E0] group-hover/idx:w-6 group-hover/idx:bg-dark-yellow'"
+                aria-hidden="true"
+              ></span>
+              <span
+                class="font-display text-sm transition-colors duration-200"
+                [class]="activeGroup() === group.id
+                  ? 'font-bold text-ink'
+                  : 'font-medium text-text-grey group-hover/idx:text-ink'"
+              >{{ group.titleKey | mnTranslate }}</span>
+            </button>
+          </li>
+        }
+      </ul>
+    </nav>
+
+    <!-- Grouped Q&A -->
+    <div>
+      @for (group of groups; track group.id) {
+        <section appReveal [id]="group.id" class="scroll-mt-28 mb-16 last:mb-0">
+          <header class="mb-6">
+            <div class="flex items-center gap-2.5 mb-2.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-brand-500" aria-hidden="true"></span>
+              <span class="font-display font-bold text-[11px] tracking-[0.14em] uppercase text-dark-yellow">
+                {{ group.items.length }} {{ 'faq.questionsLabel' | mnTranslate }}
+              </span>
+            </div>
+            <h2 class="font-display font-extrabold text-2xl lg:text-[1.75rem] tracking-tight text-ink">
+              {{ group.titleKey | mnTranslate }}
+            </h2>
+            <p class="mt-1.5 text-[15px] text-text-grey max-w-xl">{{ group.subKey | mnTranslate }}</p>
+          </header>
+
+          <div class="border-t border-[#E8E8F0]">
+            @for (item of group.items; track item.qKey) {
+              <div class="border-b border-[#E8E8F0]">
+                <button
+                  type="button"
+                  (click)="toggle(item.qKey)"
+                  [attr.aria-expanded]="isOpen(item.qKey)"
+                  class="group/q w-full flex items-start gap-4 text-left py-5 cursor-pointer"
+                >
+                  <!-- Toggle chip: outlined "+" that fills brand-yellow and turns to a cross when open -->
+                  <span
+                    class="mt-px flex h-7 w-7 shrink-0 items-center justify-center rounded-full border transition-colors duration-200"
+                    [class]="isOpen(item.qKey)
+                      ? 'bg-brand-500 border-brand-500'
+                      : 'border-[#E0E0EA] group-hover/q:border-dark-yellow'"
+                    aria-hidden="true"
+                  >
+                    <span
+                      class="text-lg leading-none transition-transform duration-200"
+                      [class]="isOpen(item.qKey) ? 'text-ink rotate-45' : 'text-dark-yellow'"
+                    >+</span>
+                  </span>
+                  <h3 class="font-display font-semibold text-[16.5px] lg:text-[17px] leading-snug text-ink pt-0.5">
+                    {{ item.qKey | mnTranslate }}
+                  </h3>
+                </button>
+                @if (isOpen(item.qKey)) {
+                  <div class="pl-11 pb-6 -mt-1">
+                    <p class="text-[15px] leading-[1.75] text-text-grey max-w-2xl">{{ item.aKey | mnTranslate }}</p>
+                  </div>
+                }
+              </div>
+            }
+          </div>
+        </section>
+      }
+    </div>
+  </div>
+</section>
+
+<app-page-cta
+  appReveal
+  titleKey="faq.cta.title"
+  subKey="faq.cta.sub"
+  buttonKey="faq.cta.button"
+></app-page-cta>

@@ -1,0 +1,37 @@
+<section class="relative overflow-hidden bg-ink min-h-[86vh] flex items-end">
+  <!-- Scouting photograph -->
+  <img src="/images/hero_image.webp" alt="" aria-hidden="true" class="absolute inset-0 w-full h-full object-cover" />
+  <div class="absolute inset-0 bg-[linear-gradient(180deg,rgba(11,12,14,0.35)_0%,rgba(11,12,14,0.55)_50%,rgba(11,12,14,0.92)_100%)]"></div>
+  <!-- Warm glow behind the headline -->
+  <div class="absolute -top-32 -left-24 w-[46rem] h-[46rem] rounded-full bg-[radial-gradient(circle,rgba(255,187,0,0.10),transparent_62%)]"></div>
+
+  <div class="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-16 pt-32 pb-16 lg:pb-24">
+    <div class="grid lg:grid-cols-[1.2fr_0.8fr] gap-10 lg:gap-14 items-end">
+      <div>
+        <p class="flex items-center gap-2.5 font-display font-bold text-[13px] tracking-[0.12em] uppercase text-brand-400 mb-6">
+          <span class="w-1.5 h-1.5 rounded-full bg-brand-400"></span>{{ 'home.hero.eyebrow' | mnTranslate }}
+        </p>
+        <h1 class="font-display font-extrabold text-4xl md:text-6xl lg:text-[4.4rem] leading-[1.03] tracking-tight text-white max-w-3xl">
+          {{ 'home.hero.titleLead' | mnTranslate }}<span class="text-brand-500">{{ 'home.hero.titleAccent' | mnTranslate }}</span>
+        </h1>
+        <p class="mt-6 text-lg md:text-xl italic text-white/65 max-w-lg leading-relaxed">{{ 'home.hero.sub' | mnTranslate }}</p>
+
+        <div class="mt-9 flex flex-wrap items-center gap-6">
+          <a mnButton [data]="primaryData" routerLink="/contact" class="font-display font-bold">
+            {{ 'home.hero.primary' | mnTranslate }}
+          </a>
+          <a mnButton [data]="secondaryData" routerLink="/bestemmingen" class="font-display font-medium">
+            {{ 'home.hero.secondary' | mnTranslate }} →
+          </a>
+        </div>
+      </div>
+
+      <!-- Signature: field note -->
+      <aside class="lg:justify-self-end w-full max-w-sm bg-white/[0.05] border border-brand-500/25 rounded-lg p-6 backdrop-blur-sm">
+        <span class="block font-display font-bold text-[11px] tracking-[0.1em] uppercase text-brand-400 mb-3">{{ 'home.hero.note.stamp' | mnTranslate }}</span>
+        <p class="text-white/85 text-[15px] leading-relaxed">&ldquo;{{ 'home.hero.note.quote' | mnTranslate }}&rdquo;</p>
+        <div class="mt-4 font-display text-xs tracking-[0.04em] text-white/45">{{ 'home.hero.note.loc' | mnTranslate }}</div>
+      </aside>
+    </div>
+  </div>
+</section>

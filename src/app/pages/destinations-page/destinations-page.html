@@ -1,0 +1,87 @@
+<app-page-hero
+  imageUrl="/images/hero_image.webp"
+  [eyebrow]="'destinations.eyebrow' | mnTranslate"
+  [title]="'destinations.title' | mnTranslate"
+  [subtitle]="'destinations.subtitle' | mnTranslate"
+></app-page-hero>
+
+<!-- Country filter -->
+<div class="border-b border-[#E8E8F0] bg-paper">
+  <div class="max-w-7xl mx-auto px-6 lg:px-16 py-6 flex flex-wrap gap-3">
+    @for (option of filters; track option.id) {
+      <button
+        type="button"
+        (click)="setFilter(option.id)"
+        [ngClass]="filter() === option.id
+          ? 'bg-brand-500 text-ink border-brand-500'
+          : 'bg-transparent text-text-grey border-[#DDD] hover:border-ink'"
+        class="font-display font-semibold text-[13px] px-[18px] py-2 rounded-full border cursor-pointer transition-colors duration-200"
+      >
+        {{ option.labelKey | mnTranslate }}
+      </button>
+    }
+  </div>
+</div>
+
+<!-- Destination grid -->
+<section appReveal class="max-w-7xl mx-auto px-6 lg:px-16 py-14 lg:py-20">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+    @for (dest of visible(); track dest.name) {
+      @if (dest.route) {
+        <a
+          [routerLink]="dest.route"
+          class="group block bg-paper-card border border-[#E8E8F0] rounded-[10px] overflow-hidden transition-all duration-150 hover:-translate-y-1 hover:shadow-[0_14px_30px_rgba(0,0,0,0.10)]"
+        >
+          <div class="relative h-48 overflow-hidden">
+            <img [src]="dest.imageUrl" [alt]="dest.name" loading="lazy"
+                 class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.04]" />
+            @if (dest.badgeKey) {
+              <span mnBadge [data]="{variant: 'fill', color: 'primary', size: 'sm'}"
+                    class="absolute top-4 right-4 font-display font-bold tracking-wide uppercase">{{ dest.badgeKey | mnTranslate }}</span>
+            }
+          </div>
+          <div class="p-6 lg:p-7">
+            <div class="font-display text-[11px] tracking-[0.08em] uppercase text-text-grey mb-1.5">{{ dest.countryKey | mnTranslate }}</div>
+            <h3 class="font-display font-bold text-2xl mb-2.5">{{ dest.name }}</h3>
+            <p class="text-[14.5px] text-text-grey leading-relaxed mb-4">{{ dest.descriptionKey | mnTranslate }}</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              @for (tag of dest.tagKeys; track tag) {
+                <span class="text-[11.5px] bg-[#F4F4F8] text-text-grey px-2.5 py-1 rounded font-display">{{ tag | mnTranslate }}</span>
+              }
+            </div>
+            <div class="font-display font-bold text-[13px] text-dark-yellow">{{ 'destinations.view' | mnTranslate }} {{ dest.name }} →</div>
+          </div>
+        </a>
+      } @else {
+        <div class="block bg-paper-card border border-[#E8E8F0] rounded-[10px] overflow-hidden opacity-60">
+          <div class="relative h-48 overflow-hidden">
+            <img [src]="dest.imageUrl" [alt]="dest.name" loading="lazy"
+                 class="w-full h-full object-cover grayscale-[35%]" />
+            @if (dest.badgeKey) {
+              <span mnBadge [data]="{variant: 'fill', color: 'lightgray', size: 'sm'}"
+                    class="absolute top-4 right-4 font-display font-bold tracking-wide uppercase">{{ dest.badgeKey | mnTranslate }}</span>
+            }
+          </div>
+          <div class="p-6 lg:p-7">
+            <div class="font-display text-[11px] tracking-[0.08em] uppercase text-text-grey mb-1.5">{{ dest.countryKey | mnTranslate }}</div>
+            <h3 class="font-display font-bold text-2xl mb-2.5">{{ dest.name }}</h3>
+            <p class="text-[14.5px] text-text-grey leading-relaxed mb-4">{{ dest.descriptionKey | mnTranslate }}</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              @for (tag of dest.tagKeys; track tag) {
+                <span class="text-[11.5px] bg-[#F4F4F8] text-text-grey px-2.5 py-1 rounded font-display">{{ tag | mnTranslate }}</span>
+              }
+            </div>
+            <div class="font-display font-bold text-[13px] text-text-grey">{{ 'destinations.soon' | mnTranslate }}</div>
+          </div>
+        </div>
+      }
+    }
+  </div>
+</section>
+
+<app-page-cta
+  appReveal
+  titleKey="destinations.cta.title"
+  subKey="destinations.cta.sub"
+  buttonKey="destinations.cta.button"
+></app-page-cta>

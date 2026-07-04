@@ -1,0 +1,32 @@
+<section class="px-6 lg:px-16 py-24 max-w-7xl mx-auto">
+  <p class="font-display font-bold text-sm tracking-[0.1em] uppercase text-dark-yellow mb-4">{{ componentConfig.label }}</p>
+  <h2 class="font-display font-extrabold text-3xl md:text-4xl tracking-tight leading-[1.12] max-w-3xl mb-8">{{ componentConfig.title }}</h2>
+
+  @if (componentConfig.intro) {
+    <p class="max-w-2xl text-lg leading-relaxed text-ink font-medium mb-8">{{ componentConfig.intro }}</p>
+  }
+  @if (componentConfig.introSecondary) {
+    <p class="max-w-2xl text-base leading-relaxed text-[#333] mb-10">{{ componentConfig.introSecondary }}</p>
+  }
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-0.5 bg-[#E3E3EC] rounded-lg overflow-hidden">
+    <!-- Them -->
+    <div class="bg-[#FAFAFC] p-10">
+      <div class="font-display font-bold text-lg mb-5 text-text-grey">{{ componentConfig.them?.head }}</div>
+      <ul class="flex flex-col gap-3.5">
+        @for (item of componentConfig.them?.items; track item) {
+          <li class="relative pl-6 text-base leading-relaxed text-[#333] before:content-['—'] before:absolute before:left-0 before:text-[#B5B5C0]">{{ item }}</li>
+        }
+      </ul>
+    </div>
+    <!-- Us -->
+    <div class="bg-[#FFFCF2] p-10">
+      <div class="font-display font-bold text-lg mb-5 text-dark-yellow">{{ componentConfig.us?.head }}</div>
+      <ul class="flex flex-col gap-3.5">
+        @for (item of componentConfig.us?.items; track item) {
+          <li class="relative pl-6 text-base leading-relaxed text-[#333] before:content-['—'] before:absolute before:left-0 before:text-dark-yellow">{{ item }}</li>
+        }
+      </ul>
+    </div>
+  </div>
+</section>
