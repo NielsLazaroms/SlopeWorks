@@ -74,13 +74,15 @@
   "home.gallery.title": "What a week on the mountain looks like.",
 
   "home.pictures.description": "A look at what a SlopeWorks retreat actually feels like. Time on the mountain. Evenings together. The moments in between.",
-  "home.pictures.carousel.1.alt": "Corporate team skiing together on a sunny slope",
-  "home.pictures.carousel.2.alt": "Mountain landscape at sunset during a winter retreat",
-  "home.pictures.carousel.3.alt": "Strategy session in a cozy mountain lodge",
-  "home.pictures.carousel.4.alt": "Participants enjoying a shared meal at an alpine restaurant",
-  "home.pictures.carousel.5.alt": "Close-up of high-quality ski equipment on snow",
-  "home.pictures.carousel.6.alt": "Team building activity in the snow during a retreat",
-  "home.pictures.carousel.7.alt": "Peaceful winter forest trail with fresh snow",
+  "home.gallery.alt.gaislachkogl": "View from the Gaislachkogl in Sölden",
+  "home.gallery.alt.schirmbar": "Slope-side Schirmbar in Sölden",
+  "home.gallery.alt.ijsgrot": "The ice cave inside the Hintertux glacier",
+  "home.gallery.alt.kaiserschmarrn": "Kaiserschmarrn at a mountain hut near Mayrhofen",
+  "home.gallery.alt.jagerhof": "Hotel Jägerhof in Mayrhofen",
+  "home.gallery.alt.zillertalerhof": "Hotel Zillertalerhof in Mayrhofen",
+  "home.gallery.alt.golfhotel": "Golf hotel in Saanenmöser near Gstaad",
+  "home.gallery.alt.lauenensee": "Lake Lauenen near Gstaad",
+  "home.gallery.alt.saanenmoser": "The Saanenmöser ski area near Gstaad",
 
   "home.contact.title": "Get in touch",
   "home.contact.informationDescription": "Thinking about what your team could do with a week in the mountains? Let's figure it out together.",
@@ -162,6 +164,13 @@
 
   "breadcrumb.home": "Home",
   "breadcrumb.destinations": "Destinations",
+
+  "solden.signature.alt": "SlopeWorks company ski trip in Sölden",
+  "mayrhofen.signature.alt": "SlopeWorks company ski trip in Mayrhofen",
+  "stanton.signature.alt": "SlopeWorks company ski trip in St. Anton am Arlberg",
+  "kitzbuhel.signature.alt": "SlopeWorks company ski trip in Kitzbühel",
+  "zellamsee.signature.alt": "SlopeWorks company ski trip in Zell am See",
+  "gstaad.signature.alt": "SlopeWorks company ski trip in Gstaad",
 
   "destinations.eyebrow": "Destinations",
   "destinations.title": "Six areas. Visited and measured ourselves.",

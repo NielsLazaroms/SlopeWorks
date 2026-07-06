@@ -59,9 +59,10 @@
   <section appReveal class="bg-paper-band border-y border-[#EFE7D0] px-6 lg:px-16 py-20 lg:py-24">
     <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
       <div class="relative h-80 lg:h-120 rounded-xl overflow-hidden">
-        <img [src]="d.signatureImage" alt="" aria-hidden="true" class="absolute inset-0 w-full h-full object-cover" />
+        <img [src]="d.signatureImage" [alt]="d.prefix + '.signature.alt' | mnTranslate" class="absolute inset-0 w-full h-full object-cover" />
         <div class="absolute inset-0 bg-[linear-gradient(160deg,rgba(58,79,99,0.15),rgba(14,24,34,0.75))]"></div>
-        <span class="absolute bottom-5 left-5 font-display text-xs tracking-wide text-white/60">{{ d.prefix + '.signature.caption' | mnTranslate }}</span>
+        <span mnBadge [data]="{variant: 'fill', color: 'primary', size: 'sm'}"
+              class="absolute bottom-5 left-5 font-display font-bold tracking-wide uppercase">{{ d.prefix + '.signature.caption' | mnTranslate }}</span>
       </div>
       <div class="lg:pl-4">
         <app-eyebrow class="mb-4">{{ d.prefix + '.signature.label' | mnTranslate }}</app-eyebrow>

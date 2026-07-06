@@ -39,14 +39,15 @@ export class GallerySectionComponent {
 
   /** Slides in display order; captions are scouted locations. */
   protected readonly slides: GallerySlide[] = [
-    {src: '/images/carousel_1.webp', altKey: 'home.pictures.carousel.1.alt', caption: 'Sölden · Ötztal'},
-    {src: '/images/carousel_2.webp', altKey: 'home.pictures.carousel.2.alt', caption: 'Gaislachkogl · 3.048 m'},
-    {src: '/images/carousel_6.webp', altKey: 'home.pictures.carousel.5.alt', caption: 'Hintertux · gletsjer'},
-    {src: '/images/carousel_8.webp', altKey: 'home.pictures.carousel.6.alt', caption: 'Mayrhofen · Zillertal'},
-    {src: '/images/carousel_5.webp', altKey: 'home.pictures.carousel.4.alt', caption: 'Gstaad · Saanenland'},
-    {src: '/images/carousel_4.webp', altKey: 'home.pictures.carousel.3.alt', caption: 'Zell am See'},
-    {src: '/images/carousel_10.webp', altKey: 'home.pictures.carousel.7.alt', caption: 'St. Anton · Arlberg'},
-    {src: '/images/carousel_12.webp', altKey: 'home.pictures.carousel.1.alt', caption: 'Kitzbühel · Tirol'},
+    {src: '/images/gallery/solden-gaislachkogl.webp', altKey: 'home.gallery.alt.gaislachkogl', caption: 'Sölden · Gaislachkogl'},
+    {src: '/images/gallery/solden-schirmbar.webp', altKey: 'home.gallery.alt.schirmbar', caption: 'Sölden · Schirmbar'},
+    {src: '/images/gallery/hintertux-ijsgrot.webp', altKey: 'home.gallery.alt.ijsgrot', caption: 'Hintertux · ijsgrot'},
+    {src: '/images/gallery/mayrhofen-kaiserschmarrn.webp', altKey: 'home.gallery.alt.kaiserschmarrn', caption: 'Mayrhofen · Kaiserschmarrn'},
+    {src: '/images/gallery/mayrhofen-jagerhof.webp', altKey: 'home.gallery.alt.jagerhof', caption: 'Mayrhofen · Hotel Jägerhof'},
+    {src: '/images/gallery/mayrhofen-zillertalerhof.webp', altKey: 'home.gallery.alt.zillertalerhof', caption: 'Mayrhofen · Hotel Zillertalerhof'},
+    {src: '/images/gallery/gstaad-golfhotel.webp', altKey: 'home.gallery.alt.golfhotel', caption: 'Saanenmöser · Golfhotel'},
+    {src: '/images/gallery/gstaad-lauenensee.webp', altKey: 'home.gallery.alt.lauenensee', caption: 'Gstaad · Lauenensee'},
+    {src: '/images/gallery/gstaad-saanenmoser.webp', altKey: 'home.gallery.alt.saanenmoser', caption: 'Saanenmöser'},
   ];
 
   /**

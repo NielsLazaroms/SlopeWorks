@@ -1,7 +1,7 @@
 import {Component, computed, effect, inject, OnDestroy} from '@angular/core';
 import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {toSignal} from '@angular/core/rxjs-interop';
-import {MnLanguageService, MnTranslatePipe} from 'mn-angular-lib';
+import {MnBadge, MnLanguageService, MnTranslatePipe} from 'mn-angular-lib';
 import {BreadcrumbComponent} from '../../components/breadcrumb/breadcrumb';
 import {PageCtaComponent} from '../../components/page-cta/page-cta';
 import {RevealDirective} from '../../components/reveal/reveal';
@@ -46,24 +46,32 @@ interface DestinationConfig {
   relatedSlugs: string[];
 }
 
+/**
+ * The photographic hero shown at the top of every destination detail page. It is
+ * deliberately the same across all areas — the per-area photos live in the
+ * signature band and the related-area cards instead, so the pages share one
+ * consistent, wide-format opening image.
+ */
+const DETAIL_HERO_IMAGE = '/images/hero_image.webp';
+
 /** Shared metadata for every scouted area, keyed by URL slug. */
 const AREA_META: Record<string, AreaMeta> = {
-  'solden': {name: 'Sölden', countryKey: 'destinations.solden.country', image: '/images/carousel_1.webp', route: '/bestemmingen/solden'},
-  'mayrhofen': {name: 'Mayrhofen', countryKey: 'destinations.mayrhofen.country', image: '/images/carousel_8.webp', route: '/bestemmingen/mayrhofen'},
-  'st-anton': {name: 'St. Anton am Arlberg', countryKey: 'destinations.stanton.country', image: '/images/carousel_7.webp', route: '/bestemmingen/st-anton'},
-  'kitzbuhel': {name: 'Kitzbühel-Kirchberg', countryKey: 'destinations.kitzbuhel.country', image: '/images/carousel_9.webp', route: '/bestemmingen/kitzbuhel'},
-  'zell-am-see': {name: 'Zell am See-Kaprun', countryKey: 'destinations.zellamsee.country', image: '/images/carousel_10.webp', route: '/bestemmingen/zell-am-see'},
-  'gstaad': {name: 'Gstaad', countryKey: 'destinations.gstaad.country', image: '/images/carousel_5.webp', route: '/bestemmingen/gstaad'},
+  'solden': {name: 'Sölden', countryKey: 'destinations.solden.country', image: '/images/destinations/solden.webp', route: '/bestemmingen/solden'},
+  'mayrhofen': {name: 'Mayrhofen', countryKey: 'destinations.mayrhofen.country', image: '/images/destinations/mayrhofen.webp', route: '/bestemmingen/mayrhofen'},
+  'st-anton': {name: 'St. Anton am Arlberg', countryKey: 'destinations.stanton.country', image: '/images/destinations/st-anton.webp', route: '/bestemmingen/st-anton'},
+  'kitzbuhel': {name: 'Kitzbühel-Kirchberg', countryKey: 'destinations.kitzbuhel.country', image: '/images/destinations/kitzbuhel.webp', route: '/bestemmingen/kitzbuhel'},
+  'zell-am-see': {name: 'Zell am See-Kaprun', countryKey: 'destinations.zellamsee.country', image: '/images/destinations/zell-am-see.webp', route: '/bestemmingen/zell-am-see'},
+  'gstaad': {name: 'Gstaad', countryKey: 'destinations.gstaad.country', image: '/images/destinations/gstaad.webp', route: '/bestemmingen/gstaad'},
 };
 
 /** Per-area template configuration, keyed by URL slug. */
 const CONFIG: Record<string, DestinationConfig> = {
-  'solden': {prefix: 'solden', signatureImage: '/images/carousel_6.webp', fitYes: 4, fitNo: 3, faq: 4, relatedSlugs: ['mayrhofen', 'st-anton', 'gstaad']},
-  'mayrhofen': {prefix: 'mayrhofen', signatureImage: '/images/carousel_12.webp', fitYes: 4, fitNo: 2, faq: 4, relatedSlugs: ['solden', 'st-anton', 'gstaad']},
-  'st-anton': {prefix: 'stanton', signatureImage: '/images/carousel_4.webp', fitYes: 3, fitNo: 3, faq: 4, relatedSlugs: ['solden', 'kitzbuhel', 'gstaad']},
-  'kitzbuhel': {prefix: 'kitzbuhel', signatureImage: '/images/carousel_2.webp', fitYes: 3, fitNo: 2, faq: 3, relatedSlugs: ['mayrhofen', 'st-anton', 'zell-am-see']},
-  'zell-am-see': {prefix: 'zellamsee', signatureImage: '/images/carousel_6.webp', fitYes: 4, fitNo: 3, faq: 3, relatedSlugs: ['kitzbuhel', 'mayrhofen', 'gstaad']},
-  'gstaad': {prefix: 'gstaad', signatureImage: '/images/carousel_2.webp', fitYes: 4, fitNo: 3, faq: 4, relatedSlugs: ['solden', 'st-anton', 'zell-am-see']},
+  'solden': {prefix: 'solden', signatureImage: '/images/destinations/solden-hero.webp', fitYes: 4, fitNo: 3, faq: 4, relatedSlugs: ['mayrhofen', 'st-anton', 'gstaad']},
+  'mayrhofen': {prefix: 'mayrhofen', signatureImage: '/images/destinations/mayrhofen-hero.webp', fitYes: 4, fitNo: 2, faq: 4, relatedSlugs: ['solden', 'st-anton', 'gstaad']},
+  'st-anton': {prefix: 'stanton', signatureImage: '/images/destinations/st-anton-hero.webp', fitYes: 3, fitNo: 3, faq: 4, relatedSlugs: ['solden', 'kitzbuhel', 'gstaad']},
+  'kitzbuhel': {prefix: 'kitzbuhel', signatureImage: '/images/destinations/kitzbuhel-hero.webp', fitYes: 3, fitNo: 2, faq: 3, relatedSlugs: ['mayrhofen', 'st-anton', 'zell-am-see']},
+  'zell-am-see': {prefix: 'zellamsee', signatureImage: '/images/destinations/zell-am-see-hero.webp', fitYes: 4, fitNo: 3, faq: 3, relatedSlugs: ['kitzbuhel', 'mayrhofen', 'gstaad']},
+  'gstaad': {prefix: 'gstaad', signatureImage: '/images/destinations/gstaad-hero.webp', fitYes: 4, fitNo: 3, faq: 4, relatedSlugs: ['solden', 'st-anton', 'zell-am-see']},
 };
 
 /** A related area surfaced at the foot of a detail page. */
@@ -116,7 +124,7 @@ interface DestinationView {
 @Component({
   selector: 'app-destination-detail',
   standalone: true,
-  imports: [RouterLink, MnTranslatePipe, BreadcrumbComponent, PageCtaComponent, RevealDirective, FaqAccordionComponent, EyebrowComponent],
+  imports: [RouterLink, MnBadge, MnTranslatePipe, BreadcrumbComponent, PageCtaComponent, RevealDirective, FaqAccordionComponent, EyebrowComponent],
   templateUrl: './destination-detail.html',
 })
 export class DestinationDetailPage implements OnDestroy {
@@ -149,7 +157,7 @@ export class DestinationDetailPage implements OnDestroy {
       prefix: p,
       breadcrumbName: meta.name,
       countryKey: meta.countryKey,
-      heroImage: meta.image,
+      heroImage: DETAIL_HERO_IMAGE,
       signatureImage: cfg.signatureImage,
       statIds: ['pistes', 'altitude', 'transfer', 'season', 'group'],
       infoIds: ['pass', 'crowd', 'level', 'vibe'],

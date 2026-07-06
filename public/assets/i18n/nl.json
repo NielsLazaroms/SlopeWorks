@@ -74,13 +74,15 @@
   "home.gallery.title": "Hoe een week op de berg eruitziet.",
 
   "home.pictures.description": "Een inkijkje in hoe een SlopeWorks-retreat echt voelt. Tijd op de berg. Avonden samen. En de momenten daartussenin.",
-  "home.pictures.carousel.1.alt": "Zakelijk team skiet samen op een zonnige piste",
-  "home.pictures.carousel.2.alt": "Berglandschap bij zonsondergang tijdens een winterretraite",
-  "home.pictures.carousel.3.alt": "Strategiesessie in een gezellige berghut",
-  "home.pictures.carousel.4.alt": "Deelnemers genieten van een gezamenlijke maaltijd in een alpine restaurant",
-  "home.pictures.carousel.5.alt": "Close-up van hoogwaardige ski-uitrusting op sneeuw",
-  "home.pictures.carousel.6.alt": "Teambuildingactiviteit in de sneeuw tijdens een retraite",
-  "home.pictures.carousel.7.alt": "Vredig winterbospad met verse sneeuw",
+  "home.gallery.alt.gaislachkogl": "Uitzicht vanaf de Gaislachkogl in Sölden",
+  "home.gallery.alt.schirmbar": "Schirmbar langs de piste in Sölden",
+  "home.gallery.alt.ijsgrot": "De ijsgrot in de Hintertux-gletsjer",
+  "home.gallery.alt.kaiserschmarrn": "Kaiserschmarrn op een berghut bij Mayrhofen",
+  "home.gallery.alt.jagerhof": "Hotel Jägerhof in Mayrhofen",
+  "home.gallery.alt.zillertalerhof": "Hotel Zillertalerhof in Mayrhofen",
+  "home.gallery.alt.golfhotel": "Golfhotel in Saanenmöser bij Gstaad",
+  "home.gallery.alt.lauenensee": "De Lauenensee bij Gstaad",
+  "home.gallery.alt.saanenmoser": "Wintersportgebied Saanenmöser bij Gstaad",
 
   "home.contact.title": "Contact",
   "home.contact.informationDescription": "Benieuwd wat jullie team zou kunnen doen met een week in de bergen? Laten we het samen uitzoeken.",
@@ -162,6 +164,13 @@
 
   "breadcrumb.home": "Home",
   "breadcrumb.destinations": "Bestemmingen",
+
+  "solden.signature.alt": "Bedrijfsuitje van SlopeWorks in Sölden",
+  "mayrhofen.signature.alt": "Bedrijfsuitje van SlopeWorks in Mayrhofen",
+  "stanton.signature.alt": "Bedrijfsuitje van SlopeWorks in St. Anton am Arlberg",
+  "kitzbuhel.signature.alt": "Bedrijfsuitje van SlopeWorks in Kitzbühel",
+  "zellamsee.signature.alt": "Bedrijfsuitje van SlopeWorks in Zell am See",
+  "gstaad.signature.alt": "Bedrijfsuitje van SlopeWorks in Gstaad",
 
   "destinations.eyebrow": "Bestemmingen",
   "destinations.title": "Zes gebieden. Zelf bezocht, zelf doorgemeten.",

@@ -105,7 +105,7 @@
                 "title": { $translate: "home.proof.card1.title" },
                 "body": { $translate: "home.proof.card1.body" },
                 "stamp": { $translate: "home.proof.stamp" },
-                "imageUrl": "/images/carousel_4.webp",
+                "imageUrl": "/images/proof/raclettewandeling.webp",
                 "imageAlt": { $translate: "home.proof.card1.title" }
               },
               {
@@ -113,7 +113,7 @@
                 "title": { $translate: "home.proof.card2.title" },
                 "body": { $translate: "home.proof.card2.body" },
                 "stamp": { $translate: "home.proof.stamp" },
-                "imageUrl": "/images/carousel_6.webp",
+                "imageUrl": "/images/proof/hintertux-gletsjer.webp",
                 "imageAlt": { $translate: "home.proof.card2.title" }
               },
               {
@@ -121,7 +121,7 @@
                 "title": { $translate: "home.proof.card3.title" },
                 "body": { $translate: "home.proof.card3.body" },
                 "stamp": { $translate: "home.proof.stamp" },
-                "imageUrl": "/images/carousel_2.webp",
+                "imageUrl": "/images/proof/vijf-minuten-bus.webp",
                 "imageAlt": { $translate: "home.proof.card3.title" }
               }
             ]
@@ -156,7 +156,7 @@
                 "name": "Sölden",
                 "tagline": { $translate: "home.destinations.card1.tagline" },
                 "linkText": { $translate: "home.destinations.card1.link" },
-                "imageUrl": "/images/carousel_1.webp",
+                "imageUrl": "/images/destinations/solden.webp",
                 "imageAlt": { $translate: "home.destinations.card1.tagline" },
                 "route": "/bestemmingen/solden"
               },
@@ -165,7 +165,7 @@
                 "name": "Mayrhofen",
                 "tagline": { $translate: "home.destinations.card2.tagline" },
                 "linkText": { $translate: "home.destinations.card2.link" },
-                "imageUrl": "/images/carousel_8.webp",
+                "imageUrl": "/images/destinations/mayrhofen.webp",
                 "imageAlt": { $translate: "home.destinations.card2.tagline" },
                 "route": "/bestemmingen/mayrhofen"
               },
@@ -174,7 +174,7 @@
                 "name": "Gstaad",
                 "tagline": { $translate: "home.destinations.card3.tagline" },
                 "linkText": { $translate: "home.destinations.card3.link" },
-                "imageUrl": "/images/carousel_5.webp",
+                "imageUrl": "/images/destinations/gstaad.webp",
                 "imageAlt": { $translate: "home.destinations.card3.tagline" },
                 "route": "/bestemmingen/gstaad"
               }
