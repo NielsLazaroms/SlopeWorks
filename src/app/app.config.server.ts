@@ -8,17 +8,18 @@ import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {provideServerRendering, withRoutes} from '@angular/ssr';
 import {MnConfigService, MnLanguageService} from 'mn-angular-lib';
 
+import {environment} from '../environments/environment';
 import {appConfig} from './app.config';
 import {serverRoutes} from './app.routes.server';
 import {ServerAssetInterceptor} from './interceptors/server-asset.interceptor';
 
 /**
- * Locale baked into the prerendered HTML. The static build is deployed to
- * slopeworks.nl (a Dutch market), and without a browser `window` mn-lib's
- * domain-based locale resolution falls back to the config default (`en`).
- * Forcing Dutch keeps the served HTML in the visitor's language.
+ * Locale baked into the prerendered HTML. Without a browser `window`, mn-lib's
+ * domain-based locale resolution falls back to the config default, so the locale
+ * is forced here from the build's environment (`nl` for slopeworks.nl/.be, `en`
+ * for the slopeworks.eu build) to keep the served HTML in the right language.
  */
-const PRERENDER_LOCALE = 'nl';
+const PRERENDER_LOCALE = environment.prerenderLocale;
 
 /** Upper bound on poll iterations while waiting for the config to load. */
 const CONFIG_WAIT_MAX_TICKS = 1000;

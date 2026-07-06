@@ -7,6 +7,9 @@
 ## Run (always background)
 - frontend: `npm run start`
 
+## Deploy
+- Static SSG, one build per domain (`build` → .nl, `build:be` → .be, `build:eu` → .eu, `build:all`). Build→domain mapping, per-domain rules, and how to add a locale: see `DEPLOY.md`.
+
 ## Frontend rules
 - State: signals. Data/logic: services. Route protection: `auth.guard`, `association-permission.guard`. JWT: `interceptors/auth.interceptor.ts` (auto-refresh on 401).
 - **Always use MnLib components** — never build a custom equivalent if an MN component covers the use case.

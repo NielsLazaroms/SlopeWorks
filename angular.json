@@ -50,6 +50,24 @@
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
+            },
+            "eu": {
+              "outputPath": "dist/slopeworks-eu",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.eu.ts"
+                }
+              ]
+            },
+            "be": {
+              "outputPath": "dist/slopeworks-be",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.be.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"

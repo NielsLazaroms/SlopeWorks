@@ -4,7 +4,10 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build && node scripts/localize-static.mjs dist/SlopeWorks/browser https://slopeworks.nl",
+    "build:eu": "ng build --configuration production,eu && node scripts/localize-static.mjs dist/slopeworks-eu/browser https://slopeworks.eu",
+    "build:be": "ng build --configuration production,be && node scripts/localize-static.mjs dist/slopeworks-be/browser https://slopeworks.be",
+    "build:all": "npm run build && npm run build:eu && npm run build:be",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },

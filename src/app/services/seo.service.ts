@@ -4,6 +4,7 @@ import {Meta, Title} from '@angular/platform-browser';
 import {ActivatedRouteSnapshot, NavigationEnd, Router} from '@angular/router';
 import {MnLanguageService} from 'mn-angular-lib';
 import {filter} from 'rxjs';
+import {environment} from '../../environments/environment';
 
 /**
  * Keeps the document title, meta description, canonical link, Open Graph tags
@@ -30,12 +31,12 @@ export class SeoService {
   /**
    * Public origin used for canonical / `og:url` during prerender. On the server
    * `document.location.origin` is the internal build host (`ng-localhost`), which
-   * would otherwise be baked into the static HTML; the prerendered build is the
-   * Dutch site, whose sitemap canonicalises to this primary domain. In the
-   * browser the live per-domain origin is used instead, so each `.nl`/`.be`/`.eu`
-   * page stays self-referential.
+   * would otherwise be baked into the static HTML; the build's environment
+   * supplies the real domain instead (`slopeworks.nl` / `slopeworks.eu`). In the
+   * browser the live per-domain origin is used, so each page stays
+   * self-referential.
    */
-  private static readonly PRERENDER_ORIGIN = 'https://slopeworks.nl';
+  private static readonly PRERENDER_ORIGIN = environment.prerenderOrigin;
 
   /** Element id of the sitewide `BreadcrumbList` JSON-LD block. */
   private static readonly BREADCRUMB_ID = 'breadcrumb-schema';
