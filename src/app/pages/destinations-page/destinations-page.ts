@@ -31,9 +31,8 @@ interface DestinationEntry {
 /**
  * The destinations overview page (`/bestemmingen`).
  *
- * Lists the six scouted ski areas with a country filter. Only Sölden has a live
- * detail page today; the rest render as muted "in progress" cards, mirroring the
- * mockup while the remaining detail pages are built.
+ * Lists the six scouted ski areas with a country filter. Every area links to its
+ * own detail page (`/bestemmingen/:slug`).
  */
 @Component({
   selector: 'app-destinations-page',
@@ -71,7 +70,7 @@ export class DestinationsPage {
       tagKeys: ['destinations.mayrhofen.tag1', 'destinations.mayrhofen.tag2'],
       country: 'at',
       imageUrl: '/images/carousel_8.webp',
-      badgeKey: 'destinations.badge.inProgress',
+      route: '/bestemmingen/mayrhofen',
     },
     {
       name: 'St. Anton am Arlberg',
@@ -80,7 +79,7 @@ export class DestinationsPage {
       tagKeys: ['destinations.stanton.tag1', 'destinations.stanton.tag2'],
       country: 'at',
       imageUrl: '/images/carousel_7.webp',
-      badgeKey: 'destinations.badge.inProgress',
+      route: '/bestemmingen/st-anton',
     },
     {
       name: 'Kitzbühel-Kirchberg',
@@ -89,7 +88,7 @@ export class DestinationsPage {
       tagKeys: ['destinations.kitzbuhel.tag1', 'destinations.kitzbuhel.tag2'],
       country: 'at',
       imageUrl: '/images/carousel_9.webp',
-      badgeKey: 'destinations.badge.inProgress',
+      route: '/bestemmingen/kitzbuhel',
     },
     {
       name: 'Zell am See-Kaprun',
@@ -98,7 +97,7 @@ export class DestinationsPage {
       tagKeys: ['destinations.zellamsee.tag1', 'destinations.zellamsee.tag2'],
       country: 'at',
       imageUrl: '/images/carousel_10.webp',
-      badgeKey: 'destinations.badge.inProgress',
+      route: '/bestemmingen/zell-am-see',
     },
     {
       name: 'Gstaad / Saanenmöser',
@@ -107,7 +106,7 @@ export class DestinationsPage {
       tagKeys: ['destinations.gstaad.tag1'],
       country: 'ch',
       imageUrl: '/images/carousel_5.webp',
-      badgeKey: 'destinations.badge.inProgress',
+      route: '/bestemmingen/gstaad',
     },
   ];
 

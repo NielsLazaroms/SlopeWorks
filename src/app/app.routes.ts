@@ -13,8 +13,10 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/destinations-page/destinations-page').then((m) => m.DestinationsPage),
   },
   {
-    path: 'bestemmingen/solden',
-    loadComponent: () => import('./pages/solden-page/solden-page').then((m) => m.SoldenPage),
+    // One data-driven detail page serves every scouted area (Sölden, Mayrhofen,
+    // St. Anton, Kitzbühel, Zell am See, Gstaad).
+    path: 'bestemmingen/:slug',
+    loadComponent: () => import('./pages/destination-detail/destination-detail').then((m) => m.DestinationDetailPage),
   },
   {
     path: 'faq',

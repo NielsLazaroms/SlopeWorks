@@ -150,7 +150,7 @@
                 "linkText": { $translate: "home.destinations.card2.link" },
                 "imageUrl": "/images/carousel_8.webp",
                 "imageAlt": { $translate: "home.destinations.card2.tagline" },
-                "route": "/bestemmingen"
+                "route": "/bestemmingen/mayrhofen"
               },
               {
                 "country": { $translate: "home.destinations.card3.country" },
@@ -159,7 +159,7 @@
                 "linkText": { $translate: "home.destinations.card3.link" },
                 "imageUrl": "/images/carousel_5.webp",
                 "imageAlt": { $translate: "home.destinations.card3.tagline" },
-                "route": "/bestemmingen"
+                "route": "/bestemmingen/gstaad"
               }
             ]
           }

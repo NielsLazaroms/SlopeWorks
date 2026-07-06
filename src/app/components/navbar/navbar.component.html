@@ -5,14 +5,14 @@
 >
 
 <div
-  class="w-[60%] sm:w-2/5 md:w-1/5 px-10   cursor-pointer"
+  class="w-[60%] sm:w-2/5 lg:w-1/5 px-10   cursor-pointer"
   (click)="goHome()"
 >
   <img [src]="componentConfig.logoSrc" [alt]="componentConfig.logoAlt" class="w-full  max-h-32 ">
 </div>
 
 <ul
-  class="relative w-3/5 hidden md:flex justify-center gap-10 py-7 h-20
+  class="relative w-3/5 hidden lg:flex justify-center gap-5 xl:gap-10 py-7 lg:px-16 h-20
            border-l border-r border-gray-500 transition-transform duration-300"
   [ngClass]="menuOpen ? [
       'flex!','fixed!','inset-0!','w-full!','h-screen!',
@@ -34,7 +34,7 @@
     </li>
   }
 
-  <div class="flex gap-2 text-md uppercase md:absolute md:right-10 md:top-1/2 md:-translate-y-1/2" [class.absolute]="menuOpen" [class.bottom-20]="menuOpen">
+  <div class="flex gap-2 text-md uppercase lg:absolute lg:right-5 lg:top-1/2 lg:-translate-y-1/2" [class.absolute]="menuOpen" [class.bottom-20]="menuOpen">
     <button (click)="setLocale('nl')" [class.text-brand-500]="currentLocale === 'nl'" [class.font-bold]="currentLocale === 'nl'" class="cursor-pointer duration-300 hover:text-brand-500">NL</button>
     <span class="text-gray-400">/</span>
     <button (click)="setLocale('en')" [class.text-brand-500]="currentLocale === 'en'" [class.font-bold]="currentLocale === 'en'" class="cursor-pointer duration-300 hover:text-brand-500">EN</button>
@@ -43,7 +43,7 @@
 
 @if (!menuOpen && componentConfig.contactItem) {
   <div
-    class="hidden md:block w-1/5 text-lg text-center relative text-black cursor-pointer
+    class="hidden lg:block w-1/5 text-lg text-center relative text-black cursor-pointer
              transition-colors duration-300 hover:text-brand-500
              after:content-[''] after:absolute after:left-0 after:-bottom-[26.5px]
              after:w-full after:h-0.75 after:bg-linear-to-r
@@ -56,7 +56,7 @@
 
 <button
   type="button"
-  class="flex md:hidden flex-col w-10 h-10 items-center justify-center gap-1.25 mr-4"
+  class="flex lg:hidden flex-col w-10 h-10 items-center justify-center gap-1.25 mr-4"
   (click)="toggleMenu()"
   aria-label="Toggle menu"
   [attr.aria-expanded]="menuOpen"
