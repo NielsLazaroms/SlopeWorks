@@ -1,6 +1,6 @@
 import {Component, ElementRef, signal, viewChildren} from '@angular/core';
 import {NgClass} from '@angular/common';
-import {MnTranslatePipe} from 'mn-angular-lib';
+import {MnBadge, MnTranslatePipe} from 'mn-angular-lib';
 import {EyebrowComponent} from '../../../../components/eyebrow/eyebrow';
 
 /**
@@ -27,7 +27,7 @@ interface GallerySlide {
 @Component({
   selector: 'app-gallery-section',
   standalone: true,
-  imports: [MnTranslatePipe, NgClass, EyebrowComponent],
+  imports: [MnBadge, MnTranslatePipe, NgClass, EyebrowComponent],
   templateUrl: './gallery-section.html',
 })
 export class GallerySectionComponent {

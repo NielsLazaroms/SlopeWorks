@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {MnTranslatePipe} from 'mn-angular-lib';
+import {MnBadge, MnTranslatePipe} from 'mn-angular-lib';
 import {PageHeroComponent} from '../../components/page-hero/page-hero';
 import {PageCtaComponent} from '../../components/page-cta/page-cta';
 import {RevealDirective} from '../../components/reveal/reveal';
@@ -34,7 +34,7 @@ interface Value {
 @Component({
   selector: 'app-about-page',
   standalone: true,
-  imports: [MnTranslatePipe, PageHeroComponent, PageCtaComponent, RevealDirective, EyebrowComponent],
+  imports: [MnBadge, MnTranslatePipe, PageHeroComponent, PageCtaComponent, RevealDirective, EyebrowComponent],
   templateUrl: './about-page.html',
 })
 export class AboutPage {

@@ -45,7 +45,7 @@
           <p class="text-[14.5px] text-text-grey leading-relaxed mb-4">{{ dest.descriptionKey | mnTranslate }}</p>
           <div class="flex flex-wrap gap-2 mb-4">
             @for (tag of dest.tagKeys; track tag) {
-              <span class="font-display text-[11.5px] tracking-wide text-text-grey bg-[#F4F1EA] border border-[#EDE5D2] px-2.5 py-1 rounded-md">{{ tag | mnTranslate }}</span>
+              <span mnBadge [data]="{variant: 'default', color: 'lightgray', size: 'sm'}" class="font-display tracking-wide">{{ tag | mnTranslate }}</span>
             }
           </div>
           <div class="flex items-center gap-1.5 font-display font-bold text-[13px] text-dark-yellow">{{ 'destinations.view' | mnTranslate }} {{ dest.name }}<svg lucideArrowRight [size]="15" aria-hidden="true"></svg></div>
