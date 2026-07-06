@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {RouterLink} from '@angular/router';
+import {LucideArrowRight} from '@lucide/angular';
 import {MnButton, MnButtonTypes, MnTranslatePipe} from 'mn-angular-lib';
 import {EyebrowComponent} from '../../../../components/eyebrow/eyebrow';
 
@@ -15,7 +16,7 @@ import {EyebrowComponent} from '../../../../components/eyebrow/eyebrow';
 @Component({
   selector: 'app-home-hero',
   standalone: true,
-  imports: [RouterLink, MnButton, MnTranslatePipe, EyebrowComponent],
+  imports: [RouterLink, LucideArrowRight, MnButton, MnTranslatePipe, EyebrowComponent],
   templateUrl: './home-hero.html',
 })
 export class HomeHeroComponent {

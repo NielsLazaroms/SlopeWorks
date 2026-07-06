@@ -2,6 +2,7 @@
   <div id="top-section"><app-home-hero></app-home-hero></div>
   <div appReveal mn-section="why-section" id="why-section" class="scroll-mt-20"><app-why-section></app-why-section></div>
   <div appReveal mn-section="proof-section" id="proof-section"><app-proof-section></app-proof-section></div>
+  <div appReveal mn-section="teambuilding-section" id="teambuilding-section" class="scroll-mt-20"><app-teambuilding-section></app-teambuilding-section></div>
   <div appReveal mn-section="destinations-section" id="destinations-section" class="scroll-mt-20"><app-destinations-section></app-destinations-section></div>
 
   <!-- Orient: route out to the reference pages now that the site is multi-page -->
@@ -11,13 +12,13 @@
         <div class="w-9 h-1 bg-brand-500 rounded-full mb-5"></div>
         <h3 class="font-display font-bold text-xl mb-2">{{ 'home.orient.faq.title' | mnTranslate }}</h3>
         <p class="text-[14.5px] leading-relaxed text-text-grey mb-4">{{ 'home.orient.faq.body' | mnTranslate }}</p>
-        <a mnButton [data]="orientData" routerLink="/faq" class="font-display font-bold text-dark-yellow! self-start -ml-4 mt-auto">{{ 'home.orient.faq.link' | mnTranslate }} →</a>
+        <a mnButton [data]="orientData" routerLink="/faq" class="font-display font-bold text-dark-yellow! self-start -ml-4 mt-auto"><span class="inline-flex items-center gap-1.5">{{ 'home.orient.faq.link' | mnTranslate }}<svg lucideArrowRight [size]="16" aria-hidden="true"></svg></span></a>
       </div>
       <div class="flex flex-col rounded-lg border border-[#E8E8F0] bg-paper-card p-8">
         <div class="w-9 h-1 bg-brand-500 rounded-full mb-5"></div>
         <h3 class="font-display font-bold text-xl mb-2">{{ 'home.orient.vs.title' | mnTranslate }}</h3>
         <p class="text-[14.5px] leading-relaxed text-text-grey mb-4">{{ 'home.orient.vs.body' | mnTranslate }}</p>
-        <a mnButton [data]="orientData" routerLink="/vergelijken" class="font-display font-bold text-dark-yellow! self-start -ml-4 mt-auto">{{ 'home.orient.vs.link' | mnTranslate }} →</a>
+        <a mnButton [data]="orientData" routerLink="/vergelijken" class="font-display font-bold text-dark-yellow! self-start -ml-4 mt-auto"><span class="inline-flex items-center gap-1.5">{{ 'home.orient.vs.link' | mnTranslate }}<svg lucideArrowRight [size]="16" aria-hidden="true"></svg></span></a>
       </div>
     </div>
   </section>

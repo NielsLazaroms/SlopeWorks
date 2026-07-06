@@ -1,7 +1,7 @@
-import {Component, computed, effect, inject} from '@angular/core';
+import {Component, computed, effect, inject, OnDestroy} from '@angular/core';
 import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {toSignal} from '@angular/core/rxjs-interop';
-import {MnTranslatePipe} from 'mn-angular-lib';
+import {MnLanguageService, MnTranslatePipe} from 'mn-angular-lib';
 import {BreadcrumbComponent} from '../../components/breadcrumb/breadcrumb';
 import {PageCtaComponent} from '../../components/page-cta/page-cta';
 import {RevealDirective} from '../../components/reveal/reveal';
@@ -119,7 +119,10 @@ interface DestinationView {
   imports: [RouterLink, MnTranslatePipe, BreadcrumbComponent, PageCtaComponent, RevealDirective, FaqAccordionComponent, EyebrowComponent],
   templateUrl: './destination-detail.html',
 })
-export class DestinationDetailPage {
+export class DestinationDetailPage implements OnDestroy {
+  /** Element id of this page's `FAQPage` JSON-LD block. */
+  private static readonly FAQ_SCHEMA_ID = 'faq-schema';
+
   /** Router, used to redirect unknown slugs back to the overview. */
   private readonly router = inject(Router);
 
@@ -170,16 +173,38 @@ export class DestinationDetailPage {
   });
 
   private readonly seo = inject(SeoService);
+  private readonly lang = inject(MnLanguageService);
 
   /**
    * Gives each area its own title and description (from its i18n copy) instead
-   * of the generic route-level metadata, so the six detail pages aren't
-   * near-duplicates for search engines.
+   * of the generic route-level metadata, plus a `FAQPage` for its questions and a
+   * full breadcrumb trail — so the six detail pages are distinct, richly marked-up
+   * entries for search engines and AI answers rather than near-duplicates.
    */
   private readonly seoEffect = effect(() => {
     const view = this.view();
-    if (view) {
-      this.seo.setFromKeys(`${view.prefix}.title`, `${view.prefix}.subtitle`);
+    if (!view) {
+      return;
     }
+    this.seo.setFromKeys(`${view.prefix}.title`, `${view.prefix}.subtitle`);
+    this.seo.setBreadcrumb([
+      {name: this.lang.translate('breadcrumb.home'), path: '/'},
+      {name: this.lang.translate('breadcrumb.destinations'), path: '/bestemmingen'},
+      {name: view.breadcrumbName, path: `/bestemmingen/${this.slug()}`},
+    ]);
+    this.seo.setStructuredData(DestinationDetailPage.FAQ_SCHEMA_ID, {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: view.faqs.map((faq) => ({
+        '@type': 'Question',
+        name: this.lang.translate(faq.qKey),
+        acceptedAnswer: {'@type': 'Answer', text: this.lang.translate(faq.aKey)},
+      })),
+    });
   });
+
+  /** Removes the area's FAQ schema when the visitor navigates away. */
+  ngOnDestroy(): void {
+    this.seo.removeStructuredData(DestinationDetailPage.FAQ_SCHEMA_ID);
+  }
 }

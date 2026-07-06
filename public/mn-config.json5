@@ -127,6 +127,23 @@
             ]
           }
         },
+        "teambuilding-section": {
+          "app-teambuilding-section": {
+            "label": { $translate: "home.teambuilding.label" },
+            "title": { $translate: "home.teambuilding.title" },
+            "intro": { $translate: "home.teambuilding.intro" },
+            "introSecondary": { $translate: "home.teambuilding.introSecondary" },
+            "buttonText": { $translate: "home.teambuilding.button" },
+            "buttonRoute": "/over-ons",
+            "partner": {
+              "initials": "KV",
+              "name": "Kamp Vuur",
+              "role": { $translate: "home.teambuilding.partner.role" },
+              "quote": { $translate: "home.teambuilding.partner.quote" },
+              "site": "kamp-vuur.nl"
+            }
+          }
+        },
         "destinations-section": {
           "app-destinations-section": {
             "label": { $translate: "home.destinations.label" },

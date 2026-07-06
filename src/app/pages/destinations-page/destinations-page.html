@@ -48,7 +48,7 @@
               <span class="font-display text-[11.5px] tracking-wide text-text-grey bg-[#F4F1EA] border border-[#EDE5D2] px-2.5 py-1 rounded-md">{{ tag | mnTranslate }}</span>
             }
           </div>
-          <div class="font-display font-bold text-[13px] text-dark-yellow">{{ 'destinations.view' | mnTranslate }} {{ dest.name }} →</div>
+          <div class="flex items-center gap-1.5 font-display font-bold text-[13px] text-dark-yellow">{{ 'destinations.view' | mnTranslate }} {{ dest.name }}<svg lucideArrowRight [size]="15" aria-hidden="true"></svg></div>
         </div>
       </a>
     }

@@ -1,9 +1,10 @@
-import {afterNextRender, Component, signal} from '@angular/core';
-import {MnTranslatePipe} from 'mn-angular-lib';
+import {afterNextRender, Component, inject, OnDestroy, signal} from '@angular/core';
+import {MnLanguageService, MnTranslatePipe} from 'mn-angular-lib';
 import {PageHeroComponent} from '../../components/page-hero/page-hero';
 import {PageCtaComponent} from '../../components/page-cta/page-cta';
 import {RevealDirective} from '../../components/reveal/reveal';
 import {FaqAccordionComponent, FaqEntry} from '../../components/faq-accordion/faq-accordion';
+import {SeoService} from '../../services/seo.service';
 
 /**
  * A themed group of FAQ entries with its own anchor in the side navigation.
@@ -32,19 +33,53 @@ interface FaqGroup {
   imports: [MnTranslatePipe, PageHeroComponent, PageCtaComponent, RevealDirective, FaqAccordionComponent],
   templateUrl: './faq-page.html',
 })
-export class FaqPage {
+export class FaqPage implements OnDestroy {
+  /** Id of the injected `FAQPage` JSON-LD block. */
+  private static readonly SCHEMA_ID = 'faq-schema';
+
   /** Id of the group currently in view, highlighted in the index rail. */
   protected readonly activeGroup = signal<string>('werkwijze');
 
   /** Group ids whose section is currently intersecting the viewport band. */
   private readonly visibleGroups = new Set<string>();
 
+  private readonly seo = inject(SeoService);
+  private readonly lang = inject(MnLanguageService);
+
   /**
-   * Wires up the scroll-spy that keeps the index rail in sync with the group
-   * the reader is currently looking at. Runs only in the browser.
+   * Publishes the `FAQPage` structured data (baked into the prerendered HTML) and
+   * wires up the scroll-spy that keeps the index rail in sync with the group the
+   * reader is currently looking at (browser only).
    */
   constructor() {
+    this.seo.setStructuredData(FaqPage.SCHEMA_ID, this.buildFaqSchema());
     afterNextRender(() => this.observeGroups());
+  }
+
+  /** Removes the FAQ schema so it does not linger after navigating away. */
+  ngOnDestroy(): void {
+    this.seo.removeStructuredData(FaqPage.SCHEMA_ID);
+  }
+
+  /**
+   * Builds the `FAQPage` JSON-LD graph from every group's questions, resolving
+   * each question and answer to text in the active language.
+   */
+  private buildFaqSchema(): unknown {
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: this.groups
+        .flatMap((group) => group.items)
+        .map((item) => ({
+          '@type': 'Question',
+          name: this.lang.translate(item.qKey),
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: this.lang.translate(item.aKey),
+          },
+        })),
+    };
   }
 
   /** The FAQ groups in display order. */

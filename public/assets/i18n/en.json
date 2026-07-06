@@ -28,6 +28,14 @@
   "home.proof.card3.title": "Five minutes by bus",
   "home.proof.card3.body": "The hotels right by the lift are twice as expensive as the ones five minutes away by bus, and you don't know that when you book for the first time. We do.",
 
+  "home.teambuilding.label": "Creative partner",
+  "home.teambuilding.title": "A week that keeps working after the mountain.",
+  "home.teambuilding.intro": "We work with Kamp Vuur. Not as a loose add-on we bolt on, but as a creative partner who thinks with us about how a week on the mountain can also shift how a team works together.",
+  "home.teambuilding.introSecondary": "Kamp Vuur builds on the moments that are already there: arrival, the gondola up, dinner, departure day. No obligatory exercise, no flip chart. More an approach that runs invisibly through the week and stays noticeable afterwards.",
+  "home.teambuilding.button": "Read about the partnership",
+  "home.teambuilding.partner.role": "Experience-based team development",
+  "home.teambuilding.partner.quote": "No standard teambuilding or classic training, but unique, experience-based programmes that push a little and put your most important muscle to work: curiosity.",
+
   "home.destinations.label": "Destinations",
   "home.destinations.title": "Six areas. Visited and measured ourselves.",
   "home.destinations.seeAll": "See all six destinations",
@@ -152,6 +160,7 @@
   "about.cta.sub": "Tell us about the group. We'll think along.",
   "about.cta.button": "Get in touch",
 
+  "breadcrumb.home": "Home",
   "breadcrumb.destinations": "Destinations",
 
   "destinations.eyebrow": "Destinations",

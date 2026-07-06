@@ -1,6 +1,7 @@
 import {Component, computed, signal} from '@angular/core';
 import {NgClass} from '@angular/common';
 import {RouterLink} from '@angular/router';
+import {LucideArrowRight} from '@lucide/angular';
 import {MnBadge, MnTranslatePipe} from 'mn-angular-lib';
 import {PageHeroComponent} from '../../components/page-hero/page-hero';
 import {PageCtaComponent} from '../../components/page-cta/page-cta';
@@ -37,7 +38,7 @@ interface DestinationEntry {
 @Component({
   selector: 'app-destinations-page',
   standalone: true,
-  imports: [NgClass, RouterLink, MnBadge, MnTranslatePipe, PageHeroComponent, PageCtaComponent, RevealDirective],
+  imports: [NgClass, RouterLink, LucideArrowRight, MnBadge, MnTranslatePipe, PageHeroComponent, PageCtaComponent, RevealDirective],
   templateUrl: './destinations-page.html',
 })
 export class DestinationsPage {

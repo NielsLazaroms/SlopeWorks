@@ -1,9 +1,11 @@
 import {Component} from '@angular/core';
 import {RouterLink} from '@angular/router';
+import {LucideArrowRight} from '@lucide/angular';
 import {MnButton, MnButtonTypes, MnSectionDirective, MnTranslatePipe} from 'mn-angular-lib';
 import {HomeHeroComponent} from './components/home-hero/home-hero';
 import {WhySectionComponent} from './components/why-section/why-section';
 import {ProofSectionComponent} from './components/proof-section/proof-section';
+import {TeambuildingSectionComponent} from './components/teambuilding-section/teambuilding-section';
 import {DestinationsSectionComponent} from './components/destinations-section/destinations-section';
 import {GallerySectionComponent} from './components/gallery-section/gallery-section';
 import {PageCtaComponent} from '../../components/page-cta/page-cta';
@@ -23,11 +25,13 @@ import {RevealDirective} from '../../components/reveal/reveal';
   standalone: true,
   imports: [
     RouterLink,
+    LucideArrowRight,
     MnButton,
     MnTranslatePipe,
     HomeHeroComponent,
     WhySectionComponent,
     ProofSectionComponent,
+    TeambuildingSectionComponent,
     DestinationsSectionComponent,
     GallerySectionComponent,
     PageCtaComponent,

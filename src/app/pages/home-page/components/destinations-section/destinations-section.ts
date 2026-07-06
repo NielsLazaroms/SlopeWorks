@@ -1,5 +1,6 @@
 import {Component, inject, InjectionToken} from '@angular/core';
 import {RouterLink} from '@angular/router';
+import {LucideArrowRight} from '@lucide/angular';
 import {MnButton, MnButtonTypes, provideMnComponentConfig} from 'mn-angular-lib';
 import {EyebrowComponent} from '../../../../components/eyebrow/eyebrow';
 
@@ -49,7 +50,7 @@ export const APP_DESTINATIONS_SECTION_CONFIG = new InjectionToken<DestinationsSe
 @Component({
   selector: 'app-destinations-section',
   standalone: true,
-  imports: [RouterLink, MnButton, EyebrowComponent],
+  imports: [RouterLink, LucideArrowRight, MnButton, EyebrowComponent],
   providers: [
     provideMnComponentConfig<DestinationsSectionConfig>(APP_DESTINATIONS_SECTION_CONFIG, 'app-destinations-section'),
   ],

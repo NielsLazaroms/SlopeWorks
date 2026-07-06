@@ -28,6 +28,14 @@
   "home.proof.card3.title": "Vijf minuten met de bus",
   "home.proof.card3.body": "De hotels direct bij de lift zijn dubbel zo duur als de hotels vijf minuten verderop met de bus, en dat weet je niet als je voor het eerst boekt. Wij wel.",
 
+  "home.teambuilding.label": "Creatief partner",
+  "home.teambuilding.title": "Een week die ook na de berg nog werkt.",
+  "home.teambuilding.intro": "Wij werken samen met Kamp Vuur. Niet als een los programmaonderdeel dat we erbij plakken, maar als creatief partner die meedenkt over hoe een week op de berg ook iets kan veranderen in hoe een team samenwerkt.",
+  "home.teambuilding.introSecondary": "Kamp Vuur haakt in op de momenten die er toch al zijn: aankomst, de gondel omhoog, het diner, de vertrekdag. Geen verplicht nummertje, geen flipover. Eerder een aanpak die onzichtbaar meeloopt in de week en achteraf merkbaar blijft.",
+  "home.teambuilding.button": "Lees over de samenwerking",
+  "home.teambuilding.partner.role": "Ervaringsgericht teamontwikkeling",
+  "home.teambuilding.partner.quote": "Geen standaard teambuilding of klassieke trainingen, maar unieke programma's die ervaringsgericht zijn, een beetje schuren en die jouw belangrijkste spier aan het werk zetten: nieuwsgierigheid.",
+
   "home.destinations.label": "Bestemmingen",
   "home.destinations.title": "Zes gebieden. Zelf bezocht, zelf doorgemeten.",
   "home.destinations.seeAll": "Bekijk alle zes bestemmingen",
@@ -152,6 +160,7 @@
   "about.cta.sub": "Vertel ons over de groep. Wij denken mee.",
   "about.cta.button": "Neem contact op",
 
+  "breadcrumb.home": "Home",
   "breadcrumb.destinations": "Bestemmingen",
 
   "destinations.eyebrow": "Bestemmingen",

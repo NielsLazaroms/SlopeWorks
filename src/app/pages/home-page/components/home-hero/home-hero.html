@@ -19,7 +19,7 @@
             {{ 'home.hero.primary' | mnTranslate }}
           </a>
           <a mnButton [data]="secondaryData" routerLink="/bestemmingen" class="font-display font-medium">
-            {{ 'home.hero.secondary' | mnTranslate }} →
+            <span class="inline-flex items-center gap-1.5">{{ 'home.hero.secondary' | mnTranslate }}<svg lucideArrowRight [size]="18" aria-hidden="true"></svg></span>
           </a>
         </div>
       </div>
