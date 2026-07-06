@@ -43,20 +43,21 @@
   </div>
 </section>
 
-<!-- Facts strip -->
+<!-- Facts strip: the area's quick profile. Reflows 4-up → 2-up → a clean stacked
+     label/value list (label left, value right) instead of a cramped 2×2 grid. -->
 <section appReveal class="max-w-7xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
-  <div class="grid grid-cols-2 lg:grid-cols-4 gap-px bg-[#E5E5EC] rounded-xl overflow-hidden border border-[#E5E5EC]">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px overflow-hidden rounded-2xl border border-[#EDE5D2] bg-[#EDE5D2] shadow-[0_16px_44px_-26px_rgba(0,0,0,0.2)]">
     @for (cell of infoCells; track cell.labelKey) {
-      <div class="bg-paper-card px-7 py-9 lg:px-8 lg:py-10">
-        <div class="font-display text-xs tracking-[0.08em] uppercase text-text-grey mb-3">{{ cell.labelKey | mnTranslate }}</div>
-        <div class="font-display font-extrabold text-2xl lg:text-[1.65rem] tracking-tight">{{ cell.valueKey | mnTranslate }}</div>
+      <div class="bg-paper-card flex items-center justify-between gap-4 px-6 py-5 sm:flex-col sm:items-start sm:justify-start sm:px-7 sm:py-9">
+        <div class="order-1 font-display text-[11px] tracking-[0.12em] uppercase text-text-grey sm:mb-3">{{ cell.labelKey | mnTranslate }}</div>
+        <div class="order-2 shrink-0 font-display font-extrabold text-xl sm:text-2xl lg:text-[1.55rem] tracking-tight text-ink">{{ cell.valueKey | mnTranslate }}</div>
       </div>
     }
   </div>
 </section>
 
-<!-- Signature moment (dark accent band) -->
-<section appReveal class="bg-ink px-6 lg:px-16 py-20 lg:py-24">
+<!-- Signature moment (warm featured band) -->
+<section appReveal class="bg-paper-band border-y border-[#EFE7D0] px-6 lg:px-16 py-20 lg:py-24">
   <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
     <div class="relative h-80 lg:h-[30rem] rounded-xl overflow-hidden">
       <img src="/images/carousel_6.webp" alt="" aria-hidden="true" class="absolute inset-0 w-full h-full object-cover" />
@@ -64,9 +65,9 @@
       <span class="absolute bottom-5 left-5 font-display text-xs tracking-wide text-white/60">{{ 'solden.signature.caption' | mnTranslate }}</span>
     </div>
     <div class="lg:pl-4">
-      <p class="font-display font-bold text-[13px] tracking-[0.1em] uppercase text-brand-400 mb-4">{{ 'solden.signature.label' | mnTranslate }}</p>
-      <h2 class="font-display font-extrabold text-3xl md:text-4xl lg:text-[2.5rem] leading-[1.1] tracking-tight text-white mb-6">{{ 'solden.signature.title' | mnTranslate }}</h2>
-      <p class="text-lg leading-relaxed text-white/70 max-w-lg">{{ 'solden.signature.body' | mnTranslate }}</p>
+      <p class="font-display font-bold text-[13px] tracking-[0.1em] uppercase text-dark-yellow mb-4">{{ 'solden.signature.label' | mnTranslate }}</p>
+      <h2 class="font-display font-extrabold text-3xl md:text-4xl lg:text-[2.5rem] leading-[1.1] tracking-tight text-ink mb-6">{{ 'solden.signature.title' | mnTranslate }}</h2>
+      <p class="text-lg leading-relaxed text-text-grey max-w-lg">{{ 'solden.signature.body' | mnTranslate }}</p>
     </div>
   </div>
 </section>
@@ -116,51 +117,10 @@
   </div>
 </section>
 
-<!-- Page FAQ: same interactive accordion as the FAQ page, scoped to Sölden -->
+<!-- Page FAQ: the shared accordion, scoped to Sölden -->
 <section appReveal class="max-w-7xl mx-auto px-6 lg:px-16 pb-20 lg:pb-28">
   <div class="max-w-3xl">
-    <div class="flex items-center gap-2.5 mb-3">
-      <span class="w-1.5 h-1.5 rounded-full bg-brand-500" aria-hidden="true"></span>
-      <span class="font-display font-bold text-[11px] tracking-[0.14em] uppercase text-dark-yellow">
-        {{ faqs.length }} {{ 'faq.questionsLabel' | mnTranslate }}
-      </span>
-    </div>
-    <h2 class="font-display font-extrabold text-3xl md:text-4xl tracking-tight text-ink mb-8">{{ 'solden.faq.title' | mnTranslate }}</h2>
-
-    <div class="border-t border-[#E8E8F0]">
-      @for (item of faqs; track item.qKey) {
-        <div class="border-b border-[#E8E8F0]">
-          <button
-            type="button"
-            (click)="toggle(item.qKey)"
-            [attr.aria-expanded]="isOpen(item.qKey)"
-            class="group/q w-full flex items-start gap-4 text-left py-5 cursor-pointer"
-          >
-            <!-- Toggle chip: outlined "+" that fills brand-yellow and turns to a cross when open -->
-            <span
-              class="mt-px flex h-7 w-7 shrink-0 items-center justify-center rounded-full border transition-colors duration-200"
-              [class]="isOpen(item.qKey)
-                ? 'bg-brand-500 border-brand-500'
-                : 'border-[#E0E0EA] group-hover/q:border-dark-yellow'"
-              aria-hidden="true"
-            >
-              <span
-                class="text-lg leading-none transition-transform duration-200"
-                [class]="isOpen(item.qKey) ? 'text-ink rotate-45' : 'text-dark-yellow'"
-              >+</span>
-            </span>
-            <h3 class="font-display font-semibold text-[16.5px] lg:text-[17px] leading-snug text-ink pt-0.5">
-              {{ item.qKey | mnTranslate }}
-            </h3>
-          </button>
-          @if (isOpen(item.qKey)) {
-            <div class="pl-11 pb-6 -mt-1">
-              <p class="text-[15px] leading-[1.75] text-text-grey max-w-2xl">{{ item.aKey | mnTranslate }}</p>
-            </div>
-          }
-        </div>
-      }
-    </div>
+    <app-faq-accordion [items]="faqs" titleKey="solden.faq.title" />
   </div>
 </section>
 

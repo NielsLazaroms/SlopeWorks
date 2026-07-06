@@ -3,16 +3,7 @@ import {MnTranslatePipe} from 'mn-angular-lib';
 import {PageHeroComponent} from '../../components/page-hero/page-hero';
 import {PageCtaComponent} from '../../components/page-cta/page-cta';
 import {RevealDirective} from '../../components/reveal/reveal';
-
-/**
- * A single question/answer entry in the FAQ.
- */
-interface FaqItem {
-  /** i18n key for the question. */
-  qKey: string;
-  /** i18n key for the answer. */
-  aKey: string;
-}
+import {FaqAccordionComponent, FaqEntry} from '../../components/faq-accordion/faq-accordion';
 
 /**
  * A themed group of FAQ entries with its own anchor in the side navigation.
@@ -25,7 +16,7 @@ interface FaqGroup {
   /** i18n key for the one-line group description. */
   subKey: string;
   /** The questions in this group. */
-  items: FaqItem[];
+  items: FaqEntry[];
 }
 
 /**
@@ -38,13 +29,10 @@ interface FaqGroup {
 @Component({
   selector: 'app-faq-page',
   standalone: true,
-  imports: [MnTranslatePipe, PageHeroComponent, PageCtaComponent, RevealDirective],
+  imports: [MnTranslatePipe, PageHeroComponent, PageCtaComponent, RevealDirective, FaqAccordionComponent],
   templateUrl: './faq-page.html',
 })
 export class FaqPage {
-  /** Currently expanded questions, keyed by their question i18n key. */
-  private readonly openKeys = signal<ReadonlySet<string>>(new Set());
-
   /** Id of the group currently in view, highlighted in the index rail. */
   protected readonly activeGroup = signal<string>('werkwijze');
 
@@ -112,30 +100,6 @@ export class FaqPage {
       ],
     },
   ];
-
-  /**
-   * Whether a question is currently expanded.
-   *
-   * @param qKey The question's i18n key.
-   */
-  isOpen(qKey: string): boolean {
-    return this.openKeys().has(qKey);
-  }
-
-  /**
-   * Expands or collapses a single question.
-   *
-   * @param qKey The question's i18n key.
-   */
-  toggle(qKey: string): void {
-    const next = new Set(this.openKeys());
-    if (next.has(qKey)) {
-      next.delete(qKey);
-    } else {
-      next.add(qKey);
-    }
-    this.openKeys.set(next);
-  }
 
   /**
    * Smoothly scrolls a FAQ group into view, clearing the fixed navbar.

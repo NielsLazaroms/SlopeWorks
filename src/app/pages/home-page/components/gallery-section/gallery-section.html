@@ -1,31 +1,60 @@
 <section class="py-24">
-  <div class="max-w-7xl mx-auto px-6 lg:px-16 mb-10">
+  <div class="max-w-7xl mx-auto px-6 lg:px-16">
     <p class="font-display font-bold text-sm tracking-[0.1em] uppercase text-dark-yellow mb-4">{{ 'home.gallery.label' | mnTranslate }}</p>
     <h2 class="font-display font-extrabold text-3xl md:text-4xl tracking-tight leading-[1.12] max-w-3xl mb-3">{{ 'home.gallery.title' | mnTranslate }}</h2>
-    <p class="max-w-2xl text-base leading-relaxed text-text-grey">{{ 'home.pictures.description' | mnTranslate }}</p>
-  </div>
+    <p class="max-w-2xl text-base leading-relaxed text-text-grey mb-10">{{ 'home.pictures.description' | mnTranslate }}</p>
 
-  <!-- Film strip with arrows on the sides of the images -->
-  <div class="relative">
-    <button type="button" (click)="scroll(-1)" aria-label="Previous photos"
-            class="absolute left-3 lg:left-6 top-1/2 -translate-y-1/2 z-10 w-11 h-11 flex items-center justify-center rounded-full bg-ink/85 text-white backdrop-blur-sm shadow-lg cursor-pointer transition-colors duration-200 hover:bg-brand-500 hover:text-ink">
-      <span class="text-xl leading-none -mt-0.5" aria-hidden="true">‹</span>
-    </button>
+    <!-- Feature frame: one photo at a time, contained in the content column so it
+         always fits the viewport. Slides crossfade; the location stamp is the
+         "we've been there" proof. -->
+    <figure class="relative w-full h-[300px] sm:h-[400px] md:h-[480px] lg:h-[560px] rounded-2xl overflow-hidden bg-ink-raised">
+      @for (slide of slides; track slide.src; let i = $index) {
+        <img
+          class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-out"
+          [ngClass]="i === activeIndex() ? 'opacity-100' : 'opacity-0'"
+          [src]="slide.src"
+          [alt]="slide.altKey | mnTranslate"
+          [attr.aria-hidden]="i === activeIndex() ? null : 'true'"
+          [attr.loading]="i === 0 ? 'eager' : 'lazy'"
+        />
+      }
 
-    <div #track class="sw-strip flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth px-6 lg:px-16 pb-2">
-      @for (slide of slides; track slide.src) {
-        <figure class="relative shrink-0 snap-center h-[280px] md:h-[440px] aspect-[4/3] rounded-xl overflow-hidden bg-ink-raised">
-          <img class="absolute inset-0 w-full h-full object-cover" [src]="slide.src" [alt]="slide.altKey | mnTranslate" loading="lazy" />
-          <figcaption class="absolute left-4 bottom-4 z-10 inline-flex items-center gap-2 px-3.5 py-2 rounded-full bg-ink/60 backdrop-blur-sm text-white text-[12.5px] font-display tracking-wide">
-            <span class="w-1.5 h-1.5 rounded-full bg-brand-500"></span>{{ slide.caption }}
-          </figcaption>
-        </figure>
+      <!-- Legibility scrim under the overlays -->
+      <div class="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-ink/70 to-transparent pointer-events-none"></div>
+
+      <!-- Location stamp -->
+      <figcaption class="absolute left-4 sm:left-5 bottom-4 sm:bottom-5 z-10 inline-flex items-center gap-2 px-3.5 py-2 rounded-full bg-ink/55 backdrop-blur-sm text-white text-[12.5px] font-display tracking-wide">
+        <span class="w-1.5 h-1.5 rounded-full bg-brand-500"></span>{{ slides[activeIndex()].caption }}
+      </figcaption>
+
+      <!-- Compact prev / next, tucked into the corner so they never cover the shot -->
+      <div class="absolute right-4 sm:right-5 bottom-4 sm:bottom-5 z-10 flex items-center gap-2">
+        <button type="button" (click)="step(-1)" aria-label="Previous photo"
+                class="w-9 h-9 flex items-center justify-center rounded-full bg-white/90 text-ink cursor-pointer transition-colors duration-200 hover:bg-brand-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white">
+          <span class="text-lg leading-none -mt-0.5" aria-hidden="true">‹</span>
+        </button>
+        <button type="button" (click)="step(1)" aria-label="Next photo"
+                class="w-9 h-9 flex items-center justify-center rounded-full bg-white/90 text-ink cursor-pointer transition-colors duration-200 hover:bg-brand-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white">
+          <span class="text-lg leading-none -mt-0.5" aria-hidden="true">›</span>
+        </button>
+      </div>
+    </figure>
+
+    <!-- Contact sheet: every scouted spot, the active one lifted with a brand ring -->
+    <div class="sw-strip mt-2 sm:mt-3 -mx-1.5 flex gap-2.5 sm:gap-3 overflow-x-auto px-1.5 py-2">
+      @for (slide of slides; track slide.src; let i = $index) {
+        <button
+          #thumb
+          type="button"
+          (click)="select(i)"
+          [attr.aria-label]="slide.caption"
+          [attr.aria-current]="i === activeIndex() ? 'true' : null"
+          class="group relative shrink-0 h-16 w-24 sm:h-[70px] sm:w-28 rounded-lg overflow-hidden cursor-pointer transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500"
+          [ngClass]="i === activeIndex() ? 'ring-2 ring-brand-500 ring-offset-2 ring-offset-paper' : 'opacity-55 hover:opacity-100'"
+        >
+          <img class="absolute inset-0 w-full h-full object-cover" [src]="slide.src" alt="" loading="lazy" />
+        </button>
       }
     </div>
-
-    <button type="button" (click)="scroll(1)" aria-label="Next photos"
-            class="absolute right-3 lg:right-6 top-1/2 -translate-y-1/2 z-10 w-11 h-11 flex items-center justify-center rounded-full bg-ink/85 text-white backdrop-blur-sm shadow-lg cursor-pointer transition-colors duration-200 hover:bg-brand-500 hover:text-ink">
-      <span class="text-xl leading-none -mt-0.5" aria-hidden="true">›</span>
-    </button>
   </div>
 </section>

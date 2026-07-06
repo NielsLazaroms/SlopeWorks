@@ -28,8 +28,8 @@
   </div>
 </section>
 
-<!-- The people (dark band): a full-width spread, not a card grid in an empty void -->
-<section appReveal class="bg-ink px-6 lg:px-16 py-16 lg:py-24">
+<!-- The people (warm featured band): a full-width spread, not a card grid in an empty void -->
+<section appReveal class="bg-paper-band border-y border-[#EFE7D0] px-6 lg:px-16 py-16 lg:py-24">
   <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[minmax(0,440px)_1fr] gap-10 lg:gap-16 items-center">
     <!-- The two of them, on the mountain they scout -->
     <div class="order-2 lg:order-1">
@@ -38,20 +38,20 @@
     </div>
 
     <div class="order-1 lg:order-2">
-      <p class="font-display font-bold text-sm tracking-[0.14em] uppercase text-brand-400 mb-5">
+      <p class="font-display font-bold text-sm tracking-[0.14em] uppercase text-dark-yellow mb-5">
         {{ 'about.founders.label' | mnTranslate }}
       </p>
-      <h2 class="font-display font-extrabold text-3xl md:text-4xl tracking-tight leading-[1.12] text-white max-w-xl">
+      <h2 class="font-display font-extrabold text-3xl md:text-4xl tracking-tight leading-[1.12] text-ink max-w-xl">
         {{ 'about.founders.title' | mnTranslate }}
       </h2>
 
-      <ul class="mt-9 border-t border-white/12">
+      <ul class="mt-9 border-t border-[#EAE2CE]">
         @for (person of founders; track person.nameKey) {
-          <li class="flex items-start gap-4 py-5 border-b border-white/12">
+          <li class="flex items-start gap-4 py-5 border-b border-[#EAE2CE]">
             <span class="mt-1 w-1 h-9 shrink-0 rounded-full bg-brand-500" aria-hidden="true"></span>
             <div>
-              <h3 class="font-display font-bold text-lg text-white">{{ person.nameKey | mnTranslate }}</h3>
-              <p class="text-sm text-white/55 mt-1">{{ person.roleKey | mnTranslate }}</p>
+              <h3 class="font-display font-bold text-lg text-ink">{{ person.nameKey | mnTranslate }}</h3>
+              <p class="text-sm text-text-grey mt-1">{{ person.roleKey | mnTranslate }}</p>
             </div>
           </li>
         }

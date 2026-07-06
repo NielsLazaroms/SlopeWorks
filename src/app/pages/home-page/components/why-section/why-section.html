@@ -9,22 +9,38 @@
     <p class="max-w-2xl text-base leading-relaxed text-[#333] mb-10">{{ componentConfig.introSecondary }}</p>
   }
 
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-0.5 bg-[#E3E3EC] rounded-lg overflow-hidden">
-    <!-- Them -->
-    <div class="bg-[#FAFAFC] p-10">
-      <div class="font-display font-bold text-lg mb-5 text-text-grey">{{ componentConfig.them?.head }}</div>
-      <ul class="flex flex-col gap-3.5">
+  <!-- Two camps, one lifted. The travel-agency card stays deliberately flat and
+       cool (the generic option); the SlopeWorks card is warm and raised — brand
+       top rule, soft yellow shadow, gold-checked points — so the better bet is
+       the one that physically rises. -->
+  <div class="mt-12 lg:mt-14 grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6">
+    <!-- A travel agency: flat, cool, generic -->
+    <div class="rounded-2xl border border-[#EAEAF0] bg-[#F5F5F8] p-8 lg:p-10">
+      <div class="font-display font-bold text-lg text-text-grey mb-6">{{ componentConfig.them?.head }}</div>
+      <ul class="flex flex-col gap-4">
         @for (item of componentConfig.them?.items; track item) {
-          <li class="relative pl-6 text-base leading-relaxed text-[#333] before:content-['—'] before:absolute before:left-0 before:text-[#B5B5C0]">{{ item }}</li>
+          <li class="flex items-start gap-3.5 text-[15px] leading-relaxed text-text-grey">
+            <span class="mt-[11px] w-3 h-px bg-[#C2C2CE] shrink-0"></span>
+            <span>{{ item }}</span>
+          </li>
         }
       </ul>
     </div>
-    <!-- Us -->
-    <div class="bg-[#FFFCF2] p-10">
-      <div class="font-display font-bold text-lg mb-5 text-dark-yellow">{{ componentConfig.us?.head }}</div>
-      <ul class="flex flex-col gap-3.5">
+
+    <!-- SlopeWorks: warm, raised, the better bet -->
+    <div class="rounded-2xl border border-brand-500 bg-[#FFFDF5] p-8 lg:p-10 shadow-[0_22px_50px_-24px_rgba(255,187,0,0.38)]">
+      <div class="flex items-center gap-2.5 mb-6">
+        <span class="w-2 h-2 rounded-full bg-brand-500 shrink-0"></span>
+        <span class="font-display font-bold text-lg text-ink">{{ componentConfig.us?.head }}</span>
+      </div>
+      <ul class="flex flex-col gap-4">
         @for (item of componentConfig.us?.items; track item) {
-          <li class="relative pl-6 text-base leading-relaxed text-[#333] before:content-['—'] before:absolute before:left-0 before:text-dark-yellow">{{ item }}</li>
+          <li class="flex items-start gap-3.5 text-[15px] leading-relaxed text-ink font-medium">
+            <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" class="w-4 h-4 mt-[3px] shrink-0 text-brand-600">
+              <path d="M3.25 8.5l3 3 6.5-7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <span>{{ item }}</span>
+          </li>
         }
       </ul>
     </div>

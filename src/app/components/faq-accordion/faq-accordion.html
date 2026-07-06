@@ -1,0 +1,53 @@
+<div class="mb-6">
+  <div class="flex items-center gap-2.5 mb-2.5">
+    <span class="w-1.5 h-1.5 rounded-full bg-brand-500" aria-hidden="true"></span>
+    <span class="font-display font-bold text-[11px] tracking-[0.14em] uppercase text-dark-yellow">
+      {{ items().length }} {{ 'faq.questionsLabel' | mnTranslate }}
+    </span>
+  </div>
+  @if (titleKey(); as key) {
+    <h2 class="font-display font-extrabold text-2xl lg:text-[1.75rem] tracking-tight text-ink">
+      {{ key | mnTranslate }}
+    </h2>
+  }
+  @if (subKey(); as key) {
+    <p class="mt-1.5 text-[15px] text-text-grey max-w-xl">{{ key | mnTranslate }}</p>
+  }
+</div>
+
+<div class="border-t border-[#E8E8F0]">
+  @for (item of items(); track item.qKey) {
+    <div class="border-b border-[#E8E8F0]">
+      <button
+        type="button"
+        (click)="toggle(item.qKey)"
+        [attr.aria-expanded]="isOpen(item.qKey)"
+        class="group/q w-full flex items-start gap-4 text-left py-5 cursor-pointer"
+      >
+        <!-- Toggle chip: outlined "+" that fills brand-yellow and rotates into a cross when open -->
+        <span
+          class="mt-px flex h-7 w-7 shrink-0 items-center justify-center rounded-full border transition-colors duration-200"
+          [class]="isOpen(item.qKey)
+            ? 'bg-brand-500 border-brand-500'
+            : 'border-[#E0E0EA] group-hover/q:border-dark-yellow'"
+          aria-hidden="true"
+        >
+          <svg
+            lucidePlus
+            [size]="18"
+            class="transition-transform duration-200"
+            [ngClass]="isOpen(item.qKey) ? 'text-ink rotate-45' : 'text-dark-yellow'"
+          ></svg>
+        </span>
+        <h3 class="font-display font-semibold text-[16.5px] lg:text-[17px] leading-snug text-ink pt-0.5">
+          {{ item.qKey | mnTranslate }}
+        </h3>
+      </button>
+      @if (isOpen(item.qKey)) {
+        <div class="pl-11 pb-6 -mt-1">
+          <p class="text-[15px] leading-[1.75] text-text-grey max-w-2xl">{{ item.aKey | mnTranslate }}</p>
+        </div>
+      }
+    </div>
+  }
+</div>

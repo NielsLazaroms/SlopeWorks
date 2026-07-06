@@ -118,7 +118,7 @@ export class ContactSectionComponent {
    */
   protected readonly channels: ContactChannel[] = [
     { labelKey: 'home.contact.email.title', valueKey: 'home.contact.email.description', href: 'mailto:info@slopeworks.nl' },
-    { labelKey: 'home.contact.call.title', valueKey: 'home.contact.call.description', href: 'tel:+31630941253' },
+    { labelKey: 'home.contact.call.title', valueKey: 'home.contact.call.description', href: 'tel:+32468411287' },
     { labelKey: 'home.contact.location.title', valueKey: 'home.contact.location.description', href: null },
   ];
 

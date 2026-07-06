@@ -36,14 +36,25 @@
   --color-base-100: var(--color-paper-card);
 
   /* Editorial palette from the SlopeWorks mockup: dark "ink" surfaces, light
-     "paper" surfaces, muted grey body text, and a deep yellow for on-light accents. */
+     "paper" surfaces, muted grey body text, and a deep yellow for on-light accents.
+     The paper surfaces form one warm family so the yellow accents read as part of
+     the palette, not as outliers: a warm off-white base, pure white for cards and
+     forms that lift above it, and a soft cream for the featured "beat" bands. */
   --color-ink: #0B0C0E;
   --color-ink-soft: #15171A;
   --color-ink-raised: #1c1e22;
-  --color-paper: #F9F9FF;
+  --color-paper: #FAF9F4;
   --color-paper-card: #FFFFFF;
+  --color-paper-band: #FBF7E8;
   --color-text-grey: #5A5D63;
   --color-dark-yellow: #7B5800;
+
+  /* Piste-map accents, used ONLY in the comparison page's route markers: a muted
+     alpine green for the generalist's "motorway piste" and a brick red for the
+     specialist's "engineered run", leaving the brand yellow to mark the
+     SlopeWorks line. Kept desaturated so they read as map keys, not alarms. */
+  --color-piste-green: #3E8E5A;
+  --color-piste-red: #C2472F;
 
   /* Montserrat for display/headings, Inter for body copy. Overriding --font-sans
      makes Inter the default document font; use `font-display` for headings. */
@@ -72,6 +83,15 @@
   .sw-strip {
     scroll-padding-inline: 4rem;
   }
+}
+
+/* The dashed ridge line the three route markers hang from. A single hairline so
+   the markers punched onto it read as junctions on a piste map. */
+.sw-ridge {
+  background-image: linear-gradient(to right, rgba(11, 12, 14, 0.22) 0 8px, transparent 8px 16px);
+  background-size: 16px 1px;
+  background-repeat: repeat-x;
+  background-position: 0 50%;
 }
 
 /* "In short" statement beneath the hero: figures wrapped in <b> are tinted with

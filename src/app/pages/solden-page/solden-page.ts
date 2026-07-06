@@ -1,9 +1,10 @@
-import {Component, signal} from '@angular/core';
+import {Component} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {MnTranslatePipe} from 'mn-angular-lib';
 import {BreadcrumbComponent} from '../../components/breadcrumb/breadcrumb';
 import {PageCtaComponent} from '../../components/page-cta/page-cta';
 import {RevealDirective} from '../../components/reveal/reveal';
+import {FaqAccordionComponent, FaqEntry} from '../../components/faq-accordion/faq-accordion';
 
 /**
  * A key/value pair (both i18n keys) for the hero stat card and info strip.
@@ -30,16 +31,6 @@ interface RelatedDestination {
 }
 
 /**
- * A question/answer pair for the on-page FAQ.
- */
-interface QnA {
-  /** i18n key for the question. */
-  qKey: string;
-  /** i18n key for the answer. */
-  aKey: string;
-}
-
-/**
  * The Sölden destination-detail page (`/bestemmingen/solden`).
  *
  * The template for every scouted area: a photographic hero with an at-a-glance
@@ -49,7 +40,7 @@ interface QnA {
 @Component({
   selector: 'app-solden-page',
   standalone: true,
-  imports: [RouterLink, MnTranslatePipe, BreadcrumbComponent, PageCtaComponent, RevealDirective],
+  imports: [RouterLink, MnTranslatePipe, BreadcrumbComponent, PageCtaComponent, RevealDirective, FaqAccordionComponent],
   templateUrl: './solden-page.html',
 })
 export class SoldenPage {
@@ -93,37 +84,10 @@ export class SoldenPage {
   ];
 
   /** On-page FAQ entries specific to Sölden. */
-  protected readonly faqs: QnA[] = [
+  protected readonly faqs: FaqEntry[] = [
     {qKey: 'solden.faq.q1', aKey: 'solden.faq.a1'},
     {qKey: 'solden.faq.q2', aKey: 'solden.faq.a2'},
     {qKey: 'solden.faq.q3', aKey: 'solden.faq.a3'},
     {qKey: 'solden.faq.q4', aKey: 'solden.faq.a4'},
   ];
-
-  /** Currently expanded FAQ questions, keyed by their question i18n key. */
-  private readonly openKeys = signal<ReadonlySet<string>>(new Set());
-
-  /**
-   * Whether an FAQ question is currently expanded.
-   *
-   * @param qKey The question's i18n key.
-   */
-  isOpen(qKey: string): boolean {
-    return this.openKeys().has(qKey);
-  }
-
-  /**
-   * Expands or collapses a single FAQ question.
-   *
-   * @param qKey The question's i18n key.
-   */
-  toggle(qKey: string): void {
-    const next = new Set(this.openKeys());
-    if (next.has(qKey)) {
-      next.delete(qKey);
-    } else {
-      next.add(qKey);
-    }
-    this.openKeys.set(next);
-  }
 }

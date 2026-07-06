@@ -1,4 +1,5 @@
-import {Component, ElementRef, viewChild} from '@angular/core';
+import {Component, ElementRef, signal, viewChildren} from '@angular/core';
+import {NgClass} from '@angular/common';
 import {MnTranslatePipe} from 'mn-angular-lib';
 
 /**
@@ -14,23 +15,26 @@ interface GallerySlide {
 }
 
 /**
- * The home page photo gallery: a horizontal scroll-snap film strip of scouting
- * shots.
+ * The home page photo gallery: a contained slideshow of scouting shots.
  *
- * Every image keeps its native aspect ratio at a uniform height, so nothing is
- * cropped, and each carries a location stamp — the "we've actually been there"
- * idea the whole page runs on. Built on native scroll-snap (not a JS carousel) so
- * layout never depends on image-load timing; the arrows just scroll the track.
+ * One feature photo is shown at a time inside the page's content column, so the
+ * frame always fits the viewport on every screen. Photos crossfade between
+ * slides, each carries a location stamp — the "we've actually been there" idea
+ * the whole page runs on — and a contact-sheet thumbnail rail below lets you jump
+ * to any shot, the active frame lifting with a brand ring.
  */
 @Component({
   selector: 'app-gallery-section',
   standalone: true,
-  imports: [MnTranslatePipe],
+  imports: [MnTranslatePipe, NgClass],
   templateUrl: './gallery-section.html',
 })
 export class GallerySectionComponent {
-  /** The scrollable strip element, scrolled by the arrow controls. */
-  private readonly track = viewChild.required<ElementRef<HTMLElement>>('track');
+  /** The thumbnail buttons, so the active one can be scrolled into view. */
+  private readonly thumbs = viewChildren<ElementRef<HTMLElement>>('thumb');
+
+  /** Index of the slide currently shown in the feature frame. */
+  protected readonly activeIndex = signal(0);
 
   /** Slides in display order; captions are scouted locations. */
   protected readonly slides: GallerySlide[] = [
@@ -45,25 +49,36 @@ export class GallerySectionComponent {
   ];
 
   /**
-   * Scrolls the strip by roughly one viewport of images, looping at the ends:
-   * "next" past the last photo returns to the first, "previous" before the first
-   * jumps to the last.
+   * Shows the slide at the given index.
    *
-   * @param direction `-1` to scroll left (previous), `1` to scroll right (next).
+   * @param index Position of the slide to show.
    */
-  scroll(direction: -1 | 1): void {
-    const element = this.track().nativeElement;
-    const maxScroll = element.scrollWidth - element.clientWidth;
-    const step = Math.min(element.clientWidth * 0.8, 680);
+  protected select(index: number): void {
+    this.activeIndex.set(index);
+    this.revealActiveThumb();
+  }
 
-    if (direction === 1 && element.scrollLeft >= maxScroll - 8) {
-      element.scrollTo({left: 0, behavior: 'smooth'});
-      return;
-    }
-    if (direction === -1 && element.scrollLeft <= 8) {
-      element.scrollTo({left: maxScroll, behavior: 'smooth'});
-      return;
-    }
-    element.scrollBy({left: direction * step, behavior: 'smooth'});
+  /**
+   * Advances the feature frame in the given direction, wrapping at both ends.
+   *
+   * @param direction `-1` for the previous slide, `1` for the next.
+   */
+  protected step(direction: -1 | 1): void {
+    const count = this.slides.length;
+    this.activeIndex.update((index) => (index + direction + count) % count);
+    this.revealActiveThumb();
+  }
+
+  /**
+   * Centres the active thumbnail within the rail. Called only from user
+   * actions — never on load — so it can never scroll the page to the gallery
+   * while the section is still below the fold.
+   */
+  private revealActiveThumb(): void {
+    this.thumbs()[this.activeIndex()]?.nativeElement.scrollIntoView({
+      inline: 'center',
+      block: 'nearest',
+      behavior: 'smooth',
+    });
   }
 }
