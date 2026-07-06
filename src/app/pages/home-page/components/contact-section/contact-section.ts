@@ -13,6 +13,7 @@ import {
   provideMnComponentConfig
 } from 'mn-angular-lib';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {EyebrowComponent} from '../../../../components/eyebrow/eyebrow';
 
 /**
  * Injected configuration for the contact section.
@@ -67,6 +68,7 @@ interface ContactChannel {
     MnSectionDirective,
     MnTextarea,
     MnTranslatePipe,
+    EyebrowComponent,
   ],
   providers: [
     provideMnComponentConfig<ContactSectionConfig>(APP_CONTACT_SECTION_COMPONENT_CONFIG, 'app-contact-section'),

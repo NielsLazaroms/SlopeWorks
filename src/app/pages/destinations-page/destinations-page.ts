@@ -22,9 +22,9 @@ interface DestinationEntry {
   country: 'at' | 'ch';
   /** Scouting photo URL. */
   imageUrl: string;
-  /** Router path to the detail page; omitted while the page is still in progress. */
-  route?: string;
-  /** i18n key for the corner badge (e.g. "glacier-sure" / "page in progress"). */
+  /** Router path to the detail page. */
+  route: string;
+  /** i18n key for the optional corner badge (e.g. "glacier-sure"). */
   badgeKey?: string;
 }
 
@@ -61,7 +61,7 @@ export class DestinationsPage {
       country: 'at',
       imageUrl: '/images/carousel_1.webp',
       route: '/bestemmingen/solden',
-      badgeKey: 'destinations.solden.badge',
+      badgeKey: 'destinations.badge.glacier',
     },
     {
       name: 'Mayrhofen',
@@ -71,6 +71,7 @@ export class DestinationsPage {
       country: 'at',
       imageUrl: '/images/carousel_8.webp',
       route: '/bestemmingen/mayrhofen',
+      badgeKey: 'destinations.badge.glacier',
     },
     {
       name: 'St. Anton am Arlberg',
@@ -98,15 +99,17 @@ export class DestinationsPage {
       country: 'at',
       imageUrl: '/images/carousel_10.webp',
       route: '/bestemmingen/zell-am-see',
+      badgeKey: 'destinations.badge.glacier',
     },
     {
       name: 'Gstaad / Saanenmöser',
       countryKey: 'destinations.gstaad.country',
       descriptionKey: 'destinations.gstaad.description',
-      tagKeys: ['destinations.gstaad.tag1'],
+      tagKeys: ['destinations.gstaad.tag1', 'destinations.gstaad.tag2'],
       country: 'ch',
       imageUrl: '/images/carousel_5.webp',
       route: '/bestemmingen/gstaad',
+      badgeKey: 'destinations.badge.glacier',
     },
   ];
 

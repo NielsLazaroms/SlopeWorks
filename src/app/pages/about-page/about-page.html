@@ -7,7 +7,7 @@
 
 <!-- Story: a short headline (site pattern), then the story beside a single photo -->
 <section appReveal class="max-w-7xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
-  <p class="font-display font-bold text-sm tracking-[0.14em] uppercase text-dark-yellow mb-4">{{ 'about.story.label' | mnTranslate }}</p>
+  <app-eyebrow class="mb-4">{{ 'about.story.label' | mnTranslate }}</app-eyebrow>
   <h2 class="font-display font-extrabold text-3xl md:text-4xl tracking-tight leading-[1.12] max-w-2xl mb-10 lg:mb-12">{{ 'about.story.title' | mnTranslate }}</h2>
 
   <div class="grid grid-cols-1 lg:grid-cols-[1fr_0.85fr] gap-12 lg:gap-16 items-start">
@@ -38,9 +38,7 @@
     </div>
 
     <div class="order-1 lg:order-2">
-      <p class="font-display font-bold text-sm tracking-[0.14em] uppercase text-dark-yellow mb-5">
-        {{ 'about.founders.label' | mnTranslate }}
-      </p>
+      <app-eyebrow class="mb-5">{{ 'about.founders.label' | mnTranslate }}</app-eyebrow>
       <h2 class="font-display font-extrabold text-3xl md:text-4xl tracking-tight leading-[1.12] text-ink max-w-xl">
         {{ 'about.founders.title' | mnTranslate }}
       </h2>
@@ -62,7 +60,7 @@
 
 <!-- What stays true: three constants, hairline-divided rather than boxed -->
 <section appReveal class="max-w-7xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
-  <p class="font-display font-bold text-sm tracking-[0.14em] uppercase text-dark-yellow mb-4">{{ 'about.values.label' | mnTranslate }}</p>
+  <app-eyebrow class="mb-4">{{ 'about.values.label' | mnTranslate }}</app-eyebrow>
   <h2 class="font-display font-extrabold text-3xl md:text-4xl tracking-tight leading-[1.12] max-w-2xl mb-12">{{ 'about.values.title' | mnTranslate }}</h2>
 
   <div class="grid grid-cols-1 md:grid-cols-3 border-t border-[#E8E8F0] divide-y md:divide-y-0 md:divide-x divide-[#E8E8F0]">

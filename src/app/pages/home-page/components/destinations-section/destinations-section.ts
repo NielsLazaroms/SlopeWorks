@@ -1,6 +1,7 @@
 import {Component, inject, InjectionToken} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {MnButton, MnButtonTypes, provideMnComponentConfig} from 'mn-angular-lib';
+import {EyebrowComponent} from '../../../../components/eyebrow/eyebrow';
 
 /**
  * A single destination card (a resort SlopeWorks has scouted).
@@ -48,7 +49,7 @@ export const APP_DESTINATIONS_SECTION_CONFIG = new InjectionToken<DestinationsSe
 @Component({
   selector: 'app-destinations-section',
   standalone: true,
-  imports: [RouterLink, MnButton],
+  imports: [RouterLink, MnButton, EyebrowComponent],
   providers: [
     provideMnComponentConfig<DestinationsSectionConfig>(APP_DESTINATIONS_SECTION_CONFIG, 'app-destinations-section'),
   ],

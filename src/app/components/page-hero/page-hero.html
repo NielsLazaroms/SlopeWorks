@@ -13,9 +13,7 @@
     }
 
     @if (eyebrow) {
-      <p class="flex items-center gap-2.5 font-display font-bold text-[13px] tracking-[0.12em] uppercase text-brand-400 mb-5">
-        <span class="w-1.5 h-1.5 rounded-full bg-brand-400"></span>{{ eyebrow }}
-      </p>
+      <app-eyebrow tone="dark" [dot]="true" class="mb-5">{{ eyebrow }}</app-eyebrow>
     }
 
     <h1 class="font-display font-extrabold text-4xl md:text-5xl lg:text-[3.25rem] leading-[1.08] tracking-tight text-white max-w-3xl">

@@ -1,4 +1,4 @@
-import {AfterViewInit, Directive, ElementRef, OnDestroy, inject} from '@angular/core';
+import {afterNextRender, Directive, ElementRef, OnDestroy, inject} from '@angular/core';
 import gsap from 'gsap';
 import {ScrollTrigger} from 'gsap/ScrollTrigger';
 
@@ -21,30 +21,36 @@ gsap.registerPlugin(ScrollTrigger);
   selector: '[appReveal]',
   standalone: true,
 })
-export class RevealDirective implements AfterViewInit, OnDestroy {
+export class RevealDirective implements OnDestroy {
   /** The host element that fades and rises into view. */
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
 
   /** The reveal tween, retained so its `ScrollTrigger` can be killed on teardown. */
   private tween?: gsap.core.Tween;
 
-  /** Registers the scroll-reveal once the host is laid out. */
-  ngAfterViewInit(): void {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      return;
-    }
+  /**
+   * Registers the scroll-reveal once the host is laid out. `afterNextRender`
+   * runs in the browser only, so the animation is skipped during prerendering
+   * (leaving the content fully visible in the served HTML).
+   */
+  constructor() {
+    afterNextRender(() => {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        return;
+      }
 
-    this.tween = gsap.from(this.host.nativeElement, {
-      scrollTrigger: {
-        trigger: this.host.nativeElement,
-        start: 'top 85%',
-        toggleActions: 'play none none none',
-      },
-      y: 60,
-      opacity: 0,
-      duration: 0.8,
-      ease: 'power2.out',
-      clearProps: 'transform',
+      this.tween = gsap.from(this.host.nativeElement, {
+        scrollTrigger: {
+          trigger: this.host.nativeElement,
+          start: 'top 85%',
+          toggleActions: 'play none none none',
+        },
+        y: 60,
+        opacity: 0,
+        duration: 0.8,
+        ease: 'power2.out',
+        clearProps: 'transform',
+      });
     });
   }
 

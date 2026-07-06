@@ -1,6 +1,6 @@
 <section class="bg-paper-band border-y border-[#EFE7D0] px-6 lg:px-16 py-24">
   <div class="max-w-7xl mx-auto">
-    <p class="font-display font-bold text-sm tracking-[0.1em] uppercase text-dark-yellow mb-4">{{ componentConfig.label }}</p>
+    <app-eyebrow class="mb-4">{{ componentConfig.label }}</app-eyebrow>
     <h2 class="font-display font-extrabold text-3xl md:text-4xl tracking-tight leading-[1.12] text-ink max-w-3xl mb-12">{{ componentConfig.title }}</h2>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-7">
@@ -12,7 +12,7 @@
             }
           </div>
           <div class="p-7 flex flex-col grow">
-            <span class="font-display text-[11px] font-bold tracking-[0.1em] uppercase text-dark-yellow">{{ card.tag }}</span>
+            <span class="font-display text-[11px] font-bold tracking-widest uppercase text-dark-yellow">{{ card.tag }}</span>
             <h3 class="font-display font-bold text-xl text-ink mt-3 mb-4 leading-tight">{{ card.title }}</h3>
             <p class="text-sm text-text-grey leading-relaxed">{{ card.body }}</p>
             <div class="mt-5 pt-4 border-t border-[#EAEAF0] font-display text-xs tracking-wide text-text-grey/70">{{ card.stamp }}</div>

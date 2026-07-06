@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {MnButton, MnButtonTypes, MnTranslatePipe} from 'mn-angular-lib';
+import {EyebrowComponent} from '../../../../components/eyebrow/eyebrow';
 
 /**
  * The home page hero.
@@ -14,7 +15,7 @@ import {MnButton, MnButtonTypes, MnTranslatePipe} from 'mn-angular-lib';
 @Component({
   selector: 'app-home-hero',
   standalone: true,
-  imports: [RouterLink, MnButton, MnTranslatePipe],
+  imports: [RouterLink, MnButton, MnTranslatePipe, EyebrowComponent],
   templateUrl: './home-hero.html',
 })
 export class HomeHeroComponent {

@@ -4,6 +4,7 @@ import {MnTranslatePipe} from 'mn-angular-lib';
 import {PageHeroComponent} from '../../components/page-hero/page-hero';
 import {PageCtaComponent} from '../../components/page-cta/page-cta';
 import {RevealDirective} from '../../components/reveal/reveal';
+import {EyebrowComponent} from '../../components/eyebrow/eyebrow';
 
 /**
  * A provider's piste-map accent. Each of the two archetype providers gets a muted
@@ -125,7 +126,7 @@ interface DecisionQuestion {
 @Component({
   selector: 'app-comparison-page',
   standalone: true,
-  imports: [NgClass, MnTranslatePipe, PageHeroComponent, PageCtaComponent, RevealDirective],
+  imports: [NgClass, MnTranslatePipe, PageHeroComponent, PageCtaComponent, RevealDirective, EyebrowComponent],
   templateUrl: './comparison-page.html',
 })
 export class ComparisonPage {
@@ -218,7 +219,7 @@ export class ComparisonPage {
   protected readonly questions: DecisionQuestion[] = [
     {
       axisKey: 'comparison.three.q1.axis',
-      labelKey: 'comparison.three.q1.k',
+      labelKey: 'comparison.three.q1.question',
       answers: [
         {labelKey: 'comparison.col.generalist', answerKey: 'comparison.three.q1.g', marker: 'circle', accent: 'green', highlight: false},
         {labelKey: 'comparison.col.specialist', answerKey: 'comparison.three.q1.s', marker: 'square', accent: 'red', highlight: false},
@@ -227,7 +228,7 @@ export class ComparisonPage {
     },
     {
       axisKey: 'comparison.three.q2.axis',
-      labelKey: 'comparison.three.q2.k',
+      labelKey: 'comparison.three.q2.question',
       answers: [
         {labelKey: 'comparison.col.generalist', answerKey: 'comparison.three.q2.g', marker: 'circle', accent: 'green', highlight: false},
         {labelKey: 'comparison.col.specialist', answerKey: 'comparison.three.q2.s', marker: 'square', accent: 'red', highlight: false},
@@ -236,7 +237,7 @@ export class ComparisonPage {
     },
     {
       axisKey: 'comparison.three.q3.axis',
-      labelKey: 'comparison.three.q3.k',
+      labelKey: 'comparison.three.q3.question',
       answers: [
         {labelKey: 'comparison.col.generalist', answerKey: 'comparison.three.q3.g', marker: 'circle', accent: 'green', highlight: false},
         {labelKey: 'comparison.col.specialist', answerKey: 'comparison.three.q3.s', marker: 'square', accent: 'red', highlight: false},

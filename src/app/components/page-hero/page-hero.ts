@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {BreadcrumbComponent, Crumb} from '../breadcrumb/breadcrumb';
+import {EyebrowComponent} from '../eyebrow/eyebrow';
 
 /**
  * The shared hero band at the top of every interior page.
@@ -13,7 +14,7 @@ import {BreadcrumbComponent, Crumb} from '../breadcrumb/breadcrumb';
 @Component({
   selector: 'app-page-hero',
   standalone: true,
-  imports: [BreadcrumbComponent],
+  imports: [BreadcrumbComponent, EyebrowComponent],
   templateUrl: './page-hero.html',
 })
 export class PageHeroComponent {

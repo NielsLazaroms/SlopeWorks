@@ -1,0 +1,15 @@
+<p
+  class="flex items-center gap-2.5 font-display font-bold text-[13px] tracking-[0.12em] uppercase"
+  [class.text-dark-yellow]="tone === 'light'"
+  [class.text-brand-400]="tone === 'dark'"
+>
+  @if (dot) {
+    <span
+      class="w-1.5 h-1.5 shrink-0 rounded-full"
+      [class.bg-brand-500]="tone === 'light'"
+      [class.bg-brand-400]="tone === 'dark'"
+      aria-hidden="true"
+    ></span>
+  }
+  <ng-content />
+</p>

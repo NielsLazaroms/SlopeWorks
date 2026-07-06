@@ -5,12 +5,19 @@
   <title>SlopeWorks</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="SlopeWorks organizes professional corporate ski retreats and team-building trips in the mountains. We handle all logistics for your next company mountain retreat.">
-  <meta name="keywords" content="corporate ski retreats, team building, mountain retreats, company ski trips, SlopeWorks, professional retreat organization">
-  <meta property="og:title" content="SlopeWorks | Professional Corporate Ski Retreats">
-  <meta property="og:description" content="Elevate your team with expert-organized corporate ski retreats and mountain team-building experiences.">
-  <meta property="og:image" content="/logo_slopeworks.svg">
+  <meta name="description" content="SlopeWorks organises corporate ski retreats and team-building trips in the Alps. We scout the resort, handle every logistic and run the week, so your team just shows up.">
+  <meta property="og:site_name" content="SlopeWorks">
+  <meta property="og:title" content="SlopeWorks | Corporate ski retreats in the Alps">
+  <meta property="og:description" content="We scout the resort, handle every logistic and run the week, so your team just shows up.">
+  <meta property="og:image" content="https://slopeworks.eu/images/hero_image.webp">
+  <meta property="og:image:alt" content="A group on the slopes at an Alpine ski resort scouted by SlopeWorks">
+  <meta property="og:url" content="https://slopeworks.eu/">
+  <meta property="og:locale" content="en">
   <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SlopeWorks | Corporate ski retreats in the Alps">
+  <meta name="twitter:description" content="We scout the resort, handle every logistic and run the week, so your team just shows up.">
+  <meta name="twitter:image" content="https://slopeworks.eu/images/hero_image.webp">
   <link rel="alternate" hreflang="nl-nl" href="https://slopeworks.nl/">
   <link rel="alternate" hreflang="nl-be" href="https://slopeworks.be/">
   <link rel="alternate" hreflang="en" href="https://slopeworks.eu/">
@@ -26,8 +33,66 @@
     as="image"
     href="/images/hero_image.webp"
     fetchpriority="high">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://slopeworks.eu/#organization",
+        "name": "SlopeWorks",
+        "url": "https://slopeworks.eu/",
+        "logo": "https://slopeworks.eu/logo_slopeworks.svg",
+        "image": "https://slopeworks.eu/images/hero_image.webp",
+        "email": "info@slopeworks.nl",
+        "description": "SlopeWorks organises corporate ski retreats and team-building trips in the Alps. We scout the resort, handle every logistic and run the week for the group.",
+        "areaServed": ["NL", "BE", "EU"],
+        "knowsAbout": [
+          "corporate ski retreats",
+          "team-building trips",
+          "Alpine ski resorts",
+          "group travel logistics"
+        ],
+        "makesOffer": {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Corporate ski retreat organisation",
+            "serviceType": "Corporate ski retreats and team-building trips in the Alps",
+            "areaServed": "Alps",
+            "provider": {"@id": "https://slopeworks.eu/#organization"}
+          }
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://slopeworks.eu/#website",
+        "url": "https://slopeworks.eu/",
+        "name": "SlopeWorks",
+        "inLanguage": ["en", "nl"],
+        "publisher": {"@id": "https://slopeworks.eu/#organization"}
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
   <app-root></app-root>
+  <noscript>
+    <h1>SlopeWorks — corporate ski retreats in the Alps</h1>
+    <p>
+      SlopeWorks organises corporate ski retreats and team-building trips in the
+      Alps. We scout the resort, handle every logistic and run the week, so your
+      team just shows up. We work across the Netherlands, Belgium and the wider EU.
+    </p>
+    <p>Explore the site:</p>
+    <ul>
+      <li><a href="/bestemmingen">Destinations</a> — Sölden, Mayrhofen, St. Anton, Kitzbühel, Zell am See and Gstaad</li>
+      <li><a href="/vergelijken">SlopeWorks vs. a travel agency</a></li>
+      <li><a href="/faq">Frequently asked questions</a></li>
+      <li><a href="/over-ons">About SlopeWorks</a></li>
+      <li><a href="/contact">Contact</a> — info&#64;slopeworks.nl</li>
+    </ul>
+  </noscript>
 </body>
 </html>

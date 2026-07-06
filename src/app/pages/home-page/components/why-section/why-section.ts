@@ -1,5 +1,6 @@
 import {Component, inject, InjectionToken} from '@angular/core';
 import {provideMnComponentConfig} from 'mn-angular-lib';
+import {EyebrowComponent} from '../../../../components/eyebrow/eyebrow';
 
 /**
  * One column of the comparison grid (a heading plus bullet points).
@@ -39,7 +40,7 @@ export const APP_WHY_SECTION_CONFIG = new InjectionToken<WhySectionConfig>('APP_
 @Component({
   selector: 'app-why-section',
   standalone: true,
-  imports: [],
+  imports: [EyebrowComponent],
   providers: [
     provideMnComponentConfig<WhySectionConfig>(APP_WHY_SECTION_CONFIG, 'app-why-section'),
   ],

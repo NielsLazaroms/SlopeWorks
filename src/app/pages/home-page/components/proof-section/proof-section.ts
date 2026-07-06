@@ -1,5 +1,6 @@
 import {Component, inject, InjectionToken} from '@angular/core';
 import {provideMnComponentConfig} from 'mn-angular-lib';
+import {EyebrowComponent} from '../../../../components/eyebrow/eyebrow';
 
 /**
  * A single "proof" card: a concrete, scouted example experience.
@@ -41,7 +42,7 @@ export const APP_PROOF_SECTION_CONFIG = new InjectionToken<ProofSectionConfig>('
 @Component({
   selector: 'app-proof-section',
   standalone: true,
-  imports: [],
+  imports: [EyebrowComponent],
   providers: [
     provideMnComponentConfig<ProofSectionConfig>(APP_PROOF_SECTION_CONFIG, 'app-proof-section'),
   ],

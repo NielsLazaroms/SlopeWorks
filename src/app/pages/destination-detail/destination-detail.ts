@@ -6,6 +6,8 @@ import {BreadcrumbComponent} from '../../components/breadcrumb/breadcrumb';
 import {PageCtaComponent} from '../../components/page-cta/page-cta';
 import {RevealDirective} from '../../components/reveal/reveal';
 import {FaqAccordionComponent, FaqEntry} from '../../components/faq-accordion/faq-accordion';
+import {EyebrowComponent} from '../../components/eyebrow/eyebrow';
+import {SeoService} from '../../services/seo.service';
 
 /**
  * Shared, language-independent facts about one scouted area: its display name, the
@@ -57,7 +59,7 @@ const AREA_META: Record<string, AreaMeta> = {
 /** Per-area template configuration, keyed by URL slug. */
 const CONFIG: Record<string, DestinationConfig> = {
   'solden': {prefix: 'solden', signatureImage: '/images/carousel_6.webp', fitYes: 4, fitNo: 3, faq: 4, relatedSlugs: ['mayrhofen', 'st-anton', 'gstaad']},
-  'mayrhofen': {prefix: 'mayrhofen', signatureImage: '/images/carousel_3.webp', fitYes: 4, fitNo: 2, faq: 4, relatedSlugs: ['solden', 'st-anton', 'gstaad']},
+  'mayrhofen': {prefix: 'mayrhofen', signatureImage: '/images/carousel_12.webp', fitYes: 4, fitNo: 2, faq: 4, relatedSlugs: ['solden', 'st-anton', 'gstaad']},
   'st-anton': {prefix: 'stanton', signatureImage: '/images/carousel_4.webp', fitYes: 3, fitNo: 3, faq: 4, relatedSlugs: ['solden', 'kitzbuhel', 'gstaad']},
   'kitzbuhel': {prefix: 'kitzbuhel', signatureImage: '/images/carousel_2.webp', fitYes: 3, fitNo: 2, faq: 3, relatedSlugs: ['mayrhofen', 'st-anton', 'zell-am-see']},
   'zell-am-see': {prefix: 'zellamsee', signatureImage: '/images/carousel_6.webp', fitYes: 4, fitNo: 3, faq: 3, relatedSlugs: ['kitzbuhel', 'mayrhofen', 'gstaad']},
@@ -114,7 +116,7 @@ interface DestinationView {
 @Component({
   selector: 'app-destination-detail',
   standalone: true,
-  imports: [RouterLink, MnTranslatePipe, BreadcrumbComponent, PageCtaComponent, RevealDirective, FaqAccordionComponent],
+  imports: [RouterLink, MnTranslatePipe, BreadcrumbComponent, PageCtaComponent, RevealDirective, FaqAccordionComponent, EyebrowComponent],
   templateUrl: './destination-detail.html',
 })
 export class DestinationDetailPage {
@@ -164,6 +166,20 @@ export class DestinationDetailPage {
   private readonly guard = effect(() => {
     if (this.params() && this.view() === null) {
       void this.router.navigate(['/bestemmingen']);
+    }
+  });
+
+  private readonly seo = inject(SeoService);
+
+  /**
+   * Gives each area its own title and description (from its i18n copy) instead
+   * of the generic route-level metadata, so the six detail pages aren't
+   * near-duplicates for search engines.
+   */
+  private readonly seoEffect = effect(() => {
+    const view = this.view();
+    if (view) {
+      this.seo.setFromKeys(`${view.prefix}.title`, `${view.prefix}.subtitle`);
     }
   });
 }

@@ -14,9 +14,7 @@
 
       <div class="grid grid-cols-1 lg:grid-cols-[1.3fr_0.7fr] gap-10 lg:gap-14 items-end">
         <div>
-          <p class="flex items-center gap-2.5 font-display font-bold text-[13px] tracking-[0.12em] uppercase text-brand-400 mb-4">
-            <span class="w-1.5 h-1.5 rounded-full bg-brand-400"></span>{{ d.countryKey | mnTranslate }}
-          </p>
+          <app-eyebrow tone="dark" [dot]="true" class="mb-4">{{ d.countryKey | mnTranslate }}</app-eyebrow>
           <h1 class="font-display font-extrabold text-4xl md:text-5xl lg:text-[3.4rem] leading-[1.05] tracking-tight text-white max-w-xl">
             {{ d.prefix + '.title' | mnTranslate }}
           </h1>
@@ -27,8 +25,8 @@
         <div class="bg-white/[0.07] border border-white/12 rounded-lg p-6 backdrop-blur-sm">
           @for (id of d.statIds; track id) {
             <div class="flex justify-between gap-4 py-3 border-b border-white/10 last:border-b-0">
-              <span class="text-[13px] text-white/55">{{ d.prefix + '.stat.' + id + '.k' | mnTranslate }}</span>
-              <span class="text-[13.5px] text-white font-semibold font-display text-right">{{ d.prefix + '.stat.' + id + '.v' | mnTranslate }}</span>
+              <span class="text-[13px] text-white/55">{{ d.prefix + '.stat.' + id + '.label' | mnTranslate }}</span>
+              <span class="text-[13.5px] text-white font-semibold font-display text-right">{{ d.prefix + '.stat.' + id + '.value' | mnTranslate }}</span>
             </div>
           }
         </div>
@@ -50,8 +48,8 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px overflow-hidden rounded-2xl border border-[#EDE5D2] bg-[#EDE5D2] shadow-[0_16px_44px_-26px_rgba(0,0,0,0.2)]">
       @for (id of d.infoIds; track id) {
         <div class="bg-paper-card flex items-center justify-between gap-4 px-6 py-5 sm:flex-col sm:items-start sm:justify-start sm:px-7 sm:py-9">
-          <div class="order-1 font-display text-[11px] tracking-[0.12em] uppercase text-text-grey sm:mb-3">{{ d.prefix + '.info.' + id + '.k' | mnTranslate }}</div>
-          <div class="order-2 shrink-0 font-display font-extrabold text-xl sm:text-2xl lg:text-[1.55rem] tracking-tight text-ink">{{ d.prefix + '.info.' + id + '.v' | mnTranslate }}</div>
+          <div class="order-1 font-display text-[11px] tracking-[0.12em] uppercase text-text-grey sm:mb-3">{{ d.prefix + '.info.' + id + '.label' | mnTranslate }}</div>
+          <div class="order-2 shrink-0 font-display font-extrabold text-xl sm:text-2xl lg:text-[1.55rem] tracking-tight text-ink">{{ d.prefix + '.info.' + id + '.value' | mnTranslate }}</div>
         </div>
       }
     </div>
@@ -60,13 +58,13 @@
   <!-- Signature moment (warm featured band) -->
   <section appReveal class="bg-paper-band border-y border-[#EFE7D0] px-6 lg:px-16 py-20 lg:py-24">
     <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-      <div class="relative h-80 lg:h-[30rem] rounded-xl overflow-hidden">
+      <div class="relative h-80 lg:h-120 rounded-xl overflow-hidden">
         <img [src]="d.signatureImage" alt="" aria-hidden="true" class="absolute inset-0 w-full h-full object-cover" />
         <div class="absolute inset-0 bg-[linear-gradient(160deg,rgba(58,79,99,0.15),rgba(14,24,34,0.75))]"></div>
         <span class="absolute bottom-5 left-5 font-display text-xs tracking-wide text-white/60">{{ d.prefix + '.signature.caption' | mnTranslate }}</span>
       </div>
       <div class="lg:pl-4">
-        <p class="font-display font-bold text-[13px] tracking-[0.1em] uppercase text-dark-yellow mb-4">{{ d.prefix + '.signature.label' | mnTranslate }}</p>
+        <app-eyebrow class="mb-4">{{ d.prefix + '.signature.label' | mnTranslate }}</app-eyebrow>
         <h2 class="font-display font-extrabold text-3xl md:text-4xl lg:text-[2.5rem] leading-[1.1] tracking-tight text-ink mb-6">{{ d.prefix + '.signature.title' | mnTranslate }}</h2>
         <p class="text-lg leading-relaxed text-text-grey max-w-lg">{{ d.prefix + '.signature.body' | mnTranslate }}</p>
       </div>
@@ -75,7 +73,7 @@
 
   <!-- For whom -->
   <section appReveal class="max-w-7xl mx-auto px-6 lg:px-16 py-20 lg:py-28">
-    <p class="font-display font-bold text-sm tracking-[0.1em] uppercase text-dark-yellow mb-4">{{ d.prefix + '.forwhom.label' | mnTranslate }}</p>
+    <app-eyebrow class="mb-4">{{ d.prefix + '.forwhom.label' | mnTranslate }}</app-eyebrow>
     <h2 class="font-display font-extrabold text-3xl md:text-4xl lg:text-[2.6rem] tracking-tight leading-[1.1] max-w-3xl mb-12">{{ d.prefix + '.forwhom.title' | mnTranslate }}</h2>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
@@ -100,7 +98,7 @@
 
   <!-- Related destinations -->
   <section appReveal class="max-w-7xl mx-auto px-6 lg:px-16 pb-20 lg:pb-28">
-    <p class="font-display font-bold text-sm tracking-[0.1em] uppercase text-dark-yellow mb-4">{{ d.prefix + '.related.label' | mnTranslate }}</p>
+    <app-eyebrow class="mb-4">{{ d.prefix + '.related.label' | mnTranslate }}</app-eyebrow>
     <h2 class="font-display font-extrabold text-2xl md:text-[2rem] tracking-tight mb-10">{{ d.prefix + '.related.title' | mnTranslate }}</h2>
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 lg:gap-7">
       @for (dest of d.related; track dest.route) {

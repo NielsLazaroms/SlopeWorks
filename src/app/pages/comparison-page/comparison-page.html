@@ -12,7 +12,7 @@
 <section appReveal class="border-b border-[#ECECF3]">
   <div class="max-w-7xl mx-auto px-6 lg:px-16 pt-16 lg:pt-24 pb-16 lg:pb-20">
     <div class="max-w-3xl mb-14 lg:mb-16">
-      <p class="font-display font-bold text-[12px] tracking-[0.2em] uppercase text-dark-yellow mb-4">{{ 'comparison.runs.label' | mnTranslate }}</p>
+      <app-eyebrow class="mb-4">{{ 'comparison.runs.label' | mnTranslate }}</app-eyebrow>
       <h2 class="font-display font-extrabold text-2xl md:text-[2rem] tracking-tight">{{ 'comparison.runs.title' | mnTranslate }}</h2>
       <p class="mt-4 text-[17px] leading-relaxed text-text-grey">{{ 'comparison.runs.lead' | mnTranslate }}</p>
     </div>
@@ -57,7 +57,7 @@
 <!-- The long read: why buyers look around, then one honest block per route -->
 <section appReveal class="border-b border-[#ECECF3]">
   <div class="max-w-7xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
-    <p class="font-display font-bold text-[12px] tracking-[0.2em] uppercase text-dark-yellow mb-8">{{ 'comparison.deep.label' | mnTranslate }}</p>
+    <app-eyebrow class="mb-8">{{ 'comparison.deep.label' | mnTranslate }}</app-eyebrow>
 
     @for (b of deepDive; track b.titleKey; let first = $first) {
       <article class="max-w-3xl" [ngClass]="first ? '' : 'mt-14 lg:mt-20 pt-14 lg:pt-16 border-t border-[#ECECF3]'">
@@ -94,7 +94,7 @@
 <section appReveal class="bg-paper-card border-b border-[#ECECF3]">
   <div class="max-w-7xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
     <div class="max-w-3xl mb-10 lg:mb-12">
-      <p class="font-display font-bold text-[12px] tracking-[0.2em] uppercase text-dark-yellow mb-4">{{ 'comparison.three.label' | mnTranslate }}</p>
+      <app-eyebrow class="mb-4">{{ 'comparison.three.label' | mnTranslate }}</app-eyebrow>
       <h2 class="font-display font-extrabold text-2xl md:text-[2rem] tracking-tight">{{ 'comparison.three.title' | mnTranslate }}</h2>
     </div>
 

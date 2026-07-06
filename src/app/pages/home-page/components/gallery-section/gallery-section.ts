@@ -1,6 +1,7 @@
 import {Component, ElementRef, signal, viewChildren} from '@angular/core';
 import {NgClass} from '@angular/common';
 import {MnTranslatePipe} from 'mn-angular-lib';
+import {EyebrowComponent} from '../../../../components/eyebrow/eyebrow';
 
 /**
  * A single slide in the gallery: a scouting photo with a location stamp.
@@ -26,7 +27,7 @@ interface GallerySlide {
 @Component({
   selector: 'app-gallery-section',
   standalone: true,
-  imports: [MnTranslatePipe, NgClass],
+  imports: [MnTranslatePipe, NgClass, EyebrowComponent],
   templateUrl: './gallery-section.html',
 })
 export class GallerySectionComponent {
