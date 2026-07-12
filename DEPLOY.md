@@ -34,6 +34,9 @@ domain's web root.
 - **`robots.txt`** — its `Sitemap:` line points at that domain's sitemap.
 - **`sitemap.xml`** — each `<loc>` is that domain's URL; the `hreflang`
   alternates still list all three domains.
+- **`llms.txt`** — a root-level summary of the brand, services and key pages for
+  AI crawlers. Its URLs point at that domain, and the English `.eu` build swaps
+  in the English body (`llms.en.txt`).
 
 Runtime language is unchanged and still **domain-based** (mn-lib's
 `domainLocaleMap` in `public/mn-config.json5`): `.nl`/`.be` → `nl`, `.eu` → `en`.
@@ -59,8 +62,9 @@ Submit each domain's sitemap in **its own Google Search Console property**:
 - `angular.json` has a build **configuration per domain** (`be`, `eu`) that swaps
   the environment file via `fileReplacements` and sets `outputPath`. The default
   `production` build is `.nl`.
-- Each `build*` script chains `scripts/localize-static.mjs <dir> <origin>`, which
-  rewrites the built `robots.txt` and `sitemap.xml` `<loc>`s to that domain.
+- Each `build*` script chains `scripts/localize-static.mjs <dir> <origin> <locale>`,
+  which rewrites the built `robots.txt`, `sitemap.xml` `<loc>`s and `llms.txt` to
+  that domain, and picks the English `llms.txt` body for the `en` build.
 - Prerendered routes are defined in `src/app/app.routes.server.ts` (all routes,
   with the six destination slugs enumerated).
 

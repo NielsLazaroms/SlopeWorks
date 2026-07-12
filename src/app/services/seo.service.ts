@@ -44,6 +44,19 @@ export class SeoService {
   /** Maps an app locale to the `language_TERRITORY` form Open Graph expects. */
   private static readonly OG_LOCALES: Record<string, string> = {nl: 'nl_NL', en: 'en_US'};
 
+  /**
+   * The sibling domains that form the `hreflang` cluster, in the order they are
+   * written. The routes are identical across all three domains, so each page's
+   * alternates are these origins plus the shared canonical path — the same
+   * cluster is listed on every build regardless of which domain it is served on.
+   */
+  private static readonly HREFLANG_ALTERNATES: {hreflang: string; origin: string}[] = [
+    {hreflang: 'nl-NL', origin: 'https://slopeworks.nl'},
+    {hreflang: 'nl-BE', origin: 'https://slopeworks.be'},
+    {hreflang: 'en', origin: 'https://slopeworks.eu'},
+    {hreflang: 'x-default', origin: 'https://slopeworks.eu'},
+  ];
+
   private readonly router = inject(Router);
   private readonly title = inject(Title);
   private readonly meta = inject(Meta);
@@ -105,7 +118,8 @@ export class SeoService {
    */
   private write(rawTitle: string, description: string): void {
     const title = rawTitle + SeoService.TITLE_SUFFIX;
-    const url = this.origin() + this.router.url.split(/[?#]/)[0];
+    const path = this.canonicalPath(this.router.url);
+    const url = this.origin() + path;
 
     this.document.documentElement.lang = this.lang.locale;
     this.title.setTitle(title);
@@ -119,7 +133,50 @@ export class SeoService {
     this.meta.updateTag({name: 'twitter:description', content: description});
 
     this.setCanonical(url);
+    this.setHreflang(path);
     this.applyBreadcrumb(rawTitle);
+  }
+
+  /**
+   * Normalises a router URL to the path form the static host actually serves.
+   * The query/fragment is dropped and every non-root path gets a single trailing
+   * slash, matching the `route/index.html` files the static build emits — a
+   * request for `/faq` is served as `/faq/`. Keeping canonical, `og:url`,
+   * `hreflang` and the sitemap on this one form removes the canonical-vs-effective
+   * URL mismatch flagged in the SEO audit.
+   *
+   * @param routerUrl The active router URL (may carry a query or fragment).
+   * @returns The canonical path, e.g. `/` or `/faq/`.
+   */
+  private canonicalPath(routerUrl: string): string {
+    const path = routerUrl.split(/[?#]/)[0];
+    if (path === '' || path === '/') {
+      return '/';
+    }
+    return path.endsWith('/') ? path : path + '/';
+  }
+
+  /**
+   * Rewrites the `hreflang` alternate links for the current path. Because the
+   * routes are identical across the three domains, each alternate is a sibling
+   * origin plus the shared canonical path. Replacing the whole set on every
+   * navigation keeps each page pointing at its own translation instead of the
+   * homepage, and — being written into the head like the canonical — the correct
+   * cluster is baked into the prerendered HTML.
+   *
+   * @param path Canonical path (with trailing slash) shared across all domains.
+   */
+  private setHreflang(path: string): void {
+    this.document.head
+      .querySelectorAll('link[rel="alternate"][hreflang]')
+      .forEach((link) => link.remove());
+    for (const {hreflang, origin} of SeoService.HREFLANG_ALTERNATES) {
+      const link = this.document.createElement('link');
+      link.setAttribute('rel', 'alternate');
+      link.setAttribute('hreflang', hreflang);
+      link.setAttribute('href', origin + path);
+      this.document.head.appendChild(link);
+    }
   }
 
   /**
@@ -155,7 +212,7 @@ export class SeoService {
         '@type': 'ListItem',
         position: index + 1,
         name: item.name,
-        item: this.origin() + item.path,
+        item: this.origin() + this.canonicalPath(item.path),
       })),
     });
   }
