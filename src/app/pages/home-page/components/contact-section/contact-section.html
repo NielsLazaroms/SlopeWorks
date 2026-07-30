@@ -78,5 +78,12 @@
     <button type="button" class="mt-8 w-full font-bold sm:w-fit" mnButton [data]="formButtonData" (click)="sendEmail()">
       {{ componentConfig.formButtonText }}
     </button>
+
+    <!-- Privacy notice at the point of collection: the message opens a mailto to
+         SlopeWorks, so link the statement that covers how that data is handled. -->
+    <p class="mt-5 text-xs leading-relaxed text-text-grey">
+      {{ 'home.contact.form.privacyNotice' | mnTranslate }}<a routerLink="/privacy"
+        class="underline underline-offset-2 decoration-ink/25 transition-colors hover:text-brand-600 hover:decoration-brand-500">{{ 'home.contact.form.privacyLink' | mnTranslate }}</a>.
+    </p>
   </form>
 </section>

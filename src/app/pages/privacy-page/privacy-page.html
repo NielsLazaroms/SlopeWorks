@@ -1,0 +1,83 @@
+<app-page-hero
+  imageUrl="/images/hero_image.webp"
+  [eyebrow]="'privacy.eyebrow' | mnTranslate"
+  [title]="'privacy.title' | mnTranslate"
+  [subtitle]="'privacy.subtitle' | mnTranslate"
+></app-page-hero>
+
+<section appReveal class="max-w-3xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
+  <!-- Last-updated stamp -->
+  <p class="text-sm text-text-grey/80 mb-8">{{ 'privacy.updated' | mnTranslate }}</p>
+
+  <!-- Lede: who the controller is and what the statement covers. The site domain
+       is injected so it matches the visitor's domain (.nl / .be / .eu). -->
+  <p class="text-[17px] leading-relaxed text-text-grey">{{ 'privacy.intro.p1' | mnTranslate }}{{ siteDomain }}{{ 'privacy.intro.p2' | mnTranslate }}</p>
+
+  <!-- What data we collect -->
+  <div class="mt-12">
+    <h2 class="font-display font-bold text-xl md:text-2xl text-ink mb-4">{{ 'privacy.collect.title' | mnTranslate }}</h2>
+    <ul class="space-y-3 list-disc pl-5 marker:text-brand-500">
+      @for (key of collectKeys; track key) {
+        <li class="text-[17px] leading-relaxed text-text-grey">{{ key | mnTranslate }}</li>
+      }
+    </ul>
+  </div>
+
+  <!-- Why we process this data -->
+  <div class="mt-12">
+    <h2 class="font-display font-bold text-xl md:text-2xl text-ink mb-4">{{ 'privacy.purpose.title' | mnTranslate }}</h2>
+    <ul class="space-y-3 list-disc pl-5 marker:text-brand-500">
+      @for (key of purposeKeys; track key) {
+        <li class="text-[17px] leading-relaxed text-text-grey">{{ key | mnTranslate }}</li>
+      }
+    </ul>
+  </div>
+
+  <!-- Retention period -->
+  <div class="mt-12">
+    <h2 class="font-display font-bold text-xl md:text-2xl text-ink mb-4">{{ 'privacy.retention.title' | mnTranslate }}</h2>
+    <p class="text-[17px] leading-relaxed text-text-grey">{{ 'privacy.retention.body' | mnTranslate }}</p>
+  </div>
+
+  <!-- Who we share data with -->
+  <div class="mt-12">
+    <h2 class="font-display font-bold text-xl md:text-2xl text-ink mb-4">{{ 'privacy.sharing.title' | mnTranslate }}</h2>
+    <p class="text-[17px] leading-relaxed text-text-grey">{{ 'privacy.sharing.body' | mnTranslate }}</p>
+  </div>
+
+  <!-- Transfers outside the EEA -->
+  <div class="mt-12">
+    <h2 class="font-display font-bold text-xl md:text-2xl text-ink mb-4">{{ 'privacy.transfer.title' | mnTranslate }}</h2>
+    <p class="text-[17px] leading-relaxed text-text-grey">{{ 'privacy.transfer.body' | mnTranslate }}</p>
+  </div>
+
+  <!-- Cookies & local storage (only the functional language preference) -->
+  <div class="mt-12">
+    <h2 class="font-display font-bold text-xl md:text-2xl text-ink mb-4">{{ 'privacy.storage.title' | mnTranslate }}</h2>
+    <p class="text-[17px] leading-relaxed text-text-grey">{{ 'privacy.storage.body' | mnTranslate }}</p>
+  </div>
+
+  <!-- Your rights (info@ rendered as a real mailto link) -->
+  <div class="mt-12">
+    <h2 class="font-display font-bold text-xl md:text-2xl text-ink mb-4">{{ 'privacy.rights.title' | mnTranslate }}</h2>
+    <p class="text-[17px] leading-relaxed text-text-grey">{{ 'privacy.rights.p1' | mnTranslate
+      }}<a href="mailto:info@slopeworks.nl" class="text-brand-600 underline underline-offset-2 hover:opacity-80 break-words">info&#64;slopeworks.nl</a>{{ 'privacy.rights.p2' | mnTranslate }}</p>
+  </div>
+
+  <!-- Right to complain (authority email + website as real links) -->
+  <div class="mt-12">
+    <h2 class="font-display font-bold text-xl md:text-2xl text-ink mb-4">{{ 'privacy.complaint.title' | mnTranslate }}</h2>
+    <p class="text-[17px] leading-relaxed text-text-grey">{{ 'privacy.complaint.p1' | mnTranslate
+      }}<a href="mailto:contact@apd-gba.be" class="text-brand-600 underline underline-offset-2 hover:opacity-80 break-words">contact&#64;apd-gba.be</a>, <a
+        href="https://www.gegevensbeschermingsautoriteit.be" target="_blank" rel="noopener noreferrer"
+        class="text-brand-600 underline underline-offset-2 hover:opacity-80 break-words">www.gegevensbeschermingsautoriteit.be</a>{{ 'privacy.complaint.p2' | mnTranslate }}</p>
+  </div>
+
+  <!-- Contact (info@ + phone as real links) -->
+  <div class="mt-12">
+    <h2 class="font-display font-bold text-xl md:text-2xl text-ink mb-4">{{ 'privacy.contact.title' | mnTranslate }}</h2>
+    <p class="text-[17px] leading-relaxed text-text-grey">{{ 'privacy.contact.p1' | mnTranslate
+      }}<a href="mailto:info@slopeworks.nl" class="text-brand-600 underline underline-offset-2 hover:opacity-80 break-words">info&#64;slopeworks.nl</a>{{ 'privacy.contact.mid' | mnTranslate
+      }}<a href="tel:+32468411287" class="text-brand-600 underline underline-offset-2 hover:opacity-80 break-words">+32&nbsp;468&nbsp;41&nbsp;12&nbsp;87</a>{{ 'privacy.contact.p2' | mnTranslate }}</p>
+  </div>
+</section>

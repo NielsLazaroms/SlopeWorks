@@ -94,6 +94,36 @@
   background-position: 0 50%;
 }
 
+/* Footer link motif: a yellow underline that grows from the centre with a soft
+   glow on hover/focus, echoing the site's brand-bar accents. Reused across the
+   footer's social, navigation and legal links so they share one interaction. */
+.sw-underlink {
+  position: relative;
+  color: inherit;
+  transition: color 0.3s ease;
+}
+.sw-underlink::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -0.35rem;
+  width: 0;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--color-brand-500);
+  transition: width 0.3s ease, left 0.3s ease, box-shadow 0.3s ease;
+}
+.sw-underlink:hover,
+.sw-underlink:focus-visible {
+  color: var(--color-brand-600);
+}
+.sw-underlink:hover::after,
+.sw-underlink:focus-visible::after {
+  left: 0;
+  width: 100%;
+  box-shadow: 0 0 6px 1px rgba(255, 187, 0, 0.55);
+}
+
 /* "In short" statement beneath the hero: figures wrapped in <b> are tinted with
    the on-light brand yellow so they stay scannable within the sentence. */
 .stat-line b {

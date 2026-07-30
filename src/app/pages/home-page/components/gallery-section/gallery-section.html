@@ -7,7 +7,7 @@
     <!-- Feature frame: one photo at a time, contained in the content column so it
          always fits the viewport. Slides crossfade; the location stamp is the
          "we've been there" proof. -->
-    <figure class="relative w-full h-[300px] sm:h-[400px] md:h-[480px] lg:h-[560px] rounded-2xl overflow-hidden bg-ink-raised">
+    <figure class="relative w-full h-75 sm:h-100 md:h-120 lg:h-140 rounded-2xl overflow-hidden bg-ink-raised">
       @for (slide of slides; track slide.src; let i = $index) {
         <img
           class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-out"
@@ -20,7 +20,7 @@
       }
 
       <!-- Legibility scrim under the overlays -->
-      <div class="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-ink/70 to-transparent pointer-events-none"></div>
+      <div class="absolute inset-x-0 bottom-0 h-28 bg-linear-to-t from-ink/70 to-transparent pointer-events-none"></div>
 
       <!-- Location stamp -->
       <span mnBadge [data]="{variant: 'fill', color: 'primary', size: 'sm'}"
@@ -48,7 +48,7 @@
           (click)="select(i)"
           [attr.aria-label]="slide.caption"
           [attr.aria-current]="i === activeIndex() ? 'true' : null"
-          class="group relative shrink-0 h-16 w-24 sm:h-[70px] sm:w-28 rounded-lg overflow-hidden cursor-pointer transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500"
+          class="group relative shrink-0 h-16 w-24 sm:h-17.5 sm:w-28 rounded-lg overflow-hidden cursor-pointer transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500"
           [ngClass]="i === activeIndex() ? 'ring-2 ring-brand-500 ring-offset-2 ring-offset-paper' : 'opacity-55 hover:opacity-100'"
         >
           <img class="absolute inset-0 w-full h-full object-cover" [src]="slide.src" alt="" loading="lazy" />

@@ -282,14 +282,22 @@
           "copyrightText": { $translate: "footer.copyright" },
           "links": [
             {
-              "label": "Linkedin",
+              "label": "LinkedIn",
               "href": "https://www.linkedin.com/company/slopeworks/"
             },
             {
               "label": "Instagram",
               "href": "https://www.instagram.com/slopeworks_ski/"
             }
-          ]
+          ],
+          "email": "info@slopeworks.nl",
+          "phone": "+32 468 41 12 87",
+          "addressLines": [
+            "Rodekruisstraat 64/1",
+            "3920 Lommel"
+          ],
+          "companyNumber": "BE 1036.649.787",
+          "vatNumber": "BE 1036.649.787"
         }
       }
     }

@@ -1,28 +1,92 @@
-<footer class="bg-paper border-t border-ink/10 w-full">
-  <div class="px-6 lg:px-16 py-10">
-    <!-- Row 1: brand (left) + social links (right) -->
-    <div class="flex flex-col md:flex-row justify-between items-center gap-6 md:gap-0">
-      <!-- Logo  -->
-      <div class="font-bold">
-      <img [src]="componentConfig.logoSrc" [alt]="componentConfig.logoAlt" class="h-24" />
+<footer class="bg-paper-band border-t border-ink/10 w-full">
+  <div class="max-w-7xl mx-auto px-6 lg:px-16 py-14 lg:py-16">
+    <!-- Upper region: brand voice + three colophon columns -->
+    <!-- 4 columns on desktop (left-aligned editorial spread); collapses to a
+         centered 2×2 grid on tablets and a single centered column on phones. -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.1fr_1fr_1fr_1.3fr] gap-10 lg:gap-12
+                text-center lg:text-left">
+
+      <!-- Brand: mark, social links -->
+      <div class="flex flex-col items-center lg:items-start">
+        <img [src]="componentConfig.logoSrc" [alt]="componentConfig.logoAlt" class="h-20 w-auto lg:-ml-1" />
+        <ul class="mt-6 flex flex-col gap-3">
+          @for (link of componentConfig.links; track link.label) {
+            <li>
+              <a [href]="link.href" target="_blank" rel="noopener noreferrer"
+                 class="sw-underlink font-sans text-sm text-ink outline-none">
+                {{ link.label }}
+              </a>
+            </li>
+          }
+        </ul>
+      </div>
+
+      <!-- Navigate: mirrors the main navigation -->
+      <nav class="flex flex-col items-center lg:items-start" [attr.aria-label]="'footer.nav.title' | mnTranslate">
+        <app-eyebrow class="mb-5">{{ 'footer.nav.title' | mnTranslate }}</app-eyebrow>
+        <ul class="flex flex-col gap-3">
+          @for (item of navItems; track item.route) {
+            <li>
+              <a [routerLink]="item.route"
+                 class="sw-underlink font-sans text-sm text-text-grey outline-none">
+                {{ item.labelKey | mnTranslate }}
+              </a>
+            </li>
+          }
+        </ul>
+      </nav>
+
+      <!-- Reach us: the direct channels -->
+      <div class="flex flex-col items-center lg:items-start">
+        <app-eyebrow class="mb-5">{{ 'footer.reach.title' | mnTranslate }}</app-eyebrow>
+        <ul class="flex flex-col gap-3 font-sans text-sm text-text-grey">
+          @if (componentConfig.email; as email) {
+            <li>
+              <a [href]="'mailto:' + email" class="sw-underlink outline-none">{{ email }}</a>
+            </li>
+          }
+          @if (componentConfig.phone; as phone) {
+            <li>
+              <a [href]="'tel:' + telHref(phone)" class="sw-underlink outline-none">{{ phone }}</a>
+            </li>
+          }
+        </ul>
+      </div>
+
+      <!-- Base camp: registered office + legal numbers, framed as their place on the map -->
+      <div class="flex flex-col items-center lg:items-start">
+        <app-eyebrow class="mb-5">{{ 'footer.base.title' | mnTranslate }}</app-eyebrow>
+        <address class="not-italic font-sans text-sm leading-relaxed text-text-grey">
+          <span class="block">{{ componentConfig.logoAlt }}</span>
+          @for (line of componentConfig.addressLines; track line) {
+            <span class="block">{{ line }}</span>
+          }
+          <span class="block">{{ 'footer.country' | mnTranslate }}</span>
+        </address>
+        <dl class="mt-4 space-y-1.5 font-sans text-[13px] leading-snug text-text-grey">
+          @if (componentConfig.companyNumber; as reg) {
+            <div class="flex flex-wrap justify-center lg:justify-start gap-x-1.5">
+              <dt>{{ 'footer.companyNumber' | mnTranslate }}</dt>
+              <dd class="text-ink/70">{{ reg }}</dd>
+            </div>
+          }
+          @if (componentConfig.vatNumber; as vat) {
+            <div class="flex flex-wrap justify-center lg:justify-start gap-x-1.5">
+              <dt>{{ 'footer.vatNumber' | mnTranslate }}</dt>
+              <dd class="text-ink/70">{{ vat }}</dd>
+            </div>
+          }
+        </dl>
+      </div>
     </div>
 
-      <!-- Social links: growing yellow underline + soft glow on hover/focus -->
-      <ul class="flex flex-row gap-9">
-        @for (link of componentConfig.links; track link.label) {
-          <li class="relative group">
-            <a [href]="link.href" target="_blank" rel="noopener noreferrer"
-               class="relative font-sans text-sm text-ink transition-colors duration-300 ease-in-out cursor-pointer outline-none group-hover:text-brand-600 group-focus-within:text-brand-600
-                      after:content-[''] after:absolute after:left-1/2 after:-bottom-2.5 after:w-0 after:h-0.75 after:bg-brand-500 after:rounded-xs after:transition-all after:duration-300 after:ease-in-out group-hover:after:w-full group-hover:after:left-0 group-focus-within:after:w-full group-focus-within:after:left-0
-                      before:content-[''] before:absolute before:left-1/2 before:-bottom-2.75 before:w-0 before:h-2.5 before:bg-brand-500/70 before:blur-[6px] before:opacity-0 before:transition-all before:duration-300 before:ease-in-out group-hover:before:w-full group-hover:before:left-0 group-hover:before:opacity-100 group-focus-within:before:w-full group-focus-within:before:left-0 group-focus-within:before:opacity-100">
-              {{ link.label }}
-            </a>
-          </li>
-        }
-      </ul>
+    <!-- Baseline: copyright + privacy -->
+    <div class="mt-12 pt-7 border-t border-ink/10 flex flex-col lg:flex-row items-center lg:justify-between gap-4
+                text-center font-sans text-sm text-text-grey">
+      <span>© {{ currentYear }} {{ componentConfig.copyrightText }}</span>
+      <a routerLink="/privacy" class="sw-underlink text-text-grey outline-none">
+        {{ 'footer.privacy' | mnTranslate }}
+      </a>
     </div>
-
-    <!-- Copyright, quiet centered baseline -->
-    <div class="font-sans text-sm text-text-grey text-center mt-8">© {{ currentYear }} {{ componentConfig.copyrightText }}</div>
   </div>
 </footer>

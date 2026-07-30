@@ -46,5 +46,10 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/contact-page/contact-page').then((m) => m.ContactPage),
     data: {seo: 'contact'},
   },
+  {
+    path: 'privacy',
+    loadComponent: () => import('./pages/privacy-page/privacy-page').then((m) => m.PrivacyPage),
+    data: {seo: 'privacy'},
+  },
   {path: '**', redirectTo: ''},
 ];
