@@ -2,7 +2,7 @@ import {Component, HostListener, inject, InjectionToken} from '@angular/core';
 import {NgClass} from '@angular/common';
 import {Router} from '@angular/router';
 import {NavListItemComponent} from './nav-list-item/nav-list-item.component';
-import {MnLanguageService, provideMnComponentConfig} from 'mn-angular-lib';
+import {MnButton, MnButtonTypes, MnLanguageService, provideMnComponentConfig} from 'mn-angular-lib';
 import {NavigationService} from '../../services/navigation.service';
 
 /**
@@ -36,7 +36,7 @@ export const APP_NAVBAR_CONFIG = new InjectionToken<NavbarConfig>('APP_NAVBAR_CO
 
 @Component({
   selector: 'app-navbar',
-  imports: [NavListItemComponent, NgClass],
+  imports: [NavListItemComponent, MnButton, NgClass],
   templateUrl: './navbar.component.html',
   standalone: true,
   providers: [
@@ -52,6 +52,24 @@ export class NavbarComponent {
 
   /** Whether the mobile full-screen menu is open. */
   menuOpen = false;
+
+  /** MnLib styling for the desktop Contact CTA (compact brand-yellow fill). */
+  protected readonly contactData: Partial<MnButtonTypes> = {
+    color: 'primary',
+    size: 'sm',
+    variant: 'fill',
+    borderRadius: 'sm',
+    hover: true,
+  };
+
+  /** MnLib styling for the Contact CTA in the mobile menu (larger, full-width feel). */
+  protected readonly contactMobileData: Partial<MnButtonTypes> = {
+    color: 'primary',
+    size: 'lg',
+    variant: 'fill',
+    borderRadius: 'sm',
+    hover: true,
+  };
 
   /** The currently active locale (`'en'` or `'nl'`). */
   get currentLocale(): string {
@@ -78,13 +96,16 @@ export class NavbarComponent {
   }
 
   /**
-   * Closes the mobile menu when a click lands outside the navbar.
+   * Closes the mobile menu when a click lands outside both the navbar and the
+   * open mobile menu panel. The panel is a sibling of the navbar (not a child),
+   * so it is matched explicitly — otherwise in-panel actions such as switching
+   * language would count as "outside" and close the menu.
    *
    * @param event The originating document click.
    */
   @HostListener('document:click', ['$event'])
   onClickOutside(event: Event) {
-    const clickedInside = (event.target as HTMLElement).closest('.navbar');
+    const clickedInside = (event.target as HTMLElement).closest('.navbar, .navbar-menu');
     if (!clickedInside) {
       this.menuOpen = false;
     }
