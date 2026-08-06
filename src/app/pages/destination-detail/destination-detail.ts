@@ -42,6 +42,10 @@ interface DestinationConfig {
   fitNo: number;
   /** Number of FAQ entries. */
   faq: number;
+  /** Whether this area has authored "a day with your team" copy (`<prefix>.day.*`). */
+  day?: boolean;
+  /** Whether this area has authored travel/logistics copy (`<prefix>.logistics.*`). */
+  logistics?: boolean;
   /** Slugs of the three related areas shown at the foot of the page. */
   relatedSlugs: string[];
 }
@@ -66,12 +70,12 @@ const AREA_META: Record<string, AreaMeta> = {
 
 /** Per-area template configuration, keyed by URL slug. */
 const CONFIG: Record<string, DestinationConfig> = {
-  'solden': {prefix: 'solden', signatureImage: '/images/destinations/solden-hero.webp', fitYes: 4, fitNo: 3, faq: 4, relatedSlugs: ['mayrhofen', 'st-anton', 'gstaad']},
-  'mayrhofen': {prefix: 'mayrhofen', signatureImage: '/images/destinations/mayrhofen-hero.webp', fitYes: 4, fitNo: 2, faq: 4, relatedSlugs: ['solden', 'st-anton', 'gstaad']},
-  'st-anton': {prefix: 'stanton', signatureImage: '/images/destinations/st-anton-hero.webp', fitYes: 3, fitNo: 3, faq: 4, relatedSlugs: ['solden', 'kitzbuhel', 'gstaad']},
-  'kitzbuhel': {prefix: 'kitzbuhel', signatureImage: '/images/destinations/kitzbuhel-hero.webp', fitYes: 3, fitNo: 2, faq: 3, relatedSlugs: ['mayrhofen', 'st-anton', 'zell-am-see']},
-  'zell-am-see': {prefix: 'zellamsee', signatureImage: '/images/destinations/zell-am-see-hero.webp', fitYes: 4, fitNo: 3, faq: 3, relatedSlugs: ['kitzbuhel', 'mayrhofen', 'gstaad']},
-  'gstaad': {prefix: 'gstaad', signatureImage: '/images/destinations/gstaad-hero.webp', fitYes: 4, fitNo: 3, faq: 4, relatedSlugs: ['solden', 'st-anton', 'zell-am-see']},
+  'solden': {prefix: 'solden', signatureImage: '/images/destinations/solden-hero.webp', fitYes: 4, fitNo: 3, faq: 4, day: true, logistics: true, relatedSlugs: ['mayrhofen', 'st-anton', 'gstaad']},
+  'mayrhofen': {prefix: 'mayrhofen', signatureImage: '/images/destinations/mayrhofen-hero.webp', fitYes: 4, fitNo: 2, faq: 4, day: true, logistics: true, relatedSlugs: ['solden', 'st-anton', 'gstaad']},
+  'st-anton': {prefix: 'stanton', signatureImage: '/images/destinations/st-anton-hero.webp', fitYes: 3, fitNo: 3, faq: 4, day: true, logistics: true, relatedSlugs: ['solden', 'kitzbuhel', 'gstaad']},
+  'kitzbuhel': {prefix: 'kitzbuhel', signatureImage: '/images/destinations/kitzbuhel-hero.webp', fitYes: 3, fitNo: 2, faq: 3, day: true, logistics: true, relatedSlugs: ['mayrhofen', 'st-anton', 'zell-am-see']},
+  'zell-am-see': {prefix: 'zellamsee', signatureImage: '/images/destinations/zell-am-see-hero.webp', fitYes: 4, fitNo: 3, faq: 3, day: true, logistics: true, relatedSlugs: ['kitzbuhel', 'mayrhofen', 'gstaad']},
+  'gstaad': {prefix: 'gstaad', signatureImage: '/images/destinations/gstaad-hero.webp', fitYes: 4, fitNo: 3, faq: 4, day: true, logistics: true, relatedSlugs: ['solden', 'st-anton', 'zell-am-see']},
 };
 
 /** A related area surfaced at the foot of a detail page. */
@@ -108,6 +112,10 @@ interface DestinationView {
   fitNoKeys: string[];
   /** FAQ entries for the shared accordion. */
   faqs: FaqEntry[];
+  /** Whether to render the "a day with your team" section for this area. */
+  hasDay: boolean;
+  /** Whether to render the travel/logistics section for this area. */
+  hasLogistics: boolean;
   /** The three related areas. */
   related: RelatedRef[];
 }
@@ -164,6 +172,8 @@ export class DestinationDetailPage implements OnDestroy {
       fitYesKeys: range(cfg.fitYes).map((i) => `${p}.fit.yes${i}`),
       fitNoKeys: range(cfg.fitNo).map((i) => `${p}.fit.no${i}`),
       faqs: range(cfg.faq).map((i) => ({qKey: `${p}.faq.q${i}`, aKey: `${p}.faq.a${i}`})),
+      hasDay: !!cfg.day,
+      hasLogistics: !!cfg.logistics,
       related: cfg.relatedSlugs.map((s) => ({
         name: AREA_META[s].name,
         countryKey: AREA_META[s].countryKey,
@@ -194,7 +204,7 @@ export class DestinationDetailPage implements OnDestroy {
     if (!view) {
       return;
     }
-    this.seo.setFromKeys(`${view.prefix}.title`, `${view.prefix}.subtitle`);
+    this.seo.setFromKeys(`${view.prefix}.title`, `seo.dest.${view.prefix}.description`);
     this.seo.setBreadcrumb([
       {name: this.lang.translate('breadcrumb.home'), path: '/'},
       {name: this.lang.translate('breadcrumb.destinations'), path: '/bestemmingen'},

@@ -5,6 +5,16 @@
   [subtitle]="'destinations.subtitle' | mnTranslate"
 ></app-page-hero>
 
+<!-- Lead-in: gives the grid a section H2 (fixes the H1→H3 hierarchy skip) and
+     adds keyword-rich context before the six area cards. -->
+<section appReveal class="max-w-7xl mx-auto px-6 lg:px-16 pt-14 lg:pt-20 pb-10 lg:pb-12">
+  <div class="max-w-2xl">
+    <app-eyebrow class="mb-4">{{ 'destinations.grid.label' | mnTranslate }}</app-eyebrow>
+    <h2 class="font-display font-extrabold text-3xl md:text-4xl tracking-tight leading-[1.12] mb-4">{{ 'destinations.grid.title' | mnTranslate }}</h2>
+    <p class="text-base leading-relaxed text-text-grey">{{ 'destinations.grid.body' | mnTranslate }}</p>
+  </div>
+</section>
+
 <!-- Country filter -->
 <div class="border-b border-[#E8E8F0] bg-paper">
   <div class="max-w-7xl mx-auto px-6 lg:px-16 py-6 flex flex-wrap gap-3">
@@ -32,7 +42,7 @@
         class="group block bg-paper-card border border-[#E8E8F0] rounded-[10px] overflow-hidden transition-all duration-150 hover:-translate-y-1 hover:shadow-[0_14px_30px_rgba(0,0,0,0.10)]"
       >
         <div class="relative h-48 overflow-hidden">
-          <img [src]="dest.imageUrl" [alt]="dest.name" loading="lazy"
+          <img [src]="dest.imageUrl" [alt]="('destinations.areaImageAlt' | mnTranslate) + ' ' + dest.name" loading="lazy"
                class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.04]" />
           @if (dest.badgeKey) {
             <span mnBadge [data]="{variant: 'fill', color: 'primary', size: 'sm'}"

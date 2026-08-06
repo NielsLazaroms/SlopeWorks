@@ -97,6 +97,30 @@
     </div>
   </section>
 
+  <!-- Sample day: editorial prose, continues on the paper background. -->
+  @if (d.hasDay) {
+    <section appReveal class="max-w-7xl mx-auto px-6 lg:px-16 pb-16 lg:pb-24">
+      <div class="max-w-3xl">
+        <app-eyebrow class="mb-4">{{ d.prefix + '.day.label' | mnTranslate }}</app-eyebrow>
+        <h2 class="font-display font-extrabold text-3xl md:text-4xl tracking-tight leading-[1.12] max-w-2xl mb-6">{{ d.prefix + '.day.title' | mnTranslate }}</h2>
+        <p class="text-lg leading-relaxed text-text-grey">{{ d.prefix + '.day.body' | mnTranslate }}</p>
+      </div>
+    </section>
+  }
+
+  <!-- Logistics: featured cream band — the "we handle this" beat. -->
+  @if (d.hasLogistics) {
+    <section appReveal class="bg-paper-band border-y border-[#EFE7D0] px-6 lg:px-16 py-20 lg:py-24 mb-12 lg:mb-16">
+      <div class="max-w-7xl mx-auto">
+        <div class="max-w-3xl">
+          <app-eyebrow class="mb-4">{{ d.prefix + '.logistics.label' | mnTranslate }}</app-eyebrow>
+          <h2 class="font-display font-extrabold text-3xl md:text-4xl tracking-tight leading-[1.12] max-w-2xl mb-6">{{ d.prefix + '.logistics.title' | mnTranslate }}</h2>
+          <p class="text-lg leading-relaxed text-text-grey">{{ d.prefix + '.logistics.body' | mnTranslate }}</p>
+        </div>
+      </div>
+    </section>
+  }
+
   <!-- Related destinations -->
   <section appReveal class="max-w-7xl mx-auto px-6 lg:px-16 pb-20 lg:pb-28">
     <app-eyebrow class="mb-4">{{ d.prefix + '.related.label' | mnTranslate }}</app-eyebrow>
@@ -106,7 +130,7 @@
         <a [routerLink]="dest.route"
            class="group block rounded-xl overflow-hidden border border-[#E8E8F0] bg-paper-card transition-all duration-150 hover:-translate-y-1 hover:shadow-[0_14px_30px_rgba(0,0,0,0.1)]">
           <div class="h-52 lg:h-60 overflow-hidden">
-            <img [src]="dest.imageUrl" [alt]="dest.name" loading="lazy" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.05]" />
+            <img [src]="dest.imageUrl" [alt]="('destinations.areaImageAlt' | mnTranslate) + ' ' + dest.name" loading="lazy" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.05]" />
           </div>
           <div class="px-6 py-5">
             <div class="font-display text-[11px] tracking-[0.07em] uppercase text-text-grey">{{ dest.countryKey | mnTranslate }}</div>

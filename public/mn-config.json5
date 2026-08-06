@@ -245,7 +245,7 @@
       },
       "navbar": {
         "app-navbar": {
-          "logoSrc": "logo_slopeworks.svg",
+          "logoSrc": "logo_slopeworks.webp",
           "logoAlt": "SlopeWorks",
           "navItems": [
             {
@@ -277,7 +277,7 @@
       },
       "footer": {
         "app-footer": {
-          "logoSrc": "logo_slopeworks.svg",
+          "logoSrc": "logo_slopeworks.webp",
           "logoAlt": "SlopeWorks",
           "copyrightText": { $translate: "footer.copyright" },
           "links": [
