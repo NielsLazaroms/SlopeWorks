@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --port 5000",
     "build": "ng build && node scripts/localize-static.mjs dist/SlopeWorks/browser https://slopeworks.nl nl",
     "build:eu": "ng build --configuration production,eu && node scripts/localize-static.mjs dist/slopeworks-eu/browser https://slopeworks.eu en",
     "build:be": "ng build --configuration production,be && node scripts/localize-static.mjs dist/slopeworks-be/browser https://slopeworks.be nl",
