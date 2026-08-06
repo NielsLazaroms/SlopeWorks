@@ -3,6 +3,7 @@
   <!-- Left: who you are actually reaching, and the direct ways to do it -->
   <div class="max-w-md">
     <app-eyebrow class="mb-4">{{ 'contact.reach.label' | mnTranslate }}</app-eyebrow>
+    <h2 class="font-display font-extrabold text-3xl md:text-[2rem] tracking-tight leading-[1.12] mb-5">{{ 'contact.reach.title' | mnTranslate }}</h2>
     <p class="text-[17px] leading-relaxed text-text-grey">
       {{ componentConfig.informationDescription }}
     </p>
@@ -39,9 +40,9 @@
   <!-- Right: the message, framed as an actual note to Bas & Carmen -->
   <form [formGroup]="form" mn-section="form"
         class="rounded-2xl border border-[#E8E8F0] bg-paper-card p-7 shadow-sm sm:p-9 lg:p-11">
-    <p class="font-display font-bold text-xs tracking-[0.14em] uppercase text-dark-yellow mb-6">
+    <h2 class="font-display font-bold text-xs tracking-[0.14em] uppercase text-dark-yellow mb-6">
       {{ 'home.contact.form.title' | mnTranslate }}
-    </p>
+    </h2>
 
     <!-- Printed salutation: the note opens exactly as the sent email does -->
     <p class="font-display font-semibold text-xl text-ink mb-6">{{ componentConfig.emailSalutation }}</p>

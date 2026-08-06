@@ -6,6 +6,7 @@ import {MnBadge, MnTranslatePipe} from 'mn-angular-lib';
 import {PageHeroComponent} from '../../components/page-hero/page-hero';
 import {PageCtaComponent} from '../../components/page-cta/page-cta';
 import {RevealDirective} from '../../components/reveal/reveal';
+import {EyebrowComponent} from '../../components/eyebrow/eyebrow';
 
 /**
  * A ski area SlopeWorks has scouted, as shown on the destinations overview.
@@ -38,7 +39,7 @@ interface DestinationEntry {
 @Component({
   selector: 'app-destinations-page',
   standalone: true,
-  imports: [NgClass, RouterLink, LucideArrowRight, MnBadge, MnTranslatePipe, PageHeroComponent, PageCtaComponent, RevealDirective],
+  imports: [NgClass, RouterLink, LucideArrowRight, MnBadge, MnTranslatePipe, PageHeroComponent, PageCtaComponent, RevealDirective, EyebrowComponent],
   templateUrl: './destinations-page.html',
 })
 export class DestinationsPage {
