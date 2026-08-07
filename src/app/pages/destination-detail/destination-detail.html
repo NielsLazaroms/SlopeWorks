@@ -56,8 +56,8 @@
   </section>
 
   <!-- Signature moment (warm featured band) -->
-  <section appReveal class="bg-paper-band border-y border-[#EFE7D0] px-6 lg:px-16 py-20 lg:py-24">
-    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+  <section appReveal class="bg-paper-band border-y border-[#EFE7D0] py-20 lg:py-24">
+    <div class="max-w-7xl mx-auto px-6 lg:px-16 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
       <div class="relative h-80 lg:h-120 rounded-xl overflow-hidden">
         <img [src]="d.signatureImage" [alt]="d.prefix + '.signature.alt' | mnTranslate" class="absolute inset-0 w-full h-full object-cover" />
         <div class="absolute inset-0 bg-[linear-gradient(160deg,rgba(58,79,99,0.15),rgba(14,24,34,0.75))]"></div>
@@ -110,8 +110,8 @@
 
   <!-- Logistics: featured cream band — the "we handle this" beat. -->
   @if (d.hasLogistics) {
-    <section appReveal class="bg-paper-band border-y border-[#EFE7D0] px-6 lg:px-16 py-20 lg:py-24 mb-12 lg:mb-16">
-      <div class="max-w-7xl mx-auto">
+    <section appReveal class="bg-paper-band border-y border-[#EFE7D0] py-20 lg:py-24 mb-16 lg:mb-24">
+      <div class="max-w-7xl mx-auto px-6 lg:px-16">
         <div class="max-w-3xl">
           <app-eyebrow class="mb-4">{{ d.prefix + '.logistics.label' | mnTranslate }}</app-eyebrow>
           <h2 class="font-display font-extrabold text-3xl md:text-4xl tracking-tight leading-[1.12] max-w-2xl mb-6">{{ d.prefix + '.logistics.title' | mnTranslate }}</h2>
