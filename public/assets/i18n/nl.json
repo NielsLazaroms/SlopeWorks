@@ -146,6 +146,17 @@
   "seo.contact.description": "Vertel ons wat jouw team zoekt. Geen verkooppraatje, gewoon een eerlijk gesprek over wat jouw groep op de berg nodig heeft.",
   "seo.privacy.title": "Privacyverklaring",
   "seo.privacy.description": "Hoe SlopeWorks omgaat met je persoonsgegevens: welke gegevens we verzamelen, waarom, met wie we ze delen en welke rechten je hebt.",
+  "seo.notfound.title": "Pagina niet gevonden",
+  "seo.notfound.description": "Deze pagina staat niet op onze kaart. Ga terug naar de bestemmingen of neem contact op om je ski-bedrijfsuitje te plannen.",
+
+  "notfound.eyebrow": "404 · Buiten piste",
+  "notfound.titleLead": "Je bent van de ",
+  "notfound.titleAccent": "piste geraakt.",
+  "notfound.lede": "Deze pagina staat niet op onze kaart. Geen zorgen. We zetten je zo weer op de piste.",
+  "notfound.primary": "Terug naar home",
+  "notfound.secondary": "Bekijk bestemmingen",
+  "notfound.contactPrompt": "Zoek je iets specifieks?",
+  "notfound.contact": "Praat met ons",
 
   "contact.eyebrow": "Contact",
   "contact.title": "Vertel ons wat je zoekt.",

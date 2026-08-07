@@ -1,0 +1,43 @@
+<main class="relative overflow-hidden bg-ink min-h-screen flex items-center">
+  <!-- Scouting photograph under the site's deep hero gradient -->
+  <img data-anim="photo" src="/images/hero_image.webp" alt="" aria-hidden="true" class="absolute inset-0 w-full h-full object-cover" />
+  <div class="absolute inset-0 bg-[linear-gradient(165deg,rgba(11,12,14,0.60)_0%,rgba(11,12,14,0.74)_45%,rgba(11,12,14,0.94)_100%)]"></div>
+  <!-- Warm glow behind the headline, echoing the home hero -->
+  <div class="absolute -top-24 -left-24 w-[46rem] h-[46rem] rounded-full bg-[radial-gradient(circle,rgba(255,187,0,0.10),transparent_62%)]"></div>
+  <!-- Ambient snow, drawn over the photo but beneath the content (see startSnow) -->
+  <canvas data-snow aria-hidden="true" class="absolute inset-0 w-full h-full pointer-events-none"></canvas>
+
+  <div class="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-16 py-28">
+    <app-eyebrow data-anim="eyebrow" tone="dark" [dot]="true" class="mb-6">{{ 'notfound.eyebrow' | mnTranslate }}</app-eyebrow>
+
+    <!-- overflow-hidden mask so the headline rises up behind its own edge on load -->
+    <div class="overflow-hidden pb-1 max-w-3xl">
+      <h1 data-anim="heading" class="font-display font-extrabold text-4xl md:text-6xl lg:text-[4.2rem] leading-[1.04] tracking-tight text-white">
+        {{ 'notfound.titleLead' | mnTranslate }}<span class="text-brand-500">{{ 'notfound.titleAccent' | mnTranslate }}</span>
+      </h1>
+    </div>
+
+    <p data-anim="lede" class="mt-6 text-lg md:text-xl text-white/65 max-w-xl leading-relaxed">{{ 'notfound.lede' | mnTranslate }}</p>
+
+    <!-- Buttons are wrapped so the entrance tween runs on the wrapper, leaving each
+         mnButton's own transition intact for a clean hover (no GSAP/CSS conflict). -->
+    <div class="mt-10 flex flex-wrap items-center gap-6">
+      <span data-anim="cta" class="inline-flex">
+        <a mnButton [data]="primaryData" routerLink="/"
+           class="font-display font-bold hover:scale-[1.02] hover:shadow-[0_14px_34px_-10px_rgba(255,187,0,0.6)]">
+          {{ 'notfound.primary' | mnTranslate }}
+        </a>
+      </span>
+      <span data-anim="cta" class="inline-flex">
+        <a mnButton [data]="secondaryData" routerLink="/bestemmingen" class="group font-display font-medium">
+          <span class="inline-flex items-center gap-1.5">{{ 'notfound.secondary' | mnTranslate }}<svg lucideArrowRight [size]="18" aria-hidden="true" class="transition-transform duration-200 ease-out group-hover:translate-x-1"></svg></span>
+        </a>
+      </span>
+    </div>
+
+    <p data-anim="note" class="mt-8 text-sm text-white/75 flex flex-wrap items-center gap-2">
+      <span>{{ 'notfound.contactPrompt' | mnTranslate }}</span>
+      <a routerLink="/contact" class="sw-underlink text-white font-semibold">{{ 'notfound.contact' | mnTranslate }}</a>
+    </p>
+  </div>
+</main>

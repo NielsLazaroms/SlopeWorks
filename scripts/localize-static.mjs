@@ -14,7 +14,7 @@
  * Usage: node scripts/localize-static.mjs <outputDir> <origin> [locale]
  *   e.g. node scripts/localize-static.mjs dist/slopeworks-eu/browser https://slopeworks.eu en
  */
-import {existsSync, readFileSync, rmSync, writeFileSync} from 'node:fs';
+import {copyFileSync, existsSync, readFileSync, rmSync, writeFileSync} from 'node:fs';
 import {join} from 'node:path';
 
 /** The origin baked into the source `public/` files, replaced with the target. */
@@ -57,6 +57,26 @@ if (existsSync(llms)) {
 }
 if (existsSync(llmsEn)) {
   rmSync(llmsEn);
+}
+
+/**
+ * Wire up the 404 for direct (mistyped) URLs. On static hosting a request that
+ * matches no file is served by the host, not Angular, so the prerendered
+ * `/404` page is copied to a root `404.html` and an `.htaccess` points the
+ * host's `ErrorDocument` at it — giving a real HTTP 404 with the branded page.
+ * The Angular `**` route still handles bad in-app navigation client-side.
+ */
+const prerendered404 = join(dir, '404', 'index.html');
+const served404 = join(dir, '404.html');
+if (existsSync(prerendered404)) {
+  copyFileSync(prerendered404, served404);
+  const htaccess = join(dir, '.htaccess');
+  const directive = 'ErrorDocument 404 /404.html';
+  // Preserve any existing rules; only add the directive if it isn't there yet.
+  const existing = existsSync(htaccess) ? readFileSync(htaccess, 'utf8') : '';
+  if (!existing.includes(directive)) {
+    writeFileSync(htaccess, existing ? `${existing.trimEnd()}\n${directive}\n` : `${directive}\n`);
+  }
 }
 
 console.log(`localized ${dir} -> ${origin} (${locale})`);

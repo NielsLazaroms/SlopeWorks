@@ -51,5 +51,19 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/privacy-page/privacy-page').then((m) => m.PrivacyPage),
     data: {seo: 'privacy'},
   },
-  {path: '**', redirectTo: ''},
+  // Explicit `/404` so the static build prerenders a `404/index.html`; the deploy
+  // step copies it to `404.html` and points the host's `ErrorDocument` at it, so a
+  // mistyped URL that finds no file still gets the branded page (see localize-static).
+  {
+    path: '404',
+    loadComponent: () => import('./pages/not-found-page/not-found-page').then((m) => m.NotFoundPage),
+    data: {seo: 'notfound'},
+  },
+  // Any unknown in-app route renders the 404 page in place (keeping the bad URL in
+  // the address bar) instead of silently bouncing to the home page.
+  {
+    path: '**',
+    loadComponent: () => import('./pages/not-found-page/not-found-page').then((m) => m.NotFoundPage),
+    data: {seo: 'notfound'},
+  },
 ];

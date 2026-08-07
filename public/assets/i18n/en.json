@@ -146,6 +146,17 @@
   "seo.contact.description": "Tell us what your team is looking for. No sales pitch, an honest conversation about what your group needs on the mountain.",
   "seo.privacy.title": "Privacy statement",
   "seo.privacy.description": "How SlopeWorks handles your personal data: which data we collect, why, who we share it with and what rights you have.",
+  "seo.notfound.title": "Page not found",
+  "seo.notfound.description": "This page isn't on our map. Head back to the destinations or get in touch to plan your corporate ski trip.",
+
+  "notfound.eyebrow": "404 · Off-piste",
+  "notfound.titleLead": "You've skied off the ",
+  "notfound.titleAccent": "piste.",
+  "notfound.lede": "This page isn't on our map. No harm done. Let's get you back on the piste.",
+  "notfound.primary": "Back to home",
+  "notfound.secondary": "Browse destinations",
+  "notfound.contactPrompt": "Looking for something specific?",
+  "notfound.contact": "Talk to us",
 
   "contact.eyebrow": "Contact",
   "contact.title": "Tell us what you're looking for.",
