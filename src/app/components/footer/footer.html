@@ -8,7 +8,7 @@
 
       <!-- Brand: mark, social links -->
       <div class="flex flex-col items-center lg:items-start">
-        <img [src]="componentConfig.logoSrc" [alt]="componentConfig.logoAlt" class="h-20 w-auto lg:-ml-1" />
+        <img [src]="componentConfig.logoSrc" [alt]="componentConfig.logoAlt" width="256" height="256" class="h-20 w-auto lg:-ml-1" />
         <ul class="mt-6 flex flex-col gap-3">
           @for (link of componentConfig.links; track link.label) {
             <li>

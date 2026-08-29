@@ -1,5 +1,50 @@
 @import "tailwindcss";
+/* Self-hosted fonts (weight-axis variable, upright only). Each declares per-subset
+   @font-face with unicode-range, so the browser downloads only the latin subset our
+   content uses. Bundled same-origin at build — no fonts.gstatic.com dependency. */
+@import '@fontsource-variable/inter/wght.css';
+@import '@fontsource-variable/montserrat/wght.css';
 @source "../node_modules/mn-angular-lib";
+
+/* Metric-adjusted fallback faces (generated with @capsizecss). The fallback —
+   Arial on desktop/iOS, Roboto on Android — is scaled to occupy exactly the same
+   space as the web font, so when the real font swaps in there is no reflow. This
+   removes the font-driven layout shift (CLS) that otherwise pushes the hero's
+   field-note card on mobile. Referenced from `--font-sans` / `--font-display`. */
+@font-face {
+  font-family: "Inter Variable Fallback: Arial";
+  src: local('Arial'), local('ArialMT');
+  font-display: swap;
+  ascent-override: 90.4365%;
+  descent-override: 22.518%;
+  line-gap-override: 0%;
+  size-adjust: 107.1194%;
+}
+@font-face {
+  font-family: "Inter Variable Fallback: Roboto";
+  src: local('Roboto Regular'), local('Roboto-Regular');
+  font-display: swap;
+  ascent-override: 90.2384%;
+  descent-override: 22.4686%;
+  size-adjust: 107.3546%;
+}
+@font-face {
+  font-family: "Montserrat Variable Fallback: Arial";
+  src: local('Arial'), local('ArialMT');
+  font-display: swap;
+  ascent-override: 85.7923%;
+  descent-override: 22.2457%;
+  line-gap-override: 0%;
+  size-adjust: 112.8307%;
+}
+@font-face {
+  font-family: "Montserrat Variable Fallback: Roboto";
+  src: local('Roboto Regular'), local('Roboto-Regular');
+  font-display: swap;
+  ascent-override: 85.6043%;
+  descent-override: 22.197%;
+  size-adjust: 113.0784%;
+}
 
 @theme {
   --color-brand-50:  #FFFBEB;
@@ -57,9 +102,10 @@
   --color-piste-red: #C2472F;
 
   /* Montserrat for display/headings, Inter for body copy. Overriding --font-sans
-     makes Inter the default document font; use `font-display` for headings. */
-  --font-sans: 'Inter', sans-serif;
-  --font-display: 'Montserrat', sans-serif;
+     makes Inter the default document font; use `font-display` for headings.
+     The `* Variable` names are the self-hosted @fontsource families imported above. */
+  --font-sans: 'Inter Variable', 'Inter Variable Fallback: Arial', 'Inter Variable Fallback: Roboto', Arial, sans-serif;
+  --font-display: 'Montserrat Variable', 'Montserrat Variable Fallback: Arial', 'Montserrat Variable Fallback: Roboto', Arial, sans-serif;
 }
 
 @layer base {

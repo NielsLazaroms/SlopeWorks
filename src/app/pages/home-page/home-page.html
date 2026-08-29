@@ -1,9 +1,106 @@
 <div mn-section="home">
   <div id="top-section"><app-home-hero></app-home-hero></div>
   <div appReveal mn-section="why-section" id="why-section" class="scroll-mt-20"><app-why-section></app-why-section></div>
-  <div appReveal mn-section="proof-section" id="proof-section"><app-proof-section></app-proof-section></div>
+
+  <!-- Team first, destination second -->
+  <section appReveal id="team-section" class="max-w-7xl mx-auto px-6 lg:px-16 py-14 lg:py-20 scroll-mt-20">
+    <div class="max-w-3xl">
+      <app-eyebrow class="mb-4">{{ 'home.team.label' | mnTranslate }}</app-eyebrow>
+      <h2 class="font-display font-extrabold text-3xl md:text-4xl lg:text-[2.6rem] tracking-tight leading-[1.1] mb-6">{{ 'home.team.title' | mnTranslate }}</h2>
+      <p class="text-lg leading-relaxed text-ink mb-5">{{ 'home.team.body1' | mnTranslate }}</p>
+      <p class="text-[17px] leading-relaxed text-text-grey">{{ 'home.team.body2' | mnTranslate }}</p>
+    </div>
+  </section>
+
+  <!-- What we handle: instead of an equal-weight list, the section leads with the
+       one part that sets SlopeWorks apart — on-location support, given a photo and
+       room to breathe — then lists the six table-stakes services quietly beneath
+       as a ruled editorial index. Hierarchy is the point: the differentiator gets
+       the spotlight, the expected competences get done well and shown plainly. -->
+  <section appReveal id="services-section" class="bg-paper-band py-14 lg:py-20">
+    <div class="max-w-7xl mx-auto px-6 lg:px-16">
+      <app-eyebrow class="mb-4">{{ 'home.services.label' | mnTranslate }}</app-eyebrow>
+      <h2 class="font-display font-extrabold text-3xl md:text-4xl tracking-tight leading-[1.12] max-w-2xl mb-5">{{ 'home.services.title' | mnTranslate }}</h2>
+      <p class="text-[17px] leading-relaxed text-text-grey max-w-2xl mb-10 lg:mb-12">{{ 'home.services.intro' | mnTranslate }}</p>
+
+      <!-- Featured differentiator: photo left, the on-location story right. -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 rounded-2xl overflow-hidden border border-[#EFE7D0] bg-paper-card shadow-[0_26px_60px_-34px_rgba(11,12,14,0.28)]">
+        <div class="relative min-h-65 lg:min-h-100">
+          <img
+            src="/images/carousel_1-1280.webp"
+            srcset="/images/carousel_1-768.webp 768w, /images/carousel_1-1280.webp 1280w"
+            sizes="(min-width: 1024px) 640px, 100vw"
+            width="1280"
+            height="960"
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            decoding="async"
+            class="absolute inset-0 w-full h-full object-cover" />
+        </div>
+        <div class="p-8 lg:p-12 flex flex-col justify-center">
+          <span class="font-display font-bold text-[11px] uppercase tracking-[0.14em] text-dark-yellow mb-4">{{ 'home.services.featuredKicker' | mnTranslate }}</span>
+          <h3 class="font-display font-extrabold text-2xl lg:text-[1.9rem] tracking-tight leading-[1.12] text-ink mb-4">{{ featuredService.titleKey | mnTranslate }}</h3>
+          <p class="text-[15.5px] leading-relaxed text-text-grey">{{ featuredService.bodyKey | mnTranslate }}</p>
+        </div>
+      </div>
+
+      <!-- The six table-stakes services: a quiet ruled index, pure type. -->
+      <ul class="mt-10 lg:mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 lg:gap-x-12 gap-y-8">
+        @for (service of services; track service.titleKey) {
+          <li class="pt-5 border-t border-[#E4DBBE]">
+            <h3 class="font-display font-bold text-lg leading-snug text-ink mb-2">{{ service.titleKey | mnTranslate }}</h3>
+            <p class="text-[14.5px] leading-relaxed text-text-grey">{{ service.bodyKey | mnTranslate }}</p>
+          </li>
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- What should the trip achieve -->
+  <section appReveal id="outcome-section" class="max-w-7xl mx-auto px-6 lg:px-16 py-14 lg:py-20">
+    <app-eyebrow class="mb-4">{{ 'home.outcome.label' | mnTranslate }}</app-eyebrow>
+    <h2 class="font-display font-extrabold text-3xl md:text-4xl tracking-tight leading-[1.12] max-w-2xl mb-5">{{ 'home.outcome.title' | mnTranslate }}</h2>
+    <p class="text-[17px] leading-relaxed text-text-grey max-w-2xl mb-12">{{ 'home.outcome.intro' | mnTranslate }}</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+      @for (outcome of outcomes; track outcome.titleKey) {
+        <div class="rounded-xl border border-[#E8E8F0] bg-paper-card p-8 lg:p-9">
+          <div class="w-9 h-1 bg-brand-500 rounded-full mb-5"></div>
+          <h3 class="font-display font-bold text-xl mb-3 text-ink">{{ outcome.titleKey | mnTranslate }}</h3>
+          <p class="text-[15px] leading-relaxed text-text-grey">{{ outcome.bodyKey | mnTranslate }}</p>
+        </div>
+      }
+    </div>
+  </section>
+
   <div appReveal mn-section="teambuilding-section" id="teambuilding-section" class="scroll-mt-20"><app-teambuilding-section></app-teambuilding-section></div>
   <div appReveal mn-section="destinations-section" id="destinations-section" class="scroll-mt-20"><app-destinations-section></app-destinations-section></div>
+  <div appReveal mn-section="proof-section" id="proof-section"><app-proof-section></app-proof-section></div>
+
+  <!-- How we organise it: five steps -->
+  <section appReveal id="process-section" class="bg-paper-band py-14 lg:py-20 scroll-mt-20">
+    <div class="max-w-7xl mx-auto px-6 lg:px-16">
+      <app-eyebrow class="mb-4">{{ 'home.process.label' | mnTranslate }}</app-eyebrow>
+      <h2 class="font-display font-extrabold text-3xl md:text-4xl tracking-tight leading-[1.12] max-w-2xl mb-12">{{ 'home.process.title' | mnTranslate }}</h2>
+
+      <ol class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-6">
+        @for (step of steps; track step.titleKey; let i = $index) {
+          <li class="flex flex-col">
+            <span class="font-display font-extrabold text-3xl text-brand-500 mb-3">{{ i + 1 }}</span>
+            <h3 class="font-display font-bold text-base mb-2 text-ink">{{ step.titleKey | mnTranslate }}</h3>
+            <p class="text-[14px] leading-relaxed text-text-grey">{{ step.bodyKey | mnTranslate }}</p>
+          </li>
+        }
+      </ol>
+
+      <div class="mt-11">
+        <a mnButton [data]="processButtonData" routerLink="/hoe-het-werkt" class="font-display font-bold text-dark-yellow! -ml-4">
+          <span class="inline-flex items-center gap-1.5">{{ 'home.process.button' | mnTranslate }}<svg lucideArrowRight [size]="17" aria-hidden="true"></svg></span>
+        </a>
+      </div>
+    </div>
+  </section>
 
   <!-- Orient: route out to the reference pages now that the site is multi-page -->
   <section appReveal id="orient-section" class="max-w-7xl mx-auto px-6 lg:px-16 py-12 lg:py-16">
@@ -24,6 +121,15 @@
   </section>
 
   <div appReveal id="gallery-section"><app-gallery-section></app-gallery-section></div>
+
+  <!-- Home FAQ: kept last, directly above the get-in-touch CTA -->
+  <section appReveal id="faq-section" class="max-w-7xl mx-auto px-6 lg:px-16 py-14 lg:py-20">
+    <div class="max-w-3xl">
+      <app-eyebrow class="mb-6">{{ 'home.faq.label' | mnTranslate }}</app-eyebrow>
+      <app-faq-accordion [items]="homeFaqs" titleKey="home.faq.title" />
+    </div>
+  </section>
+
   <div appReveal id="cta-section">
     <app-page-cta titleKey="home.cta.title" subKey="home.cta.sub" buttonKey="home.cta.button"></app-page-cta>
   </div>

@@ -153,29 +153,56 @@
             "cards": [
               {
                 "country": { $translate: "home.destinations.card1.country" },
-                "name": "Sölden",
+                "name": "Mayrhofen",
                 "tagline": { $translate: "home.destinations.card1.tagline" },
                 "linkText": { $translate: "home.destinations.card1.link" },
-                "imageUrl": "/images/destinations/solden.webp",
-                "imageAlt": { $translate: "home.destinations.card1.tagline" },
-                "route": "/bestemmingen/solden"
-              },
-              {
-                "country": { $translate: "home.destinations.card2.country" },
-                "name": "Mayrhofen",
-                "tagline": { $translate: "home.destinations.card2.tagline" },
-                "linkText": { $translate: "home.destinations.card2.link" },
                 "imageUrl": "/images/destinations/mayrhofen.webp",
-                "imageAlt": { $translate: "home.destinations.card2.tagline" },
+                "imageAlt": { $translate: "home.destinations.card1.tagline" },
                 "route": "/bestemmingen/mayrhofen"
               },
               {
+                "country": { $translate: "home.destinations.card2.country" },
+                "name": "Zell am See-Kaprun",
+                "tagline": { $translate: "home.destinations.card2.tagline" },
+                "linkText": { $translate: "home.destinations.card2.link" },
+                "imageUrl": "/images/destinations/zell-am-see.webp",
+                "imageAlt": { $translate: "home.destinations.card2.tagline" },
+                "route": "/bestemmingen/zell-am-see"
+              },
+              {
                 "country": { $translate: "home.destinations.card3.country" },
-                "name": "Gstaad",
+                "name": "Sölden",
                 "tagline": { $translate: "home.destinations.card3.tagline" },
                 "linkText": { $translate: "home.destinations.card3.link" },
-                "imageUrl": "/images/destinations/gstaad.webp",
+                "imageUrl": "/images/destinations/solden.webp",
                 "imageAlt": { $translate: "home.destinations.card3.tagline" },
+                "route": "/bestemmingen/solden"
+              },
+              {
+                "country": { $translate: "home.destinations.card4.country" },
+                "name": "Kitzbühel-Kirchberg",
+                "tagline": { $translate: "home.destinations.card4.tagline" },
+                "linkText": { $translate: "home.destinations.card4.link" },
+                "imageUrl": "/images/destinations/kitzbuhel.webp",
+                "imageAlt": { $translate: "home.destinations.card4.tagline" },
+                "route": "/bestemmingen/kitzbuhel"
+              },
+              {
+                "country": { $translate: "home.destinations.card5.country" },
+                "name": "St. Anton am Arlberg",
+                "tagline": { $translate: "home.destinations.card5.tagline" },
+                "linkText": { $translate: "home.destinations.card5.link" },
+                "imageUrl": "/images/destinations/st-anton.webp",
+                "imageAlt": { $translate: "home.destinations.card5.tagline" },
+                "route": "/bestemmingen/st-anton"
+              },
+              {
+                "country": { $translate: "home.destinations.card6.country" },
+                "name": "Gstaad",
+                "tagline": { $translate: "home.destinations.card6.tagline" },
+                "linkText": { $translate: "home.destinations.card6.link" },
+                "imageUrl": "/images/destinations/gstaad.webp",
+                "imageAlt": { $translate: "home.destinations.card6.tagline" },
                 "route": "/bestemmingen/gstaad"
               }
             ]
@@ -255,6 +282,10 @@
             {
               "label": { $translate: "navbar.destinations" },
               "route": "/bestemmingen"
+            },
+            {
+              "label": { $translate: "navbar.howitworks" },
+              "route": "/hoe-het-werkt"
             },
             {
               "label": { $translate: "navbar.about" },

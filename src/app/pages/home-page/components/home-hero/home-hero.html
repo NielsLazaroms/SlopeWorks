@@ -1,20 +1,29 @@
-<section class="relative overflow-hidden bg-ink min-h-[86vh] flex items-end">
+<section class="relative overflow-hidden bg-ink min-h-[560px] lg:min-h-[680px] lg:max-h-[820px] flex items-end">
   <!-- Scouting photograph -->
-  <img src="/images/hero_image.webp" alt="" aria-hidden="true" class="absolute inset-0 w-full h-full object-cover" />
+  <img
+    src="/images/hero_image-1280.webp"
+    srcset="/images/hero_image-768.webp 768w, /images/hero_image-1080.webp 1080w, /images/hero_image-1280.webp 1280w"
+    sizes="100vw"
+    width="1280"
+    height="720"
+    alt=""
+    aria-hidden="true"
+    fetchpriority="high"
+    class="absolute inset-0 w-full h-full object-cover" />
   <div class="absolute inset-0 bg-[linear-gradient(180deg,rgba(11,12,14,0.35)_0%,rgba(11,12,14,0.55)_50%,rgba(11,12,14,0.92)_100%)]"></div>
   <!-- Warm glow behind the headline -->
   <div class="absolute -top-32 -left-24 w-[46rem] h-[46rem] rounded-full bg-[radial-gradient(circle,rgba(255,187,0,0.10),transparent_62%)]"></div>
 
-  <div class="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-16 pt-32 pb-16 lg:pb-24">
-    <div class="grid lg:grid-cols-[1.2fr_0.8fr] gap-10 lg:gap-14 items-end">
+  <div class="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-16 pt-28 pb-12 lg:pb-16">
+    <div class="grid lg:grid-cols-[1.15fr_0.85fr] gap-8 lg:gap-14 items-end">
       <div>
-        <app-eyebrow tone="dark" [dot]="true" class="mb-6">{{ 'home.hero.eyebrow' | mnTranslate }}</app-eyebrow>
-        <h1 class="font-display font-extrabold text-4xl md:text-6xl lg:text-[4.4rem] leading-[1.03] tracking-tight text-white max-w-3xl">
-          {{ 'home.hero.titleLead' | mnTranslate }}<span class="text-brand-500">{{ 'home.hero.titleAccent' | mnTranslate }}</span>
+        <app-eyebrow tone="dark" [dot]="true" class="mb-5">{{ 'home.hero.eyebrow' | mnTranslate }}</app-eyebrow>
+        <h1 class="font-display font-extrabold text-4xl md:text-5xl lg:text-[3.75rem] leading-[1.04] tracking-tight text-white max-w-2xl">
+          {{ ('home.hero.titleLead' | mnTranslate) + ' ' }}<span class="text-brand-500">{{ 'home.hero.titleAccent' | mnTranslate }}</span>
         </h1>
-        <p class="mt-6 text-lg md:text-xl italic text-white/65 max-w-lg leading-relaxed">{{ 'home.hero.sub' | mnTranslate }}</p>
+        <p class="mt-5 text-[15px] md:text-base not-italic text-white/70 max-w-xl leading-relaxed">{{ 'home.hero.sub' | mnTranslate }}</p>
 
-        <div class="mt-9 flex flex-wrap items-center gap-6">
+        <div class="mt-7 flex flex-wrap items-center gap-5">
           <a mnButton [data]="primaryData" routerLink="/contact" class="font-display font-bold">
             {{ 'home.hero.primary' | mnTranslate }}
           </a>

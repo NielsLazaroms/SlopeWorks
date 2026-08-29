@@ -11,8 +11,9 @@ Who it's for:
 - (International) Dutch- and English-speaking teams
 
 ## Key pages
-- [SlopeWorks — corporate ski retreats in the Alps](https://slopeworks.nl/): What SlopeWorks does and which teams it serves.
+- [SlopeWorks: corporate ski retreats in the Alps](https://slopeworks.nl/): What SlopeWorks does and which teams it serves.
 - [Destinations](https://slopeworks.nl/bestemmingen/): The Alpine resorts we scout and organise.
+- [How it works](https://slopeworks.nl/hoe-het-werkt/): How we put a company ski trip together, from a 30-minute intake to on-location guidance.
 - [FAQ](https://slopeworks.nl/faq/): Process, group size, planning, transport and cost.
 - [SlopeWorks vs. a travel agency](https://slopeworks.nl/vergelijken/): How SlopeWorks differs from a traditional travel agency.
 - [About SlopeWorks](https://slopeworks.nl/over-ons/): Who we are and how we work.

@@ -7,9 +7,13 @@ import {Component, Input, Output, EventEmitter} from '@angular/core';
  * The active entry is shown in brand yellow; inactive entries share the site's
  * growing-underline link motif (`.sw-underlink`). Two layouts are supported:
  * `bar` for the horizontal desktop navbar and `stacked` for the large mobile menu.
+ *
+ * Rendered as an `li[appNavListItem]` so the component's host element *is* the
+ * `<li>` — a direct child of the parent `<ul>`, keeping the list structure valid
+ * (an `app-nav-list-item` host between `<ul>` and `<li>` breaks list semantics).
  */
 @Component({
-  selector: 'app-nav-list-item',
+  selector: 'li[appNavListItem]',
   standalone: true,
   templateUrl: './nav-list-item.component.html',
 })

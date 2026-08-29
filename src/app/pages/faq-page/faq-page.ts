@@ -92,6 +92,7 @@ export class FaqPage implements OnDestroy {
         {qKey: 'faq.werk.q1', aKey: 'faq.werk.a1'},
         {qKey: 'faq.werk.q2', aKey: 'faq.werk.a2'},
         {qKey: 'faq.werk.q3', aKey: 'faq.werk.a3'},
+        {qKey: 'faq.werk.q4', aKey: 'faq.werk.a4'},
       ],
     },
     {
@@ -132,6 +133,7 @@ export class FaqPage implements OnDestroy {
         {qKey: 'faq.prakt.q1', aKey: 'faq.prakt.a1'},
         {qKey: 'faq.prakt.q2', aKey: 'faq.prakt.a2'},
         {qKey: 'faq.prakt.q3', aKey: 'faq.prakt.a3'},
+        {qKey: 'faq.prakt.q4', aKey: 'faq.prakt.a4'},
       ],
     },
   ];

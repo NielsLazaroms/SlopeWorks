@@ -1,0 +1,48 @@
+<app-page-hero
+  imageUrl="/images/hero_image.webp"
+  [eyebrow]="'howitworks.eyebrow' | mnTranslate"
+  [title]="('howitworks.titleLead' | mnTranslate) + ' ' + ('howitworks.titleAccent' | mnTranslate)"
+  [subtitle]="'howitworks.sub' | mnTranslate"
+></app-page-hero>
+
+<!-- Intro -->
+<section appReveal class="max-w-7xl mx-auto px-6 lg:px-16 pt-16 lg:pt-24 pb-4">
+  <div class="max-w-3xl">
+    <p class="text-lg leading-relaxed text-ink mb-5">{{ 'howitworks.intro1' | mnTranslate }}</p>
+    <p class="text-[17px] leading-relaxed text-text-grey">{{ 'howitworks.intro2' | mnTranslate }}</p>
+  </div>
+</section>
+
+<!-- The five steps -->
+<section appReveal class="max-w-7xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
+  <ol class="flex flex-col gap-10 lg:gap-12">
+    @for (step of steps; track step.titleKey; let i = $index) {
+      <li class="grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-4 lg:gap-10 max-w-4xl">
+        <div class="flex items-center gap-4 lg:flex-col lg:items-start lg:gap-0">
+          <span class="font-display font-extrabold text-4xl lg:text-5xl text-brand-500 leading-none">{{ i + 1 }}</span>
+        </div>
+        <div class="lg:pt-1 lg:border-l lg:border-[#EAE2CE] lg:pl-10">
+          <h2 class="font-display font-extrabold text-2xl md:text-[1.7rem] tracking-tight text-ink mb-3">{{ step.titleKey | mnTranslate }}</h2>
+          <p class="text-[17px] leading-relaxed text-text-grey max-w-2xl">{{ step.bodyKey | mnTranslate }}</p>
+        </div>
+      </li>
+    }
+  </ol>
+</section>
+
+<!-- Practical questions: these read as an FAQ, so they collapse into the shared
+     accordion (one open at a time) instead of a long prose scroll. -->
+<section appReveal class="py-16 lg:py-24">
+  <div class="max-w-7xl mx-auto px-6 lg:px-16">
+    <div class="max-w-3xl">
+      <app-faq-accordion [items]="faqBlocks" />
+    </div>
+  </div>
+</section>
+
+<app-page-cta
+  appReveal
+  titleKey="howitworks.cta.title"
+  subKey="howitworks.cta.sub"
+  buttonKey="howitworks.cta.button"
+></app-page-cta>

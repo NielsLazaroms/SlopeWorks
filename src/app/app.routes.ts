@@ -42,6 +42,11 @@ export const routes: Routes = [
     data: {seo: 'about'},
   },
   {
+    path: 'hoe-het-werkt',
+    loadComponent: () => import('./pages/how-it-works-page/how-it-works-page').then((m) => m.HowItWorksPage),
+    data: {seo: 'howitworks'},
+  },
+  {
     path: 'contact',
     loadComponent: () => import('./pages/contact-page/contact-page').then((m) => m.ContactPage),
     data: {seo: 'contact'},

@@ -9,13 +9,13 @@
 
     <!-- Brand mark -->
     <button type="button" (click)="goHome()" class="shrink-0 cursor-pointer" [attr.aria-label]="componentConfig.logoAlt">
-      <img [src]="componentConfig.logoSrc" [alt]="componentConfig.logoAlt" class="max-h-32 w-auto" />
+      <img [src]="componentConfig.logoSrc" [alt]="componentConfig.logoAlt" width="256" height="256" class="max-h-32 w-auto" />
     </button>
 
     <!-- Desktop navigation -->
     <ul class="hidden lg:flex items-center gap-8 xl:gap-11">
       @for (item of componentConfig.navItems; track item.label) {
-        <app-nav-list-item [label]="item.label" [active]="isActive(item)" (itemClick)="onNavItem(item)"></app-nav-list-item>
+        <li appNavListItem [label]="item.label" [active]="isActive(item)" (itemClick)="onNavItem(item)"></li>
       }
     </ul>
 
@@ -72,7 +72,7 @@
   <div class="navbar-menu lg:hidden fixed inset-x-0 top-20 bottom-0 z-90 bg-paper px-6 py-10 flex flex-col items-center justify-center gap-9 overflow-y-auto text-center">
       <ul class="flex flex-col items-center gap-6">
         @for (item of componentConfig.navItems; track item.label) {
-          <app-nav-list-item variant="stacked" [label]="item.label" [active]="isActive(item)" (itemClick)="onNavItem(item)"></app-nav-list-item>
+          <li appNavListItem variant="stacked" [label]="item.label" [active]="isActive(item)" (itemClick)="onNavItem(item)"></li>
         }
       </ul>
 

@@ -27,7 +27,7 @@
 </section>
 
 <!-- The people (warm featured band): a full-width spread, not a card grid in an empty void -->
-<section appReveal class="bg-paper-band border-y border-[#EFE7D0] py-16 lg:py-24">
+<section appReveal class="bg-paper-band py-16 lg:py-24">
   <div class="max-w-7xl mx-auto px-6 lg:px-16 grid grid-cols-1 lg:grid-cols-[minmax(0,440px)_1fr] gap-10 lg:gap-16 items-center">
     <!-- The two of them, on the mountain they scout -->
     <div class="order-2 lg:order-1">
@@ -43,8 +43,8 @@
 
       <ul class="mt-9 border-t border-[#EAE2CE]">
         @for (person of founders; track person.nameKey) {
-          <li class="flex items-start gap-4 py-5 border-b border-[#EAE2CE]">
-            <span class="mt-1 w-1 h-9 shrink-0 rounded-full bg-brand-500" aria-hidden="true"></span>
+          <li class="flex items-start gap-3.5 py-5 border-b border-[#EAE2CE]">
+            <span class="mt-2 w-1.5 h-1.5 shrink-0 rounded-full bg-brand-500" aria-hidden="true"></span>
             <div>
               <h3 class="font-display font-bold text-lg text-ink">{{ person.nameKey | mnTranslate }}</h3>
               <p class="text-sm text-text-grey mt-1">{{ person.roleKey | mnTranslate }}</p>
@@ -56,17 +56,14 @@
   </div>
 </section>
 
-<!-- What stays true: three constants, hairline-divided rather than boxed -->
+<!-- How we work: three commitments, as a hairline-ruled editorial ledger -->
 <section appReveal class="max-w-7xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
-  <app-eyebrow class="mb-4">{{ 'about.values.label' | mnTranslate }}</app-eyebrow>
-  <h2 class="font-display font-extrabold text-3xl md:text-4xl tracking-tight leading-[1.12] max-w-2xl mb-12">{{ 'about.values.title' | mnTranslate }}</h2>
-
-  <div class="grid grid-cols-1 md:grid-cols-3 border-t border-[#E8E8F0] divide-y md:divide-y-0 md:divide-x divide-[#E8E8F0]">
-    @for (value of values; track value.titleKey) {
-      <div class="py-8 md:px-8 first:md:pl-0 last:md:pr-0">
-        <div class="w-9 h-1 bg-brand-500 rounded-full mb-5"></div>
-        <h3 class="font-display font-bold text-lg mb-2 text-ink">{{ value.titleKey | mnTranslate }}</h3>
-        <p class="text-[14.5px] leading-relaxed text-text-grey">{{ value.bodyKey | mnTranslate }}</p>
+  <div class="max-w-3xl flex flex-col">
+    @for (block of blocks; track block.titleKey) {
+      <div class="pt-10 lg:pt-12 mt-10 lg:mt-12 border-t border-[#EAE2CE] first:pt-0 first:mt-0 first:border-t-0">
+        <app-eyebrow [dot]="true" class="mb-4">{{ block.eyebrowKey | mnTranslate }}</app-eyebrow>
+        <h2 class="font-display font-extrabold text-2xl md:text-3xl tracking-tight leading-[1.14] text-ink mb-4">{{ block.titleKey | mnTranslate }}</h2>
+        <p class="text-[17px] leading-relaxed text-text-grey">{{ block.bodyKey | mnTranslate }}</p>
       </div>
     }
   </div>

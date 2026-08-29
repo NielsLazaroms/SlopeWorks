@@ -1,4 +1,5 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { provideRouter, withInMemoryScrolling } from '@angular/router';
 import { provideHttpClient, withFetch, withInterceptorsFromDi } from '@angular/common/http';
 
@@ -8,6 +9,11 @@ import {provideMnConfig} from 'mn-angular-lib';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
+    // Reuse the prerendered DOM instead of destroying and re-rendering it on
+    // bootstrap. Without this the client rebuilds the whole page from scratch,
+    // which re-paints the LCP hero late (huge LCP "render delay"). `withEventReplay`
+    // captures clicks made before hydration finishes and replays them after.
+    provideClientHydration(withEventReplay()),
     provideRouter(
       routes,
       // Land at the top of each interior page rather than keeping scroll position.

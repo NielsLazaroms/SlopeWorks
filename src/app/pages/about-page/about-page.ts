@@ -16,12 +16,14 @@ interface Founder {
 }
 
 /**
- * A "what stays true" value card.
+ * A prose block in the "how we work" run below the founders band.
  */
-interface Value {
-  /** i18n key for the value title. */
+interface AboutBlock {
+  /** i18n key for the short keyword eyebrow naming the commitment. */
+  eyebrowKey: string;
+  /** i18n key for the block heading. */
   titleKey: string;
-  /** i18n key for the value body. */
+  /** i18n key for the block body. */
   bodyKey: string;
 }
 
@@ -44,10 +46,10 @@ export class AboutPage {
     {nameKey: 'about.carmen.name', roleKey: 'about.carmen.role'},
   ];
 
-  /** The three constants of how SlopeWorks works. */
-  protected readonly values: Value[] = [
-    {titleKey: 'about.value1.title', bodyKey: 'about.value1.body'},
-    {titleKey: 'about.value2.title', bodyKey: 'about.value2.body'},
-    {titleKey: 'about.value3.title', bodyKey: 'about.value3.body'},
+  /** The prose blocks describing how SlopeWorks works. */
+  protected readonly blocks: AboutBlock[] = [
+    {eyebrowKey: 'about.b1.eyebrow', titleKey: 'about.b1.title', bodyKey: 'about.b1.body'},
+    {eyebrowKey: 'about.b2.eyebrow', titleKey: 'about.b2.title', bodyKey: 'about.b2.body'},
+    {eyebrowKey: 'about.b3.eyebrow', titleKey: 'about.b3.title', bodyKey: 'about.b3.body'},
   ];
 }

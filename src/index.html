@@ -6,11 +6,14 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="SlopeWorks organises corporate ski retreats and team-building trips in the Alps. We scout the resort, handle every logistic and run the week, so your team just shows up.">
+  <meta name="author" content="SlopeWorks">
   <meta property="og:site_name" content="SlopeWorks">
   <meta property="og:title" content="SlopeWorks | Corporate ski retreats in the Alps">
   <meta property="og:description" content="We scout the resort, handle every logistic and run the week, so your team just shows up.">
   <meta property="og:image" content="https://slopeworks.eu/images/hero_image.webp">
   <meta property="og:image:alt" content="A group on the slopes at an Alpine ski resort scouted by SlopeWorks">
+  <meta property="og:image:width" content="1280">
+  <meta property="og:image:height" content="720">
   <meta property="og:url" content="https://slopeworks.eu/">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="website">
@@ -18,17 +21,16 @@
   <meta name="twitter:title" content="SlopeWorks | Corporate ski retreats in the Alps">
   <meta name="twitter:description" content="We scout the resort, handle every logistic and run the week, so your team just shows up.">
   <meta name="twitter:image" content="https://slopeworks.eu/images/hero_image.webp">
+  <meta name="twitter:image:alt" content="A group on the slopes at an Alpine ski resort scouted by SlopeWorks">
   <!-- hreflang alternates are written per-page (with the served trailing-slash URL) by SeoService. -->
   <link rel="icon" type="image/png" href="/favicon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800&family=Inter:wght@400;500;600&display=swap"
-    rel="stylesheet">
+  <!-- Fonts are self-hosted via @fontsource (see src/styles.css); no fonts.gstatic.com. -->
   <link
     rel="preload"
     as="image"
-    href="/images/hero_image.webp"
+    href="/images/hero_image-1280.webp"
+    imagesrcset="/images/hero_image-768.webp 768w, /images/hero_image-1080.webp 1080w, /images/hero_image-1280.webp 1280w"
+    imagesizes="100vw"
     fetchpriority="high">
   <script type="application/ld+json">
   {
@@ -87,7 +89,7 @@
 <body>
   <app-root></app-root>
   <noscript>
-    <p><strong>SlopeWorks — ski-bedrijfsuitjes in de Alpen</strong></p>
+    <p><strong>SlopeWorks: ski-bedrijfsuitjes in de Alpen</strong></p>
     <p>
       SlopeWorks organiseert ski-bedrijfsuitjes en teambuildingreizen in de Alpen.
       Wij verkennen het gebied, regelen alle logistiek en begeleiden de week, zodat
@@ -96,11 +98,11 @@
     </p>
     <p>Ontdek de site:</p>
     <ul>
-      <li><a href="/bestemmingen">Bestemmingen</a> — Sölden, Mayrhofen, St. Anton, Kitzbühel, Zell am See en Gstaad</li>
+      <li><a href="/bestemmingen">Bestemmingen</a>: Sölden, Mayrhofen, St. Anton, Kitzbühel, Zell am See en Gstaad</li>
       <li><a href="/vergelijken">SlopeWorks vs. een reisbureau</a></li>
       <li><a href="/faq">Veelgestelde vragen</a></li>
       <li><a href="/over-ons">Over SlopeWorks</a></li>
-      <li><a href="/contact">Contact</a> — info&#64;slopeworks.nl</li>
+      <li><a href="/contact">Contact</a>: info&#64;slopeworks.nl</li>
     </ul>
   </noscript>
 </body>

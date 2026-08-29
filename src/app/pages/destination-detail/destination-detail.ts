@@ -1,4 +1,4 @@
-import {Component, computed, effect, inject, OnDestroy} from '@angular/core';
+import {Component, computed, effect, inject, OnDestroy, signal} from '@angular/core';
 import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {toSignal} from '@angular/core/rxjs-interop';
 import {MnBadge, MnLanguageService, MnTranslatePipe} from 'mn-angular-lib';
@@ -7,7 +7,7 @@ import {PageCtaComponent} from '../../components/page-cta/page-cta';
 import {RevealDirective} from '../../components/reveal/reveal';
 import {FaqAccordionComponent, FaqEntry} from '../../components/faq-accordion/faq-accordion';
 import {EyebrowComponent} from '../../components/eyebrow/eyebrow';
-import {SeoService} from '../../services/seo.service';
+import {SeoService, SocialImage} from '../../services/seo.service';
 
 /**
  * Shared, language-independent facts about one scouted area: its display name, the
@@ -20,32 +20,39 @@ interface AreaMeta {
   name: string;
   /** i18n key for the country / region line. */
   countryKey: string;
-  /** Hero / card photo URL. */
+  /** Hero / card photo URL, also used as the page's `og:image`. */
   image: string;
+  /** Intrinsic width of {@link image} in pixels, for `og:image:width`. */
+  imageWidth: number;
+  /** Intrinsic height of {@link image} in pixels, for `og:image:height`. */
+  imageHeight: number;
   /** Router path to this area's detail page. */
   route: string;
 }
 
 /**
  * Per-area configuration that drives the generic detail template: which i18n
- * prefix holds its copy, its signature photo, how many for-whom bullets and FAQ
- * entries it has, and which three areas to surface as "other destinations".
+ * prefix holds its copy, the photo used in the feature band, how many prose
+ * sections / for-whom bullets / FAQ entries it has, and which three areas to
+ * surface as "other destinations".
  */
 interface DestinationConfig {
   /** i18n key prefix for this area's copy (e.g. `stanton`). */
   prefix: string;
-  /** Photo shown in the signature band. */
-  signatureImage: string;
+  /** Photo shown in the feature band (first prose section). */
+  featureImage: string;
+  /**
+   * Number of ordered prose sections (`<prefix>.sec.<i>.title` / `.body`). Each
+   * area carries its own H2 sequence, so this varies per destination — that is
+   * deliberate (distinct, non-duplicate pages), not a template quirk.
+   */
+  sections: number;
   /** Number of "a good fit if" bullets. */
   fitYes: number;
   /** Number of "less suitable if" bullets. */
   fitNo: number;
   /** Number of FAQ entries. */
   faq: number;
-  /** Whether this area has authored "a day with your team" copy (`<prefix>.day.*`). */
-  day?: boolean;
-  /** Whether this area has authored travel/logistics copy (`<prefix>.logistics.*`). */
-  logistics?: boolean;
   /** Slugs of the three related areas shown at the foot of the page. */
   relatedSlugs: string[];
 }
@@ -53,29 +60,33 @@ interface DestinationConfig {
 /**
  * The photographic hero shown at the top of every destination detail page. It is
  * deliberately the same across all areas — the per-area photos live in the
- * signature band and the related-area cards instead, so the pages share one
+ * feature band and the related-area cards instead, so the pages share one
  * consistent, wide-format opening image.
  */
 const DETAIL_HERO_IMAGE = '/images/hero_image.webp';
 
 /** Shared metadata for every scouted area, keyed by URL slug. */
 const AREA_META: Record<string, AreaMeta> = {
-  'solden': {name: 'Sölden', countryKey: 'destinations.solden.country', image: '/images/destinations/solden.webp', route: '/bestemmingen/solden'},
-  'mayrhofen': {name: 'Mayrhofen', countryKey: 'destinations.mayrhofen.country', image: '/images/destinations/mayrhofen.webp', route: '/bestemmingen/mayrhofen'},
-  'st-anton': {name: 'St. Anton am Arlberg', countryKey: 'destinations.stanton.country', image: '/images/destinations/st-anton.webp', route: '/bestemmingen/st-anton'},
-  'kitzbuhel': {name: 'Kitzbühel-Kirchberg', countryKey: 'destinations.kitzbuhel.country', image: '/images/destinations/kitzbuhel.webp', route: '/bestemmingen/kitzbuhel'},
-  'zell-am-see': {name: 'Zell am See-Kaprun', countryKey: 'destinations.zellamsee.country', image: '/images/destinations/zell-am-see.webp', route: '/bestemmingen/zell-am-see'},
-  'gstaad': {name: 'Gstaad', countryKey: 'destinations.gstaad.country', image: '/images/destinations/gstaad.webp', route: '/bestemmingen/gstaad'},
+  'solden': {name: 'Sölden', countryKey: 'destinations.solden.country', image: '/images/destinations/solden.webp', imageWidth: 1200, imageHeight: 900, route: '/bestemmingen/solden'},
+  'mayrhofen': {name: 'Mayrhofen', countryKey: 'destinations.mayrhofen.country', image: '/images/destinations/mayrhofen.webp', imageWidth: 1200, imageHeight: 1600, route: '/bestemmingen/mayrhofen'},
+  'st-anton': {name: 'St. Anton am Arlberg', countryKey: 'destinations.stanton.country', image: '/images/destinations/st-anton.webp', imageWidth: 1200, imageHeight: 900, route: '/bestemmingen/st-anton'},
+  'kitzbuhel': {name: 'Kitzbühel-Kirchberg', countryKey: 'destinations.kitzbuhel.country', image: '/images/destinations/kitzbuhel.webp', imageWidth: 1200, imageHeight: 1600, route: '/bestemmingen/kitzbuhel'},
+  'zell-am-see': {name: 'Zell am See-Kaprun', countryKey: 'destinations.zellamsee.country', image: '/images/destinations/zell-am-see.webp', imageWidth: 1200, imageHeight: 1600, route: '/bestemmingen/zell-am-see'},
+  'gstaad': {name: 'Gstaad', countryKey: 'destinations.gstaad.country', image: '/images/destinations/gstaad.webp', imageWidth: 1024, imageHeight: 768, route: '/bestemmingen/gstaad'},
 };
 
-/** Per-area template configuration, keyed by URL slug. */
+/**
+ * Per-area template configuration, keyed by URL slug. The `sections` / `fitYes` /
+ * `fitNo` / `faq` counts mirror how many keys each area's copy actually has in the
+ * i18n files — they differ on purpose (each area gets the H2s its story needs).
+ */
 const CONFIG: Record<string, DestinationConfig> = {
-  'solden': {prefix: 'solden', signatureImage: '/images/destinations/solden-hero.webp', fitYes: 4, fitNo: 3, faq: 4, day: true, logistics: true, relatedSlugs: ['mayrhofen', 'st-anton', 'gstaad']},
-  'mayrhofen': {prefix: 'mayrhofen', signatureImage: '/images/destinations/mayrhofen-hero.webp', fitYes: 4, fitNo: 2, faq: 4, day: true, logistics: true, relatedSlugs: ['solden', 'st-anton', 'gstaad']},
-  'st-anton': {prefix: 'stanton', signatureImage: '/images/destinations/st-anton-hero.webp', fitYes: 3, fitNo: 3, faq: 4, day: true, logistics: true, relatedSlugs: ['solden', 'kitzbuhel', 'gstaad']},
-  'kitzbuhel': {prefix: 'kitzbuhel', signatureImage: '/images/destinations/kitzbuhel-hero.webp', fitYes: 3, fitNo: 2, faq: 3, day: true, logistics: true, relatedSlugs: ['mayrhofen', 'st-anton', 'zell-am-see']},
-  'zell-am-see': {prefix: 'zellamsee', signatureImage: '/images/destinations/zell-am-see-hero.webp', fitYes: 4, fitNo: 3, faq: 3, day: true, logistics: true, relatedSlugs: ['kitzbuhel', 'mayrhofen', 'gstaad']},
-  'gstaad': {prefix: 'gstaad', signatureImage: '/images/destinations/gstaad-hero.webp', fitYes: 4, fitNo: 3, faq: 4, day: true, logistics: true, relatedSlugs: ['solden', 'st-anton', 'zell-am-see']},
+  'solden': {prefix: 'solden', featureImage: '/images/destinations/solden-hero.webp', sections: 10, fitYes: 3, fitNo: 3, faq: 4, relatedSlugs: ['mayrhofen', 'st-anton', 'gstaad']},
+  'mayrhofen': {prefix: 'mayrhofen', featureImage: '/images/destinations/mayrhofen-hero.webp', sections: 8, fitYes: 4, fitNo: 3, faq: 5, relatedSlugs: ['solden', 'st-anton', 'gstaad']},
+  'st-anton': {prefix: 'stanton', featureImage: '/images/destinations/st-anton-hero.webp', sections: 11, fitYes: 3, fitNo: 3, faq: 4, relatedSlugs: ['solden', 'kitzbuhel', 'gstaad']},
+  'kitzbuhel': {prefix: 'kitzbuhel', featureImage: '/images/destinations/kitzbuhel-hero.webp', sections: 10, fitYes: 3, fitNo: 2, faq: 4, relatedSlugs: ['mayrhofen', 'st-anton', 'zell-am-see']},
+  'zell-am-see': {prefix: 'zellamsee', featureImage: '/images/destinations/zell-am-see-hero.webp', sections: 11, fitYes: 3, fitNo: 2, faq: 4, relatedSlugs: ['kitzbuhel', 'mayrhofen', 'gstaad']},
+  'gstaad': {prefix: 'gstaad', featureImage: '/images/destinations/gstaad-hero.webp', sections: 10, fitYes: 3, fitNo: 3, faq: 4, relatedSlugs: ['solden', 'st-anton', 'zell-am-see']},
 };
 
 /** A related area surfaced at the foot of a detail page. */
@@ -90,6 +101,14 @@ interface RelatedRef {
   route: string;
 }
 
+/** One prose section: its heading and body i18n keys. */
+interface Section {
+  /** i18n key for the section heading. */
+  titleKey: string;
+  /** i18n key for the section body. */
+  bodyKey: string;
+}
+
 /** The resolved, template-ready view of one destination. */
 interface DestinationView {
   /** i18n prefix, concatenated with field suffixes to resolve copy. */
@@ -100,9 +119,11 @@ interface DestinationView {
   countryKey: string;
   /** Hero photograph. */
   heroImage: string;
-  /** Signature-band photograph. */
+  /** Photograph for the "moment that stays with you" signature band. */
   signatureImage: string;
-  /** Fixed stat-card / facts-strip sub-keys, in order. */
+  /** This area's photo (path, alt and size) used as the `og:image` share card. */
+  ogImage: SocialImage;
+  /** Fixed stat-card sub-keys, in order. */
   statIds: string[];
   /** Fixed facts-strip sub-keys, in order. */
   infoIds: string[];
@@ -110,12 +131,21 @@ interface DestinationView {
   fitYesKeys: string[];
   /** i18n keys for the "less suitable if" bullets. */
   fitNoKeys: string[];
-  /** FAQ entries for the shared accordion. */
+  /**
+   * The area's topic sections whose heading is NOT a question — rendered as
+   * prose bands (real sections), not folded into the FAQ.
+   */
+  proseSections: Section[];
+  /**
+   * The FAQ list rendered in the accordion: only genuine questions — the topic
+   * sections whose heading ends in "?" followed by the short practical questions.
+   */
   faqs: FaqEntry[];
-  /** Whether to render the "a day with your team" section for this area. */
-  hasDay: boolean;
-  /** Whether to render the travel/logistics section for this area. */
-  hasLogistics: boolean;
+  /**
+   * Only the genuine questions (`faq.*`), used for the `FAQPage` structured data
+   * so the schema stays true Q&A rather than including topic sections.
+   */
+  schemaFaqs: FaqEntry[];
   /** The three related areas. */
   related: RelatedRef[];
 }
@@ -123,11 +153,11 @@ interface DestinationView {
 /**
  * The destination detail page (`/bestemmingen/:slug`).
  *
- * One data-driven template for every scouted area. The design is the mockup's
- * area template — photographic hero with an at-a-glance stat card, an intro, a
- * facts strip, a signature-moment band, a for-whom / not-for-whom split, related
- * areas and a page-specific FAQ — with all copy resolved from the area's i18n
- * prefix so a single component serves all six destinations.
+ * One data-driven template for every scouted area. Fixed chrome — a photographic
+ * hero with an at-a-glance stat card, an intro, a facts strip, a for-whom /
+ * not-for-whom split, related areas and a page FAQ — wraps a variable-length list
+ * of ordered prose sections, so each area carries its own H2 sequence while a
+ * single component serves all six destinations.
  */
 @Component({
   selector: 'app-destination-detail',
@@ -150,7 +180,7 @@ export class DestinationDetailPage implements OnDestroy {
 
   /**
    * The resolved view for the active slug, or `null` for an unknown area.
-   * Building the fit/FAQ key lists here keeps the template declarative.
+   * Building the section/fit/FAQ key lists here keeps the template declarative.
    */
   protected readonly view = computed<DestinationView | null>(() => {
     const slug = this.slug();
@@ -161,19 +191,39 @@ export class DestinationDetailPage implements OnDestroy {
     }
     const p = cfg.prefix;
     const range = (n: number): number[] => Array.from({length: n}, (_, i) => i + 1);
+    // Split the area's topic sections by their heading: a question (ends in "?")
+    // belongs in the FAQ; a statement is a real prose section. The split is
+    // language-invariant (a question translates to a question), so resolving the
+    // title once is enough.
+    const sections: Section[] = range(cfg.sections).map((i) => ({
+      titleKey: `${p}.sec.${i}.title`,
+      bodyKey: `${p}.sec.${i}.body`,
+    }));
+    const isQuestion = (titleKey: string): boolean => this.lang.translate(titleKey).trim().endsWith('?');
+    const sectionQuestions: FaqEntry[] = sections
+      .filter((s) => isQuestion(s.titleKey))
+      .map((s) => ({qKey: s.titleKey, aKey: s.bodyKey}));
+    const proseSections = sections.filter((s) => !isQuestion(s.titleKey));
+    const questionFaqs: FaqEntry[] = range(cfg.faq).map((i) => ({qKey: `${p}.faq.q${i}`, aKey: `${p}.faq.a${i}`}));
     return {
       prefix: p,
       breadcrumbName: meta.name,
       countryKey: meta.countryKey,
       heroImage: DETAIL_HERO_IMAGE,
-      signatureImage: cfg.signatureImage,
+      signatureImage: cfg.featureImage,
+      ogImage: {
+        path: meta.image,
+        alt: this.lang.translate(`${p}.title`),
+        width: meta.imageWidth,
+        height: meta.imageHeight,
+      },
       statIds: ['pistes', 'altitude', 'transfer', 'season', 'group'],
       infoIds: ['pass', 'crowd', 'level', 'vibe'],
       fitYesKeys: range(cfg.fitYes).map((i) => `${p}.fit.yes${i}`),
       fitNoKeys: range(cfg.fitNo).map((i) => `${p}.fit.no${i}`),
-      faqs: range(cfg.faq).map((i) => ({qKey: `${p}.faq.q${i}`, aKey: `${p}.faq.a${i}`})),
-      hasDay: !!cfg.day,
-      hasLogistics: !!cfg.logistics,
+      proseSections,
+      faqs: [...sectionQuestions, ...questionFaqs],
+      schemaFaqs: questionFaqs,
       related: cfg.relatedSlugs.map((s) => ({
         name: AREA_META[s].name,
         countryKey: AREA_META[s].countryKey,
@@ -190,6 +240,15 @@ export class DestinationDetailPage implements OnDestroy {
     }
   });
 
+  /** The open area-note tab (index into `view.proseSections`). */
+  protected readonly activeNote = signal(0);
+
+  /** Resets the open note tab to the first whenever the area changes. */
+  private readonly noteReset = effect(() => {
+    this.slug();
+    this.activeNote.set(0);
+  });
+
   private readonly seo = inject(SeoService);
   private readonly lang = inject(MnLanguageService);
 
@@ -204,7 +263,7 @@ export class DestinationDetailPage implements OnDestroy {
     if (!view) {
       return;
     }
-    this.seo.setFromKeys(`${view.prefix}.title`, `seo.dest.${view.prefix}.description`);
+    this.seo.setFromKeys(`${view.prefix}.title`, `seo.dest.${view.prefix}.description`, view.ogImage);
     this.seo.setBreadcrumb([
       {name: this.lang.translate('breadcrumb.home'), path: '/'},
       {name: this.lang.translate('breadcrumb.destinations'), path: '/bestemmingen'},
@@ -213,7 +272,7 @@ export class DestinationDetailPage implements OnDestroy {
     this.seo.setStructuredData(DestinationDetailPage.FAQ_SCHEMA_ID, {
       '@context': 'https://schema.org',
       '@type': 'FAQPage',
-      mainEntity: view.faqs.map((faq) => ({
+      mainEntity: view.schemaFaqs.map((faq) => ({
         '@type': 'Question',
         name: this.lang.translate(faq.qKey),
         acceptedAnswer: {'@type': 'Answer', text: this.lang.translate(faq.aKey)},

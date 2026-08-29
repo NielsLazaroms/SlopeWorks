@@ -84,6 +84,7 @@ export class FooterComponent {
   protected readonly navItems: FooterNavItem[] = [
     {labelKey: 'navbar.home', route: '/'},
     {labelKey: 'navbar.destinations', route: '/bestemmingen'},
+    {labelKey: 'navbar.howitworks', route: '/hoe-het-werkt'},
     {labelKey: 'navbar.about', route: '/over-ons'},
     {labelKey: 'navbar.faq', route: '/faq'},
     {labelKey: 'navbar.comparison', route: '/vergelijken'},

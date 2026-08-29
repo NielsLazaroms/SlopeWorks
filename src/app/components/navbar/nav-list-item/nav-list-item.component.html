@@ -1,29 +1,25 @@
 @if (variant === 'bar') {
-  <li>
-    <button
-      type="button"
-      (click)="itemClick.emit()"
-      [class.sw-underlink]="!active"
-      [class.text-text-grey]="!active"
-      [class.text-brand-500]="active"
-      [class.font-semibold]="active"
-      class="font-sans text-[15px] leading-none cursor-pointer transition-colors duration-300
-             hover:text-brand-600 focus-visible:outline-none focus-visible:text-brand-600"
-    >
-      {{ label }}
-    </button>
-  </li>
+  <button
+    type="button"
+    (click)="itemClick.emit()"
+    [class.sw-underlink]="!active"
+    [class.text-text-grey]="!active"
+    [class.text-brand-500]="active"
+    [class.font-semibold]="active"
+    class="font-sans text-[15px] leading-none cursor-pointer transition-colors duration-300
+           hover:text-brand-600 focus-visible:outline-none focus-visible:text-brand-600"
+  >
+    {{ label }}
+  </button>
 } @else {
-  <li>
-    <button
-      type="button"
-      (click)="itemClick.emit()"
-      [class.text-brand-500]="active"
-      [class.text-text-grey]="!active"
-      class="font-display font-semibold text-lg leading-none cursor-pointer transition-colors duration-300
-             hover:text-brand-600 focus-visible:outline-none focus-visible:text-brand-600"
-    >
-      {{ label }}
-    </button>
-  </li>
+  <button
+    type="button"
+    (click)="itemClick.emit()"
+    [class.text-brand-500]="active"
+    [class.text-text-grey]="!active"
+    class="font-display font-semibold text-lg leading-none cursor-pointer transition-colors duration-300
+           hover:text-brand-600 focus-visible:outline-none focus-visible:text-brand-600"
+  >
+    {{ label }}
+  </button>
 }

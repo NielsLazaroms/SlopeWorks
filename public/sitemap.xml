@@ -90,6 +90,14 @@
     <lastmod>2026-07-06</lastmod>
   </url>
   <url>
+    <loc>https://slopeworks.nl/hoe-het-werkt/</loc>
+    <xhtml:link rel="alternate" hreflang="nl-NL" href="https://slopeworks.nl/hoe-het-werkt/"/>
+    <xhtml:link rel="alternate" hreflang="nl-BE" href="https://slopeworks.be/hoe-het-werkt/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://slopeworks.eu/hoe-het-werkt/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://slopeworks.eu/hoe-het-werkt/"/>
+    <lastmod>2026-08-29</lastmod>
+  </url>
+  <url>
     <loc>https://slopeworks.nl/contact/</loc>
     <xhtml:link rel="alternate" hreflang="nl-NL" href="https://slopeworks.nl/contact/"/>
     <xhtml:link rel="alternate" hreflang="nl-BE" href="https://slopeworks.be/contact/"/>

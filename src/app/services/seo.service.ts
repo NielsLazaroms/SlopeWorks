@@ -7,6 +7,23 @@ import {filter} from 'rxjs';
 import {environment} from '../../environments/environment';
 
 /**
+ * A social-share image: its root-relative path, already-resolved alt text and
+ * intrinsic pixel dimensions. A page (e.g. a destination) supplies one so its
+ * `og:image` card shows the area's own photo — correctly described and sized so
+ * crawlers can lay the card out without downloading the file first.
+ */
+export interface SocialImage {
+  /** Root-relative path to the image file. */
+  path: string;
+  /** Localised alt text describing the image. */
+  alt: string;
+  /** Intrinsic width in pixels. */
+  width: number;
+  /** Intrinsic height in pixels. */
+  height: number;
+}
+
+/**
  * Keeps the document title, meta description, canonical link, Open Graph tags
  * and `<html lang>` in sync with the active route and language.
  *
@@ -43,6 +60,21 @@ export class SeoService {
 
   /** Maps an app locale to the `language_TERRITORY` form Open Graph expects. */
   private static readonly OG_LOCALES: Record<string, string> = {nl: 'nl_NL', en: 'en_US'};
+
+  /**
+   * The sitewide social-share image — its path, intrinsic size and the i18n key
+   * for its alt text — used for `og:image` / `twitter:image` on every page that
+   * does not supply its own. Made absolute against the live origin so each domain
+   * references its own copy; writing it on every navigation also resets a
+   * per-page image (e.g. a destination's photo) back to the default when the
+   * visitor moves to a page without one.
+   */
+  private static readonly DEFAULT_OG_IMAGE = {
+    path: '/images/hero_image.webp',
+    altKey: 'seo.image.alt',
+    width: 1280,
+    height: 720,
+  };
 
   /**
    * The sibling domains that form the `hreflang` cluster, in the order they are
@@ -95,9 +127,11 @@ export class SeoService {
    *
    * @param titleKey i18n key for the page title.
    * @param descriptionKey i18n key for the meta description.
+   * @param image Optional page-specific social-share image; falls back to the
+   *   sitewide default when omitted.
    */
-  setFromKeys(titleKey: string, descriptionKey: string): void {
-    this.write(this.lang.translate(titleKey), this.lang.translate(descriptionKey));
+  setFromKeys(titleKey: string, descriptionKey: string, image?: SocialImage): void {
+    this.write(this.lang.translate(titleKey), this.lang.translate(descriptionKey), image);
   }
 
   /**
@@ -115,11 +149,15 @@ export class SeoService {
    *
    * @param rawTitle Page title before the site-name suffix.
    * @param description Meta and social-card description.
+   * @param image Optional page-specific social-share image; the sitewide default
+   *   is used when omitted.
    */
-  private write(rawTitle: string, description: string): void {
+  private write(rawTitle: string, description: string, image?: SocialImage): void {
     const title = rawTitle + SeoService.TITLE_SUFFIX;
     const path = this.canonicalPath(this.router.url);
     const url = this.origin() + path;
+    const img = image ?? this.defaultImage();
+    const imageUrl = this.origin() + img.path;
 
     this.document.documentElement.lang = this.lang.locale;
     this.title.setTitle(title);
@@ -129,8 +167,14 @@ export class SeoService {
     this.meta.updateTag({property: 'og:description', content: description});
     this.meta.updateTag({property: 'og:url', content: url});
     this.meta.updateTag({property: 'og:locale', content: SeoService.OG_LOCALES[this.lang.locale] ?? this.lang.locale});
+    this.meta.updateTag({property: 'og:image', content: imageUrl});
+    this.meta.updateTag({property: 'og:image:alt', content: img.alt});
+    this.meta.updateTag({property: 'og:image:width', content: String(img.width)});
+    this.meta.updateTag({property: 'og:image:height', content: String(img.height)});
     this.meta.updateTag({name: 'twitter:title', content: title});
     this.meta.updateTag({name: 'twitter:description', content: description});
+    this.meta.updateTag({name: 'twitter:image', content: imageUrl});
+    this.meta.updateTag({name: 'twitter:image:alt', content: img.alt});
 
     this.setCanonical(url);
     this.setHreflang(path);
@@ -230,6 +274,15 @@ export class SeoService {
       this.document.head.appendChild(link);
     }
     link.setAttribute('href', url);
+  }
+
+  /**
+   * The sitewide default share image with its alt text resolved in the active
+   * language, used whenever a page supplies no image of its own.
+   */
+  private defaultImage(): SocialImage {
+    const {path, altKey, width, height} = SeoService.DEFAULT_OG_IMAGE;
+    return {path, alt: this.lang.translate(altKey), width, height};
   }
 
   /**
