@@ -1,0 +1,57 @@
+name: Weekly merge development into main
+
+on:
+  schedule:
+    # TEMPORARY TEST SCHEDULE: 2026-09-10 21:50 UTC (revert to "0 6 * * 1" afterwards)
+    - cron: "50 21 10 9 *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: weekly-merge
+  cancel-in-progress: false
+
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Check whether development is ahead of main
+        id: diff
+        run: |
+          if ! git ls-remote --exit-code --heads origin development >/dev/null; then
+            echo "Branch 'development' does not exist on origin, nothing to merge."
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git fetch origin development
+          AHEAD=$(git rev-list --count main..origin/development)
+          echo "development is $AHEAD commit(s) ahead of main"
+          if [ "$AHEAD" -eq 0 ]; then
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Merge development into main
+        if: steps.diff.outputs.has_changes == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git merge --no-ff --no-edit origin/development
+          git push origin main
+
+      - name: Trigger deploy
+        if: steps.diff.outputs.has_changes == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh workflow run main.yml --ref main
