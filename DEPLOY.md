@@ -78,3 +78,10 @@ Submit each domain's sitemap in **its own Google Search Console property**:
    output dir, and origin) and include it in `build:all`.
 4. If it introduces a new language, make sure `public/assets/i18n/<locale>.json`
    exists and `preload` in `mn-config.json5` includes it.
+
+## Branching
+
+Day-to-day work happens on `development`. The `weekly-merge` workflow
+(`.github/workflows/weekly-merge.yml`) merges `development` into `main` every
+Monday at 06:00 UTC, but only when `development` has commits that `main`
+lacks. A push to `main` (automated or manual) triggers the FTP deploy.
