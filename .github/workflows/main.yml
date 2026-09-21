@@ -21,10 +21,12 @@ jobs:
       - name: Install
         run: npm ci
 
-      - name: Build
-        run: npm run build -- --configuration production
+      - name: Build (.nl, .be, .eu)
+        run: npm run build:all
 
-      - name: Deploy via FTP
+      # One upload per domain: each build bakes its own language, canonical,
+      # robots.txt and sitemap, so it must only land on its matching web root.
+      - name: Deploy slopeworks.nl via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
@@ -32,3 +34,21 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: dist/SlopeWorks/browser/
           server-dir: /domains/slopeworks.nl/public_html/
+
+      - name: Deploy slopeworks.be via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: dist/slopeworks-be/browser/
+          server-dir: /domains/slopeworks.be/public_html/
+
+      - name: Deploy slopeworks.eu via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: dist/slopeworks-eu/browser/
+          server-dir: /domains/slopeworks.eu/public_html/
