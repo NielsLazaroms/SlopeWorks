@@ -129,7 +129,22 @@ export class NotFoundPage implements OnDestroy {
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     const rnd = (min: number, max: number) => min + Math.random() * (max - min);
     /** One snowflake: position, radius, fall speed, sway width/phase, and opacity. */
-    type Flake = {x: number; y: number; r: number; vy: number; sway: number; phase: number; alpha: number};
+    type Flake = {
+      /** Horizontal position in CSS pixels. */
+      x: number;
+      /** Vertical position in CSS pixels. */
+      y: number;
+      /** Radius in CSS pixels. */
+      r: number;
+      /** Fall speed in pixels per frame. */
+      vy: number;
+      /** Horizontal sway amplitude in pixels. */
+      sway: number;
+      /** Current sway phase in radians. */
+      phase: number;
+      /** Opacity, 0 to 1. */
+      alpha: number;
+    };
     let width = 0;
     let height = 0;
     const flakes: Flake[] = [];

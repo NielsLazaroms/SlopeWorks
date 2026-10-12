@@ -6,6 +6,7 @@ import { provideHttpClient, withFetch, withInterceptorsFromDi } from '@angular/c
 import { routes } from './app.routes';
 import {provideMnConfig} from 'mn-angular-lib/core';
 
+/** Browser application providers: routing, hydration, HTTP and the MnLib config. */
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),

@@ -212,6 +212,7 @@ export class QuizPage {
   /** Every question photo, rendered stacked so they load up front and crossfade. */
   protected readonly photos = [...new Set(Object.values(STEP_PHOTO))];
 
+  /** Photo and "why we ask this" text for the current question. */
   protected readonly aside = computed(() => ({
     photo: STEP_PHOTO[this.step().key],
     whyKey: `quiz.why.${this.step().key}`,

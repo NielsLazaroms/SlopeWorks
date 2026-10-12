@@ -44,7 +44,9 @@ export class FaqPage implements OnDestroy {
   /** Group ids whose section is currently intersecting the viewport band. */
   private readonly visibleGroups = new Set<string>();
 
+  /** Publishes the FAQPage structured data. */
   private readonly seo = inject(SeoService);
+  /** Active language, so the structured data follows a language switch. */
   private readonly lang = inject(MnLanguageService);
 
   /**

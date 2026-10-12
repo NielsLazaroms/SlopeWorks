@@ -24,6 +24,7 @@ const PRERENDER_LOCALE = environment.prerenderLocale;
 /** Upper bound on poll iterations while waiting for the config to load. */
 const CONFIG_WAIT_MAX_TICKS = 1000;
 
+/** Server-only providers: prerendering, the prerender locale and waiting for `mn-config` before rendering. */
 const serverConfig: ApplicationConfig = {
   providers: [
     provideServerRendering(withRoutes(serverRoutes)),

@@ -251,7 +251,9 @@ export class DestinationDetailPage implements OnDestroy {
     this.activeNote.set(0);
   });
 
+  /** Sets the per-destination title, description, image and breadcrumb. */
   private readonly seo = inject(SeoService);
+  /** Active language, so the metadata follows a language switch. */
   private readonly lang = inject(MnLanguageService);
 
   /**
