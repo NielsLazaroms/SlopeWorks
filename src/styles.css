@@ -79,6 +79,10 @@
   --color-primary-content: var(--color-ink);
   --color-base-content: var(--color-ink);
   --color-base-100: var(--color-paper-card);
+  /* Since mn-angular-lib v2, form fields colour their required `*` and error
+     messages with `text-error`; kept at the `red-500` that v1 used. */
+  --color-error: var(--color-red-500);
+  --color-error-content: #FFFFFF;
 
   /* Editorial palette from the SlopeWorks mockup: dark "ink" surfaces, light
      "paper" surfaces, muted grey body text, and a deep yellow for on-light accents.

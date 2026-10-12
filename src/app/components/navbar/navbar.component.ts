@@ -1,8 +1,9 @@
-import {Component, HostListener, inject, InjectionToken} from '@angular/core';
+import {Component, HostListener, inject, InjectionToken, ChangeDetectionStrategy} from '@angular/core';
 import {NgClass} from '@angular/common';
 import {Router} from '@angular/router';
 import {NavListItemComponent} from './nav-list-item/nav-list-item.component';
-import {MnButton, MnButtonTypes, MnLanguageService, provideMnComponentConfig} from 'mn-angular-lib';
+import {MnLanguageService, provideMnComponentConfig} from 'mn-angular-lib/core';
+import {MnButton, MnButtonTypes} from 'mn-angular-lib/button';
 import {NavigationService} from '../../services/navigation.service';
 
 /**
@@ -39,6 +40,7 @@ export const APP_NAVBAR_CONFIG = new InjectionToken<NavbarConfig>('APP_NAVBAR_CO
   imports: [NavListItemComponent, MnButton, NgClass],
   templateUrl: './navbar.component.html',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     provideMnComponentConfig<NavbarConfig>(APP_NAVBAR_CONFIG, 'app-navbar'),
   ],

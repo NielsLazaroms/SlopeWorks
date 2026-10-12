@@ -1,5 +1,5 @@
-import {Component, inject, InjectionToken} from '@angular/core';
-import {provideMnComponentConfig} from 'mn-angular-lib';
+import {Component, inject, InjectionToken, ChangeDetectionStrategy} from '@angular/core';
+import {provideMnComponentConfig} from 'mn-angular-lib/core';
 import {EyebrowComponent} from '../../../../components/eyebrow/eyebrow';
 
 /**
@@ -44,6 +44,7 @@ export const APP_WHY_SECTION_CONFIG = new InjectionToken<WhySectionConfig>('APP_
   providers: [
     provideMnComponentConfig<WhySectionConfig>(APP_WHY_SECTION_CONFIG, 'app-why-section'),
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './why-section.html',
 })
 export class WhySectionComponent {

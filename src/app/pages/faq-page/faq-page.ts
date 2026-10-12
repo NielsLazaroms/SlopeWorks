@@ -1,5 +1,5 @@
-import {afterNextRender, Component, inject, OnDestroy, signal} from '@angular/core';
-import {MnLanguageService, MnTranslatePipe} from 'mn-angular-lib';
+import {afterNextRender, Component, inject, OnDestroy, signal, ChangeDetectionStrategy} from '@angular/core';
+import {MnLanguageService, MnTranslatePipe} from 'mn-angular-lib/core';
 import {PageHeroComponent} from '../../components/page-hero/page-hero';
 import {PageCtaComponent} from '../../components/page-cta/page-cta';
 import {RevealDirective} from '../../components/reveal/reveal';
@@ -31,6 +31,7 @@ interface FaqGroup {
   selector: 'app-faq-page',
   standalone: true,
   imports: [MnTranslatePipe, PageHeroComponent, PageCtaComponent, RevealDirective, FaqAccordionComponent],
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './faq-page.html',
 })
 export class FaqPage implements OnDestroy {

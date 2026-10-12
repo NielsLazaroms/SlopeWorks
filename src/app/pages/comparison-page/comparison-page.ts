@@ -1,6 +1,6 @@
-import {Component} from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 import {NgClass} from '@angular/common';
-import {MnTranslatePipe} from 'mn-angular-lib';
+import {MnTranslatePipe} from 'mn-angular-lib/core';
 import {PageHeroComponent} from '../../components/page-hero/page-hero';
 import {PageCtaComponent} from '../../components/page-cta/page-cta';
 import {RevealDirective} from '../../components/reveal/reveal';
@@ -127,6 +127,7 @@ interface DecisionQuestion {
   selector: 'app-comparison-page',
   standalone: true,
   imports: [NgClass, MnTranslatePipe, PageHeroComponent, PageCtaComponent, RevealDirective, EyebrowComponent],
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './comparison-page.html',
 })
 export class ComparisonPage {

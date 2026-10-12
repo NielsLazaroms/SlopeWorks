@@ -1,7 +1,8 @@
-import {Component} from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {LucideArrowRight} from '@lucide/angular';
-import {MnButton, MnButtonTypes, MnSectionDirective, MnTranslatePipe} from 'mn-angular-lib';
+import {MnSectionDirective, MnTranslatePipe} from 'mn-angular-lib/core';
+import {MnButton, MnButtonTypes} from 'mn-angular-lib/button';
 import {HomeHeroComponent} from './components/home-hero/home-hero';
 import {WhySectionComponent} from './components/why-section/why-section';
 import {ProofSectionComponent} from './components/proof-section/proof-section';
@@ -50,6 +51,7 @@ interface TitledBlock {
     EyebrowComponent,
     FaqAccordionComponent,
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './home-page.html',
 })
 export class HomePage {

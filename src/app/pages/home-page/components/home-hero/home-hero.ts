@@ -1,7 +1,8 @@
-import {Component} from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {LucideArrowRight} from '@lucide/angular';
-import {MnButton, MnButtonTypes, MnTranslatePipe} from 'mn-angular-lib';
+import {MnTranslatePipe} from 'mn-angular-lib/core';
+import {MnButton, MnButtonTypes} from 'mn-angular-lib/button';
 import {EyebrowComponent} from '../../../../components/eyebrow/eyebrow';
 
 /**
@@ -17,6 +18,7 @@ import {EyebrowComponent} from '../../../../components/eyebrow/eyebrow';
   selector: 'app-home-hero',
   standalone: true,
   imports: [RouterLink, LucideArrowRight, MnButton, MnTranslatePipe, EyebrowComponent],
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './home-hero.html',
 })
 export class HomeHeroComponent {

@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {provideServerRendering, withRoutes} from '@angular/ssr';
-import {MnConfigService, MnLanguageService} from 'mn-angular-lib';
+import {MnConfigService, MnLanguageService} from 'mn-angular-lib/core';
 
 import {environment} from '../environments/environment';
 import {appConfig} from './app.config';

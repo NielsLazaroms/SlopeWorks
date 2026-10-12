@@ -1,9 +1,10 @@
-import {afterNextRender, Component, ElementRef, OnDestroy, inject} from '@angular/core';
+import {afterNextRender, Component, ElementRef, OnDestroy, inject, ChangeDetectionStrategy} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {Meta} from '@angular/platform-browser';
 import {LucideArrowRight} from '@lucide/angular';
 import gsap from 'gsap';
-import {MnButton, MnButtonTypes, MnTranslatePipe} from 'mn-angular-lib';
+import {MnTranslatePipe} from 'mn-angular-lib/core';
+import {MnButton, MnButtonTypes} from 'mn-angular-lib/button';
 import {EyebrowComponent} from '../../components/eyebrow/eyebrow';
 
 /**
@@ -30,6 +31,7 @@ import {EyebrowComponent} from '../../components/eyebrow/eyebrow';
   selector: 'app-not-found-page',
   standalone: true,
   imports: [RouterLink, LucideArrowRight, MnButton, MnTranslatePipe, EyebrowComponent],
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './not-found-page.html',
 })
 export class NotFoundPage implements OnDestroy {

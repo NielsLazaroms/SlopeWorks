@@ -1,6 +1,6 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, ChangeDetectionStrategy } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import {MnSectionDirective} from 'mn-angular-lib';
+import {MnSectionDirective} from 'mn-angular-lib/core';
 import {NavbarComponent} from './components/navbar/navbar.component';
 import {FooterComponent} from './components/footer/footer';
 import {SeoService} from './services/seo.service';
@@ -9,6 +9,7 @@ import {SeoService} from './services/seo.service';
   selector: 'app-root',
   imports: [RouterOutlet, MnSectionDirective, NavbarComponent, FooterComponent],
   templateUrl: './app.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './app.css'
 })
 export class App {

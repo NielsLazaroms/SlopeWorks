@@ -1,6 +1,7 @@
-import {Component, ElementRef, signal, viewChildren} from '@angular/core';
+import {Component, ElementRef, signal, viewChildren, ChangeDetectionStrategy} from '@angular/core';
 import {NgClass} from '@angular/common';
-import {MnBadge, MnTranslatePipe} from 'mn-angular-lib';
+import {MnTranslatePipe} from 'mn-angular-lib/core';
+import {MnBadge} from 'mn-angular-lib/button';
 import {EyebrowComponent} from '../../../../components/eyebrow/eyebrow';
 
 /**
@@ -28,6 +29,7 @@ interface GallerySlide {
   selector: 'app-gallery-section',
   standalone: true,
   imports: [MnBadge, MnTranslatePipe, NgClass, EyebrowComponent],
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './gallery-section.html',
 })
 export class GallerySectionComponent {

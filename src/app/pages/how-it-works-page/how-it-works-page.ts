@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import {MnTranslatePipe} from 'mn-angular-lib';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
+import {MnTranslatePipe} from 'mn-angular-lib/core';
 import {PageHeroComponent} from '../../components/page-hero/page-hero';
 import {PageCtaComponent} from '../../components/page-cta/page-cta';
 import {RevealDirective} from '../../components/reveal/reveal';
@@ -25,6 +25,7 @@ interface TitledBlock {
   selector: 'app-how-it-works-page',
   standalone: true,
   imports: [MnTranslatePipe, PageHeroComponent, PageCtaComponent, RevealDirective, FaqAccordionComponent],
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './how-it-works-page.html',
 })
 export class HowItWorksPage {

@@ -1,7 +1,7 @@
 import {inject, Injectable, PLATFORM_ID} from '@angular/core';
 import {isPlatformBrowser} from '@angular/common';
 import {ValidatorFn} from '@angular/forms';
-import {MnLanguageService} from 'mn-angular-lib';
+import {MnLanguageService} from 'mn-angular-lib/core';
 import type {Firestore} from 'firebase/firestore/lite';
 import {firebaseConfig} from '../../environments/firebase.config';
 

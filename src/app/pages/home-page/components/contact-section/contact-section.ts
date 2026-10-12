@@ -1,18 +1,19 @@
-import {Component, computed, inject, InjectionToken, signal} from '@angular/core';
+import {Component, computed, inject, InjectionToken, signal, ChangeDetectionStrategy} from '@angular/core';
 import {toSignal} from '@angular/core/rxjs-interop';
 import {
-  MnButton,
-  MnButtonTypes,
+  MnLanguageService,
+  MnSectionDirective,
+  MnTranslatePipe,
+  provideMnComponentConfig,
+} from 'mn-angular-lib/core';
+import {MnButton, MnButtonTypes} from 'mn-angular-lib/button';
+import {
   MnErrorMessagesData,
   MnInputField,
   MnInputProps,
-  MnLanguageService,
-  MnSectionDirective,
   MnTextarea,
   MnTextareaProps,
-  MnTranslatePipe,
-  provideMnComponentConfig
-} from 'mn-angular-lib';
+} from 'mn-angular-lib/forms';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {RouterLink} from '@angular/router';
 import {EyebrowComponent} from '../../../../components/eyebrow/eyebrow';
@@ -80,6 +81,7 @@ type SendState = 'idle' | 'sending' | 'sent';
   providers: [
     provideMnComponentConfig<ContactSectionConfig>(APP_CONTACT_SECTION_COMPONENT_CONFIG, 'app-contact-section'),
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './contact-section.html',
 })
 export class ContactSectionComponent {

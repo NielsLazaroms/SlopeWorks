@@ -1,5 +1,6 @@
-import {Component} from '@angular/core';
-import {MnBadge, MnTranslatePipe} from 'mn-angular-lib';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
+import {MnTranslatePipe} from 'mn-angular-lib/core';
+import {MnBadge} from 'mn-angular-lib/button';
 import {PageHeroComponent} from '../../components/page-hero/page-hero';
 import {PageCtaComponent} from '../../components/page-cta/page-cta';
 import {RevealDirective} from '../../components/reveal/reveal';
@@ -37,6 +38,7 @@ interface AboutBlock {
   selector: 'app-about-page',
   standalone: true,
   imports: [MnBadge, MnTranslatePipe, PageHeroComponent, PageCtaComponent, RevealDirective, EyebrowComponent],
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './about-page.html',
 })
 export class AboutPage {

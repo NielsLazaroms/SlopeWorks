@@ -1,8 +1,9 @@
-import {Component, computed, signal} from '@angular/core';
+import {Component, computed, signal, ChangeDetectionStrategy} from '@angular/core';
 import {NgClass} from '@angular/common';
 import {RouterLink} from '@angular/router';
 import {LucideArrowRight} from '@lucide/angular';
-import {MnBadge, MnTranslatePipe} from 'mn-angular-lib';
+import {MnTranslatePipe} from 'mn-angular-lib/core';
+import {MnBadge} from 'mn-angular-lib/button';
 import {PageHeroComponent} from '../../components/page-hero/page-hero';
 import {PageCtaComponent} from '../../components/page-cta/page-cta';
 import {RevealDirective} from '../../components/reveal/reveal';
@@ -40,6 +41,7 @@ interface DestinationEntry {
   selector: 'app-destinations-page',
   standalone: true,
   imports: [NgClass, RouterLink, LucideArrowRight, MnBadge, MnTranslatePipe, PageHeroComponent, PageCtaComponent, RevealDirective, EyebrowComponent],
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './destinations-page.html',
 })
 export class DestinationsPage {

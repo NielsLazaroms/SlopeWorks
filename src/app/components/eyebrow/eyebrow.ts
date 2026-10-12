@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, ChangeDetectionStrategy} from '@angular/core';
 
 /**
  * The small uppercase "eyebrow" label that sits above section headings across the
@@ -13,6 +13,7 @@ import {Component, Input} from '@angular/core';
   selector: 'app-eyebrow',
   standalone: true,
   templateUrl: './eyebrow.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   host: {class: 'block'},
 })
 export class EyebrowComponent {

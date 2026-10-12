@@ -2,7 +2,7 @@ import {isPlatformServer} from '@angular/common';
 import {DOCUMENT, inject, Injectable, PLATFORM_ID} from '@angular/core';
 import {Meta, Title} from '@angular/platform-browser';
 import {ActivatedRouteSnapshot, NavigationEnd, Router} from '@angular/router';
-import {MnLanguageService} from 'mn-angular-lib';
+import {MnLanguageService} from 'mn-angular-lib/core';
 import {filter} from 'rxjs';
 import {environment} from '../../environments/environment';
 

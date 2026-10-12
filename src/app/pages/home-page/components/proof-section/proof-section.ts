@@ -1,5 +1,5 @@
-import {Component, inject, InjectionToken} from '@angular/core';
-import {provideMnComponentConfig} from 'mn-angular-lib';
+import {Component, inject, InjectionToken, ChangeDetectionStrategy} from '@angular/core';
+import {provideMnComponentConfig} from 'mn-angular-lib/core';
 import {EyebrowComponent} from '../../../../components/eyebrow/eyebrow';
 
 /**
@@ -46,6 +46,7 @@ export const APP_PROOF_SECTION_CONFIG = new InjectionToken<ProofSectionConfig>('
   providers: [
     provideMnComponentConfig<ProofSectionConfig>(APP_PROOF_SECTION_CONFIG, 'app-proof-section'),
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './proof-section.html',
 })
 export class ProofSectionComponent {
