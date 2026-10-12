@@ -1,7 +1,8 @@
 import {Component, ElementRef, signal, viewChildren, ChangeDetectionStrategy} from '@angular/core';
 import {NgClass} from '@angular/common';
 import {MnTranslatePipe} from 'mn-angular-lib/core';
-import {MnBadge} from 'mn-angular-lib/button';
+import {MnBadge, MnButton, MnButtonTypes} from 'mn-angular-lib/button';
+import {LucideChevronLeft, LucideChevronRight} from '@lucide/angular';
 import {EyebrowComponent} from '../../../../components/eyebrow/eyebrow';
 
 /**
@@ -28,13 +29,16 @@ interface GallerySlide {
 @Component({
   selector: 'app-gallery-section',
   standalone: true,
-  imports: [MnBadge, MnTranslatePipe, NgClass, EyebrowComponent],
+  imports: [MnBadge, MnButton, LucideChevronLeft, LucideChevronRight, MnTranslatePipe, NgClass, EyebrowComponent],
   changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './gallery-section.html',
 })
 export class GallerySectionComponent {
   /** The thumbnail buttons, so the active one can be scrolled into view. */
   private readonly thumbs = viewChildren<ElementRef<HTMLElement>>('thumb');
+
+  /** Round primary button used for the previous / next arrows on the photo. */
+  protected readonly arrowButton: MnButtonTypes = {color: 'primary', variant: 'fill', size: 'md', borderRadius: 'full', hover: true};
 
   /** Index of the slide currently shown in the feature frame. */
   protected readonly activeIndex = signal(0);
