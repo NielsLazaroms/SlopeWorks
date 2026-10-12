@@ -3,6 +3,7 @@ import {toSignal} from '@angular/core/rxjs-interop';
 import {
   MnButton,
   MnButtonTypes,
+  MnErrorMessagesData,
   MnInputField,
   MnInputProps,
   MnLanguageService,
@@ -53,7 +54,7 @@ interface ContactChannel {
 }
 
 /** Lifecycle of a contact-form submission. */
-type SendState = 'idle' | 'sending' | 'sent' | 'error';
+type SendState = 'idle' | 'sending' | 'sent';
 
 /**
  * Contact section for the `/contact` page.
@@ -119,12 +120,27 @@ export class ContactSectionComponent {
    * get a fake success and nothing is stored.
    */
   form = new FormGroup({
-    name: new FormControl('', { validators: [notBlank, Validators.maxLength(200)] }),
-    email: new FormControl('', { validators: [notBlank, Validators.pattern(SUBMISSION_EMAIL_PATTERN), Validators.maxLength(254)] }),
-    subject: new FormControl('', { validators: [notBlank, Validators.maxLength(200)] }),
-    description: new FormControl('', { validators: [notBlank, Validators.maxLength(5000)] }),
+    name: new FormControl('', { validators: [Validators.required, notBlank, Validators.maxLength(200)] }),
+    email: new FormControl('', { validators: [Validators.required, notBlank, Validators.pattern(SUBMISSION_EMAIL_PATTERN), Validators.maxLength(254)] }),
+    subject: new FormControl('', { validators: [Validators.required, notBlank, Validators.maxLength(200)] }),
+    description: new FormControl('', { validators: [Validators.required, notBlank, Validators.maxLength(5000)] }),
     website: new FormControl(''),
   });
+
+  /**
+   * i18n key of the message shown above the send button: why the form cannot
+   * be sent yet, or why saving failed. `null` when there is nothing to report.
+   */
+  protected readonly formMessageKey = signal<string | null>(null);
+
+  /**
+   * The message to show above the send button. The "fields missing" notice
+   * disappears by itself once every field is filled in correctly.
+   */
+  protected get visibleFormMessageKey(): string | null {
+    const key = this.formMessageKey();
+    return key === 'home.contact.form.incomplete' && this.form.valid ? null : key;
+  }
 
   /**
    * Live value of the name field, used to sign the note's closing as the
@@ -143,35 +159,45 @@ export class ContactSectionComponent {
   ];
 
   /**
-   * Props for the name input, including a translated placeholder.
+   * Props for the name input: translated label, placeholder and error messages.
    *
-   * `mn-input-field` overwrites its config-resolved placeholder with `props`, so
-   * (unlike the textarea) the placeholder must be supplied here rather than in
+   * The label goes through `props` so the library renders it with its red `*`
+   * for required fields. `mn-input-field` overwrites its config-resolved
+   * label/placeholder with `props`, so they must be supplied here rather than in
    * `mn-config.json5`. Kept as a `computed` so it re-resolves on language switch.
    */
   protected readonly nameProps = computed<MnInputProps>(() => {
     this.locale();
-    return {id: 'name', type: 'text', placeholder: this.language.translate('home.contact.form.name.placeholder')};
+    return {...this.fieldText('name'), id: 'name', type: 'text', autocomplete: 'name'};
   });
 
-  /** Props for the email input, including a translated placeholder. See {@link nameProps}. */
+  /** Props for the email input. See {@link nameProps}. */
   protected readonly emailProps = computed<MnInputProps>(() => {
     this.locale();
-    return {id: 'email', type: 'email', placeholder: this.language.translate('home.contact.form.email.placeholder')};
+    return {...this.fieldText('email'), id: 'email', type: 'email', autocomplete: 'email'};
   });
 
-  /** Props for the subject input, including a translated placeholder. See {@link nameProps}. */
+  /** Props for the subject input. See {@link nameProps}. */
   protected readonly subjectProps = computed<MnInputProps>(() => {
     this.locale();
-    return {id: 'subject', type: 'text', placeholder: this.language.translate('home.contact.form.subject.placeholder')};
+    return {...this.fieldText('subject'), id: 'subject', type: 'text'};
   });
 
-  /** Props for the message textarea. */
-  descriptionProps = {
-    id: 'description',
-    resize: 'none',
-    rows: 5
-  } satisfies MnTextareaProps;
+  /**
+   * Props for the message textarea: translated label and error messages. Its
+   * placeholder comes from `mn-config.json5`, which the textarea keeps.
+   */
+  protected readonly descriptionProps = computed<MnTextareaProps>(() => {
+    this.locale();
+    const {label, errorMessages} = this.fieldText('description');
+    return {id: 'description', resize: 'none', rows: 5, label, errorMessages};
+  });
+
+  /**
+   * Host classes for every form field: full width, and the library's label
+   * aligned with the input edge and set in semibold like the rest of the note.
+   */
+  protected readonly fieldClass = 'block w-full [&_label]:pl-0 [&_label]:pb-2 [&_label]:font-semibold [&_label]:text-ink';
 
   /** Base styling for the send button; disabled/loading state is applied per render. */
   formButton: MnButtonTypes = {
@@ -182,24 +208,58 @@ export class ContactSectionComponent {
     hover: true,
   };
 
-  /** Send-button config with its disabled/loading state bound to form validity and sending. */
+  /**
+   * Send-button config. Stays clickable while the form is incomplete so a click
+   * can point out what is missing; only disabled while sending.
+   */
   get formButtonData(): MnButtonTypes {
     const sending = this.sendState() === 'sending';
     return {
       ...this.formButton,
-      disabled: this.form.invalid || sending,
+      disabled: sending,
       loading: sending,
+    };
+  }
+
+  /**
+   * Translated label, placeholder and per-validator error messages for a field,
+   * read from `home.contact.form.<field>.*`.
+   *
+   * @param field The form field the texts belong to.
+   */
+  private fieldText(field: 'name' | 'email' | 'subject' | 'description'): {
+    label: string;
+    placeholder: string;
+    errorMessages: MnErrorMessagesData;
+  } {
+    const t = (key: string) => this.language.translate(`home.contact.form.${key}`);
+    return {
+      label: t(`${field}.label`),
+      placeholder: t(`${field}.placeholder`),
+      errorMessages: {
+        required: t(`${field}.required`),
+        pattern: t(`${field}.invalid`),
+        maxlength: args => t('maxlength').replace('{max}', String(args.requiredLength)),
+      },
     };
   }
 
   /**
    * Stores the message in Firestore and shows the result in place of the form.
    *
-   * Does nothing while the form is invalid or already sending. A filled-in
-   * honeypot is treated as sent without storing anything.
+   * An incomplete form is not sent: every field shows its error and the first
+   * invalid field gets focus. A filled-in honeypot is treated as sent without
+   * storing anything. A failed save explains whether the connection or the
+   * site is the likely cause.
    */
   async submit(): Promise<void> {
-    if (this.form.invalid || this.sendState() === 'sending') {
+    if (this.sendState() === 'sending') {
+      return;
+    }
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      this.formMessageKey.set('home.contact.form.incomplete');
+      this.focusFirstInvalid();
       return;
     }
     if (this.form.controls.website.value) {
@@ -208,6 +268,7 @@ export class ContactSectionComponent {
     }
 
     const {name, email, subject, description} = this.form.getRawValue();
+    this.formMessageKey.set(null);
     this.sendState.set('sending');
     try {
       await this.submissions.submitContact({
@@ -218,13 +279,25 @@ export class ContactSectionComponent {
       });
       this.sendState.set('sent');
       this.form.reset();
-    } catch {
-      this.sendState.set('error');
+    } catch (error) {
+      const offline = !navigator.onLine || (error as {code?: string})?.code === 'unavailable';
+      this.formMessageKey.set(offline ? 'home.contact.form.error.offline' : 'home.contact.form.error.failed');
+      this.sendState.set('idle');
+    }
+  }
+
+  /** Moves focus to the first field (in form order) that still has an error. */
+  private focusFirstInvalid(): void {
+    const first = (['name', 'email', 'subject', 'description'] as const)
+      .find(field => this.form.controls[field].invalid);
+    if (first) {
+      document.getElementById(first)?.focus();
     }
   }
 
   /** Returns from the thank-you message to an empty form. */
   writeAnother(): void {
+    this.formMessageKey.set(null);
     this.sendState.set('idle');
   }
 

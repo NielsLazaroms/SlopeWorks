@@ -56,33 +56,22 @@
       </div>
     } @else {
       <!-- Printed salutation: the note opens like a letter -->
-      <p class="font-display font-semibold text-xl text-ink mb-6">{{ componentConfig.emailSalutation }}</p>
+      <p class="font-display font-semibold text-xl text-ink mb-2">{{ componentConfig.emailSalutation }}</p>
+      <p class="text-sm text-text-grey mb-6">
+        {{ 'home.contact.form.requiredHint.before' | mnTranslate }}<span class="text-red-500">*</span>{{ 'home.contact.form.requiredHint.after' | mnTranslate }}
+      </p>
 
       <div class="flex flex-col gap-5">
-        <!-- Text inputs are keyed on the locale so their translated placeholder
-             props are re-read on language switch (see localeGroup). -->
-        <div>
-          <label for="name" class="mb-2 block text-sm font-semibold text-ink">{{ 'home.contact.form.name.label' | mnTranslate }}</label>
-          @for (l of localeGroup(); track l) {
-            <mn-lib-input-field class="block w-full" formControlName="name" [props]="nameProps()"></mn-lib-input-field>
-          }
-        </div>
-        <div>
-          <label for="email" class="mb-2 block text-sm font-semibold text-ink">{{ 'home.contact.form.email.label' | mnTranslate }}</label>
-          @for (l of localeGroup(); track l) {
-            <mn-lib-input-field class="block w-full" formControlName="email" [props]="emailProps()"></mn-lib-input-field>
-          }
-        </div>
-        <div>
-          <label for="subject" class="mb-2 block text-sm font-semibold text-ink">{{ 'home.contact.form.subject.label' | mnTranslate }}</label>
-          @for (l of localeGroup(); track l) {
-            <mn-lib-input-field class="block w-full" formControlName="subject" [props]="subjectProps()"></mn-lib-input-field>
-          }
-        </div>
-        <div>
-          <label for="description" class="mb-2 block text-sm font-semibold text-ink">{{ 'home.contact.form.description.label' | mnTranslate }}</label>
-          <mn-lib-textarea class="block w-full" formControlName="description" [props]="descriptionProps"></mn-lib-textarea>
-        </div>
+        <!-- Labels, the red * for required fields and the error messages are
+             rendered by the MnLib fields from their props. Text inputs are keyed
+             on the locale so their translated props are re-read on language
+             switch (see localeGroup). -->
+        @for (l of localeGroup(); track l) {
+          <mn-lib-input-field [class]="fieldClass" formControlName="name" [props]="nameProps()"></mn-lib-input-field>
+          <mn-lib-input-field [class]="fieldClass" formControlName="email" [props]="emailProps()"></mn-lib-input-field>
+          <mn-lib-input-field [class]="fieldClass" formControlName="subject" [props]="subjectProps()"></mn-lib-input-field>
+        }
+        <mn-lib-textarea [class]="fieldClass" formControlName="description" [props]="descriptionProps()"></mn-lib-textarea>
 
         <!-- Honeypot: invisible to people and screen readers, filled in by bots -->
         <div class="absolute -left-[9999px] h-px w-px overflow-hidden" aria-hidden="true">
@@ -99,10 +88,14 @@
         }
       </p>
 
-      @if (sendState() === 'error') {
+      <!-- Why the form was not sent: missing fields, or a failed save with the
+           direct address as fallback. -->
+      @if (visibleFormMessageKey; as messageKey) {
         <p role="alert" class="mt-6 rounded-xl bg-paper-band p-4 text-sm leading-relaxed text-ink">
-          {{ 'home.contact.form.error' | mnTranslate }}
-          <a [href]="'mailto:' + componentConfig.contactEmail" class="font-semibold underline underline-offset-2">{{ componentConfig.contactEmail }}</a>.
+          {{ messageKey | mnTranslate }}
+          @if (messageKey !== 'home.contact.form.incomplete') {
+            <a [href]="'mailto:' + componentConfig.contactEmail" class="font-semibold underline underline-offset-2">{{ componentConfig.contactEmail }}</a>.
+          }
         </p>
       }
 
