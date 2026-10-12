@@ -21,7 +21,7 @@
   <!-- The pitch: the usual ways a destination gets picked, shown as three
        holiday snaps captioned with the reasoning behind them. Then the answer:
        "Kan." and what we look at instead. -->
-  <section class="max-w-7xl mx-auto px-6 lg:px-16 pt-16 lg:pt-24">
+  <section appReveal class="max-w-7xl mx-auto px-6 lg:px-16 pt-16 lg:pt-24">
     <h2 class="font-display font-extrabold text-3xl md:text-[2.4rem] tracking-tight leading-[1.1] text-ink max-w-2xl">{{ 'quiz.intro.lead' | mnTranslate }}</h2>
 
     <ul class="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-6 lg:gap-8">
@@ -43,7 +43,7 @@
   </section>
 
   <!-- The six destinations the scan chooses between -->
-  <section class="max-w-7xl mx-auto px-6 lg:px-16 pt-16 lg:pt-24 pb-16 lg:pb-24">
+  <section appReveal class="max-w-7xl mx-auto px-6 lg:px-16 pt-16 lg:pt-24 pb-16 lg:pb-24">
     <h2 class="font-display font-extrabold text-2xl md:text-[2rem] tracking-tight text-ink mb-8">{{ 'quiz.intro.six' | mnTranslate }}</h2>
     <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
       @for (d of destinations; track d.name) {
@@ -92,8 +92,10 @@
 
       <!-- Answers: large tap targets of one fixed height (room for the longest
            answer), so every question looks the same. Picking one moves on
-           automatically. Tracked by text key, so each question gets fresh buttons. -->
-      <ul class="flex flex-col gap-3">
+           automatically. Tracked by text key, so each question gets fresh buttons.
+           The list is always as tall as four answers (4 tiles + 3 gaps), so the
+           "previous question" link stays in place on the three-answer question. -->
+      <ul class="flex flex-col gap-3 min-h-[30.25rem] sm:min-h-[26.25rem]">
         @for (option of options(); track option.key) {
           <li>
             <button type="button" (click)="choose(option.letter)"
@@ -114,17 +116,24 @@
       </button>
     </div>
 
-    <!-- Beside the question (wide screens only): a photo of what it is about and
-         why we ask it. Fixed photo format, so the layout never shifts; the photo
-         is re-created per question so it fades in on each change. -->
-    <aside class="hidden lg:block pt-10">
-      @for (item of [aside()]; track item.photo) {
-        <img [src]="item.photo" alt="" aria-hidden="true"
-             class="quiz-photo w-full aspect-[4/5] object-cover rounded-2xl shadow-sm" />
+    <!-- Beside the question (only rendered on wide screens, so phones skip the
+         photos): a photo of what it is about and
+         why we ask it. All photos are stacked in one fixed frame and loaded when
+         the scan starts; only the current one is visible, so changing question
+         crossfades between two loaded photos instead of flashing. -->
+    @if (isWide()) {
+      <aside class="pt-10">
+        <div class="relative w-full aspect-[4/5] rounded-2xl overflow-hidden shadow-sm">
+          @for (photo of photos; track photo) {
+            <img [src]="photo" alt="" aria-hidden="true"
+                 class="quiz-photo absolute inset-0 w-full h-full object-cover"
+                 [class.opacity-0]="photo !== aside().photo" />
+          }
+        </div>
         <p class="mt-6 font-display font-bold text-ink">{{ 'quiz.why.label' | mnTranslate }}</p>
-        <p class="mt-2 text-[16px] leading-relaxed text-text-grey">{{ item.whyKey | mnTranslate }}</p>
-      }
-    </aside>
+        <p class="mt-2 text-[16px] leading-relaxed text-text-grey">{{ aside().whyKey | mnTranslate }}</p>
+      </aside>
+    }
     </div>
 </section>
 }
@@ -176,7 +185,7 @@
     </header>
 
     <!-- Why it fits and what to keep in mind, beside the alternative -->
-    <section class="max-w-7xl mx-auto px-6 lg:px-16 pt-16 lg:pt-24">
+    <section appReveal class="max-w-7xl mx-auto px-6 lg:px-16 pt-16 lg:pt-24">
       <div class="grid grid-cols-1 lg:grid-cols-[1fr_0.82fr] gap-12 lg:gap-16 lg:items-stretch">
         <div class="max-w-2xl">
           <h2 class="font-display font-extrabold text-3xl md:text-[2.2rem] tracking-tight leading-[1.12] text-ink mb-5">
@@ -237,7 +246,7 @@
     <!-- Next step: the intake, on the plain page background, like the closing block on every other page. The pitch and the
          buttons on the left, the three steps in the "Hoe het werkt" style on
          the right. -->
-    <section class="bg-paper">
+    <section appReveal class="bg-paper">
       <div class="max-w-7xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
         <div class="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-12 lg:gap-16 items-start">
           <div class="max-w-xl">

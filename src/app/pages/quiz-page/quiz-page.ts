@@ -11,6 +11,7 @@ import {toSignal} from '@angular/core/rxjs-interop';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {RouterLink} from '@angular/router';
 import {LucideArrowRight} from '@lucide/angular';
+import {RevealDirective} from '../../components/reveal/reveal';
 import {MnLanguageService, MnTranslatePipe} from 'mn-angular-lib/core';
 import {MnButton, MnButtonTypes} from 'mn-angular-lib/button';
 import {MnCheckbox, MnCheckboxProps, MnInputField, MnInputProps} from 'mn-angular-lib/forms';
@@ -131,6 +132,7 @@ type MailState = 'closed' | 'open' | 'sending' | 'sent';
     ReactiveFormsModule,
     RouterLink,
     LucideArrowRight,
+    RevealDirective,
   ],
   changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './quiz-page.html',
@@ -193,6 +195,23 @@ export class QuizPage {
   ];
 
   /** Photo and "why we ask this" text for the current question. */
+  /**
+   * Whether the screen is wide enough (Tailwind `lg`) for the photo column.
+   * The column is only rendered there, so phones don't download its photos.
+   * Always false while prerendering.
+   */
+  protected readonly isWide = signal(false);
+
+  /** Tracks the `lg` breakpoint in the browser to show or hide the photo column. */
+  private readonly trackWidth = afterNextRender(() => {
+    const query = window.matchMedia('(min-width: 1024px)');
+    this.isWide.set(query.matches);
+    query.addEventListener('change', e => this.isWide.set(e.matches));
+  });
+
+  /** Every question photo, rendered stacked so they load up front and crossfade. */
+  protected readonly photos = [...new Set(Object.values(STEP_PHOTO))];
+
   protected readonly aside = computed(() => ({
     photo: STEP_PHOTO[this.step().key],
     whyKey: `quiz.why.${this.step().key}`,
