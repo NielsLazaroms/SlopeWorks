@@ -4,7 +4,7 @@
 @if (phase() === 'intro') {
   <header class="relative overflow-hidden bg-ink">
     <img src="/images/hero_image.webp" alt="" aria-hidden="true" class="absolute inset-0 w-full h-full object-cover" />
-    <div class="absolute inset-0 bg-[linear-gradient(165deg,rgba(11,12,14,0.55)_0%,rgba(11,12,14,0.72)_45%,rgba(11,12,14,0.94)_100%)]"></div>
+    <div class="absolute inset-0 scrim-page"></div>
 
     <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-16 pt-28 lg:pt-36 pb-16 lg:pb-20">
       <h1 class="font-display font-extrabold text-4xl md:text-5xl lg:text-display leading-[1.06] tracking-tight text-white max-w-3xl">
@@ -144,7 +144,7 @@
   @if (view(); as v) {
     <header class="relative overflow-hidden bg-ink">
       <img src="/images/hero_image.webp" alt="" aria-hidden="true" class="absolute inset-0 w-full h-full object-cover" />
-      <div class="absolute inset-0 bg-[linear-gradient(160deg,rgba(11,12,14,0.45)_0%,rgba(11,12,14,0.70)_55%,rgba(11,12,14,0.92)_100%)]"></div>
+      <div class="absolute inset-0 scrim-destination"></div>
 
       <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-16 pt-28 lg:pt-36 pb-16 lg:pb-20">
         <div class="grid grid-cols-1 lg:grid-cols-[1.3fr_0.7fr] gap-10 lg:gap-14 items-end">
@@ -227,7 +227,7 @@
         <div class="flex flex-col">
           <p class="text-text-grey mb-3">{{ 'quiz.alt.label' | mnTranslate }}</p>
           <a [routerLink]="v.alternative.route"
-             class="group flex flex-col flex-1 bg-paper-card border border-[#E8E8F0] rounded-[10px] overflow-hidden transition-all duration-150 hover:-translate-y-1 hover:shadow-[0_14px_30px_rgba(0,0,0,0.10)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
+             class="group flex flex-col flex-1 bg-paper-card border border-line rounded-[10px] overflow-hidden transition-all duration-150 hover:-translate-y-1 hover:shadow-[0_14px_30px_rgba(0,0,0,0.10)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
             <div class="relative h-56 lg:h-auto lg:flex-1 lg:min-h-56 overflow-hidden">
               <img [src]="v.alternative.image" [alt]="v.alternative.name" loading="lazy"
                    class="w-full h-full object-cover lg:absolute lg:inset-0 transition-transform duration-300 group-hover:scale-[1.04]" />
@@ -272,7 +272,7 @@
             @for (key of nextStepKeys; track key; let i = $index) {
               <li class="grid grid-cols-[auto_1fr] gap-6">
                 <span class="font-display font-extrabold text-4xl lg:text-5xl leading-none text-brand-500 tabular-nums">{{ i + 1 }}</span>
-                <p class="border-l border-[#EAE2CE] pl-6 text-body leading-relaxed text-ink">{{ key | mnTranslate }}</p>
+                <p class="border-l border-line-warm pl-6 text-body leading-relaxed text-ink">{{ key | mnTranslate }}</p>
               </li>
             }
           </ol>

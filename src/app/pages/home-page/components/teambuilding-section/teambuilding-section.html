@@ -18,7 +18,7 @@
 
     <!-- Partner quote card -->
     @if (componentConfig.partner; as p) {
-      <aside class="w-full rounded-2xl border border-[#EFE7D0] bg-[#FFFDF5] p-8 lg:p-9 shadow-[0_20px_50px_-32px_rgba(0,0,0,0.25)]">
+      <aside class="w-full rounded-2xl border border-line-warm bg-paper-warm p-8 lg:p-9 shadow-[0_20px_50px_-32px_rgba(0,0,0,0.25)]">
         <div class="flex items-center gap-4">
           <span class="grid place-items-center shrink-0 w-12 h-12 rounded-lg bg-brand-500 font-display font-extrabold text-ink text-lg" aria-hidden="true">{{ p.initials }}</span>
           <div>
@@ -27,7 +27,7 @@
           </div>
         </div>
 
-        <div class="my-6 border-t border-[#F0E4C0]"></div>
+        <div class="my-6 border-t border-line-gold"></div>
 
         <blockquote class="text-body italic leading-relaxed text-ink/80">&ldquo;{{ p.quote }}&rdquo;</blockquote>
         <div class="mt-6 font-display text-xs tracking-[0.04em] text-text-grey/70">{{ p.site }}</div>

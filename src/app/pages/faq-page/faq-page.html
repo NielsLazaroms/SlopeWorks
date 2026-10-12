@@ -7,7 +7,7 @@
 
 <section class="bg-paper">
   <!-- Mobile category chips: horizontal jump-nav where the sticky rail is hidden -->
-  <div class="lg:hidden sticky top-20 z-20 bg-paper/95 backdrop-blur border-b border-[#E8E8F0]">
+  <div class="lg:hidden sticky top-20 z-20 bg-paper/95 backdrop-blur border-b border-line">
     <div class="flex gap-2 overflow-x-auto px-6 py-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
       @for (group of groups; track group.id) {
         <button
@@ -16,7 +16,7 @@
           class="shrink-0 whitespace-nowrap rounded-full border px-3.5 py-1.5 font-display font-semibold text-meta transition-colors duration-200"
           [class]="activeGroup() === group.id
             ? 'bg-brand-500 text-ink border-brand-500'
-            : 'bg-white text-text-grey border-[#E4E4EE]'"
+            : 'bg-white text-text-grey border-line'"
         >{{ group.titleKey | mnTranslate }}</button>
       }
     </div>
@@ -41,7 +41,7 @@
                 class="block h-px shrink-0 transition-all duration-300 ease-out"
                 [class]="activeGroup() === group.id
                   ? 'w-8 bg-brand-500'
-                  : 'w-4 bg-[#D6D6E0] group-hover/idx:w-6 group-hover/idx:bg-dark-yellow'"
+                  : 'w-4 bg-line-strong group-hover/idx:w-6 group-hover/idx:bg-dark-yellow'"
                 aria-hidden="true"
               ></span>
               <span

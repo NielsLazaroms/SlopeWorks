@@ -9,9 +9,9 @@
     </p>
 
     <!-- Direct channels: hairline-divided list with a yellow bar, no icon badges -->
-    <ul class="mt-10 border-t border-[#E8E8F0]">
+    <ul class="mt-10 border-t border-line">
       @for (channel of channels; track channel.labelKey) {
-        <li class="flex items-start gap-4 py-5 border-b border-[#E8E8F0]">
+        <li class="flex items-start gap-4 py-5 border-b border-line">
           <span class="mt-1 w-1 h-9 shrink-0 rounded-full bg-brand-500" aria-hidden="true"></span>
           <div>
             <p class="font-display font-bold text-xs tracking-[0.12em] uppercase text-text-grey mb-1.5">
@@ -39,7 +39,7 @@
 
   <!-- Right: the message, framed as an actual note to Bas & Carmen -->
   <form [formGroup]="form" mn-section="form" (ngSubmit)="submit()"
-        class="rounded-2xl border border-[#E8E8F0] bg-paper-card p-7 shadow-sm sm:p-9 lg:p-11">
+        class="rounded-2xl border border-line bg-paper-card p-7 shadow-sm sm:p-9 lg:p-11">
     <h2 class="font-display font-bold text-xs tracking-[0.14em] uppercase text-dark-yellow mb-6">
       {{ 'home.contact.form.title' | mnTranslate }}
     </h2>

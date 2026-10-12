@@ -36,13 +36,13 @@
             <!-- Route card -->
             <div
               class="flex-1 rounded-xl border p-7 lg:p-8"
-              [ngClass]="run.highlight ? 'border-brand-500 bg-[#FFFCF2] shadow-[0_10px_30px_rgba(255,187,0,0.12)]' : 'border-[#E8E8F0] bg-paper-card'"
+              [ngClass]="run.highlight ? 'border-brand-500 bg-paper-warm shadow-[0_10px_30px_rgba(255,187,0,0.12)]' : 'border-line bg-paper-card'"
             >
               <p class="font-display font-bold text-label tracking-[0.18em] uppercase mb-3" [ngClass]="accent[run.accent].label">{{ run.runTypeKey | mnTranslate }}</p>
               <h3 class="font-display font-bold text-xl mb-2" [ngClass]="run.highlight ? 'text-dark-yellow' : 'text-ink'">{{ run.nameKey | mnTranslate }}</h3>
               <p class="text-body-sm leading-relaxed text-text-grey">{{ run.typeKey | mnTranslate }}</p>
 
-              <div class="mt-6 pt-6 border-t border-[#EAEAF0]">
+              <div class="mt-6 pt-6 border-t border-line">
                 <p class="font-display font-bold text-label tracking-[0.18em] uppercase text-text-grey mb-2">{{ 'comparison.card.bestAt' | mnTranslate }}</p>
                 <p class="text-body-sm leading-snug font-medium text-ink">{{ run.bestAtKey | mnTranslate }}</p>
               </div>
@@ -60,7 +60,7 @@
     <app-eyebrow class="mb-8">{{ 'comparison.deep.label' | mnTranslate }}</app-eyebrow>
 
     @for (b of deepDive; track b.titleKey; let first = $first) {
-      <article class="max-w-3xl" [ngClass]="first ? '' : 'mt-14 lg:mt-20 pt-14 lg:pt-16 border-t border-[#ECECF3]'">
+      <article class="max-w-3xl" [ngClass]="first ? '' : 'mt-14 lg:mt-20 pt-14 lg:pt-16 border-t border-line'">
         @if (b.runTypeKey && b.accent) {
           <p class="flex items-center gap-2.5 font-display font-bold text-label tracking-[0.18em] uppercase mb-4" [ngClass]="accent[b.accent].label">
             <span class="w-3 h-3 shrink-0" [ngClass]="accent[b.accent].marker + ' ' + shape[b.marker!]"></span>{{ b.runTypeKey | mnTranslate }}
@@ -80,7 +80,7 @@
         </div>
 
         @if (b.chooseTitleKey && b.accent) {
-          <div class="mt-7 border-l-[3px] pl-5 py-1" [ngClass]="accent[b.accent].rule + (b.highlight ? ' bg-[#FFFCF2] rounded-r-lg py-3' : '')">
+          <div class="mt-7 border-l-[3px] pl-5 py-1" [ngClass]="accent[b.accent].rule + (b.highlight ? ' bg-paper-warm rounded-r-lg py-3' : '')">
             <p class="font-display font-bold text-body-sm mb-1" [ngClass]="b.highlight ? 'text-dark-yellow' : 'text-ink'">{{ b.chooseTitleKey | mnTranslate }}</p>
             <p class="text-body-sm leading-relaxed text-text-grey">{{ b.chooseBodyKey! | mnTranslate }}</p>
           </div>
@@ -110,11 +110,11 @@
           </div>
 
           <!-- The three answers, each tagged with its route marker; SlopeWorks marked 'us', not 'winner' -->
-          <div class="rounded-xl border border-[#E8E8F0] overflow-hidden divide-y divide-[#E8E8F0]">
+          <div class="rounded-xl border border-line overflow-hidden divide-y divide-line">
             @for (a of q.answers; track a.labelKey) {
               <div
                 class="grid grid-cols-[auto_minmax(0,1fr)] sm:grid-cols-[auto_8.5rem_minmax(0,1fr)] items-baseline gap-x-3 sm:gap-x-5 gap-y-1 px-5 py-4"
-                [ngClass]="a.highlight ? 'bg-[#FFFCF2] border-l-[3px] border-brand-500' : 'border-l-[3px] border-transparent'"
+                [ngClass]="a.highlight ? 'bg-paper-warm border-l-[3px] border-brand-500' : 'border-l-[3px] border-transparent'"
               >
                 <span class="w-2.5 h-2.5 shrink-0 translate-y-[3px] row-span-2 sm:row-span-1" [ngClass]="accent[a.accent].marker + ' ' + shape[a.marker]"></span>
                 <span
@@ -123,7 +123,7 @@
                 >{{ a.labelKey | mnTranslate }}</span>
                 <span
                   class="col-start-2 sm:col-start-3 text-body-sm leading-relaxed"
-                  [ngClass]="a.highlight ? 'font-medium text-ink' : 'text-[#333]'"
+                  [ngClass]="a.highlight ? 'font-medium text-ink' : 'text-ink/80'"
                 >{{ a.answerKey | mnTranslate }}</span>
               </div>
             }

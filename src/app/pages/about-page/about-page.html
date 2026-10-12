@@ -41,9 +41,9 @@
         {{ 'about.founders.title' | mnTranslate }}
       </h2>
 
-      <ul class="mt-9 border-t border-[#EAE2CE]">
+      <ul class="mt-9 border-t border-line-warm">
         @for (person of founders; track person.nameKey) {
-          <li class="flex items-start gap-3.5 py-5 border-b border-[#EAE2CE]">
+          <li class="flex items-start gap-3.5 py-5 border-b border-line-warm">
             <span class="mt-2 w-1.5 h-1.5 shrink-0 rounded-full bg-brand-500" aria-hidden="true"></span>
             <div>
               <h3 class="font-display font-bold text-lg text-ink">{{ person.nameKey | mnTranslate }}</h3>
@@ -60,7 +60,7 @@
 <section appReveal class="max-w-7xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
   <div class="max-w-3xl flex flex-col">
     @for (block of blocks; track block.titleKey) {
-      <div class="pt-10 lg:pt-12 mt-10 lg:mt-12 border-t border-[#EAE2CE] first:pt-0 first:mt-0 first:border-t-0">
+      <div class="pt-10 lg:pt-12 mt-10 lg:mt-12 border-t border-line-warm first:pt-0 first:mt-0 first:border-t-0">
         <app-eyebrow [dot]="true" class="mb-4">{{ block.eyebrowKey | mnTranslate }}</app-eyebrow>
         <h2 class="font-display font-extrabold text-2xl md:text-3xl tracking-tight leading-[1.14] text-ink mb-4">{{ block.titleKey | mnTranslate }}</h2>
         <p class="text-body leading-relaxed text-text-grey">{{ block.bodyKey | mnTranslate }}</p>

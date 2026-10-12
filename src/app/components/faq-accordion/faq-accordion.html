@@ -15,9 +15,9 @@
   }
 </div>
 
-<div class="border-t border-[#E8E8F0]">
+<div class="border-t border-line">
   @for (item of items(); track item.qKey) {
-    <div class="border-b border-[#E8E8F0]">
+    <div class="border-b border-line">
       <button
         type="button"
         (click)="toggle(item.qKey)"
@@ -30,7 +30,7 @@
           class="mt-px flex h-7 w-7 shrink-0 items-center justify-center rounded-full border transition-colors duration-200"
           [class]="isOpen(item.qKey)
             ? 'bg-brand-500 border-brand-500'
-            : 'border-[#E0E0EA] group-hover/q:border-dark-yellow'"
+            : 'border-line-strong group-hover/q:border-dark-yellow'"
           aria-hidden="true"
         >
           <svg

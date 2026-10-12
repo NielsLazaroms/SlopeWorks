@@ -112,6 +112,16 @@
   --color-text-grey: #5A5D63;
   --color-dark-yellow: #7B5800;
 
+  /* Lines and quiet surfaces. Templates use these instead of typed-out hex
+     values, so every hairline, divider and tinted card comes from one set. */
+  --color-line: #E8E8F0;        /* hairlines and card borders on light surfaces */
+  --color-line-strong: #DCDCE6; /* slightly firmer lines: filter pills, index bars */
+  --color-line-warm: #EAE2CE;   /* lines on cream / warm areas */
+  --color-line-gold: #F0DDA0;   /* lines inside yellow-highlighted blocks */
+  --color-mark-muted: #B5B5C0;  /* neutral dash markers ("not this") */
+  --color-paper-warm: #FFFCF2;  /* highlighted (SlopeWorks) cards and rows */
+  --color-paper-cool: #F5F5F8;  /* the cool "without SlopeWorks" counterpart */
+
   /* Piste-map accents, used ONLY in the comparison page's route markers: a muted
      alpine green for the generalist's "motorway piste" and a brick red for the
      specialist's "engineered run", leaving the brand yellow to mark the
@@ -124,6 +134,22 @@
      The `* Variable` names are the self-hosted @fontsource families imported above. */
   --font-sans: 'Inter Variable', 'Inter Variable Fallback: Arial', 'Inter Variable Fallback: Roboto', Arial, sans-serif;
   --font-display: 'Montserrat Variable', 'Montserrat Variable Fallback: Arial', 'Montserrat Variable Fallback: Roboto', Arial, sans-serif;
+}
+
+/* Dark overlays ("scrims") that keep text readable on photo heroes. One per
+   kind of hero, so the overlay looks the same wherever that hero is used. */
+@utility scrim-page {
+  background-image: linear-gradient(165deg, rgba(11, 12, 14, 0.55) 0%, rgba(11, 12, 14, 0.72) 45%, rgba(11, 12, 14, 0.94) 100%);
+}
+@utility scrim-destination {
+  background-image: linear-gradient(160deg, rgba(11, 12, 14, 0.45) 0%, rgba(11, 12, 14, 0.70) 55%, rgba(11, 12, 14, 0.92) 100%);
+}
+@utility scrim-home {
+  background-image: linear-gradient(180deg, rgba(11, 12, 14, 0.35) 0%, rgba(11, 12, 14, 0.55) 50%, rgba(11, 12, 14, 0.92) 100%);
+}
+/* Lighter, cool-toned overlay for the in-page destination photo band. */
+@utility scrim-cool {
+  background-image: linear-gradient(160deg, rgba(58, 79, 99, 0.12), rgba(14, 24, 34, 0.72));
 }
 
 @layer base {

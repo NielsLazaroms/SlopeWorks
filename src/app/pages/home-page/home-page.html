@@ -24,7 +24,7 @@
       <p class="text-body leading-relaxed text-text-grey max-w-2xl mb-10 lg:mb-12">{{ 'home.services.intro' | mnTranslate }}</p>
 
       <!-- Featured differentiator: photo left, the on-location story right. -->
-      <div class="grid grid-cols-1 lg:grid-cols-2 rounded-2xl overflow-hidden border border-[#EFE7D0] bg-paper-card shadow-[0_26px_60px_-34px_rgba(11,12,14,0.28)]">
+      <div class="grid grid-cols-1 lg:grid-cols-2 rounded-2xl overflow-hidden border border-line-warm bg-paper-card shadow-[0_26px_60px_-34px_rgba(11,12,14,0.28)]">
         <div class="relative min-h-65 lg:min-h-100">
           <img
             src="/images/carousel_1-1280.webp"
@@ -48,7 +48,7 @@
       <!-- The six table-stakes services: a quiet ruled index, pure type. -->
       <ul class="mt-10 lg:mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 lg:gap-x-12 gap-y-8">
         @for (service of services; track service.titleKey) {
-          <li class="pt-5 border-t border-[#E4DBBE]">
+          <li class="pt-5 border-t border-line-warm">
             <h3 class="font-display font-bold text-lg leading-snug text-ink mb-2">{{ service.titleKey | mnTranslate }}</h3>
             <p class="text-body-sm leading-relaxed text-text-grey">{{ service.bodyKey | mnTranslate }}</p>
           </li>
@@ -65,7 +65,7 @@
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
       @for (outcome of outcomes; track outcome.titleKey) {
-        <div class="rounded-xl border border-[#E8E8F0] bg-paper-card p-8 lg:p-9">
+        <div class="rounded-xl border border-line bg-paper-card p-8 lg:p-9">
           <div class="w-9 h-1 bg-brand-500 rounded-full mb-5"></div>
           <h3 class="font-display font-bold text-xl mb-3 text-ink">{{ outcome.titleKey | mnTranslate }}</h3>
           <p class="text-body-sm leading-relaxed text-text-grey">{{ outcome.bodyKey | mnTranslate }}</p>
@@ -105,13 +105,13 @@
   <!-- Orient: route out to the reference pages now that the site is multi-page -->
   <section appReveal id="orient-section" class="max-w-7xl mx-auto px-6 lg:px-16 py-12 lg:py-16">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div class="flex flex-col rounded-lg border border-[#E8E8F0] bg-paper-card p-8">
+      <div class="flex flex-col rounded-lg border border-line bg-paper-card p-8">
         <div class="w-9 h-1 bg-brand-500 rounded-full mb-5"></div>
         <h3 class="font-display font-bold text-xl mb-2">{{ 'home.orient.faq.title' | mnTranslate }}</h3>
         <p class="text-body-sm leading-relaxed text-text-grey mb-4">{{ 'home.orient.faq.body' | mnTranslate }}</p>
         <a mnButton [data]="orientData" routerLink="/faq" class="font-display font-bold text-dark-yellow! self-start -ml-4 mt-auto"><span class="inline-flex items-center gap-1.5">{{ 'home.orient.faq.link' | mnTranslate }}<svg lucideArrowRight [size]="16" aria-hidden="true"></svg></span></a>
       </div>
-      <div class="flex flex-col rounded-lg border border-[#E8E8F0] bg-paper-card p-8">
+      <div class="flex flex-col rounded-lg border border-line bg-paper-card p-8">
         <div class="w-9 h-1 bg-brand-500 rounded-full mb-5"></div>
         <h3 class="font-display font-bold text-xl mb-2">{{ 'home.orient.vs.title' | mnTranslate }}</h3>
         <p class="text-body-sm leading-relaxed text-text-grey mb-4">{{ 'home.orient.vs.body' | mnTranslate }}</p>
