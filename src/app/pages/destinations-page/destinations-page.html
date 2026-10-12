@@ -7,11 +7,19 @@
 
 <!-- Lead-in: gives the grid a section H2 (fixes the H1→H3 hierarchy skip) and
      adds keyword-rich context before the six area cards. -->
-<section appReveal class="max-w-7xl mx-auto px-6 lg:px-16 pt-14 lg:pt-20 pb-10 lg:pb-12">
+<section appReveal class="max-w-7xl mx-auto px-6 lg:px-16 pt-14 lg:pt-20 pb-10 lg:pb-12 grid grid-cols-1 lg:grid-cols-[1fr_0.8fr] gap-10 lg:gap-16 items-end">
   <div class="max-w-2xl">
     <app-eyebrow class="mb-4">{{ 'destinations.grid.label' | mnTranslate }}</app-eyebrow>
     <h2 class="font-display font-extrabold text-3xl md:text-4xl tracking-tight leading-[1.12] mb-4">{{ 'destinations.grid.title' | mnTranslate }}</h2>
     <p class="text-base leading-relaxed text-text-grey">{{ 'destinations.grid.body' | mnTranslate }}</p>
+  </div>
+
+  <!-- Entry point to the Ski Trip Scan for visitors who don't know where to start -->
+  <div class="rounded-2xl bg-paper-band p-6 sm:p-8">
+    <p class="font-display font-bold text-xs tracking-[0.14em] uppercase text-dark-yellow mb-3">{{ 'destinations.scan.label' | mnTranslate }}</p>
+    <h3 class="font-display font-extrabold text-2xl tracking-tight text-ink mb-3">{{ 'destinations.scan.title' | mnTranslate }}</h3>
+    <p class="text-[15px] leading-relaxed text-text-grey mb-6">{{ 'destinations.scan.body' | mnTranslate }}</p>
+    <a mnButton [data]="scanButton" routerLink="/welk-skigebied-past-bij-jullie-team" class="font-bold">{{ 'destinations.scan.button' | mnTranslate }}</a>
   </div>
 </section>
 

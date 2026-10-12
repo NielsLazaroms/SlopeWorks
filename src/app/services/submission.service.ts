@@ -27,12 +27,36 @@ export interface ContactSubmission {
   message: string;
 }
 
-/** An email address left at the end of the quiz. */
+/**
+ * A Ski Trip Scan whose result the visitor asked to receive by email: their
+ * details plus the full scan in readable form (names and answer texts in the
+ * visitor's language), so it can be read and mailed straight from the console.
+ */
 export interface QuizSubmission {
-  /** Visitor's email address. */
+  /** Visitor's first name. */
+  firstName: string;
+  /** Address to send the result to. */
   email: string;
-  /** Optional quiz outcome, e.g. the recommended destination. */
-  result?: string;
+  /** Company name; omitted when left empty. */
+  company?: string;
+  /** Whether the visitor opted in to occasional inspiration emails. */
+  newsletter: boolean;
+  /** Name of the best match, e.g. "Kitzbühel-Kirchberg". */
+  match: string;
+  /** Name of the alternative. */
+  alternative: string;
+  /** Trip style name, e.g. "Reset". */
+  tripStyle: string;
+  /** The budget answer as the visitor saw it. */
+  budget: string;
+  /** The group-size answer, e.g. "26–35 personen". */
+  groupSize: string;
+  /** Whether a budget note was shown on the result. */
+  budgetNote: boolean;
+  /** Numbered short question label → answer text, e.g. "1 Ideale skidag" → "…". */
+  answers: Record<string, string>;
+  /** Character score per destination name. */
+  scores: Record<string, number>;
 }
 
 /**
@@ -64,12 +88,15 @@ export class SubmissionService {
   }
 
   /**
-   * Saves a quiz email address to the `quizSubscribers` collection.
+   * Saves a Ski Trip Scan with the visitor's details to the `quizSubscribers`
+   * collection, named after the match and first name. An empty company is left
+   * out, because the rules only accept non-empty text.
    *
-   * @param submission The email address and optional quiz result.
+   * @param submission The visitor's details and scan result.
    */
   async subscribeQuiz(submission: QuizSubmission): Promise<void> {
-    await this.add('quizSubscribers', submission.email.split('@')[0], {...submission});
+    const {company, ...rest} = submission;
+    await this.add('quizSubscribers', `${submission.match} ${submission.firstName}`, company ? {...rest, company} : rest);
   }
 
   /**

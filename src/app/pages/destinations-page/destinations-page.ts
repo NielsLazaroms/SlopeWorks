@@ -3,7 +3,7 @@ import {NgClass} from '@angular/common';
 import {RouterLink} from '@angular/router';
 import {LucideArrowRight} from '@lucide/angular';
 import {MnTranslatePipe} from 'mn-angular-lib/core';
-import {MnBadge} from 'mn-angular-lib/button';
+import {MnBadge, MnButton, MnButtonTypes} from 'mn-angular-lib/button';
 import {PageHeroComponent} from '../../components/page-hero/page-hero';
 import {PageCtaComponent} from '../../components/page-cta/page-cta';
 import {RevealDirective} from '../../components/reveal/reveal';
@@ -40,11 +40,14 @@ interface DestinationEntry {
 @Component({
   selector: 'app-destinations-page',
   standalone: true,
-  imports: [NgClass, RouterLink, LucideArrowRight, MnBadge, MnTranslatePipe, PageHeroComponent, PageCtaComponent, RevealDirective, EyebrowComponent],
+  imports: [NgClass, RouterLink, LucideArrowRight, MnBadge, MnButton, MnTranslatePipe, PageHeroComponent, PageCtaComponent, RevealDirective, EyebrowComponent],
   changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './destinations-page.html',
 })
 export class DestinationsPage {
+  /** Yellow button linking to the Ski Trip Scan. */
+  protected readonly scanButton: MnButtonTypes = {color: 'primary', size: 'md', variant: 'fill', borderRadius: 'xl', hover: true};
+
   /** Active country filter; `all` shows every area. */
   protected readonly filter = signal<'all' | 'at' | 'ch'>('all');
 

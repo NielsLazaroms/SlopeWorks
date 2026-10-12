@@ -35,6 +35,7 @@ export class PrivacyPage {
     'privacy.collect.item1',
     'privacy.collect.item2',
     'privacy.collect.item3',
+    'privacy.collect.item4',
   ];
 
   /** i18n keys for the "why we process this data" bullet list, in reading order. */
@@ -42,5 +43,6 @@ export class PrivacyPage {
     'privacy.purpose.item1',
     'privacy.purpose.item2',
     'privacy.purpose.item3',
+    'privacy.purpose.item4',
   ];
 }

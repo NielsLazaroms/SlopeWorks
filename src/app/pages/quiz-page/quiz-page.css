@@ -1,0 +1,12 @@
+/* The photo beside each question fades in when the question changes; with
+   reduced motion it simply swaps. */
+@media (prefers-reduced-motion: no-preference) {
+  .quiz-photo {
+    animation: appear 0.35s ease-out both;
+  }
+}
+
+@keyframes appear {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

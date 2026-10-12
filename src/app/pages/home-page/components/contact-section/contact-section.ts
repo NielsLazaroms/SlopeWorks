@@ -7,16 +7,11 @@ import {
   provideMnComponentConfig,
 } from 'mn-angular-lib/core';
 import {MnButton, MnButtonTypes} from 'mn-angular-lib/button';
-import {
-  MnErrorMessagesData,
-  MnInputField,
-  MnInputProps,
-  MnTextarea,
-  MnTextareaProps,
-} from 'mn-angular-lib/forms';
+import {MnInputField, MnInputProps, MnTextarea, MnTextareaProps} from 'mn-angular-lib/forms';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {RouterLink} from '@angular/router';
+import {ActivatedRoute, RouterLink} from '@angular/router';
 import {EyebrowComponent} from '../../../../components/eyebrow/eyebrow';
+import {FORM_FIELD_CLASS, formFieldText, FormFieldText} from '../../../../components/form-fields';
 import {notBlank, SUBMISSION_EMAIL_PATTERN, SubmissionService} from '../../../../services/submission.service';
 
 /**
@@ -130,6 +125,17 @@ export class ContactSectionComponent {
   });
 
   /**
+   * Pre-fills the subject from `?subject=` (used by the Ski Trip Scan's intake
+   * button). `setValue` leaves the field untouched, so no errors show yet.
+   */
+  constructor() {
+    const subject = inject(ActivatedRoute).snapshot.queryParamMap.get('subject')?.trim();
+    if (subject) {
+      this.form.controls.subject.setValue(subject.slice(0, 200));
+    }
+  }
+
+  /**
    * i18n key of the message shown above the send button: why the form cannot
    * be sent yet, or why saving failed. `null` when there is nothing to report.
    */
@@ -195,11 +201,8 @@ export class ContactSectionComponent {
     return {id: 'description', resize: 'none', rows: 5, label, errorMessages};
   });
 
-  /**
-   * Host classes for every form field: full width, and the library's label
-   * aligned with the input edge and set in semibold like the rest of the note.
-   */
-  protected readonly fieldClass = 'block w-full [&_label]:pl-0 [&_label]:pb-2 [&_label]:font-semibold [&_label]:text-ink';
+  /** Host classes shared by every form field (see {@link FORM_FIELD_CLASS}). */
+  protected readonly fieldClass = FORM_FIELD_CLASS;
 
   /** Base styling for the send button; disabled/loading state is applied per render. */
   formButton: MnButtonTypes = {
@@ -229,21 +232,8 @@ export class ContactSectionComponent {
    *
    * @param field The form field the texts belong to.
    */
-  private fieldText(field: 'name' | 'email' | 'subject' | 'description'): {
-    label: string;
-    placeholder: string;
-    errorMessages: MnErrorMessagesData;
-  } {
-    const t = (key: string) => this.language.translate(`home.contact.form.${key}`);
-    return {
-      label: t(`${field}.label`),
-      placeholder: t(`${field}.placeholder`),
-      errorMessages: {
-        required: t(`${field}.required`),
-        pattern: t(`${field}.invalid`),
-        maxlength: args => t('maxlength').replace('{max}', String(args.requiredLength)),
-      },
-    };
+  private fieldText(field: 'name' | 'email' | 'subject' | 'description'): FormFieldText {
+    return formFieldText(this.language, 'home.contact.form', field);
   }
 
   /**
