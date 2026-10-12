@@ -1,4 +1,4 @@
-import {Component, computed, inject, InjectionToken} from '@angular/core';
+import {Component, computed, inject, InjectionToken, signal} from '@angular/core';
 import {toSignal} from '@angular/core/rxjs-interop';
 import {
   MnButton,
@@ -15,13 +15,14 @@ import {
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {RouterLink} from '@angular/router';
 import {EyebrowComponent} from '../../../../components/eyebrow/eyebrow';
+import {notBlank, SUBMISSION_EMAIL_PATTERN, SubmissionService} from '../../../../services/submission.service';
 
 /**
  * Injected configuration for the contact section.
  *
  * The channel copy (email, phone, location) is read straight from i18n in the
- * template; this config only carries the section's prose and the framing used
- * both to build the `mailto:` body and to print the note's salutation/closing.
+ * template; this config only carries the section's prose and the note's printed
+ * salutation/closing.
  */
 export interface ContactSectionConfig {
   /** Lead paragraph shown beside the contact channels. */
@@ -30,11 +31,11 @@ export interface ContactSectionConfig {
   formDescription?: string;
   /** Label for the send button. */
   formButtonText?: string;
-  /** Opening line of the sent email, also printed atop the note card. */
+  /** Opening line printed atop the note card. */
   emailSalutation?: string;
-  /** Closing line of the sent email, also printed above the note's signature. */
+  /** Closing line printed above the note's signature. */
   emailClosing?: string;
-  /** Address the message is delivered to. */
+  /** Direct address shown as a fallback when sending fails. */
   contactEmail?: string;
 }
 
@@ -51,13 +52,16 @@ interface ContactChannel {
   href: string | null;
 }
 
+/** Lifecycle of a contact-form submission. */
+type SendState = 'idle' | 'sending' | 'sent' | 'error';
+
 /**
  * Contact section for the `/contact` page.
  *
  * Presents the send-a-message form as an honest note to the two founders: the
- * card is framed by the same salutation and closing that the `mailto:` body
- * uses, and the closing signs itself with the visitor's name as they type. The
- * validated form and `sendEmail` mailto behaviour are unchanged.
+ * card is framed by a printed salutation and closing, and the closing signs
+ * itself with the visitor's name as they type. Submitting stores the message in
+ * Firestore via {@link SubmissionService}; the visitor stays on the page.
  */
 @Component({
   selector: 'app-contact-section',
@@ -79,8 +83,14 @@ interface ContactChannel {
 })
 export class ContactSectionComponent {
 
-  /** Section copy and email framing resolved from `mn-config.json5`. */
+  /** Section copy and note framing resolved from `mn-config.json5`. */
   protected readonly componentConfig = inject(APP_CONTACT_SECTION_COMPONENT_CONFIG);
+
+  /** Stores the message in Firestore. */
+  private readonly submissions = inject(SubmissionService);
+
+  /** Current state of the submission, driving the button and result messages. */
+  protected readonly sendState = signal<SendState>('idle');
 
   /** Translation service, used to build the reactive input placeholders. */
   private readonly language = inject(MnLanguageService);
@@ -93,7 +103,7 @@ export class ContactSectionComponent {
 
   /**
    * The active locale wrapped in a single-element array, used as an `@for` key
-   * around the name/subject inputs so they are re-created on language switch.
+   * around the text inputs so they are re-created on language switch.
    *
    * `mn-input-field` resolves its `props` only on init and on its own locale
    * subscription (which fires before Angular pushes the recomputed `props`),
@@ -103,11 +113,17 @@ export class ContactSectionComponent {
    */
   protected readonly localeGroup = computed(() => [this.locale()]);
 
-  /** Message form: all three fields are required before sending is enabled. */
+  /**
+   * Message form: name, email, subject and message are required before sending
+   * is enabled. `website` is a honeypot hidden from people; bots that fill it in
+   * get a fake success and nothing is stored.
+   */
   form = new FormGroup({
-    name: new FormControl('', { validators: [Validators.required] }),
-    subject: new FormControl('', { validators: [Validators.required] }),
-    description: new FormControl('', { validators: [Validators.required] }),
+    name: new FormControl('', { validators: [notBlank, Validators.maxLength(200)] }),
+    email: new FormControl('', { validators: [notBlank, Validators.pattern(SUBMISSION_EMAIL_PATTERN), Validators.maxLength(254)] }),
+    subject: new FormControl('', { validators: [notBlank, Validators.maxLength(200)] }),
+    description: new FormControl('', { validators: [notBlank, Validators.maxLength(5000)] }),
+    website: new FormControl(''),
   });
 
   /**
@@ -138,6 +154,12 @@ export class ContactSectionComponent {
     return {id: 'name', type: 'text', placeholder: this.language.translate('home.contact.form.name.placeholder')};
   });
 
+  /** Props for the email input, including a translated placeholder. See {@link nameProps}. */
+  protected readonly emailProps = computed<MnInputProps>(() => {
+    this.locale();
+    return {id: 'email', type: 'email', placeholder: this.language.translate('home.contact.form.email.placeholder')};
+  });
+
   /** Props for the subject input, including a translated placeholder. See {@link nameProps}. */
   protected readonly subjectProps = computed<MnInputProps>(() => {
     this.locale();
@@ -151,7 +173,7 @@ export class ContactSectionComponent {
     rows: 5
   } satisfies MnTextareaProps;
 
-  /** Base styling for the send button; disabled state is applied per render. */
+  /** Base styling for the send button; disabled/loading state is applied per render. */
   formButton: MnButtonTypes = {
     color: 'primary',
     size: 'md',
@@ -160,43 +182,50 @@ export class ContactSectionComponent {
     hover: true,
   };
 
-  /** Send-button config with its disabled state bound to form validity. */
+  /** Send-button config with its disabled/loading state bound to form validity and sending. */
   get formButtonData(): MnButtonTypes {
+    const sending = this.sendState() === 'sending';
     return {
       ...this.formButton,
-      disabled: this.form.invalid
+      disabled: this.form.invalid || sending,
+      loading: sending,
     };
   }
 
   /**
-   * Opens the visitor's mail client with a pre-composed message to SlopeWorks.
+   * Stores the message in Firestore and shows the result in place of the form.
    *
-   * The body is wrapped in the configured salutation and closing so the sent
-   * email matches the note the visitor sees on screen. Does nothing while the
-   * form is invalid.
+   * Does nothing while the form is invalid or already sending. A filled-in
+   * honeypot is treated as sent without storing anything.
    */
-  sendEmail() {
-    if (this.form.invalid) {
+  async submit(): Promise<void> {
+    if (this.form.invalid || this.sendState() === 'sending') {
+      return;
+    }
+    if (this.form.controls.website.value) {
+      this.sendState.set('sent');
       return;
     }
 
-    const name = this.form.get('name')?.value ?? '';
-    const subject = this.form.get('subject')?.value ?? '';
-    const description = this.form.get('description')?.value ?? '';
+    const {name, email, subject, description} = this.form.getRawValue();
+    this.sendState.set('sending');
+    try {
+      await this.submissions.submitContact({
+        name: (name ?? '').trim(),
+        email: (email ?? '').trim(),
+        subject: (subject ?? '').trim(),
+        message: (description ?? '').trim(),
+      });
+      this.sendState.set('sent');
+      this.form.reset();
+    } catch {
+      this.sendState.set('error');
+    }
+  }
 
-    const salutation = this.componentConfig?.emailSalutation ?? 'Beste Meneer';
-    const closing = this.componentConfig?.emailClosing ?? 'Met vriendelijke groet';
-    const contactEmail = this.componentConfig?.contactEmail ?? 'info@Slopeworks.nl';
-
-    const body =
-      `${salutation}
-
-${description}
-
-${closing}
-${name}`;
-
-    window.location.href = `mailto:${contactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  /** Returns from the thank-you message to an empty form. */
+  writeAnother(): void {
+    this.sendState.set('idle');
   }
 
 }

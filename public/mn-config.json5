@@ -256,6 +256,9 @@
             "#mn-input-name": {
               "ariaLabel": { $translate: "home.contact.form.name.ariaLabel" }
             },
+            "#mn-input-email": {
+              "ariaLabel": { $translate: "home.contact.form.email.ariaLabel" }
+            },
             "#mn-input-subject": {
               "ariaLabel": { $translate: "home.contact.form.subject.ariaLabel" }
             },

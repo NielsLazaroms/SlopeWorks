@@ -3,13 +3,13 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --port 5000",
-    "build": "ng build && node scripts/localize-static.mjs dist/SlopeWorks/browser https://slopeworks.nl nl",
-    "build:eu": "ng build --configuration production,eu && node scripts/localize-static.mjs dist/slopeworks-eu/browser https://slopeworks.eu en",
-    "build:be": "ng build --configuration production,be && node scripts/localize-static.mjs dist/slopeworks-be/browser https://slopeworks.be nl",
+    "start": "node scripts/firebase-config.mjs && ng serve --port 5000",
+    "build": "node scripts/firebase-config.mjs && ng build && node scripts/localize-static.mjs dist/SlopeWorks/browser https://slopeworks.nl nl",
+    "build:eu": "node scripts/firebase-config.mjs && ng build --configuration production,eu && node scripts/localize-static.mjs dist/slopeworks-eu/browser https://slopeworks.eu en",
+    "build:be": "node scripts/firebase-config.mjs && ng build --configuration production,be && node scripts/localize-static.mjs dist/slopeworks-be/browser https://slopeworks.be nl",
     "build:all": "npm run build && npm run build:eu && npm run build:be",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "node scripts/firebase-config.mjs && ng test"
   },
   "prettier": {
     "printWidth": 100,
@@ -38,6 +38,7 @@
     "@fontsource-variable/montserrat": "^5.3.0",
     "@lucide/angular": "^1.23.0",
     "@tailwindcss/postcss": "^4.1.18",
+    "firebase": "^12.19.0",
     "gsap": "^3.14.2",
     "mn-angular-lib": "^1.0.100",
     "postcss": "^8.5.6",

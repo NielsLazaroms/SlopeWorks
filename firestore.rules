@@ -1,0 +1,52 @@
+rules_version = '2';
+
+// Visitors can only create submissions; nothing can be read, changed or
+// deleted from the website. Entries are read in the Firebase console.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // True when `value` is a string of 1..max characters.
+    function text(value, max) {
+      return value is string && value.size() > 0 && value.size() <= max;
+    }
+
+    // True for a plausible email address of at most 254 characters.
+    function email(value) {
+      return text(value, 254) && value.matches('^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$');
+    }
+
+    // Metadata the site adds to every submission.
+    function validMeta(d) {
+      return text(d.locale, 10) && text(d.domain, 100) && d.createdAt == request.time;
+    }
+
+    match /contactMessages/{id} {
+      allow read, update, delete: if false;
+      allow create: if request.resource.data.keys().hasAll(
+          ['name', 'email', 'subject', 'message', 'locale', 'domain', 'createdAt'])
+        && request.resource.data.keys().hasOnly(
+          ['name', 'email', 'subject', 'message', 'locale', 'domain', 'createdAt'])
+        && text(request.resource.data.name, 200)
+        && email(request.resource.data.email)
+        && text(request.resource.data.subject, 200)
+        && text(request.resource.data.message, 5000)
+        && validMeta(request.resource.data);
+    }
+
+    match /quizSubscribers/{id} {
+      allow read, update, delete: if false;
+      allow create: if request.resource.data.keys().hasAll(
+          ['email', 'locale', 'domain', 'createdAt'])
+        && request.resource.data.keys().hasOnly(
+          ['email', 'result', 'locale', 'domain', 'createdAt'])
+        && email(request.resource.data.email)
+        && (!('result' in request.resource.data) || text(request.resource.data.result, 100))
+        && validMeta(request.resource.data);
+    }
+
+    // Everything else is closed.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

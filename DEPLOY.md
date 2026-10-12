@@ -56,6 +56,17 @@ its own web root: `/domains/slopeworks.{nl,be,eu}/public_html/`.
 
 Every build's `.htaccess` 301-redirects `www.<domain>` to the bare domain.
 
+## Firebase config
+
+The contact form stores messages in Firestore. Its config is generated into
+`src/environments/firebase.config.ts` by `scripts/firebase-config.mjs`, which
+runs before `start`, `build*` and `test`. Locally it reads `.env` (copy
+`.env.example`); in CI it reads the `FIREBASE_*` GitHub secrets. Both `.env` and
+the generated file are git-ignored. A missing value fails the build.
+
+Firestore security rules live in `firestore.rules`; publish them in the
+Firebase console (Firestore → Rules) or with `firebase deploy --only firestore:rules`.
+
 ## After deploy
 
 Submit each domain's sitemap in **its own Google Search Console property**:
