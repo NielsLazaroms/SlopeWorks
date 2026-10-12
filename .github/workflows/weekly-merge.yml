@@ -2,8 +2,8 @@ name: Weekly merge development into main
 
 on:
   schedule:
-    # TEMPORARY TEST SCHEDULE: 2026-09-10 21:50 UTC (revert to "0 6 * * 1" afterwards)
-    - cron: "50 21 10 9 *"
+    # Every Monday 06:00 UTC
+    - cron: "0 6 * * 1"
   workflow_dispatch:
 
 permissions:

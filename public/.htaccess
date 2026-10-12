@@ -1,5 +1,6 @@
 # Static-hosting rules for the prerendered SlopeWorks build (Apache).
-# scripts/localize-static.mjs appends the `ErrorDocument 404` line per domain.
+# scripts/localize-static.mjs appends the www→bare-domain 301 and the
+# `ErrorDocument 404` line per domain.
 
 # --- Text compression ---------------------------------------------------------
 # Brotli where available, gzip as fallback. Images/fonts (webp/woff2) are already

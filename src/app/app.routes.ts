@@ -47,6 +47,12 @@ export const routes: Routes = [
     data: {seo: 'howitworks'},
   },
   {
+    // The Ski Trip Scan: a 7-question quiz that matches a team to a destination.
+    path: 'welk-skigebied-past-bij-jullie-team',
+    loadComponent: () => import('./pages/quiz-page/quiz-page').then((m) => m.QuizPage),
+    data: {seo: 'quiz'},
+  },
+  {
     path: 'contact',
     loadComponent: () => import('./pages/contact-page/contact-page').then((m) => m.ContactPage),
     data: {seo: 'contact'},

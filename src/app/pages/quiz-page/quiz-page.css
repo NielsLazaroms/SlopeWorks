@@ -1,0 +1,7 @@
+/* The question photos are stacked in one frame; changing question crossfades
+   from the current photo to the next. With reduced motion they simply swap. */
+@media (prefers-reduced-motion: no-preference) {
+  .quiz-photo {
+    transition: opacity 0.6s ease-in-out;
+  }
+}

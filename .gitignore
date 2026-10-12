@@ -44,3 +44,7 @@ __screenshots__/
 Thumbs.db
 
 .claude
+
+# Firebase config: local values and the file generated from them
+.env
+/src/environments/firebase.config.ts

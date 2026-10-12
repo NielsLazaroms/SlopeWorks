@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import {MnTranslatePipe} from 'mn-angular-lib';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
+import {MnTranslatePipe} from 'mn-angular-lib/core';
 import {PageHeroComponent} from '../../components/page-hero/page-hero';
 import {RevealDirective} from '../../components/reveal/reveal';
 import {environment} from '../../../environments/environment';
@@ -17,6 +17,7 @@ import {environment} from '../../../environments/environment';
   selector: 'app-privacy-page',
   standalone: true,
   imports: [MnTranslatePipe, PageHeroComponent, RevealDirective],
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './privacy-page.html',
 })
 export class PrivacyPage {
@@ -34,6 +35,7 @@ export class PrivacyPage {
     'privacy.collect.item1',
     'privacy.collect.item2',
     'privacy.collect.item3',
+    'privacy.collect.item4',
   ];
 
   /** i18n keys for the "why we process this data" bullet list, in reading order. */
@@ -41,5 +43,6 @@ export class PrivacyPage {
     'privacy.purpose.item1',
     'privacy.purpose.item2',
     'privacy.purpose.item3',
+    'privacy.purpose.item4',
   ];
 }

@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import {MnSectionDirective, MnTranslatePipe} from 'mn-angular-lib';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
+import {MnSectionDirective, MnTranslatePipe} from 'mn-angular-lib/core';
 import {PageHeroComponent} from '../../components/page-hero/page-hero';
 import {ContactSectionComponent} from '../home-page/components/contact-section/contact-section';
 import {RevealDirective} from '../../components/reveal/reveal';
@@ -16,6 +16,7 @@ import {RevealDirective} from '../../components/reveal/reveal';
   selector: 'app-contact-page',
   standalone: true,
   imports: [MnSectionDirective, MnTranslatePipe, PageHeroComponent, ContactSectionComponent, RevealDirective],
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './contact-page.html',
 })
 export class ContactPage {}

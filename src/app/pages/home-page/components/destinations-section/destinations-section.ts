@@ -1,7 +1,8 @@
-import {Component, inject, InjectionToken} from '@angular/core';
+import {Component, inject, InjectionToken, ChangeDetectionStrategy} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {LucideArrowRight} from '@lucide/angular';
-import {MnButton, MnButtonTypes, provideMnComponentConfig} from 'mn-angular-lib';
+import {provideMnComponentConfig} from 'mn-angular-lib/core';
+import {MnButton, MnButtonTypes} from 'mn-angular-lib/button';
 import {EyebrowComponent} from '../../../../components/eyebrow/eyebrow';
 
 /**
@@ -54,6 +55,7 @@ export const APP_DESTINATIONS_SECTION_CONFIG = new InjectionToken<DestinationsSe
   providers: [
     provideMnComponentConfig<DestinationsSectionConfig>(APP_DESTINATIONS_SECTION_CONFIG, 'app-destinations-section'),
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './destinations-section.html',
 })
 export class DestinationsSectionComponent {

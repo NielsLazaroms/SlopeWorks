@@ -3,7 +3,7 @@
   <img [src]="imageUrl" alt="" aria-hidden="true"
        class="absolute inset-0 w-full h-full object-cover" />
   <!-- Gradient: readable at the base, image breathing at the top -->
-  <div class="absolute inset-0 bg-[linear-gradient(165deg,rgba(11,12,14,0.55)_0%,rgba(11,12,14,0.72)_45%,rgba(11,12,14,0.94)_100%)]"></div>
+  <div class="absolute inset-0 scrim-page"></div>
 
   <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-16 pt-28 lg:pt-36 pb-16 lg:pb-20">
     @if (crumbs.length) {
@@ -16,7 +16,7 @@
       <app-eyebrow tone="dark" [dot]="true" class="mb-5">{{ eyebrow }}</app-eyebrow>
     }
 
-    <h1 class="font-display font-extrabold text-4xl md:text-5xl lg:text-[3.25rem] leading-[1.08] tracking-tight text-white max-w-3xl">
+    <h1 class="font-display font-extrabold text-4xl md:text-5xl lg:text-display leading-[1.08] tracking-tight text-white max-w-3xl">
       {{ title }}
     </h1>
 

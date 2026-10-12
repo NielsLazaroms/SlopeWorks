@@ -1,7 +1,7 @@
-import {Component, input, signal} from '@angular/core';
+import {Component, input, signal, ChangeDetectionStrategy} from '@angular/core';
 import {NgClass} from '@angular/common';
 import {LucidePlus} from '@lucide/angular';
-import {MnTranslatePipe} from 'mn-angular-lib';
+import {MnTranslatePipe} from 'mn-angular-lib/core';
 
 /**
  * A single question/answer entry in an FAQ accordion (both fields are i18n keys).
@@ -27,6 +27,7 @@ export interface FaqEntry {
   standalone: true,
   imports: [NgClass, LucidePlus, MnTranslatePipe],
   host: {class: 'block'},
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './faq-accordion.html',
 })
 export class FaqAccordionComponent {

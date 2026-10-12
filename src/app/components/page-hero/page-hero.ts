@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, ChangeDetectionStrategy} from '@angular/core';
 import {BreadcrumbComponent, Crumb} from '../breadcrumb/breadcrumb';
 import {EyebrowComponent} from '../eyebrow/eyebrow';
 
@@ -15,6 +15,7 @@ import {EyebrowComponent} from '../eyebrow/eyebrow';
   selector: 'app-page-hero',
   standalone: true,
   imports: [BreadcrumbComponent, EyebrowComponent],
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './page-hero.html',
 })
 export class PageHeroComponent {

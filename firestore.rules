@@ -1,0 +1,83 @@
+rules_version = '2';
+
+// Visitors can only create submissions; nothing can be read, changed or
+// deleted from the website. Entries are read in the Firebase console.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // True when `value` is a string of 1..max characters.
+    function text(value, max) {
+      return value is string && value.size() > 0 && value.size() <= max;
+    }
+
+    // True for a plausible email address of at most 254 characters.
+    function email(value) {
+      return text(value, 254) && value.matches('^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$');
+    }
+
+    // Metadata the site adds to every submission.
+    function validMeta(d) {
+      return text(d.locale, 10) && text(d.domain, 100) && d.createdAt == request.time;
+    }
+
+    match /contactMessages/{id} {
+      allow read, update, delete: if false;
+      allow create: if request.resource.data.keys().hasAll(
+          ['name', 'email', 'subject', 'message', 'locale', 'domain', 'createdAt'])
+        && request.resource.data.keys().hasOnly(
+          ['name', 'email', 'subject', 'message', 'locale', 'domain', 'createdAt'])
+        && text(request.resource.data.name, 200)
+        && email(request.resource.data.email)
+        && text(request.resource.data.subject, 200)
+        && text(request.resource.data.message, 5000)
+        && validMeta(request.resource.data);
+    }
+
+    // Destination names used by the Ski Trip Scan.
+    function destinations() {
+      return ['Mayrhofen', 'Zell am See-Kaprun', 'Sölden', 'Kitzbühel-Kirchberg', 'St. Anton', 'Gstaad'];
+    }
+
+    // True for a whole-number score within the range Q1–Q5 can produce.
+    function score(value) {
+      return value is int && value >= -10 && value <= 15;
+    }
+
+    // One score per destination name.
+    function validScores(s) {
+      return s is map && s.size() == 6 && s.keys().hasOnly(destinations())
+        && score(s['Mayrhofen']) && score(s['Zell am See-Kaprun']) && score(s['Sölden'])
+        && score(s['Kitzbühel-Kirchberg']) && score(s['St. Anton']) && score(s['Gstaad']);
+    }
+
+    // Ski Trip Scans whose result the visitor asked to receive by email, stored
+    // readably: names and answer texts in the visitor's language.
+    match /quizSubscribers/{id} {
+      allow read, update, delete: if false;
+      allow create: if request.resource.data.keys().hasAll(
+          ['firstName', 'email', 'newsletter', 'match', 'alternative', 'tripStyle', 'budget',
+           'groupSize', 'budgetNote', 'answers', 'scores', 'locale', 'domain', 'createdAt'])
+        && request.resource.data.keys().hasOnly(
+          ['firstName', 'email', 'company', 'newsletter', 'match', 'alternative', 'tripStyle', 'budget',
+           'groupSize', 'budgetNote', 'answers', 'scores', 'locale', 'domain', 'createdAt'])
+        && text(request.resource.data.firstName, 100)
+        && email(request.resource.data.email)
+        && (!('company' in request.resource.data) || text(request.resource.data.company, 200))
+        && request.resource.data.newsletter is bool
+        && request.resource.data.match in destinations()
+        && request.resource.data.alternative in destinations()
+        && request.resource.data.tripStyle in ['Reward', 'Better Together', 'Reset']
+        && text(request.resource.data.budget, 200)
+        && text(request.resource.data.groupSize, 50)
+        && request.resource.data.budgetNote is bool
+        && request.resource.data.answers is map && request.resource.data.answers.size() == 8
+        && validScores(request.resource.data.scores)
+        && validMeta(request.resource.data);
+    }
+
+    // Everything else is closed.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

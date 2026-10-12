@@ -1,6 +1,7 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, ChangeDetectionStrategy} from '@angular/core';
 import {RouterLink} from '@angular/router';
-import {MnButton, MnButtonTypes, MnTranslatePipe} from 'mn-angular-lib';
+import {MnTranslatePipe} from 'mn-angular-lib/core';
+import {MnButton, MnButtonTypes} from 'mn-angular-lib/button';
 
 /**
  * The quiet closing call-to-action band shared by every interior page.
@@ -15,6 +16,7 @@ import {MnButton, MnButtonTypes, MnTranslatePipe} from 'mn-angular-lib';
   selector: 'app-page-cta',
   standalone: true,
   imports: [RouterLink, MnButton, MnTranslatePipe],
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './page-cta.html',
 })
 export class PageCtaComponent {

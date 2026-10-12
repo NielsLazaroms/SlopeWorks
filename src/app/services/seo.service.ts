@@ -2,7 +2,7 @@ import {isPlatformServer} from '@angular/common';
 import {DOCUMENT, inject, Injectable, PLATFORM_ID} from '@angular/core';
 import {Meta, Title} from '@angular/platform-browser';
 import {ActivatedRouteSnapshot, NavigationEnd, Router} from '@angular/router';
-import {MnLanguageService} from 'mn-angular-lib';
+import {MnLanguageService} from 'mn-angular-lib/core';
 import {filter} from 'rxjs';
 import {environment} from '../../environments/environment';
 
@@ -89,11 +89,17 @@ export class SeoService {
     {hreflang: 'x-default', origin: 'https://slopeworks.eu'},
   ];
 
+  /** Source of navigation events and the active route. */
   private readonly router = inject(Router);
+  /** Writes the document title. */
   private readonly title = inject(Title);
+  /** Writes description, Open Graph and Twitter meta tags. */
   private readonly meta = inject(Meta);
+  /** Document used for canonical, hreflang and JSON-LD elements. */
   private readonly document = inject(DOCUMENT);
+  /** Active language for translated metadata. */
   private readonly lang = inject(MnLanguageService);
+  /** Distinguishes prerendering from the browser. */
   private readonly platformId = inject(PLATFORM_ID);
 
   /**

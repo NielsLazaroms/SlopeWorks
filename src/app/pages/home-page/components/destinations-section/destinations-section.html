@@ -6,7 +6,7 @@
     @for (card of componentConfig.cards; track card.name) {
       <a
         [routerLink]="card.route"
-        class="group block text-left bg-paper-card border border-[#E8E8F0] rounded-lg overflow-hidden transition-all duration-150 hover:-translate-y-1 hover:shadow-[0_10px_24px_rgba(0,0,0,0.08)]"
+        class="group block text-left bg-paper-card border border-line rounded-lg overflow-hidden transition-all duration-150 hover:-translate-y-1 hover:shadow-[0_10px_24px_rgba(0,0,0,0.08)]"
       >
         <div class="relative h-40 bg-ink-raised overflow-hidden">
           @if (card.imageUrl) {

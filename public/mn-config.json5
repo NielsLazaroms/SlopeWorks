@@ -246,26 +246,16 @@
             "#section-title-form": {
               title: { $translate: "home.contact.form.title" }
             },
-            // Visible field labels are rendered by the contact section's own
-            // template (reactive editorial labels), so no `label` is configured
-            // here. mn-input-field overwrites its config `placeholder` with
-            // `props`, so the name/subject placeholders are supplied from the
-            // component instead (see `nameProps`/`subjectProps`); the textarea
-            // guards that override and keeps its config placeholder below. Each
-            // field keeps its accessible label here for screen readers.
-            "#mn-input-name": {
-              "ariaLabel": { $translate: "home.contact.form.name.ariaLabel" }
-            },
-            "#mn-input-subject": {
-              "ariaLabel": { $translate: "home.contact.form.subject.ariaLabel" }
-            },
+            // Labels (with the library's red * for required fields), placeholders
+            // and error messages come from the component's `props` (see
+            // `fieldText`), because mn-input-field overwrites config values with
+            // `props`. The visible label doubles as the accessible name. The
+            // textarea keeps its config placeholder below.
             "#mn-textarea-description": {
               "placeholder": { $translate: "home.contact.form.description.placeholder" },
-              // Empty string suppresses the library's own label (the global
-              // `mn-textarea` default is "Generic Textarea"); the visible label
-              // is rendered by this section's template instead.
-              "label": "",
-              "ariaLabel": { $translate: "home.contact.form.description.ariaLabel" }
+              // Empty string suppresses the global `mn-textarea` default label
+              // ("Generic Textarea") so the label from `props` is used.
+              "label": ""
             }
           }
         }

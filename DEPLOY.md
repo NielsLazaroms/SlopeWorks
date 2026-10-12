@@ -44,6 +44,29 @@ The per-domain builds simply make the *static* HTML match what the browser
 resolves, so there is no language flash and crawlers see the right language
 immediately.
 
+## CI deploy
+
+`.github/workflows/main.yml` runs `npm run build:all` and uploads each build to
+its own web root: `/domains/slopeworks.{nl,be,eu}/public_html/`.
+
+> **Hosting prerequisite:** `slopeworks.be` and `slopeworks.eu` must be set up
+> as **separate domains with their own `public_html`** in the hosting panel —
+> not as aliases/pointers of `slopeworks.nl`. As an alias they keep serving the
+> `.nl` build (Dutch, canonical → `.nl`) no matter what CI uploads.
+
+Every build's `.htaccess` 301-redirects `www.<domain>` to the bare domain.
+
+## Firebase config
+
+The contact form stores messages in Firestore. Its config is generated into
+`src/environments/firebase.config.ts` by `scripts/firebase-config.mjs`, which
+runs before `start`, `build*` and `test`. Locally it reads `.env` (copy
+`.env.example`); in CI it reads the `FIREBASE_*` GitHub secrets. Both `.env` and
+the generated file are git-ignored. A missing value fails the build.
+
+Firestore security rules live in `firestore.rules`; publish them in the
+Firebase console (Firestore → Rules) or with `firebase deploy --only firestore:rules`.
+
 ## After deploy
 
 Submit each domain's sitemap in **its own Google Search Console property**:

@@ -1,0 +1,332 @@
+<!-- Intro: a photo hero like the other pages (title, one line, start button),
+     then the pitch on the light page, then the six destinations the scan can
+     land on. Only shown before the scan starts. -->
+@if (phase() === 'intro') {
+  <header class="relative overflow-hidden bg-ink">
+    <img src="/images/hero_image.webp" alt="" aria-hidden="true" class="absolute inset-0 w-full h-full object-cover" />
+    <div class="absolute inset-0 scrim-page"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-16 pt-28 lg:pt-36 pb-16 lg:pb-20">
+      <h1 class="font-display font-extrabold text-4xl md:text-5xl lg:text-display leading-[1.06] tracking-tight text-white max-w-3xl">
+        {{ 'quiz.title' | mnTranslate }}
+      </h1>
+      <p class="mt-6 text-lg text-white/75 max-w-xl leading-relaxed">{{ 'quiz.intro.p3' | mnTranslate }}</p>
+      <div class="mt-8 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6">
+        <button type="button" mnButton [data]="primaryButton" (click)="start('serious')" class="w-fit font-bold">{{ 'quiz.start' | mnTranslate }}</button>
+        <p class="text-sm text-white/60">{{ 'quiz.intro.meta' | mnTranslate }}</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- The pitch: the usual ways a destination gets picked, shown as three
+       holiday snaps captioned with the reasoning behind them. Then the answer:
+       "Kan." and what we look at instead. -->
+  <section appReveal class="max-w-7xl mx-auto px-6 lg:px-16 pt-16 lg:pt-24">
+    <h2 class="font-display font-extrabold text-3xl md:text-h2-lg tracking-tight leading-[1.1] text-ink max-w-2xl">{{ 'quiz.intro.lead' | mnTranslate }}</h2>
+
+    <ul class="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-6 lg:gap-8">
+      @for (reason of reasons; track reason.key) {
+        <li>
+          <img [src]="reason.photo" [alt]="reason.name" loading="lazy" class="w-full aspect-[4/3] object-cover rounded-xl" />
+          <p class="mt-4 font-display font-bold text-ink">{{ reason.name }}</p>
+          <p class="mt-1 text-lg leading-snug text-text-grey">{{ reason.key | mnTranslate }}</p>
+        </li>
+      }
+    </ul>
+
+    <div class="mt-12 lg:mt-16 grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-6 lg:gap-16 items-start">
+      <p class="font-display font-extrabold text-2xl md:text-h2 leading-[1.2] tracking-tight text-ink max-w-xl">
+        {{ 'quiz.intro.can' | mnTranslate }} {{ 'quiz.intro.p1' | mnTranslate }}
+      </p>
+      <p class="text-body leading-relaxed text-text-grey max-w-xl lg:pt-1">{{ 'quiz.intro.p2' | mnTranslate }}</p>
+    </div>
+  </section>
+
+  <!-- The six destinations the scan chooses between -->
+  <section appReveal class="max-w-7xl mx-auto px-6 lg:px-16 pt-16 lg:pt-24 pb-16 lg:pb-24">
+    <h2 class="font-display font-extrabold text-2xl md:text-h2 tracking-tight text-ink mb-8">{{ 'quiz.intro.six' | mnTranslate }}</h2>
+    <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+      @for (d of destinations; track d.name) {
+        <li>
+          <img [src]="d.image" [alt]="d.name" loading="lazy" class="w-full aspect-[4/3] lg:aspect-[3/4] object-cover rounded-xl" />
+          <p class="mt-3 font-display font-bold text-ink leading-tight">{{ d.name }}</p>
+          <p class="mt-0.5 text-sm text-text-grey">{{ d.countryKey | mnTranslate }}</p>
+        </li>
+      }
+    </ul>
+    <div class="mt-10 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6">
+      <button type="button" mnButton [data]="primaryButton" (click)="start('serious')" class="w-fit font-bold">{{ 'quiz.start' | mnTranslate }}</button>
+      <p class="text-sm text-text-grey">{{ 'quiz.intro.meta' | mnTranslate }}</p>
+    </div>
+  </section>
+}
+
+
+<!-- Questions: one per screen. At least one screen tall, so the footer does not
+     jump up and down as questions and answers vary in length. -->
+@if (phase() === 'questions') {
+<section class="max-w-7xl mx-auto px-6 lg:px-16 pt-28 lg:pt-36 pb-16 lg:pb-24 min-h-svh">
+    <!-- Tall enough for the longest question with four answers, so the page
+         keeps the same height whichever question is showing. -->
+    <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,22rem)] gap-12 xl:gap-20">
+    <div class="max-w-3xl min-h-[46rem] sm:min-h-[42rem]">
+      <!-- Progress -->
+      <div class="mb-8">
+        <p class="font-display font-bold text-xs tracking-[0.14em] uppercase text-dark-yellow mb-3" aria-live="polite">
+          @if (isGroupStep()) {
+            {{ 'quiz.progress.group' | mnTranslate }}
+          } @else {
+            {{ 'quiz.progress.question' | mnTranslate }} {{ stepIndex() + 1 }} {{ 'quiz.progress.of' | mnTranslate }} {{ questionCount }}
+          }
+        </p>
+        <div class="h-1.5 w-full rounded-full bg-paper-band overflow-hidden" role="progressbar"
+             [attr.aria-valuenow]="progress()" aria-valuemin="0" aria-valuemax="100">
+          <div class="h-full rounded-full bg-brand-500 transition-[width] duration-300" [style.width.%]="progress()"></div>
+        </div>
+      </div>
+
+      <!-- Room for the longest question, so the answers always start at the same height -->
+      <h2 class="font-display font-extrabold text-2xl md:text-h2 tracking-tight leading-[1.15] text-ink mb-8 min-h-[3.45em] sm:min-h-[2.3em]">
+        {{ questionKey() | mnTranslate }}
+      </h2>
+
+      <!-- Answers: large tap targets of one fixed height (room for the longest
+           answer), so every question looks the same. Picking one moves on
+           automatically. Tracked by text key, so each question gets fresh buttons.
+           The list is always as tall as four answers (4 tiles + 3 gaps), so the
+           "previous question" link stays in place on the three-answer question. -->
+      <ul class="flex flex-col gap-3 min-h-[30.25rem] sm:min-h-[26.25rem]">
+        @for (option of options(); track option.key) {
+          <li>
+            <button type="button" (click)="choose(option.letter)"
+                    [attr.aria-pressed]="currentAnswer() === option.letter"
+                    class="flex items-center gap-4 w-full min-h-[7rem] sm:min-h-[6rem] text-left rounded-2xl px-5 py-4 sm:px-6 shadow-sm transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-brand-500"
+                    [class]="currentAnswer() === option.letter ? 'bg-brand-100' : 'bg-paper-card hover:bg-brand-50'">
+              <span class="flex items-center justify-center w-8 h-8 shrink-0 rounded-full font-display font-bold text-sm"
+                    [class]="currentAnswer() === option.letter ? 'bg-brand-500 text-ink' : 'bg-paper-band text-dark-yellow'">{{ option.letter }}</span>
+              <span class="text-body leading-snug text-ink">{{ option.key | mnTranslate }}</span>
+            </button>
+          </li>
+        }
+      </ul>
+
+      <button type="button" (click)="back()"
+              class="mt-8 text-sm font-semibold text-text-grey underline underline-offset-4 decoration-ink/25 transition-colors hover:text-dark-yellow cursor-pointer">
+        ← {{ 'quiz.back' | mnTranslate }}
+      </button>
+    </div>
+
+    <!-- Beside the question (only rendered on wide screens, so phones skip the
+         photos): a photo of what it is about and
+         why we ask it. All photos are stacked in one fixed frame and loaded when
+         the scan starts; only the current one is visible, so changing question
+         crossfades between two loaded photos instead of flashing. -->
+    @if (isWide()) {
+      <aside class="pt-10">
+        <div class="relative w-full aspect-[4/5] rounded-2xl overflow-hidden shadow-sm">
+          @for (photo of photos; track photo) {
+            <img [src]="photo" alt="" aria-hidden="true"
+                 class="quiz-photo absolute inset-0 w-full h-full object-cover"
+                 [class.opacity-0]="photo !== aside().photo" />
+          }
+        </div>
+        <p class="mt-6 font-display font-bold text-ink">{{ 'quiz.why.label' | mnTranslate }}</p>
+        <p class="mt-2 text-base leading-relaxed text-text-grey">{{ aside().whyKey | mnTranslate }}</p>
+      </aside>
+    }
+    </div>
+</section>
+}
+
+<!-- Result: opens like a destination page (photo hero with the facts at a
+     glance), then the explanation on the light page, then the intake band. -->
+@if (phase() === 'result') {
+  @if (view(); as v) {
+    <header class="relative overflow-hidden bg-ink">
+      <img src="/images/hero_image.webp" alt="" aria-hidden="true" class="absolute inset-0 w-full h-full object-cover" />
+      <div class="absolute inset-0 scrim-destination"></div>
+
+      <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-16 pt-28 lg:pt-36 pb-16 lg:pb-20">
+        <div class="grid grid-cols-1 lg:grid-cols-[1.3fr_0.7fr] gap-10 lg:gap-14 items-end">
+          <div>
+            <p class="text-lg text-white/70">{{ 'quiz.result.match' | mnTranslate }}</p>
+            <h1 class="mt-2 font-display font-extrabold text-h2-lg md:text-6xl lg:text-display-lg leading-[1.02] tracking-tight text-white">{{ v.name }}</h1>
+            <p class="mt-6 text-lg md:text-xl text-white/85 max-w-xl leading-relaxed">{{ v.leadKey | mnTranslate }}</p>
+            <div class="mt-8 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
+              <a mnButton [data]="primaryButton" [routerLink]="v.route" class="font-bold">{{ v.ctaKey | mnTranslate }}</a>
+              <button type="button" (click)="restart()"
+                      class="w-fit font-semibold text-white underline underline-offset-4 decoration-white/40 transition-colors hover:decoration-brand-500 cursor-pointer">
+                {{ 'quiz.cta.restart' | mnTranslate }}
+              </button>
+            </div>
+          </div>
+
+          <!-- At a glance, as on the destination pages -->
+          <div class="bg-white/[0.07] border border-white/12 rounded-lg p-6 backdrop-blur-sm">
+            <div class="flex items-center gap-2.5 mb-4 pb-3.5 border-b border-white/15">
+              <span class="w-5 h-0.5 bg-brand-500" aria-hidden="true"></span>
+              <span class="font-display font-bold text-label tracking-[0.16em] uppercase text-white/60">{{ 'destinations.glance.label' | mnTranslate }}</span>
+            </div>
+            <div class="flex justify-between gap-4 py-3 border-b border-white/10">
+              <span class="text-meta text-white/55">{{ 'quiz.result.price' | mnTranslate }}</span>
+              <span class="text-meta text-white font-semibold font-display text-right">{{ v.priceKey | mnTranslate }}</span>
+            </div>
+            <div class="flex justify-between gap-4 py-3 border-b border-white/10">
+              <span class="text-meta text-white/55">{{ 'quiz.pass.group' | mnTranslate }}</span>
+              <span class="text-meta text-white font-semibold font-display text-right">{{ v.groupKey | mnTranslate }} {{ 'quiz.pass.people' | mnTranslate }}</span>
+            </div>
+            <div class="flex justify-between gap-4 py-3">
+              <span class="text-meta text-white/55">{{ 'quiz.pass.alternative' | mnTranslate }}</span>
+              <a [routerLink]="v.alternative.route" class="text-meta text-white font-semibold font-display text-right underline-offset-4 hover:underline hover:text-brand-400">{{ v.alternative.name }}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Why it fits and what to keep in mind, beside the alternative -->
+    <section appReveal class="max-w-7xl mx-auto px-6 lg:px-16 pt-16 lg:pt-24">
+      <div class="grid grid-cols-1 lg:grid-cols-[1fr_0.82fr] gap-12 lg:gap-16 lg:items-stretch">
+        <div class="max-w-2xl">
+          <h2 class="font-display font-extrabold text-3xl md:text-h2-lg tracking-tight leading-[1.12] text-ink mb-5">
+            {{ 'quiz.result.whyBefore' | mnTranslate }}{{ v.name }}{{ 'quiz.result.whyAfter' | mnTranslate }}
+          </h2>
+          <div class="flex flex-col gap-4 text-body leading-relaxed text-text-grey">
+            @for (key of v.paragraphKeys; track key) {
+              <p>{{ key | mnTranslate }}</p>
+            }
+          </div>
+          <ul class="mt-8 flex flex-col gap-3">
+            @for (key of v.reasonKeys; track key) {
+              <li class="flex items-start gap-3 text-body text-ink">
+                <svg viewBox="0 0 16 16" class="mt-1 w-4 h-4 shrink-0 text-dark-yellow" aria-hidden="true">
+                  <path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>{{ key | mnTranslate }}</span>
+              </li>
+            }
+          </ul>
+
+        <aside class="mt-10 rounded-2xl bg-paper-card p-7 sm:p-8 shadow-sm">
+          <h3 class="font-display font-bold text-xl text-ink mb-4">{{ 'quiz.result.caution' | mnTranslate }}</h3>
+          <div class="flex flex-col gap-3 text-base leading-relaxed text-text-grey">
+            @for (key of v.cautionKeys; track key) {
+              <p>{{ key | mnTranslate }}</p>
+            }
+          </div>
+          @if (v.budgetKey) {
+            <h3 class="mt-7 font-display font-bold text-xl text-ink mb-3">{{ 'quiz.budget.title' | mnTranslate }}</h3>
+            <p class="text-base leading-relaxed text-text-grey">{{ v.budgetKey | mnTranslate }}</p>
+          }
+        </aside>
+        </div>
+
+        <!-- Right column: the alternative, in the same card as the destinations
+             overview. The card stretches to the left column's height; its photo takes
+             up the extra space, so both columns end on the same line. -->
+        <div class="flex flex-col">
+          <p class="text-text-grey mb-3">{{ 'quiz.alt.label' | mnTranslate }}</p>
+          <a [routerLink]="v.alternative.route"
+             class="group flex flex-col flex-1 bg-paper-card border border-line rounded-[10px] overflow-hidden transition-all duration-150 hover:-translate-y-1 hover:shadow-[0_14px_30px_rgba(0,0,0,0.10)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
+            <div class="relative h-56 lg:h-auto lg:flex-1 lg:min-h-56 overflow-hidden">
+              <img [src]="v.alternative.image" [alt]="v.alternative.name" loading="lazy"
+                   class="w-full h-full object-cover lg:absolute lg:inset-0 transition-transform duration-300 group-hover:scale-[1.04]" />
+            </div>
+            <div class="p-6 lg:p-7">
+              <div class="font-display text-label tracking-[0.08em] uppercase text-text-grey mb-1.5">{{ v.alternative.countryKey | mnTranslate }}</div>
+              <h3 class="font-display font-bold text-2xl mb-2.5 text-ink">{{ v.alternative.name }}</h3>
+              <p class="text-body-sm text-text-grey leading-relaxed mb-4">{{ v.alternative.bodyKey | mnTranslate }}</p>
+              <div class="flex items-center gap-1.5 font-display font-bold text-meta text-dark-yellow">{{ 'quiz.alt.view' | mnTranslate }} {{ v.alternative.name }}<svg lucideArrowRight [size]="15" aria-hidden="true"></svg></div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Next step: the intake, on the plain page background, like the closing block on every other page. The pitch and the
+         buttons on the left, the three steps in the "Hoe het werkt" style on
+         the right. -->
+    <section appReveal class="bg-paper">
+      <div class="max-w-7xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
+        <div class="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-12 lg:gap-16 items-start">
+          <div class="max-w-xl">
+            <h2 class="font-display font-extrabold text-3xl md:text-h2-lg tracking-tight leading-[1.1] text-ink">{{ 'quiz.next.title' | mnTranslate }}</h2>
+            <p class="mt-5 text-body leading-relaxed text-text-grey">
+              @for (key of nextKeys; track key) {
+                {{ key | mnTranslate }}
+              }
+            </p>
+            <div class="mt-8 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
+              <a mnButton [data]="primaryButton" routerLink="/contact" [queryParams]="intakeQuery()" class="font-bold">{{ 'quiz.cta.intake' | mnTranslate }}</a>
+              @if (mailState() === 'closed') {
+                <button type="button" (click)="openMailForm()"
+                        class="w-fit font-semibold text-ink underline underline-offset-4 decoration-ink/30 transition-colors hover:text-dark-yellow cursor-pointer">
+                  {{ 'quiz.cta.mail' | mnTranslate }}
+                </button>
+              }
+            </div>
+          </div>
+
+          <!-- What happens after the scan: a real sequence, so numbered -->
+          <ol class="flex flex-col gap-8">
+            @for (key of nextStepKeys; track key; let i = $index) {
+              <li class="grid grid-cols-[auto_1fr] gap-6">
+                <span class="font-display font-extrabold text-4xl lg:text-5xl leading-none text-brand-500 tabular-nums">{{ i + 1 }}</span>
+                <p class="border-l border-line-warm pl-6 text-body leading-relaxed text-ink">{{ key | mnTranslate }}</p>
+              </li>
+            }
+          </ol>
+        </div>
+
+        <!-- Email me my result: only after the full result is visible -->
+        @if (mailState() !== 'closed') {
+          <form [formGroup]="mailForm" (ngSubmit)="submitMail()" class="mt-8 max-w-2xl rounded-2xl bg-paper-card p-7 sm:p-9">
+            <h3 class="font-display font-extrabold text-xl text-ink mb-2">{{ 'quiz.mail.title' | mnTranslate }}</h3>
+            @if (mailState() === 'sent') {
+              <div role="status" class="flex flex-col gap-2">
+                <p class="font-semibold text-ink">{{ 'quiz.mail.success.title' | mnTranslate }}</p>
+                <p class="text-text-grey">{{ 'quiz.mail.success.body' | mnTranslate }}</p>
+              </div>
+            } @else {
+              <p class="text-text-grey mb-6">{{ 'quiz.mail.intro' | mnTranslate }}</p>
+              <div class="flex flex-col gap-5">
+                @for (l of localeGroup(); track l) {
+                  <mn-lib-input-field [class]="fieldClass" formControlName="firstName" [props]="firstNameProps()"></mn-lib-input-field>
+                  <mn-lib-input-field [class]="fieldClass" formControlName="email" [props]="emailProps()"></mn-lib-input-field>
+                  <mn-lib-input-field [class]="fieldClass" formControlName="company" [props]="companyProps()"></mn-lib-input-field>
+                  <mn-lib-checkbox formControlName="newsletter" [props]="newsletterProps()"></mn-lib-checkbox>
+                }
+                <!-- Honeypot: invisible to people and screen readers, filled in by bots -->
+                <div class="absolute -left-[9999px] h-px w-px overflow-hidden" aria-hidden="true">
+                  <label for="quiz-website">Website</label>
+                  <input id="quiz-website" type="text" formControlName="website" tabindex="-1" autocomplete="off">
+                </div>
+              </div>
+  
+              @if (visibleMailMessageKey; as messageKey) {
+                <p role="alert" class="mt-6 rounded-xl bg-paper-band p-4 text-sm leading-relaxed text-ink">
+                  {{ messageKey | mnTranslate }}
+                  @if (messageKey !== 'quiz.mail.incomplete') {
+                    <a href="mailto:info@slopeworks.nl" class="font-semibold underline underline-offset-2">info&#64;slopeworks.nl</a>.
+                  }
+                </p>
+              }
+  
+              <button type="submit" class="mt-7 w-full font-bold sm:w-fit" mnButton [data]="submitButton">
+                @if (mailState() === 'sending') {
+                  {{ 'quiz.mail.sending' | mnTranslate }}
+                } @else {
+                  {{ 'quiz.mail.submit' | mnTranslate }}
+                }
+              </button>
+              <p class="mt-5 text-xs leading-relaxed text-text-grey">
+                {{ 'home.contact.form.privacyNotice' | mnTranslate }}<a routerLink="/privacy"
+                  class="underline underline-offset-2 decoration-ink/25 transition-colors hover:text-brand-600">{{ 'home.contact.form.privacyLink' | mnTranslate }}</a>.
+              </p>
+            }
+          </form>
+        }
+      </div>
+    </section>
+  }
+}

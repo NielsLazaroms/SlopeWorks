@@ -1,6 +1,7 @@
-import {Component, inject, InjectionToken} from '@angular/core';
+import {Component, inject, InjectionToken, ChangeDetectionStrategy} from '@angular/core';
 import {RouterLink} from '@angular/router';
-import {MnButton, MnButtonTypes, provideMnComponentConfig} from 'mn-angular-lib';
+import {provideMnComponentConfig} from 'mn-angular-lib/core';
+import {MnButton, MnButtonTypes} from 'mn-angular-lib/button';
 import {EyebrowComponent} from '../../../../components/eyebrow/eyebrow';
 
 /**
@@ -56,6 +57,7 @@ export const APP_TEAMBUILDING_SECTION_CONFIG = new InjectionToken<TeambuildingSe
   providers: [
     provideMnComponentConfig<TeambuildingSectionConfig>(APP_TEAMBUILDING_SECTION_CONFIG, 'app-teambuilding-section'),
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './teambuilding-section.html',
 })
 export class TeambuildingSectionComponent {

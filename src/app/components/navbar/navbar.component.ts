@@ -1,8 +1,9 @@
-import {Component, HostListener, inject, InjectionToken} from '@angular/core';
+import {Component, HostListener, inject, InjectionToken, ChangeDetectionStrategy} from '@angular/core';
 import {NgClass} from '@angular/common';
 import {Router} from '@angular/router';
 import {NavListItemComponent} from './nav-list-item/nav-list-item.component';
-import {MnButton, MnButtonTypes, MnLanguageService, provideMnComponentConfig} from 'mn-angular-lib';
+import {MnLanguageService, provideMnComponentConfig} from 'mn-angular-lib/core';
+import {MnButton, MnButtonTypes} from 'mn-angular-lib/button';
 import {NavigationService} from '../../services/navigation.service';
 
 /**
@@ -32,13 +33,16 @@ export interface NavbarConfig {
   contactItem?: NavbarNavItem;
 }
 
+/** DI token exposing the navbar content from `mn-config.json5`. */
 export const APP_NAVBAR_CONFIG = new InjectionToken<NavbarConfig>('APP_NAVBAR_CONFIG');
 
+/** Site navigation: logo, page links, language switch and contact button, with a full-screen menu on mobile. */
 @Component({
   selector: 'app-navbar',
   imports: [NavListItemComponent, MnButton, NgClass],
   templateUrl: './navbar.component.html',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     provideMnComponentConfig<NavbarConfig>(APP_NAVBAR_CONFIG, 'app-navbar'),
   ],
@@ -46,8 +50,11 @@ export const APP_NAVBAR_CONFIG = new InjectionToken<NavbarConfig>('APP_NAVBAR_CO
 export class NavbarComponent {
   /** Navbar content resolved from `mn-config.json5`. */
   protected readonly componentConfig = inject(APP_NAVBAR_CONFIG);
+  /** Active language, switched from the navbar. */
   private readonly lang = inject(MnLanguageService);
+  /** Scrolls to home-page sections from any page. */
   private readonly navigation = inject(NavigationService);
+  /** Used to highlight the active page link. */
   private readonly router = inject(Router);
 
   /** Whether the mobile full-screen menu is open. */

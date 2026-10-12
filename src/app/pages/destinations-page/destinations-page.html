@@ -7,16 +7,24 @@
 
 <!-- Lead-in: gives the grid a section H2 (fixes the H1→H3 hierarchy skip) and
      adds keyword-rich context before the six area cards. -->
-<section appReveal class="max-w-7xl mx-auto px-6 lg:px-16 pt-14 lg:pt-20 pb-10 lg:pb-12">
+<section appReveal class="max-w-7xl mx-auto px-6 lg:px-16 pt-14 lg:pt-20 pb-10 lg:pb-12 grid grid-cols-1 lg:grid-cols-[1fr_0.8fr] gap-10 lg:gap-16 items-end">
   <div class="max-w-2xl">
     <app-eyebrow class="mb-4">{{ 'destinations.grid.label' | mnTranslate }}</app-eyebrow>
     <h2 class="font-display font-extrabold text-3xl md:text-4xl tracking-tight leading-[1.12] mb-4">{{ 'destinations.grid.title' | mnTranslate }}</h2>
     <p class="text-base leading-relaxed text-text-grey">{{ 'destinations.grid.body' | mnTranslate }}</p>
   </div>
+
+  <!-- Entry point to the Ski Trip Scan for visitors who don't know where to start -->
+  <div class="rounded-2xl bg-paper-band p-6 sm:p-8">
+    <p class="font-display font-bold text-xs tracking-[0.14em] uppercase text-dark-yellow mb-3">{{ 'destinations.scan.label' | mnTranslate }}</p>
+    <h3 class="font-display font-extrabold text-2xl tracking-tight text-ink mb-3">{{ 'destinations.scan.title' | mnTranslate }}</h3>
+    <p class="text-body-sm leading-relaxed text-text-grey mb-6">{{ 'destinations.scan.body' | mnTranslate }}</p>
+    <a mnButton [data]="scanButton" routerLink="/welk-skigebied-past-bij-jullie-team" class="font-bold">{{ 'destinations.scan.button' | mnTranslate }}</a>
+  </div>
 </section>
 
 <!-- Country filter -->
-<div class="border-b border-[#E8E8F0] bg-paper">
+<div class="border-b border-line bg-paper">
   <div class="max-w-7xl mx-auto px-6 lg:px-16 py-6 flex flex-wrap gap-3">
     @for (option of filters; track option.id) {
       <button
@@ -24,8 +32,8 @@
         (click)="setFilter(option.id)"
         [ngClass]="filter() === option.id
           ? 'bg-brand-500 text-ink border-brand-500'
-          : 'bg-transparent text-text-grey border-[#DDD] hover:border-ink'"
-        class="font-display font-semibold text-[13px] px-4.5 py-2 rounded-full border cursor-pointer transition-colors duration-200"
+          : 'bg-transparent text-text-grey border-line-strong hover:border-ink'"
+        class="font-display font-semibold text-meta px-4.5 py-2 rounded-full border cursor-pointer transition-colors duration-200"
       >
         {{ option.labelKey | mnTranslate }}
       </button>
@@ -39,7 +47,7 @@
     @for (dest of visible(); track dest.name) {
       <a
         [routerLink]="dest.route"
-        class="group block bg-paper-card border border-[#E8E8F0] rounded-[10px] overflow-hidden transition-all duration-150 hover:-translate-y-1 hover:shadow-[0_14px_30px_rgba(0,0,0,0.10)]"
+        class="group block bg-paper-card border border-line rounded-[10px] overflow-hidden transition-all duration-150 hover:-translate-y-1 hover:shadow-[0_14px_30px_rgba(0,0,0,0.10)]"
       >
         <div class="relative h-48 overflow-hidden">
           <img [src]="dest.imageUrl" [alt]="('destinations.areaImageAlt' | mnTranslate) + ' ' + dest.name" loading="lazy"
@@ -50,15 +58,15 @@
           }
         </div>
         <div class="p-6 lg:p-7">
-          <div class="font-display text-[11px] tracking-[0.08em] uppercase text-text-grey mb-1.5">{{ dest.countryKey | mnTranslate }}</div>
+          <div class="font-display text-label tracking-[0.08em] uppercase text-text-grey mb-1.5">{{ dest.countryKey | mnTranslate }}</div>
           <h3 class="font-display font-bold text-2xl mb-2.5">{{ dest.name }}</h3>
-          <p class="text-[14.5px] text-text-grey leading-relaxed mb-4">{{ dest.descriptionKey | mnTranslate }}</p>
+          <p class="text-body-sm text-text-grey leading-relaxed mb-4">{{ dest.descriptionKey | mnTranslate }}</p>
           <div class="flex flex-wrap gap-2 mb-4">
             @for (tag of dest.tagKeys; track tag) {
               <span mnBadge [data]="{variant: 'default', color: 'lightgray', size: 'sm'}" class="font-display tracking-wide">{{ tag | mnTranslate }}</span>
             }
           </div>
-          <div class="flex items-center gap-1.5 font-display font-bold text-[13px] text-dark-yellow">{{ 'destinations.view' | mnTranslate }} {{ dest.name }}<svg lucideArrowRight [size]="15" aria-hidden="true"></svg></div>
+          <div class="flex items-center gap-1.5 font-display font-bold text-meta text-dark-yellow">{{ 'destinations.view' | mnTranslate }} {{ dest.name }}<svg lucideArrowRight [size]="15" aria-hidden="true"></svg></div>
         </div>
       </a>
     }

@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {provideServerRendering, withRoutes} from '@angular/ssr';
-import {MnConfigService, MnLanguageService} from 'mn-angular-lib';
+import {MnConfigService, MnLanguageService} from 'mn-angular-lib/core';
 
 import {environment} from '../environments/environment';
 import {appConfig} from './app.config';
@@ -24,6 +24,7 @@ const PRERENDER_LOCALE = environment.prerenderLocale;
 /** Upper bound on poll iterations while waiting for the config to load. */
 const CONFIG_WAIT_MAX_TICKS = 1000;
 
+/** Server-only providers: prerendering, the prerender locale and waiting for `mn-config` before rendering. */
 const serverConfig: ApplicationConfig = {
   providers: [
     provideServerRendering(withRoutes(serverRoutes)),

@@ -1,27 +1,25 @@
-import {Component, computed, inject, InjectionToken} from '@angular/core';
+import {Component, computed, inject, InjectionToken, signal, ChangeDetectionStrategy} from '@angular/core';
 import {toSignal} from '@angular/core/rxjs-interop';
 import {
-  MnButton,
-  MnButtonTypes,
-  MnInputField,
-  MnInputProps,
   MnLanguageService,
   MnSectionDirective,
-  MnTextarea,
-  MnTextareaProps,
   MnTranslatePipe,
-  provideMnComponentConfig
-} from 'mn-angular-lib';
+  provideMnComponentConfig,
+} from 'mn-angular-lib/core';
+import {MnButton, MnButtonTypes} from 'mn-angular-lib/button';
+import {MnInputField, MnInputProps, MnTextarea, MnTextareaProps} from 'mn-angular-lib/forms';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {RouterLink} from '@angular/router';
+import {ActivatedRoute, RouterLink} from '@angular/router';
 import {EyebrowComponent} from '../../../../components/eyebrow/eyebrow';
+import {FORM_FIELD_CLASS, formFieldText, FormFieldText} from '../../../../components/form-fields';
+import {notBlank, SUBMISSION_EMAIL_PATTERN, SubmissionService} from '../../../../services/submission.service';
 
 /**
  * Injected configuration for the contact section.
  *
  * The channel copy (email, phone, location) is read straight from i18n in the
- * template; this config only carries the section's prose and the framing used
- * both to build the `mailto:` body and to print the note's salutation/closing.
+ * template; this config only carries the section's prose and the note's printed
+ * salutation/closing.
  */
 export interface ContactSectionConfig {
   /** Lead paragraph shown beside the contact channels. */
@@ -30,11 +28,11 @@ export interface ContactSectionConfig {
   formDescription?: string;
   /** Label for the send button. */
   formButtonText?: string;
-  /** Opening line of the sent email, also printed atop the note card. */
+  /** Opening line printed atop the note card. */
   emailSalutation?: string;
-  /** Closing line of the sent email, also printed above the note's signature. */
+  /** Closing line printed above the note's signature. */
   emailClosing?: string;
-  /** Address the message is delivered to. */
+  /** Direct address shown as a fallback when sending fails. */
   contactEmail?: string;
 }
 
@@ -51,13 +49,16 @@ interface ContactChannel {
   href: string | null;
 }
 
+/** Lifecycle of a contact-form submission. */
+type SendState = 'idle' | 'sending' | 'sent';
+
 /**
  * Contact section for the `/contact` page.
  *
  * Presents the send-a-message form as an honest note to the two founders: the
- * card is framed by the same salutation and closing that the `mailto:` body
- * uses, and the closing signs itself with the visitor's name as they type. The
- * validated form and `sendEmail` mailto behaviour are unchanged.
+ * card is framed by a printed salutation and closing, and the closing signs
+ * itself with the visitor's name as they type. Submitting stores the message in
+ * Firestore via {@link SubmissionService}; the visitor stays on the page.
  */
 @Component({
   selector: 'app-contact-section',
@@ -75,12 +76,19 @@ interface ContactChannel {
   providers: [
     provideMnComponentConfig<ContactSectionConfig>(APP_CONTACT_SECTION_COMPONENT_CONFIG, 'app-contact-section'),
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './contact-section.html',
 })
 export class ContactSectionComponent {
 
-  /** Section copy and email framing resolved from `mn-config.json5`. */
+  /** Section copy and note framing resolved from `mn-config.json5`. */
   protected readonly componentConfig = inject(APP_CONTACT_SECTION_COMPONENT_CONFIG);
+
+  /** Stores the message in Firestore. */
+  private readonly submissions = inject(SubmissionService);
+
+  /** Current state of the submission, driving the button and result messages. */
+  protected readonly sendState = signal<SendState>('idle');
 
   /** Translation service, used to build the reactive input placeholders. */
   private readonly language = inject(MnLanguageService);
@@ -93,7 +101,7 @@ export class ContactSectionComponent {
 
   /**
    * The active locale wrapped in a single-element array, used as an `@for` key
-   * around the name/subject inputs so they are re-created on language switch.
+   * around the text inputs so they are re-created on language switch.
    *
    * `mn-input-field` resolves its `props` only on init and on its own locale
    * subscription (which fires before Angular pushes the recomputed `props`),
@@ -103,12 +111,44 @@ export class ContactSectionComponent {
    */
   protected readonly localeGroup = computed(() => [this.locale()]);
 
-  /** Message form: all three fields are required before sending is enabled. */
+  /**
+   * Message form: name, email, subject and message are required before sending
+   * is enabled. `website` is a honeypot hidden from people; bots that fill it in
+   * get a fake success and nothing is stored.
+   */
   form = new FormGroup({
-    name: new FormControl('', { validators: [Validators.required] }),
-    subject: new FormControl('', { validators: [Validators.required] }),
-    description: new FormControl('', { validators: [Validators.required] }),
+    name: new FormControl('', { validators: [Validators.required, notBlank, Validators.maxLength(200)] }),
+    email: new FormControl('', { validators: [Validators.required, notBlank, Validators.pattern(SUBMISSION_EMAIL_PATTERN), Validators.maxLength(254)] }),
+    subject: new FormControl('', { validators: [Validators.required, notBlank, Validators.maxLength(200)] }),
+    description: new FormControl('', { validators: [Validators.required, notBlank, Validators.maxLength(5000)] }),
+    website: new FormControl(''),
   });
+
+  /**
+   * Pre-fills the subject from `?subject=` (used by the Ski Trip Scan's intake
+   * button). `setValue` leaves the field untouched, so no errors show yet.
+   */
+  constructor() {
+    const subject = inject(ActivatedRoute).snapshot.queryParamMap.get('subject')?.trim();
+    if (subject) {
+      this.form.controls.subject.setValue(subject.slice(0, 200));
+    }
+  }
+
+  /**
+   * i18n key of the message shown above the send button: why the form cannot
+   * be sent yet, or why saving failed. `null` when there is nothing to report.
+   */
+  protected readonly formMessageKey = signal<string | null>(null);
+
+  /**
+   * The message to show above the send button. The "fields missing" notice
+   * disappears by itself once every field is filled in correctly.
+   */
+  protected get visibleFormMessageKey(): string | null {
+    const key = this.formMessageKey();
+    return key === 'home.contact.form.incomplete' && this.form.valid ? null : key;
+  }
 
   /**
    * Live value of the name field, used to sign the note's closing as the
@@ -127,31 +167,44 @@ export class ContactSectionComponent {
   ];
 
   /**
-   * Props for the name input, including a translated placeholder.
+   * Props for the name input: translated label, placeholder and error messages.
    *
-   * `mn-input-field` overwrites its config-resolved placeholder with `props`, so
-   * (unlike the textarea) the placeholder must be supplied here rather than in
+   * The label goes through `props` so the library renders it with its red `*`
+   * for required fields. `mn-input-field` overwrites its config-resolved
+   * label/placeholder with `props`, so they must be supplied here rather than in
    * `mn-config.json5`. Kept as a `computed` so it re-resolves on language switch.
    */
   protected readonly nameProps = computed<MnInputProps>(() => {
     this.locale();
-    return {id: 'name', type: 'text', placeholder: this.language.translate('home.contact.form.name.placeholder')};
+    return {...this.fieldText('name'), id: 'name', type: 'text', autocomplete: 'name'};
   });
 
-  /** Props for the subject input, including a translated placeholder. See {@link nameProps}. */
+  /** Props for the email input. See {@link nameProps}. */
+  protected readonly emailProps = computed<MnInputProps>(() => {
+    this.locale();
+    return {...this.fieldText('email'), id: 'email', type: 'email', autocomplete: 'email'};
+  });
+
+  /** Props for the subject input. See {@link nameProps}. */
   protected readonly subjectProps = computed<MnInputProps>(() => {
     this.locale();
-    return {id: 'subject', type: 'text', placeholder: this.language.translate('home.contact.form.subject.placeholder')};
+    return {...this.fieldText('subject'), id: 'subject', type: 'text'};
   });
 
-  /** Props for the message textarea. */
-  descriptionProps = {
-    id: 'description',
-    resize: 'none',
-    rows: 5
-  } satisfies MnTextareaProps;
+  /**
+   * Props for the message textarea: translated label and error messages. Its
+   * placeholder comes from `mn-config.json5`, which the textarea keeps.
+   */
+  protected readonly descriptionProps = computed<MnTextareaProps>(() => {
+    this.locale();
+    const {label, errorMessages} = this.fieldText('description');
+    return {id: 'description', resize: 'none', rows: 5, label, errorMessages};
+  });
 
-  /** Base styling for the send button; disabled state is applied per render. */
+  /** Host classes shared by every form field (see {@link FORM_FIELD_CLASS}). */
+  protected readonly fieldClass = FORM_FIELD_CLASS;
+
+  /** Base styling for the send button; disabled/loading state is applied per render. */
   formButton: MnButtonTypes = {
     color: 'primary',
     size: 'md',
@@ -160,43 +213,84 @@ export class ContactSectionComponent {
     hover: true,
   };
 
-  /** Send-button config with its disabled state bound to form validity. */
+  /**
+   * Send-button config. Stays clickable while the form is incomplete so a click
+   * can point out what is missing; only disabled while sending.
+   */
   get formButtonData(): MnButtonTypes {
+    const sending = this.sendState() === 'sending';
     return {
       ...this.formButton,
-      disabled: this.form.invalid
+      disabled: sending,
+      loading: sending,
     };
   }
 
   /**
-   * Opens the visitor's mail client with a pre-composed message to SlopeWorks.
+   * Translated label, placeholder and per-validator error messages for a field,
+   * read from `home.contact.form.<field>.*`.
    *
-   * The body is wrapped in the configured salutation and closing so the sent
-   * email matches the note the visitor sees on screen. Does nothing while the
-   * form is invalid.
+   * @param field The form field the texts belong to.
    */
-  sendEmail() {
+  private fieldText(field: 'name' | 'email' | 'subject' | 'description'): FormFieldText {
+    return formFieldText(this.language, 'home.contact.form', field);
+  }
+
+  /**
+   * Stores the message in Firestore and shows the result in place of the form.
+   *
+   * An incomplete form is not sent: every field shows its error and the first
+   * invalid field gets focus. A filled-in honeypot is treated as sent without
+   * storing anything. A failed save explains whether the connection or the
+   * site is the likely cause.
+   */
+  async submit(): Promise<void> {
+    if (this.sendState() === 'sending') {
+      return;
+    }
     if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      this.formMessageKey.set('home.contact.form.incomplete');
+      this.focusFirstInvalid();
+      return;
+    }
+    if (this.form.controls.website.value) {
+      this.sendState.set('sent');
       return;
     }
 
-    const name = this.form.get('name')?.value ?? '';
-    const subject = this.form.get('subject')?.value ?? '';
-    const description = this.form.get('description')?.value ?? '';
+    const {name, email, subject, description} = this.form.getRawValue();
+    this.formMessageKey.set(null);
+    this.sendState.set('sending');
+    try {
+      await this.submissions.submitContact({
+        name: (name ?? '').trim(),
+        email: (email ?? '').trim(),
+        subject: (subject ?? '').trim(),
+        message: (description ?? '').trim(),
+      });
+      this.sendState.set('sent');
+      this.form.reset();
+    } catch (error) {
+      const offline = !navigator.onLine || (error as {code?: string})?.code === 'unavailable';
+      this.formMessageKey.set(offline ? 'home.contact.form.error.offline' : 'home.contact.form.error.failed');
+      this.sendState.set('idle');
+    }
+  }
 
-    const salutation = this.componentConfig?.emailSalutation ?? 'Beste Meneer';
-    const closing = this.componentConfig?.emailClosing ?? 'Met vriendelijke groet';
-    const contactEmail = this.componentConfig?.contactEmail ?? 'info@Slopeworks.nl';
+  /** Moves focus to the first field (in form order) that still has an error. */
+  private focusFirstInvalid(): void {
+    const first = (['name', 'email', 'subject', 'description'] as const)
+      .find(field => this.form.controls[field].invalid);
+    if (first) {
+      document.getElementById(first)?.focus();
+    }
+  }
 
-    const body =
-      `${salutation}
-
-${description}
-
-${closing}
-${name}`;
-
-    window.location.href = `mailto:${contactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  /** Returns from the thank-you message to an empty form. */
+  writeAnother(): void {
+    this.formMessageKey.set(null);
+    this.sendState.set('idle');
   }
 
 }

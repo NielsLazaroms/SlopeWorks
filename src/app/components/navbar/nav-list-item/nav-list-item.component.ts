@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter} from '@angular/core';
+import {Component, Input, Output, EventEmitter, ChangeDetectionStrategy} from '@angular/core';
 
 /**
  * A single navigation entry rendered as a focusable button that emits on click
@@ -15,6 +15,7 @@ import {Component, Input, Output, EventEmitter} from '@angular/core';
 @Component({
   selector: 'li[appNavListItem]',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './nav-list-item.component.html',
 })
 export class NavListItemComponent {

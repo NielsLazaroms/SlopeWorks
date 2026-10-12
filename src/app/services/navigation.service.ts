@@ -13,7 +13,9 @@ import {ScrollService} from './scroll.service';
  */
 @Injectable({providedIn: 'root'})
 export class NavigationService {
+  /** Navigates home before scrolling when needed. */
   private readonly router = inject(Router);
+  /** Performs the smooth scroll to a section. */
   private readonly scroll = inject(ScrollService);
 
   /** Delay (ms) after navigating home before scrolling, so the target renders. */

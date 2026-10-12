@@ -1,9 +1,10 @@
-import {afterNextRender, Component, ElementRef, OnDestroy, inject} from '@angular/core';
+import {afterNextRender, Component, ElementRef, OnDestroy, inject, ChangeDetectionStrategy} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {Meta} from '@angular/platform-browser';
 import {LucideArrowRight} from '@lucide/angular';
 import gsap from 'gsap';
-import {MnButton, MnButtonTypes, MnTranslatePipe} from 'mn-angular-lib';
+import {MnTranslatePipe} from 'mn-angular-lib/core';
+import {MnButton, MnButtonTypes} from 'mn-angular-lib/button';
 import {EyebrowComponent} from '../../components/eyebrow/eyebrow';
 
 /**
@@ -30,6 +31,7 @@ import {EyebrowComponent} from '../../components/eyebrow/eyebrow';
   selector: 'app-not-found-page',
   standalone: true,
   imports: [RouterLink, LucideArrowRight, MnButton, MnTranslatePipe, EyebrowComponent],
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './not-found-page.html',
 })
 export class NotFoundPage implements OnDestroy {
@@ -127,7 +129,22 @@ export class NotFoundPage implements OnDestroy {
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     const rnd = (min: number, max: number) => min + Math.random() * (max - min);
     /** One snowflake: position, radius, fall speed, sway width/phase, and opacity. */
-    type Flake = {x: number; y: number; r: number; vy: number; sway: number; phase: number; alpha: number};
+    type Flake = {
+      /** Horizontal position in CSS pixels. */
+      x: number;
+      /** Vertical position in CSS pixels. */
+      y: number;
+      /** Radius in CSS pixels. */
+      r: number;
+      /** Fall speed in pixels per frame. */
+      vy: number;
+      /** Horizontal sway amplitude in pixels. */
+      sway: number;
+      /** Current sway phase in radians. */
+      phase: number;
+      /** Opacity, 0 to 1. */
+      alpha: number;
+    };
     let width = 0;
     let height = 0;
     const flakes: Flake[] = [];

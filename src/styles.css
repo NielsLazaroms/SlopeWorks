@@ -47,6 +47,20 @@
 }
 
 @theme {
+  /* Type scale. Tailwind's own sizes (text-xs … text-9xl) cover the round steps;
+     these named sizes are the in-between steps the site uses, so templates never
+     need arbitrary `text-[Npx]` values. Font size only: line height comes from
+     the element's `leading-*` class or is inherited, as before. */
+  --text-label: 11px;        /* small uppercase labels and eyebrows */
+  --text-meta: 13px;         /* meta lines, captions, small UI text */
+  --text-body-sm: 15px;      /* secondary body text, card copy */
+  --text-body: 17px;         /* main body text */
+  --text-h3: 1.75rem;        /* section sub-headings */
+  --text-h2: 2rem;           /* section headings */
+  --text-h2-lg: 2.4rem;      /* large section headings */
+  --text-display: 3.25rem;   /* page hero titles (the same size on every page) */
+  --text-display-lg: 4.2rem; /* largest hero titles */
+
   --color-brand-50:  #FFFBEB;
   --color-brand-100: #FFF3C4;
   --color-brand-200: #FFE58A;
@@ -79,6 +93,10 @@
   --color-primary-content: var(--color-ink);
   --color-base-content: var(--color-ink);
   --color-base-100: var(--color-paper-card);
+  /* Since mn-angular-lib v2, form fields colour their required `*` and error
+     messages with `text-error`; kept at the `red-500` that v1 used. */
+  --color-error: var(--color-red-500);
+  --color-error-content: #FFFFFF;
 
   /* Editorial palette from the SlopeWorks mockup: dark "ink" surfaces, light
      "paper" surfaces, muted grey body text, and a deep yellow for on-light accents.
@@ -94,11 +112,21 @@
   --color-text-grey: #5A5D63;
   --color-dark-yellow: #7B5800;
 
+  /* Lines and quiet surfaces. Templates use these instead of typed-out hex
+     values, so every hairline, divider and tinted card comes from one set. */
+  --color-line: #E8E8F0;        /* hairlines and card borders on light surfaces */
+  --color-line-strong: #DCDCE6; /* slightly firmer lines: filter pills, index bars */
+  --color-line-warm: #EAE2CE;   /* lines on cream / warm areas */
+  --color-line-gold: #F0DDA0;   /* lines inside yellow-highlighted blocks */
+  --color-mark-muted: #B5B5C0;  /* neutral dash markers ("not this") */
+  --color-paper-warm: #FFFCF2;  /* highlighted (SlopeWorks) cards and rows */
+  --color-paper-cool: #F5F5F8;  /* the cool "without SlopeWorks" counterpart */
+
   /* Piste-map accents, used ONLY in the comparison page's route markers: a muted
      alpine green for the generalist's "motorway piste" and a brick red for the
      specialist's "engineered run", leaving the brand yellow to mark the
      SlopeWorks line. Kept desaturated so they read as map keys, not alarms. */
-  --color-piste-green: #3E8E5A;
+  --color-piste-green: #357D4E;
   --color-piste-red: #C2472F;
 
   /* Montserrat for display/headings, Inter for body copy. Overriding --font-sans
@@ -106,6 +134,22 @@
      The `* Variable` names are the self-hosted @fontsource families imported above. */
   --font-sans: 'Inter Variable', 'Inter Variable Fallback: Arial', 'Inter Variable Fallback: Roboto', Arial, sans-serif;
   --font-display: 'Montserrat Variable', 'Montserrat Variable Fallback: Arial', 'Montserrat Variable Fallback: Roboto', Arial, sans-serif;
+}
+
+/* Dark overlays ("scrims") that keep text readable on photo heroes. One per
+   kind of hero, so the overlay looks the same wherever that hero is used. */
+@utility scrim-page {
+  background-image: linear-gradient(165deg, rgba(11, 12, 14, 0.55) 0%, rgba(11, 12, 14, 0.72) 45%, rgba(11, 12, 14, 0.94) 100%);
+}
+@utility scrim-destination {
+  background-image: linear-gradient(160deg, rgba(11, 12, 14, 0.45) 0%, rgba(11, 12, 14, 0.70) 55%, rgba(11, 12, 14, 0.92) 100%);
+}
+@utility scrim-home {
+  background-image: linear-gradient(180deg, rgba(11, 12, 14, 0.35) 0%, rgba(11, 12, 14, 0.55) 50%, rgba(11, 12, 14, 0.92) 100%);
+}
+/* Lighter, cool-toned overlay for the in-page destination photo band. */
+@utility scrim-cool {
+  background-image: linear-gradient(160deg, rgba(58, 79, 99, 0.12), rgba(14, 24, 34, 0.72));
 }
 
 @layer base {

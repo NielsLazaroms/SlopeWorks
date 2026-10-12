@@ -1,7 +1,8 @@
-import {Component, computed, effect, inject, OnDestroy, signal} from '@angular/core';
+import {Component, computed, effect, inject, OnDestroy, signal, ChangeDetectionStrategy} from '@angular/core';
 import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {toSignal} from '@angular/core/rxjs-interop';
-import {MnBadge, MnLanguageService, MnTranslatePipe} from 'mn-angular-lib';
+import {MnLanguageService, MnTranslatePipe} from 'mn-angular-lib/core';
+import {MnBadge} from 'mn-angular-lib/button';
 import {BreadcrumbComponent} from '../../components/breadcrumb/breadcrumb';
 import {PageCtaComponent} from '../../components/page-cta/page-cta';
 import {RevealDirective} from '../../components/reveal/reveal';
@@ -163,6 +164,7 @@ interface DestinationView {
   selector: 'app-destination-detail',
   standalone: true,
   imports: [RouterLink, MnBadge, MnTranslatePipe, BreadcrumbComponent, PageCtaComponent, RevealDirective, FaqAccordionComponent, EyebrowComponent],
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './destination-detail.html',
 })
 export class DestinationDetailPage implements OnDestroy {
@@ -249,7 +251,9 @@ export class DestinationDetailPage implements OnDestroy {
     this.activeNote.set(0);
   });
 
+  /** Sets the per-destination title, description, image and breadcrumb. */
   private readonly seo = inject(SeoService);
+  /** Active language, so the metadata follows a language switch. */
   private readonly lang = inject(MnLanguageService);
 
   /**

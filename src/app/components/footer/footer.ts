@@ -1,6 +1,6 @@
-import {Component, inject, InjectionToken} from '@angular/core';
+import {Component, inject, InjectionToken, ChangeDetectionStrategy} from '@angular/core';
 import {RouterLink} from '@angular/router';
-import {MnTranslatePipe, provideMnComponentConfig} from 'mn-angular-lib';
+import {MnTranslatePipe, provideMnComponentConfig} from 'mn-angular-lib/core';
 import {EyebrowComponent} from '../eyebrow/eyebrow';
 
 /**
@@ -67,6 +67,7 @@ export const APP_FOOTER_CONFIG = new InjectionToken<FooterConfig>('APP_FOOTER_CO
   providers: [
     provideMnComponentConfig<FooterConfig>(APP_FOOTER_CONFIG, 'app-footer'),
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './footer.html',
 })
 export class FooterComponent {

@@ -60,6 +60,36 @@ if (existsSync(llmsEn)) {
 }
 
 /**
+ * Appends `block` to the build's `.htaccess` unless `marker` is already present,
+ * preserving any existing rules.
+ *
+ * @param {string} marker A line that identifies the block (used for idempotency).
+ * @param {string} block The directives to append.
+ */
+function appendHtaccess(marker, block) {
+  const htaccess = join(dir, '.htaccess');
+  const existing = existsSync(htaccess) ? readFileSync(htaccess, 'utf8') : '';
+  if (!existing.includes(marker)) {
+    writeFileSync(htaccess, existing ? `${existing.trimEnd()}\n${block}\n` : `${block}\n`);
+  }
+}
+
+/**
+ * Collapse `www.` onto the bare domain with a 301 so each domain has one
+ * indexable host (the canonical tags already point at the non-www origin).
+ * Host-agnostic, so the same rule works on .nl, .be and .eu.
+ */
+const wwwMarker = '# Redirect www to the bare domain';
+appendHtaccess(wwwMarker, [
+  wwwMarker,
+  '<IfModule mod_rewrite.c>',
+  'RewriteEngine On',
+  'RewriteCond %{HTTP_HOST} ^www\\.(.+)$ [NC]',
+  'RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L]',
+  '</IfModule>',
+].join('\n'));
+
+/**
  * Wire up the 404 for direct (mistyped) URLs. On static hosting a request that
  * matches no file is served by the host, not Angular, so the prerendered
  * `/404` page is copied to a root `404.html` and an `.htaccess` points the
@@ -70,13 +100,8 @@ const prerendered404 = join(dir, '404', 'index.html');
 const served404 = join(dir, '404.html');
 if (existsSync(prerendered404)) {
   copyFileSync(prerendered404, served404);
-  const htaccess = join(dir, '.htaccess');
   const directive = 'ErrorDocument 404 /404.html';
-  // Preserve any existing rules; only add the directive if it isn't there yet.
-  const existing = existsSync(htaccess) ? readFileSync(htaccess, 'utf8') : '';
-  if (!existing.includes(directive)) {
-    writeFileSync(htaccess, existing ? `${existing.trimEnd()}\n${directive}\n` : `${directive}\n`);
-  }
+  appendHtaccess(directive, directive);
 }
 
 console.log(`localized ${dir} -> ${origin} (${locale})`);
