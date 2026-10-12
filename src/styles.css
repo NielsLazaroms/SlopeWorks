@@ -102,7 +102,7 @@
      alpine green for the generalist's "motorway piste" and a brick red for the
      specialist's "engineered run", leaving the brand yellow to mark the
      SlopeWorks line. Kept desaturated so they read as map keys, not alarms. */
-  --color-piste-green: #3E8E5A;
+  --color-piste-green: #357D4E;
   --color-piste-red: #C2472F;
 
   /* Montserrat for display/headings, Inter for body copy. Overriding --font-sans
