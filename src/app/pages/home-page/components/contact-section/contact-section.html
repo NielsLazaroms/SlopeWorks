@@ -3,8 +3,8 @@
   <!-- Left: who you are actually reaching, and the direct ways to do it -->
   <div class="max-w-md">
     <app-eyebrow class="mb-4">{{ 'contact.reach.label' | mnTranslate }}</app-eyebrow>
-    <h2 class="font-display font-extrabold text-3xl md:text-[2rem] tracking-tight leading-[1.12] mb-5">{{ 'contact.reach.title' | mnTranslate }}</h2>
-    <p class="text-[17px] leading-relaxed text-text-grey">
+    <h2 class="font-display font-extrabold text-3xl md:text-h2 tracking-tight leading-[1.12] mb-5">{{ 'contact.reach.title' | mnTranslate }}</h2>
+    <p class="text-body leading-relaxed text-text-grey">
       {{ componentConfig.informationDescription }}
     </p>
 
@@ -19,11 +19,11 @@
             </p>
             @if (channel.href) {
               <a [href]="channel.href"
-                 class="text-[17px] font-medium text-ink underline-offset-4 transition-colors hover:text-dark-yellow hover:underline">
+                 class="text-body font-medium text-ink underline-offset-4 transition-colors hover:text-dark-yellow hover:underline">
                 {{ channel.valueKey | mnTranslate }}
               </a>
             } @else {
-              <p class="text-[17px] font-medium text-ink">{{ channel.valueKey | mnTranslate }}</p>
+              <p class="text-body font-medium text-ink">{{ channel.valueKey | mnTranslate }}</p>
             }
           </div>
         </li>
@@ -48,7 +48,7 @@
       <!-- Sent: the note is replaced by a confirmation; the visitor stays on the page -->
       <div role="status" class="flex flex-col gap-4">
         <p class="font-display font-semibold text-xl text-ink">{{ 'home.contact.form.success.title' | mnTranslate }}</p>
-        <p class="text-[17px] leading-relaxed text-text-grey">{{ 'home.contact.form.success.body' | mnTranslate }}</p>
+        <p class="text-body leading-relaxed text-text-grey">{{ 'home.contact.form.success.body' | mnTranslate }}</p>
         <button type="button" class="w-fit text-sm font-semibold text-ink underline underline-offset-4 decoration-ink/25 transition-colors hover:text-dark-yellow"
                 (click)="writeAnother()">
           {{ 'home.contact.form.success.again' | mnTranslate }}

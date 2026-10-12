@@ -18,10 +18,10 @@
     <div class="grid lg:grid-cols-[1.15fr_0.85fr] gap-8 lg:gap-14 items-end">
       <div>
         <app-eyebrow tone="dark" [dot]="true" class="mb-5">{{ 'home.hero.eyebrow' | mnTranslate }}</app-eyebrow>
-        <h1 class="font-display font-extrabold text-4xl md:text-5xl lg:text-[3.75rem] leading-[1.04] tracking-tight text-white max-w-2xl">
+        <h1 class="font-display font-extrabold text-4xl md:text-5xl lg:text-6xl leading-[1.04] tracking-tight text-white max-w-2xl">
           {{ ('home.hero.titleLead' | mnTranslate) + ' ' }}<span class="text-brand-500">{{ 'home.hero.titleAccent' | mnTranslate }}</span>
         </h1>
-        <p class="mt-5 text-[15px] md:text-base not-italic text-white/70 max-w-xl leading-relaxed">{{ 'home.hero.sub' | mnTranslate }}</p>
+        <p class="mt-5 text-body-sm md:text-base not-italic text-white/70 max-w-xl leading-relaxed">{{ 'home.hero.sub' | mnTranslate }}</p>
 
         <div class="mt-7 flex flex-wrap items-center gap-5">
           <a mnButton [data]="primaryData" routerLink="/contact" class="font-display font-bold">
@@ -35,8 +35,8 @@
 
       <!-- Signature: field note -->
       <aside class="lg:justify-self-end w-full max-w-sm bg-white/[0.05] border border-brand-500/25 rounded-lg p-6 backdrop-blur-sm">
-        <span class="block font-display font-bold text-[11px] tracking-[0.1em] uppercase text-brand-400 mb-3">{{ 'home.hero.note.stamp' | mnTranslate }}</span>
-        <p class="text-white/85 text-[15px] leading-relaxed">&ldquo;{{ 'home.hero.note.quote' | mnTranslate }}&rdquo;</p>
+        <span class="block font-display font-bold text-label tracking-[0.1em] uppercase text-brand-400 mb-3">{{ 'home.hero.note.stamp' | mnTranslate }}</span>
+        <p class="text-white/85 text-body-sm leading-relaxed">&ldquo;{{ 'home.hero.note.quote' | mnTranslate }}&rdquo;</p>
         <div class="mt-4 font-display text-xs tracking-[0.04em] text-white/45">{{ 'home.hero.note.loc' | mnTranslate }}</div>
       </aside>
     </div>

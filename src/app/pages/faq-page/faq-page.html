@@ -13,7 +13,7 @@
         <button
           type="button"
           (click)="scrollToGroup(group.id)"
-          class="shrink-0 whitespace-nowrap rounded-full border px-3.5 py-1.5 font-display font-semibold text-[12.5px] transition-colors duration-200"
+          class="shrink-0 whitespace-nowrap rounded-full border px-3.5 py-1.5 font-display font-semibold text-meta transition-colors duration-200"
           [class]="activeGroup() === group.id
             ? 'bg-brand-500 text-ink border-brand-500'
             : 'bg-white text-text-grey border-[#E4E4EE]'"
@@ -25,7 +25,7 @@
   <div class="max-w-7xl mx-auto px-6 lg:px-16 py-16 lg:py-24 grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-10 lg:gap-16">
     <!-- Living index: tracks the reader's position with a growing yellow tick -->
     <nav aria-label="FAQ categories" class="hidden lg:block self-start sticky top-28">
-      <p class="font-display font-bold text-[11px] tracking-[0.16em] uppercase text-text-grey mb-5">
+      <p class="font-display font-bold text-label tracking-[0.16em] uppercase text-text-grey mb-5">
         {{ 'faq.indexLabel' | mnTranslate }}
       </p>
       <ul>

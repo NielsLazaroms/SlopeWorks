@@ -7,7 +7,7 @@
     <div class="absolute inset-0 bg-[linear-gradient(165deg,rgba(11,12,14,0.55)_0%,rgba(11,12,14,0.72)_45%,rgba(11,12,14,0.94)_100%)]"></div>
 
     <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-16 pt-28 lg:pt-36 pb-16 lg:pb-20">
-      <h1 class="font-display font-extrabold text-4xl md:text-5xl lg:text-[3.6rem] leading-[1.06] tracking-tight text-white max-w-3xl">
+      <h1 class="font-display font-extrabold text-4xl md:text-5xl lg:text-display leading-[1.06] tracking-tight text-white max-w-3xl">
         {{ 'quiz.title' | mnTranslate }}
       </h1>
       <p class="mt-6 text-lg text-white/75 max-w-xl leading-relaxed">{{ 'quiz.intro.p3' | mnTranslate }}</p>
@@ -22,7 +22,7 @@
        holiday snaps captioned with the reasoning behind them. Then the answer:
        "Kan." and what we look at instead. -->
   <section appReveal class="max-w-7xl mx-auto px-6 lg:px-16 pt-16 lg:pt-24">
-    <h2 class="font-display font-extrabold text-3xl md:text-[2.4rem] tracking-tight leading-[1.1] text-ink max-w-2xl">{{ 'quiz.intro.lead' | mnTranslate }}</h2>
+    <h2 class="font-display font-extrabold text-3xl md:text-h2-lg tracking-tight leading-[1.1] text-ink max-w-2xl">{{ 'quiz.intro.lead' | mnTranslate }}</h2>
 
     <ul class="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-6 lg:gap-8">
       @for (reason of reasons; track reason.key) {
@@ -35,16 +35,16 @@
     </ul>
 
     <div class="mt-12 lg:mt-16 grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-6 lg:gap-16 items-start">
-      <p class="font-display font-extrabold text-2xl md:text-[2rem] leading-[1.2] tracking-tight text-ink max-w-xl">
+      <p class="font-display font-extrabold text-2xl md:text-h2 leading-[1.2] tracking-tight text-ink max-w-xl">
         {{ 'quiz.intro.can' | mnTranslate }} {{ 'quiz.intro.p1' | mnTranslate }}
       </p>
-      <p class="text-[17px] leading-relaxed text-text-grey max-w-xl lg:pt-1">{{ 'quiz.intro.p2' | mnTranslate }}</p>
+      <p class="text-body leading-relaxed text-text-grey max-w-xl lg:pt-1">{{ 'quiz.intro.p2' | mnTranslate }}</p>
     </div>
   </section>
 
   <!-- The six destinations the scan chooses between -->
   <section appReveal class="max-w-7xl mx-auto px-6 lg:px-16 pt-16 lg:pt-24 pb-16 lg:pb-24">
-    <h2 class="font-display font-extrabold text-2xl md:text-[2rem] tracking-tight text-ink mb-8">{{ 'quiz.intro.six' | mnTranslate }}</h2>
+    <h2 class="font-display font-extrabold text-2xl md:text-h2 tracking-tight text-ink mb-8">{{ 'quiz.intro.six' | mnTranslate }}</h2>
     <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
       @for (d of destinations; track d.name) {
         <li>
@@ -86,7 +86,7 @@
       </div>
 
       <!-- Room for the longest question, so the answers always start at the same height -->
-      <h2 class="font-display font-extrabold text-2xl md:text-[2rem] tracking-tight leading-[1.15] text-ink mb-8 min-h-[3.45em] sm:min-h-[2.3em]">
+      <h2 class="font-display font-extrabold text-2xl md:text-h2 tracking-tight leading-[1.15] text-ink mb-8 min-h-[3.45em] sm:min-h-[2.3em]">
         {{ questionKey() | mnTranslate }}
       </h2>
 
@@ -104,7 +104,7 @@
                     [class]="currentAnswer() === option.letter ? 'bg-brand-100' : 'bg-paper-card hover:bg-brand-50'">
               <span class="flex items-center justify-center w-8 h-8 shrink-0 rounded-full font-display font-bold text-sm"
                     [class]="currentAnswer() === option.letter ? 'bg-brand-500 text-ink' : 'bg-paper-band text-dark-yellow'">{{ option.letter }}</span>
-              <span class="text-[17px] leading-snug text-ink">{{ option.key | mnTranslate }}</span>
+              <span class="text-body leading-snug text-ink">{{ option.key | mnTranslate }}</span>
             </button>
           </li>
         }
@@ -131,7 +131,7 @@
           }
         </div>
         <p class="mt-6 font-display font-bold text-ink">{{ 'quiz.why.label' | mnTranslate }}</p>
-        <p class="mt-2 text-[16px] leading-relaxed text-text-grey">{{ aside().whyKey | mnTranslate }}</p>
+        <p class="mt-2 text-base leading-relaxed text-text-grey">{{ aside().whyKey | mnTranslate }}</p>
       </aside>
     }
     </div>
@@ -150,7 +150,7 @@
         <div class="grid grid-cols-1 lg:grid-cols-[1.3fr_0.7fr] gap-10 lg:gap-14 items-end">
           <div>
             <p class="text-lg text-white/70">{{ 'quiz.result.match' | mnTranslate }}</p>
-            <h1 class="mt-2 font-display font-extrabold text-[2.6rem] md:text-6xl lg:text-[4.2rem] leading-[1.02] tracking-tight text-white">{{ v.name }}</h1>
+            <h1 class="mt-2 font-display font-extrabold text-h2-lg md:text-6xl lg:text-display-lg leading-[1.02] tracking-tight text-white">{{ v.name }}</h1>
             <p class="mt-6 text-lg md:text-xl text-white/85 max-w-xl leading-relaxed">{{ v.leadKey | mnTranslate }}</p>
             <div class="mt-8 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
               <a mnButton [data]="primaryButton" [routerLink]="v.route" class="font-bold">{{ v.ctaKey | mnTranslate }}</a>
@@ -165,19 +165,19 @@
           <div class="bg-white/[0.07] border border-white/12 rounded-lg p-6 backdrop-blur-sm">
             <div class="flex items-center gap-2.5 mb-4 pb-3.5 border-b border-white/15">
               <span class="w-5 h-0.5 bg-brand-500" aria-hidden="true"></span>
-              <span class="font-display font-bold text-[10.5px] tracking-[0.16em] uppercase text-white/60">{{ 'destinations.glance.label' | mnTranslate }}</span>
+              <span class="font-display font-bold text-label tracking-[0.16em] uppercase text-white/60">{{ 'destinations.glance.label' | mnTranslate }}</span>
             </div>
             <div class="flex justify-between gap-4 py-3 border-b border-white/10">
-              <span class="text-[13px] text-white/55">{{ 'quiz.result.price' | mnTranslate }}</span>
-              <span class="text-[13.5px] text-white font-semibold font-display text-right">{{ v.priceKey | mnTranslate }}</span>
+              <span class="text-meta text-white/55">{{ 'quiz.result.price' | mnTranslate }}</span>
+              <span class="text-meta text-white font-semibold font-display text-right">{{ v.priceKey | mnTranslate }}</span>
             </div>
             <div class="flex justify-between gap-4 py-3 border-b border-white/10">
-              <span class="text-[13px] text-white/55">{{ 'quiz.pass.group' | mnTranslate }}</span>
-              <span class="text-[13.5px] text-white font-semibold font-display text-right">{{ v.groupKey | mnTranslate }} {{ 'quiz.pass.people' | mnTranslate }}</span>
+              <span class="text-meta text-white/55">{{ 'quiz.pass.group' | mnTranslate }}</span>
+              <span class="text-meta text-white font-semibold font-display text-right">{{ v.groupKey | mnTranslate }} {{ 'quiz.pass.people' | mnTranslate }}</span>
             </div>
             <div class="flex justify-between gap-4 py-3">
-              <span class="text-[13px] text-white/55">{{ 'quiz.pass.alternative' | mnTranslate }}</span>
-              <a [routerLink]="v.alternative.route" class="text-[13.5px] text-white font-semibold font-display text-right underline-offset-4 hover:underline hover:text-brand-400">{{ v.alternative.name }}</a>
+              <span class="text-meta text-white/55">{{ 'quiz.pass.alternative' | mnTranslate }}</span>
+              <a [routerLink]="v.alternative.route" class="text-meta text-white font-semibold font-display text-right underline-offset-4 hover:underline hover:text-brand-400">{{ v.alternative.name }}</a>
             </div>
           </div>
         </div>
@@ -188,17 +188,17 @@
     <section appReveal class="max-w-7xl mx-auto px-6 lg:px-16 pt-16 lg:pt-24">
       <div class="grid grid-cols-1 lg:grid-cols-[1fr_0.82fr] gap-12 lg:gap-16 lg:items-stretch">
         <div class="max-w-2xl">
-          <h2 class="font-display font-extrabold text-3xl md:text-[2.2rem] tracking-tight leading-[1.12] text-ink mb-5">
+          <h2 class="font-display font-extrabold text-3xl md:text-h2-lg tracking-tight leading-[1.12] text-ink mb-5">
             {{ 'quiz.result.whyBefore' | mnTranslate }}{{ v.name }}{{ 'quiz.result.whyAfter' | mnTranslate }}
           </h2>
-          <div class="flex flex-col gap-4 text-[17px] leading-relaxed text-text-grey">
+          <div class="flex flex-col gap-4 text-body leading-relaxed text-text-grey">
             @for (key of v.paragraphKeys; track key) {
               <p>{{ key | mnTranslate }}</p>
             }
           </div>
           <ul class="mt-8 flex flex-col gap-3">
             @for (key of v.reasonKeys; track key) {
-              <li class="flex items-start gap-3 text-[17px] text-ink">
+              <li class="flex items-start gap-3 text-body text-ink">
                 <svg viewBox="0 0 16 16" class="mt-1 w-4 h-4 shrink-0 text-dark-yellow" aria-hidden="true">
                   <path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
@@ -209,14 +209,14 @@
 
         <aside class="mt-10 rounded-2xl bg-paper-card p-7 sm:p-8 shadow-sm">
           <h3 class="font-display font-bold text-xl text-ink mb-4">{{ 'quiz.result.caution' | mnTranslate }}</h3>
-          <div class="flex flex-col gap-3 text-[16px] leading-relaxed text-text-grey">
+          <div class="flex flex-col gap-3 text-base leading-relaxed text-text-grey">
             @for (key of v.cautionKeys; track key) {
               <p>{{ key | mnTranslate }}</p>
             }
           </div>
           @if (v.budgetKey) {
             <h3 class="mt-7 font-display font-bold text-xl text-ink mb-3">{{ 'quiz.budget.title' | mnTranslate }}</h3>
-            <p class="text-[16px] leading-relaxed text-text-grey">{{ v.budgetKey | mnTranslate }}</p>
+            <p class="text-base leading-relaxed text-text-grey">{{ v.budgetKey | mnTranslate }}</p>
           }
         </aside>
         </div>
@@ -233,10 +233,10 @@
                    class="w-full h-full object-cover lg:absolute lg:inset-0 transition-transform duration-300 group-hover:scale-[1.04]" />
             </div>
             <div class="p-6 lg:p-7">
-              <div class="font-display text-[11px] tracking-[0.08em] uppercase text-text-grey mb-1.5">{{ v.alternative.countryKey | mnTranslate }}</div>
+              <div class="font-display text-label tracking-[0.08em] uppercase text-text-grey mb-1.5">{{ v.alternative.countryKey | mnTranslate }}</div>
               <h3 class="font-display font-bold text-2xl mb-2.5 text-ink">{{ v.alternative.name }}</h3>
-              <p class="text-[14.5px] text-text-grey leading-relaxed mb-4">{{ v.alternative.bodyKey | mnTranslate }}</p>
-              <div class="flex items-center gap-1.5 font-display font-bold text-[13px] text-dark-yellow">{{ 'quiz.alt.view' | mnTranslate }} {{ v.alternative.name }}<svg lucideArrowRight [size]="15" aria-hidden="true"></svg></div>
+              <p class="text-body-sm text-text-grey leading-relaxed mb-4">{{ v.alternative.bodyKey | mnTranslate }}</p>
+              <div class="flex items-center gap-1.5 font-display font-bold text-meta text-dark-yellow">{{ 'quiz.alt.view' | mnTranslate }} {{ v.alternative.name }}<svg lucideArrowRight [size]="15" aria-hidden="true"></svg></div>
             </div>
           </a>
         </div>
@@ -250,8 +250,8 @@
       <div class="max-w-7xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
         <div class="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-12 lg:gap-16 items-start">
           <div class="max-w-xl">
-            <h2 class="font-display font-extrabold text-3xl md:text-[2.4rem] tracking-tight leading-[1.1] text-ink">{{ 'quiz.next.title' | mnTranslate }}</h2>
-            <p class="mt-5 text-[17px] leading-relaxed text-text-grey">
+            <h2 class="font-display font-extrabold text-3xl md:text-h2-lg tracking-tight leading-[1.1] text-ink">{{ 'quiz.next.title' | mnTranslate }}</h2>
+            <p class="mt-5 text-body leading-relaxed text-text-grey">
               @for (key of nextKeys; track key) {
                 {{ key | mnTranslate }}
               }
@@ -272,7 +272,7 @@
             @for (key of nextStepKeys; track key; let i = $index) {
               <li class="grid grid-cols-[auto_1fr] gap-6">
                 <span class="font-display font-extrabold text-4xl lg:text-5xl leading-none text-brand-500 tabular-nums">{{ i + 1 }}</span>
-                <p class="border-l border-[#EAE2CE] pl-6 text-[17px] leading-relaxed text-ink">{{ key | mnTranslate }}</p>
+                <p class="border-l border-[#EAE2CE] pl-6 text-body leading-relaxed text-ink">{{ key | mnTranslate }}</p>
               </li>
             }
           </ol>

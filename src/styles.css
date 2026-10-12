@@ -47,6 +47,20 @@
 }
 
 @theme {
+  /* Type scale. Tailwind's own sizes (text-xs … text-9xl) cover the round steps;
+     these named sizes are the in-between steps the site uses, so templates never
+     need arbitrary `text-[Npx]` values. Font size only: line height comes from
+     the element's `leading-*` class or is inherited, as before. */
+  --text-label: 11px;        /* small uppercase labels and eyebrows */
+  --text-meta: 13px;         /* meta lines, captions, small UI text */
+  --text-body-sm: 15px;      /* secondary body text, card copy */
+  --text-body: 17px;         /* main body text */
+  --text-h3: 1.75rem;        /* section sub-headings */
+  --text-h2: 2rem;           /* section headings */
+  --text-h2-lg: 2.4rem;      /* large section headings */
+  --text-display: 3.25rem;   /* page hero titles (the same size on every page) */
+  --text-display-lg: 4.2rem; /* largest hero titles */
+
   --color-brand-50:  #FFFBEB;
   --color-brand-100: #FFF3C4;
   --color-brand-200: #FFE58A;

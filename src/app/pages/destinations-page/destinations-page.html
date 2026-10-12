@@ -18,7 +18,7 @@
   <div class="rounded-2xl bg-paper-band p-6 sm:p-8">
     <p class="font-display font-bold text-xs tracking-[0.14em] uppercase text-dark-yellow mb-3">{{ 'destinations.scan.label' | mnTranslate }}</p>
     <h3 class="font-display font-extrabold text-2xl tracking-tight text-ink mb-3">{{ 'destinations.scan.title' | mnTranslate }}</h3>
-    <p class="text-[15px] leading-relaxed text-text-grey mb-6">{{ 'destinations.scan.body' | mnTranslate }}</p>
+    <p class="text-body-sm leading-relaxed text-text-grey mb-6">{{ 'destinations.scan.body' | mnTranslate }}</p>
     <a mnButton [data]="scanButton" routerLink="/welk-skigebied-past-bij-jullie-team" class="font-bold">{{ 'destinations.scan.button' | mnTranslate }}</a>
   </div>
 </section>
@@ -33,7 +33,7 @@
         [ngClass]="filter() === option.id
           ? 'bg-brand-500 text-ink border-brand-500'
           : 'bg-transparent text-text-grey border-[#DDD] hover:border-ink'"
-        class="font-display font-semibold text-[13px] px-4.5 py-2 rounded-full border cursor-pointer transition-colors duration-200"
+        class="font-display font-semibold text-meta px-4.5 py-2 rounded-full border cursor-pointer transition-colors duration-200"
       >
         {{ option.labelKey | mnTranslate }}
       </button>
@@ -58,15 +58,15 @@
           }
         </div>
         <div class="p-6 lg:p-7">
-          <div class="font-display text-[11px] tracking-[0.08em] uppercase text-text-grey mb-1.5">{{ dest.countryKey | mnTranslate }}</div>
+          <div class="font-display text-label tracking-[0.08em] uppercase text-text-grey mb-1.5">{{ dest.countryKey | mnTranslate }}</div>
           <h3 class="font-display font-bold text-2xl mb-2.5">{{ dest.name }}</h3>
-          <p class="text-[14.5px] text-text-grey leading-relaxed mb-4">{{ dest.descriptionKey | mnTranslate }}</p>
+          <p class="text-body-sm text-text-grey leading-relaxed mb-4">{{ dest.descriptionKey | mnTranslate }}</p>
           <div class="flex flex-wrap gap-2 mb-4">
             @for (tag of dest.tagKeys; track tag) {
               <span mnBadge [data]="{variant: 'default', color: 'lightgray', size: 'sm'}" class="font-display tracking-wide">{{ tag | mnTranslate }}</span>
             }
           </div>
-          <div class="flex items-center gap-1.5 font-display font-bold text-[13px] text-dark-yellow">{{ 'destinations.view' | mnTranslate }} {{ dest.name }}<svg lucideArrowRight [size]="15" aria-hidden="true"></svg></div>
+          <div class="flex items-center gap-1.5 font-display font-bold text-meta text-dark-yellow">{{ 'destinations.view' | mnTranslate }} {{ dest.name }}<svg lucideArrowRight [size]="15" aria-hidden="true"></svg></div>
         </div>
       </a>
     }

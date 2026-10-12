@@ -3,13 +3,13 @@
     <!-- Narrative -->
     <div>
       <app-eyebrow class="mb-5">{{ componentConfig.label }}</app-eyebrow>
-      <h2 class="font-display font-extrabold text-3xl md:text-4xl lg:text-[3rem] leading-[1.07] tracking-tight text-ink max-w-xl mb-7">{{ componentConfig.title }}</h2>
+      <h2 class="font-display font-extrabold text-3xl md:text-4xl lg:text-5xl leading-[1.07] tracking-tight text-ink max-w-xl mb-7">{{ componentConfig.title }}</h2>
 
       @if (componentConfig.intro) {
-        <p class="text-[17px] leading-relaxed text-text-grey max-w-lg mb-5">{{ componentConfig.intro }}</p>
+        <p class="text-body leading-relaxed text-text-grey max-w-lg mb-5">{{ componentConfig.intro }}</p>
       }
       @if (componentConfig.introSecondary) {
-        <p class="text-[15.5px] leading-relaxed text-text-grey/85 max-w-lg mb-9">{{ componentConfig.introSecondary }}</p>
+        <p class="text-body-sm leading-relaxed text-text-grey/85 max-w-lg mb-9">{{ componentConfig.introSecondary }}</p>
       }
       @if (componentConfig.buttonText) {
         <a mnButton [data]="buttonData" [routerLink]="componentConfig.buttonRoute" class="font-display font-bold">{{ componentConfig.buttonText }}</a>
@@ -29,7 +29,7 @@
 
         <div class="my-6 border-t border-[#F0E4C0]"></div>
 
-        <blockquote class="text-[17px] italic leading-relaxed text-ink/80">&ldquo;{{ p.quote }}&rdquo;</blockquote>
+        <blockquote class="text-body italic leading-relaxed text-ink/80">&ldquo;{{ p.quote }}&rdquo;</blockquote>
         <div class="mt-6 font-display text-xs tracking-[0.04em] text-text-grey/70">{{ p.site }}</div>
       </aside>
     }
