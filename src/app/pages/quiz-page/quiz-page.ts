@@ -16,7 +16,7 @@ import {MnLanguageService, MnTranslatePipe} from 'mn-angular-lib/core';
 import {MnButton, MnButtonTypes} from 'mn-angular-lib/button';
 import {MnCheckbox, MnCheckboxProps, MnInputField, MnInputProps} from 'mn-angular-lib/forms';
 import {FORM_FIELD_CLASS, formFieldText} from '../../components/form-fields';
-import {notBlank, SUBMISSION_EMAIL_PATTERN, SubmissionService} from '../../services/submission.service';
+import {notBlank, QuizScan, SUBMISSION_EMAIL_PATTERN, SubmissionService} from '../../services/submission.service';
 import {
   Destination,
   DESTINATIONS,
@@ -143,7 +143,7 @@ export class QuizPage {
   /** Translation service, for texts built in code (form props, intake subject). */
   private readonly language = inject(MnLanguageService);
 
-  /** Stores the scan when the visitor asks for the result by email. */
+  /** Stores every completed scan, and the visitor's details when they ask for the result by email. */
   private readonly submissions = inject(SubmissionService);
 
   /** Used to scroll after the next render. */
@@ -355,7 +355,7 @@ export class QuizPage {
 
   /**
    * Records the answer for the current screen and moves on: to the next screen,
-   * or to the result after the last one.
+   * or to the result after the last one, which is also stored anonymously.
    *
    * @param letter The chosen option.
    */
@@ -365,8 +365,20 @@ export class QuizPage {
       this.stepIndex.update(i => i + 1);
     } else {
       this.phase.set('result');
+      this.saveResult();
     }
     this.scrollToPanel();
+  }
+
+  /**
+   * Stores the finished scan without personal details. Best effort: a failure
+   * (offline, blocked) is ignored, because the visitor still sees their result.
+   */
+  private saveResult(): void {
+    const result = this.result();
+    if (result) {
+      this.submissions.saveQuizResult(this.readableScan(result)).catch(() => undefined);
+    }
   }
 
   /** Goes back one screen, keeping the answer given there; from the first question, back to the intro. */
@@ -441,7 +453,7 @@ export class QuizPage {
    *
    * @param result The evaluated scan.
    */
-  private readableScan(result: QuizResult) {
+  private readableScan(result: QuizResult): QuizScan {
     const t = (key: string) => this.language.translate(key);
     const answers = this.answers() as QuizAnswers;
     const answerText = (step: QuizStep) => t(this.optionKey(step, answers[step.key]));
