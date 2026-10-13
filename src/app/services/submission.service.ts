@@ -28,19 +28,10 @@ export interface ContactSubmission {
 }
 
 /**
- * A Ski Trip Scan whose result the visitor asked to receive by email: their
- * details plus the full scan in readable form (names and answer texts in the
- * visitor's language), so it can be read and mailed straight from the console.
+ * A completed Ski Trip Scan in readable form (names and answer texts in the
+ * visitor's language), so it can be read straight from the console.
  */
-export interface QuizSubmission {
-  /** Visitor's first name. */
-  firstName: string;
-  /** Address to send the result to. */
-  email: string;
-  /** Company name; omitted when left empty. */
-  company?: string;
-  /** Whether the visitor opted in to occasional inspiration emails. */
-  newsletter: boolean;
+export interface QuizScan {
   /** Name of the best match, e.g. "Kitzbühel-Kirchberg". */
   match: string;
   /** Name of the alternative. */
@@ -57,6 +48,18 @@ export interface QuizSubmission {
   answers: Record<string, string>;
   /** Character score per destination name. */
   scores: Record<string, number>;
+}
+
+/** A Ski Trip Scan whose result the visitor asked to receive by email: their details plus the scan. */
+export interface QuizSubmission extends QuizScan {
+  /** Visitor's first name. */
+  firstName: string;
+  /** Address to send the result to. */
+  email: string;
+  /** Company name; omitted when left empty. */
+  company?: string;
+  /** Whether the visitor opted in to occasional inspiration emails. */
+  newsletter: boolean;
 }
 
 /**
@@ -79,16 +82,27 @@ export class SubmissionService {
   private firestore?: Promise<Firestore>;
 
   /**
-   * Saves a contact-form message to the `contactMessages` collection.
+   * Saves a contact-form message to the `ContactForm` collection.
    *
    * @param submission The validated form values.
    */
   async submitContact(submission: ContactSubmission): Promise<void> {
-    await this.add('contactMessages', submission.subject, {...submission});
+    await this.add('ContactForm', submission.subject, {...submission});
   }
 
   /**
-   * Saves a Ski Trip Scan with the visitor's details to the `quizSubscribers`
+   * Saves every completed Ski Trip Scan, without personal details, to the
+   * `QuizAnonymous` collection, named after the match. Scans whose result is
+   * also mailed end up in `QuizWithEmail` as well.
+   *
+   * @param scan The readable scan.
+   */
+  async saveQuizResult(scan: QuizScan): Promise<void> {
+    await this.add('QuizAnonymous', scan.match, {...scan});
+  }
+
+  /**
+   * Saves a Ski Trip Scan with the visitor's details to the `QuizWithEmail`
    * collection, named after the match and first name. An empty company is left
    * out, because the rules only accept non-empty text.
    *
@@ -96,7 +110,7 @@ export class SubmissionService {
    */
   async subscribeQuiz(submission: QuizSubmission): Promise<void> {
     const {company, ...rest} = submission;
-    await this.add('quizSubscribers', `${submission.match} ${submission.firstName}`, company ? {...rest, company} : rest);
+    await this.add('QuizWithEmail', `${submission.match} ${submission.firstName}`, company ? {...rest, company} : rest);
   }
 
   /**

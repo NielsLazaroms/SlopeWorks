@@ -20,7 +20,7 @@ service cloud.firestore {
       return text(d.locale, 10) && text(d.domain, 100) && d.createdAt == request.time;
     }
 
-    match /contactMessages/{id} {
+    match /ContactForm/{id} {
       allow read, update, delete: if false;
       allow create: if request.resource.data.keys().hasAll(
           ['name', 'email', 'subject', 'message', 'locale', 'domain', 'createdAt'])
@@ -50,28 +50,44 @@ service cloud.firestore {
         && score(s['Kitzbühel-Kirchberg']) && score(s['St. Anton']) && score(s['Gstaad']);
     }
 
-    // Ski Trip Scans whose result the visitor asked to receive by email, stored
-    // readably: names and answer texts in the visitor's language.
-    match /quizSubscribers/{id} {
+    // Fields of a readable Ski Trip Scan: names and answer texts in the visitor's language.
+    function scanFields() {
+      return ['match', 'alternative', 'tripStyle', 'budget', 'groupSize', 'budgetNote', 'answers', 'scores'];
+    }
+
+    // True for a valid readable scan.
+    function validScan(d) {
+      return d.match in destinations()
+        && d.alternative in destinations()
+        && d.tripStyle in ['Reward', 'Better Together', 'Reset']
+        && text(d.budget, 200)
+        && text(d.groupSize, 50)
+        && d.budgetNote is bool
+        && d.answers is map && d.answers.size() == 8
+        && validScores(d.scores);
+    }
+
+    // Every completed Ski Trip Scan, without personal details.
+    match /QuizAnonymous/{id} {
+      allow read, update, delete: if false;
+      allow create: if request.resource.data.keys().hasAll(scanFields().concat(['locale', 'domain', 'createdAt']))
+        && request.resource.data.keys().hasOnly(scanFields().concat(['locale', 'domain', 'createdAt']))
+        && validScan(request.resource.data)
+        && validMeta(request.resource.data);
+    }
+
+    // Ski Trip Scans whose result the visitor asked to receive by email.
+    match /QuizWithEmail/{id} {
       allow read, update, delete: if false;
       allow create: if request.resource.data.keys().hasAll(
-          ['firstName', 'email', 'newsletter', 'match', 'alternative', 'tripStyle', 'budget',
-           'groupSize', 'budgetNote', 'answers', 'scores', 'locale', 'domain', 'createdAt'])
+          scanFields().concat(['firstName', 'email', 'newsletter', 'locale', 'domain', 'createdAt']))
         && request.resource.data.keys().hasOnly(
-          ['firstName', 'email', 'company', 'newsletter', 'match', 'alternative', 'tripStyle', 'budget',
-           'groupSize', 'budgetNote', 'answers', 'scores', 'locale', 'domain', 'createdAt'])
+          scanFields().concat(['firstName', 'email', 'company', 'newsletter', 'locale', 'domain', 'createdAt']))
         && text(request.resource.data.firstName, 100)
         && email(request.resource.data.email)
         && (!('company' in request.resource.data) || text(request.resource.data.company, 200))
         && request.resource.data.newsletter is bool
-        && request.resource.data.match in destinations()
-        && request.resource.data.alternative in destinations()
-        && request.resource.data.tripStyle in ['Reward', 'Better Together', 'Reset']
-        && text(request.resource.data.budget, 200)
-        && text(request.resource.data.groupSize, 50)
-        && request.resource.data.budgetNote is bool
-        && request.resource.data.answers is map && request.resource.data.answers.size() == 8
-        && validScores(request.resource.data.scores)
+        && validScan(request.resource.data)
         && validMeta(request.resource.data);
     }
 
