@@ -7,8 +7,9 @@
 
 <!-- Lead-in: gives the grid a section H2 (fixes the H1→H3 hierarchy skip) and
      adds keyword-rich context before the six area cards. -->
-<section appReveal class="max-w-7xl mx-auto px-6 lg:px-16 pt-14 lg:pt-20 pb-10 lg:pb-12 grid grid-cols-1 lg:grid-cols-[1fr_0.8fr] gap-10 lg:gap-16 items-end">
-  <div class="max-w-2xl">
+<section appReveal class="max-w-7xl mx-auto px-6 lg:px-16 pt-14 lg:pt-20 pb-10 lg:pb-12 grid grid-cols-1 lg:grid-cols-[1fr_0.8fr] gap-10 lg:gap-16 items-start">
+  <!-- lg:pt-8 matches the card's sm:p-8 so both eyebrows share one baseline -->
+  <div class="max-w-2xl lg:pt-8">
     <app-eyebrow class="mb-4">{{ 'destinations.grid.label' | mnTranslate }}</app-eyebrow>
     <h2 class="font-display font-extrabold text-3xl md:text-4xl tracking-tight leading-[1.12] mb-4">{{ 'destinations.grid.title' | mnTranslate }}</h2>
     <p class="text-base leading-relaxed text-text-grey">{{ 'destinations.grid.body' | mnTranslate }}</p>
