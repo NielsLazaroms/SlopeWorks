@@ -3,9 +3,11 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  ElementRef,
   inject,
   Injector,
   signal,
+  viewChild,
 } from '@angular/core';
 import {toSignal} from '@angular/core/rxjs-interop';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
@@ -274,8 +276,11 @@ export class QuizPage {
   /** The three steps after the scan (call → research → proposal), shown as a numbered row. */
   protected readonly nextStepKeys = numberedKeys('quiz.next.step', 3);
 
-  /** Yellow button with dark text (destination link, intake, form submit). */
+  /** Yellow button with dark text (email-my-result, destination link, intake, form submit). */
   protected readonly primaryButton: MnButtonTypes = {color: 'primary', size: 'md', variant: 'fill', borderRadius: 'xl', hover: true};
+
+  /** The "email me my result" form, once it is rendered. */
+  private readonly mailFormRef = viewChild<ElementRef<HTMLFormElement>>('mailFormEl');
 
   /** State of the "email me my result" form. */
   protected readonly mailState = signal<MailState>('closed');
@@ -403,9 +408,26 @@ export class QuizPage {
     this.scrollToPanel();
   }
 
-  /** Shows the "email me my result" form. */
-  openMailForm(): void {
-    this.mailState.set('open');
+  /**
+   * Shows the "email me my result" form. From the hero it also scrolls the form
+   * into view and focuses its first field, since it sits further down the page.
+   */
+  openMailForm(scroll = false): void {
+    if (this.mailState() === 'closed') {
+      this.mailState.set('open');
+    }
+    if (!scroll) {
+      return;
+    }
+    afterNextRender(() => {
+      const form = this.mailFormRef()?.nativeElement;
+      if (!form) {
+        return;
+      }
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      form.scrollIntoView({behavior: reduceMotion ? 'instant' : 'smooth', block: 'start'});
+      form.querySelector<HTMLInputElement>('input:not([tabindex="-1"])')?.focus({preventScroll: true});
+    }, {injector: this.injector});
   }
 
   /**

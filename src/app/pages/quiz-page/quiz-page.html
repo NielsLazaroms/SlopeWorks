@@ -153,8 +153,7 @@
             <h1 class="mt-2 font-display font-extrabold text-h2-lg md:text-6xl lg:text-display-lg leading-[1.02] tracking-tight text-white">{{ v.name }}</h1>
             <p class="mt-6 text-lg md:text-xl text-white/85 max-w-xl leading-relaxed">{{ v.leadKey | mnTranslate }}</p>
             <div class="mt-8 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
-              <a mnButton [data]="primaryButton" [routerLink]="v.route" class="font-bold">{{ v.ctaKey | mnTranslate }}</a>
-              <button type="button" (click)="restart()"
+              <button type="button" mnButton [data]="primaryButton" (click)="openMailForm(true)" class="font-bold">{{ 'quiz.cta.mail' | mnTranslate }}</button>              <button type="button" (click)="restart()"
                       class="w-fit font-semibold text-white underline underline-offset-4 decoration-white/40 transition-colors hover:decoration-brand-500 cursor-pointer">
                 {{ 'quiz.cta.restart' | mnTranslate }}
               </button>
@@ -206,6 +205,7 @@
               </li>
             }
           </ul>
+          <a mnButton [data]="primaryButton" [routerLink]="v.route" class="mt-8 font-bold">{{ v.ctaKey | mnTranslate }}</a>
 
         <aside class="mt-10 rounded-2xl bg-paper-card p-7 sm:p-8 shadow-sm">
           <h3 class="font-display font-bold text-xl text-ink mb-4">{{ 'quiz.result.caution' | mnTranslate }}</h3>
@@ -243,10 +243,10 @@
       </div>
     </section>
 
-    <!-- Next step: the intake, on the plain page background, like the closing block on every other page. The pitch and the
+    <!-- Next step: the intake, on the plain page background (no section fill), like the closing block on every other page. The pitch and the
          buttons on the left, the three steps in the "Hoe het werkt" style on
          the right. -->
-    <section appReveal class="bg-paper">
+    <section appReveal>
       <div class="max-w-7xl mx-auto px-6 lg:px-16 py-16 lg:py-24">
         <div class="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-12 lg:gap-16 items-start">
           <div class="max-w-xl">
@@ -270,9 +270,9 @@
           <!-- What happens after the scan: a real sequence, so numbered -->
           <ol class="flex flex-col gap-8">
             @for (key of nextStepKeys; track key; let i = $index) {
-              <li class="grid grid-cols-[auto_1fr] gap-6">
-                <span class="font-display font-extrabold text-4xl lg:text-5xl leading-none text-brand-500 tabular-nums">{{ i + 1 }}</span>
-                <p class="border-l border-line-warm pl-6 text-body leading-relaxed text-ink">{{ key | mnTranslate }}</p>
+              <li class="flex flex-col">
+                <span class="font-display font-extrabold text-3xl leading-none text-brand-500 mb-3">{{ i + 1 }}</span>
+                <p class="text-body leading-relaxed text-ink">{{ key | mnTranslate }}</p>
               </li>
             }
           </ol>
@@ -280,7 +280,7 @@
 
         <!-- Email me my result: only after the full result is visible -->
         @if (mailState() !== 'closed') {
-          <form [formGroup]="mailForm" (ngSubmit)="submitMail()" class="mt-8 max-w-2xl rounded-2xl bg-paper-card p-7 sm:p-9">
+          <form #mailFormEl [formGroup]="mailForm" (ngSubmit)="submitMail()" class="scroll-mt-28 mt-8max-w-2xl rounded-2xl bg-paper-card p-7 sm:p-9">
             <h3 class="font-display font-extrabold text-xl text-ink mb-2">{{ 'quiz.mail.title' | mnTranslate }}</h3>
             @if (mailState() === 'sent') {
               <div role="status" class="flex flex-col gap-2">
