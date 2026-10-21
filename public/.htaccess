@@ -2,6 +2,14 @@
 # scripts/localize-static.mjs appends the www→bare-domain 301 and the
 # `ErrorDocument 404` line per domain.
 
+# --- Redirects ----------------------------------------------------------------
+# Old comparison slug: one real 301 straight to the canonical (trailing-slash) URL,
+# instead of the prerendered meta-refresh stub followed by a slash redirect.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^vs-reisbureaus/?$ /vergelijken/ [R=301,L]
+</IfModule>
+
 # --- Text compression ---------------------------------------------------------
 # Brotli where available, gzip as fallback. Images/fonts (webp/woff2) are already
 # compressed, so only text assets are listed here.
