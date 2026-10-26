@@ -22,9 +22,12 @@
       <!-- Legibility scrim under the overlays -->
       <div class="absolute inset-x-0 bottom-0 h-28 bg-linear-to-t from-ink/70 to-transparent pointer-events-none"></div>
 
-      <!-- Location stamp -->
-      <span mnBadge [data]="{variant: 'fill', color: 'primary', size: 'sm'}"
-            class="absolute left-4 sm:left-5 bottom-4 sm:bottom-5 z-10 font-display font-bold tracking-wide uppercase">{{ slides[activeIndex()].caption }}</span>
+      <!-- Location stamp on the photo (sm and up); phones get the caption line below instead,
+           since long place names don't fit next to the arrows there -->
+      <div class="hidden sm:block absolute left-5 bottom-5 z-10">
+        <span mnBadge [data]="{variant: 'fill', color: 'primary', size: 'sm'}"
+              class="font-display font-bold tracking-wide uppercase">{{ slides[activeIndex()].caption }}</span>
+      </div>
 
       <!-- Compact prev / next (MnLib round buttons), tucked into the corner so they never cover the shot -->
       <div class="absolute right-4 sm:right-5 bottom-4 sm:bottom-5 z-10 flex items-center gap-2">
@@ -38,6 +41,13 @@
         </button>
       </div>
     </figure>
+
+    <!-- Location stamp on phones: a caption line under the photo, so long place names
+         never compete with the arrows for space -->
+    <p class="sm:hidden mt-3 flex items-center gap-2 font-display font-bold tracking-wide uppercase text-sm text-ink">
+      <span class="inline-block w-2 h-2 shrink-0 rounded-full bg-brand-500" aria-hidden="true"></span>
+      {{ slides[activeIndex()].caption }}
+    </p>
 
     <!-- Contact sheet: every scouted spot, the active one lifted with a brand ring -->
     <div class="sw-strip mt-2 sm:mt-3 -mx-1.5 flex gap-2.5 sm:gap-3 overflow-x-auto px-1.5 py-2">

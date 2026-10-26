@@ -13,7 +13,7 @@ interface GallerySlide {
   src: string;
   /** i18n key for the alt text. */
   altKey: string;
-  /** Location stamp overlaid on the photo (proper nouns — language-neutral). */
+  /** Location stamp: a badge on the photo, or a line under it on phones (proper nouns — language-neutral). */
   caption: string;
 }
 
